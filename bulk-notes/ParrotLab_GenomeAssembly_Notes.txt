@@ -1,0 +1,789 @@
+These are the working notes for the Soybean genome assemblies and analysis started on Oct 16th 2025.
+
+Working on UGA's Sapelo2 cluster. waplab group.
+
+Check pending/running job status using
+> squeue --me or sq --me
+> sq --help
+> scancel $jobid # to cancel jobs
+> sacct -X or sacct-gacrc -X # Check running or finished job status using
+> sacct-gacrc --help
+> seff $jobid # to check resource usage
+
+# interactive job
+> interact # alias for srun --pty  --cpus-per-task=1 --job-name=interact --ntasks=1 --nodes=1 --partition=inter_p --time=12:00:00 --mem=2GB /bin/bash -l
+> interact --help # has options for more ram cpu etc.
+
+
+Sapelo Intro PDF
+https://wiki.gacrc.uga.edu/images/8/80/GACRC_Sapelo2_cluster_new_user_training_workshop_v10.8.pdf
+
+ml spider hifiasm
+
+cluster partitions #SBATCH -p batch or batch_30d upto --mem 500gb and -n 128
+#SBATCH -p highmem_p or highmem_30d_p --mem 990 Gb * only ~30 nodes
+also hugemem_p has 2 nodes of 2,000Gb or 2Tb of ram.
+
+working directory: /work/waplab
+Raw Data: /work/waplab/jake/raw_data
+My directory: /work/waplab/roth
+
+Create directories:
+
+mkdir 00_log 01_sbatch 02_scripts
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+------------------------------------------------------------------------
+STEP 00: Get reference genomes from xxx
+------------------------------------------------------------------------
+
+SoyBase list Wm82.a4.v1 as the most current community reference genome with RefSeq accession number: GCF_000004515.5
+
+https://www.soybase.org/resources/genome_info/
+
+The NCBI had a more recent accession number for the Glycine max v4.0 assembly: GCF_000004515.6
+
+https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000004515.6/
+
+I downloaded that reference genome.
+
+from my working directory: /work/waplab/roth
+
+> mkdir 03_refgenome
+> cd 03_refgenome
+> wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/004/515/GCF_000004515.6_Glycine_max_v4.0/GCF_000004515.6_Glycine_max_v4.0_genomic.fna.gz 
+> gunzip GCF_000004515.6_Glycine_max_v4.0_genomic.fna.gz 
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+------------------------------------------------------------------------
+STEP 01: Check the fastq files
+------------------------------------------------------------------------
+
+> sbatch -o 00_log/01_fastp_raw.out -e 00_log/01_fastp_raw.err --export iFiles=/work/waplab/jake/raw_data/*.fastq.gz,oDir=04_fastplong 01_sbatch/fastplong.sbatch
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 02: Assemble with HiFiASM
+------------------------------------------------------------------------
+
+from working directory: /work/waplab/roth
+
+1. Assemble raw reads
+
+> sbatch -o 00_log/02_hifiasm_Benning.out -e 00_log/02_hifiasm_Benning.err --export infile=/work/waplab/jake/raw_data/Benning1.fastq.gz,infile2=/work/waplab/jake/raw_data/Benning2.fastq.gz,sample=Benning,oDir=05a_hifiasm_raw 01_sbatch/hifiasm.sbatch
+
+> sbatch -o 00_log/02_hifiasm_Clark.out -e 00_log/02_hifiasm_Clark.err --export infile=/work/waplab/jake/raw_data/Clark1.fastq.gz,infile2=/work/waplab/jake/raw_data/Clark2.fastq.gz,sample=Clark,oDir=05a_hifiasm_raw 01_sbatch/hifiasm.sbatch
+
+> for f in /work/waplab/jake/raw_data/[HKMP]*.fastq.gz; do n=`basename $f .fastq.gz`; sbatch -o 00_log/02_hifiasm_$n.out -e 00_log/02_hifiasm_$n.err --export infile=$f,sample=$n,oDir=05a_hifiasm_raw 01_sbatch/hifiasm.sbatch; done
+
+** At this point I copied the intermediate files to scratch and then copied the fasta files of the primary assemblies for hap 1 and hap2 and the primary back.
+
+from /scratch/rec05938:
+> cp -R /work/waplab/roth/05a_hifiasm_raw/ .
+
+from /work/waplab/roth:
+# very copy successful then delete files
+> rm -r 05a_hifiasm_raw/*
+# copy assembly fastas back
+> cp /work/waplab/roth/05a_hifiasm_raw/*/*.p_ctg.fa 05_hifiasm_raw/
+
+2. stats
+
+> sbatch --export inDir=05a_hifiasm_raw,fout=05b_hifiasm_raw_assembly_stats.txt 01_sbatch/bbtools_stats.sbatch
+
+3. dot plots
+
+> for f in 05a_hifiasm_raw/*.fa; do name=`basename $f .fa`; echo $name; sbatch -o 00_log/03_mumplot_${name}.out -e 00_log/03_mumplot_${name}.err --export oDir=05c_MummerPlots_raw,ref=03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 01_sbatch/mummer_plot.sbatch; done
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> seqkit stats 05a_hifiasm_raw/*.bp.p_ctg.fa
+
+file                     format  type  num_seqs        sum_len  min_len      avg_len     max_len
+Benning.bp.p_ctg.fa      FASTA   DNA      1,734  1,086,562,888   11,728    626,622.2  57,076,620
+Clark.bp.p_ctg.fa        FASTA   DNA      1,881  1,087,514,419   12,012    578,157.6  55,531,602
+Harosoy.bp.p_ctg.fa      FASTA   DNA      1,003  1,055,076,571   12,785  1,051,920.8  55,646,352
+Kingawa.bp.p_ctg.fa      FASTA   DNA      1,626  1,079,496,724   15,441    663,897.1  60,006,688
+Minsoy.bp.p_ctg.fa       FASTA   DNA      1,886  1,095,922,249   11,170    581,082.8  54,887,948
+MiyakoWhite.bp.p_ctg.fa  FASTA   DNA      1,382  1,085,627,448   13,036    785,548.1  95,127,858
+PI407020.bp.p_ctg.fa     FASTA   DNA      5,355  1,734,017,501   15,208    323,812.8  56,763,792
+PI407303.bp.p_ctg.fa     FASTA   DNA      1,214  1,074,888,667   13,482    885,410.8  68,344,814
+PI507847.bp.p_ctg.fa     FASTA   DNA      1,863  1,083,883,507   12,607    581,794.7  60,243,986
+
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+4. Assemble trimmed reads
+
+# Working over in scratch
+
+> sbatch -o 00_log/03_hifiasm_Benning.out -e 00_log/03_hifiasm_Benning.err --export infile=/scratch/rec05938/04_fastplong/Benning1.fastq.gz,infile2=/scratch/rec05938/04_fastplong/Benning2.fastq.gz,sample=Benning,oDir=06a_hifiasm_trim /work/waplab/roth/01_sbatch/hifiasm.sbatch
+
+> sbatch -o 00_log/03_hifiasm_Clark.out -e 00_log/03_hifiasm_Clark.err --export infile=/scratch/rec05938/04_fastplong/Clark1.fastq.gz,infile2=/scratch/rec05938/04_fastplong/Clark2.fastq.gz,sample=Clark,oDir=06a_hifiasm_trim /work/waplab/roth/01_sbatch/hifiasm.sbatch
+
+> for f in /scratch/rec05938/04_fastplong/[HKMP]*.fastq.gz; do n=`basename $f .fastq.gz`; sbatch -o 00_log/03_hifiasm_$n.out -e 00_log/03_hifiasm_$n.err --export infile=$f,sample=$n,oDir=06a_hifiasm_trim /work/waplab/roth/01_sbatch/hifiasm.sbatch; done
+
+> cp 06a_hifiasm_trim/*/*.p_ctg.fa 06a_hifiasm_trim/
+
+5. stats
+
+> sbatch --export inDir=06a_hifiasm_trim,fout=06b_hifiasm_trim_assembly_stats.txt /work/waplab/roth/01_sbatch/bbtools_stats.sbatch
+
+6. dot plots
+
+> for f in 06a_hifiasm_trim/*.fa; do name=`basename $f .fa`; echo $name; sbatch -o 00_log/06c_mumplot_${name}.out -e 00_log/06c_mumplot_${name}.err --export oDir=06c_MummerPlots_trim,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+7. Compare Raw vs. Trimmed assemblies.
+
+	- Trimming reads did not improve assemblies.
+	- Less than 1% difference in total length.
+	- Identical GC distributions
+	- contiguity metrics similar (N50, L50): in some cases trimmed were worse.
+
+* Continue with assemblies from raw reads.
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+8. Analize dot plots and make manual corrections.
+
+	- Benning: 2 contig chimeras that need to be cut mannually and re-scaffolded
+
+	- Clark: Beautiful
+	
+	- Harosoy: Beautiful
+	
+	- Kingawa: Fine . . . small centromeric inversion 
+	
+	- Minsoy: Beautiful
+	
+	- Miyako: Close but one telomere misjoin.  Needs manual break and rescaffold
+	
+	- 7020: Yikes . . . looks like we have a het here (or contaminant).  Need to look at genomescope plot and discuss more
+	
+	- 7303: CLose but one misjoin and a telomere flip
+	
+	- 7847: Close but a few annoying but important misjoins that need manual correction.
+
+* Continue with primary contig assembly. Disregard hap1 and hap2 assemblies.
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+9. Try to correct primary contigs using RagTag correct default settings
+
+	-------- SIDEQUEST -------------------------------------------------
+	** Install ragtag **
+	.- Did not find it available on Sapelo2 modules or singularities -.
+
+	> ml Miniforge3/24.11.3-0
+	> conda create -p /home/rec05938/conda/ragtag -c bioconda ragtag
+	> source activate /home/rec05938/conda/ragtag
+	--------------------------------------------------------------------
+
+# write output files to scratch
+# from: /scratch/rec05938
+> for f in /work/waplab/roth/05a_hifiasm_raw/*.bp.p_ctg.fa; do n=`basename $f .fa`; sbatch -o 00_log/04_ragtag_correct_${n}.out -e 00_log/04_ragtag_correct_${n}.err --export oDir=06a_ragtag_correct,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,queryG=$f,name=$n,refName=Williams82 /work/waplab/roth/01_sbatch/ragtag_correct.sbatch; done
+
+10. Copy corrected contig fastas to work directory
+
+# in work directory:
+> mkdir 06a_ragtag_correct/
+> for f in /scratch/rec05938/06a_ragtag_correct/*/*.fasta; do n=`echo $f | cut -d/ -f5 | cut -d. -f1`; echo $n; cp $f 06a_ragtag_correct/${n}_ragtag_correct_contig.fasta; done
+
+11. dot plots for corrected contigs
+
+> for f in 06a_ragtag_correct/*.fasta; do name=`basename $f .fasta`; echo $name; sbatch -o 00_log/06b_mumplot_${name}.out -e 00_log/06b_mumplot_${name}.err --export oDir=06b_MummerPlots_corrected,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> seqkit stats 06a_ragtag_correct/*.fasta
+
+file                                     format  type  num_seqs        sum_len  min_len    avg_len     max_len
+Benning_ragtag_correct_contig.fasta      FASTA   DNA      2,935  1,086,562,888    1,121  370,208.8  32,996,465
+Clark_ragtag_correct_contig.fasta        FASTA   DNA      2,938  1,087,514,419    1,121  370,154.7  33,410,475
+Harosoy_ragtag_correct_contig.fasta      FASTA   DNA      2,086  1,055,076,571    1,075  505,789.3  39,270,785
+Kingawa_ragtag_correct_contig.fasta      FASTA   DNA      2,666  1,079,496,724    1,051  404,912.5  43,480,872
+Minsoy_ragtag_correct_contig.fasta       FASTA   DNA      3,008  1,095,922,249    1,026  364,335.9  36,811,977
+MiyakoWhite_ragtag_correct_contig.fasta  FASTA   DNA      2,650  1,085,627,448    1,013  409,670.7  46,802,804
+PI407020_ragtag_correct_contig.fasta     FASTA   DNA      7,520  1,734,017,501    1,080  230,587.4  30,946,047
+PI407303_ragtag_correct_contig.fasta     FASTA   DNA      2,736  1,074,888,667    1,012  392,868.7  31,251,346
+PI507847_ragtag_correct_contig.fasta     FASTA   DNA      3,264  1,083,883,507    1,068  332,072.2  30,532,196
+
+** Corrected assemblies have roughly double the contigs and a minimum length just over 1,000 bp instead of 11-15,000 bp in the original assembly. **
+
+*** NOTES ***
+
+This ragtag correct setting make a very clean looking dotplot with williams 82. too clean. It made a lot of breaks. likely too many and the fear is too many breaks can remove actual biological variation.
+
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+12. Running Ragtag correct with the --inter param. Move -f from 1000 to 10000.
+	* only create breaks between reference sequences (which are chromosomes)
+
+# write output files to scratch
+# from: /scratch/rec05938
+> for f in /work/waplab/roth/05a_hifiasm_raw/*.bp.p_ctg.fa; do n=`basename $f .fa`; sbatch -o 00_log/04c_ragtag_correct_${n}.out -e 00_log/04c_ragtag_correct_${n}.err --export oDir=06c_ragtag_correct_inter/,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,queryG=$f,name=$n,refName=Williams82 /work/waplab/roth/01_sbatch/ragtag_correct-inter.sbatch; done
+
+# Copy corrected contig fastas to work directory
+
+# in work directory:
+> mkdir 06c_ragtag_correct_inter/
+> for f in /scratch/rec05938/06c_ragtag_correct_inter/*/*.fasta; do n=`echo $f | cut -d/ -f5 | cut -d. -f1`; echo $n; cp $f 06c_ragtag_correct_inter/${n}_ragtag_correct_contig.fasta; done
+
+13. dot plots for corrected contigs
+
+> for f in 06c_ragtag_correct_inter/*.fasta; do name=`basename $f .fasta`; echo $name; sbatch -o 00_log/06b_mumplot_${name}.out -e 00_log/06b_mumplot_${name}.err --export oDir=06d_MummerPlots_corrected_inter,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> seqkit stats 06c_ragtag_correct_inter/*.fasta
+
+file                                                              format  type  num_seqs        sum_len  min_len    avg_len     max_len
+Benning_ragtag_correct_contig.fasta      FASTA   DNA      1,998  1,086,562,888   10,960  543,825.3  43,604,282
+Clark_ragtag_correct_contig.fasta        FASTA   DNA      2,137  1,087,514,419   10,414  508,897.7  33,460,033
+Harosoy_ragtag_correct_contig.fasta      FASTA   DNA      1,278  1,055,076,571   12,785  825,568.5  53,724,881
+Kingawa_ragtag_correct_contig.fasta      FASTA   DNA      1,897  1,079,496,724   11,958  569,054.7  43,480,872
+Minsoy_ragtag_correct_contig.fasta       FASTA   DNA      2,159  1,095,922,249   11,170  507,606.4  36,811,977
+MiyakoWhite_ragtag_correct_contig.fasta  FASTA   DNA      1,683  1,085,627,448   13,036  645,054.9  46,802,804
+PI407020_ragtag_correct_contig.fasta     FASTA   DNA      5,903  1,734,017,501   10,370  293,751.9  36,152,292
+PI407303_ragtag_correct_contig.fasta     FASTA   DNA      1,572  1,074,888,667   13,482  683,771.4  34,837,732
+PI507847_ragtag_correct_contig.fasta     FASTA   DNA      2,192  1,083,883,507   10,010  494,472.4  43,381,188
+
+*** NOTES ***
+
+This ragtag correct setting fixed a lot with much fewer breaks introduced than the default setting. But it still has too many breaks likely, and it didn't fix intra rearrangements.
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+14. Running Ragtag correct with -f 10000 and read validation.
+
+Since Benning and Clark had two read sets in Jake's raw_data folder I'm copying the raw reads to my scratch where I will remove the smaller fastq file and use the larger one for this step.
+
+# from: /scratch/rec05938
+
+# copy files
+> cp -R /work/waplab/jake/raw_data 01_raw_reads
+
+# delete Benning and Clark file 2, rename file 1 to simply Benning and Clark
+> rm 01_raw_reads/Benning2.fastq.gz 01_raw_reads/Clark2.fastq.gz
+> mv 01_raw_reads/Benning1.fastq.gz 01_raw_reads/Benning.fastq.gz
+> mv 01_raw_reads/Clark1.fastq.gz 01_raw_reads/Clark.fastq.gz
+
+# write output files to scratch
+> for f in /work/waplab/roth/05a_hifiasm_raw/*.bp.p_ctg.fa; do n=`basename $f .bp.p_ctg.fa`; sbatch -o 00_log/04e_ragtag_correct_${n}.out -e 00_log/04e_ragtag_correct_${n}.err --export oDir=06e_ragtag_correct_valid,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,queryG=$f,name=$n,refName=Williams82,queryR=/scratch/rec05938/01_raw_reads/$n.fastq.gz /work/waplab/roth/01_sbatch/ragtag_correct-valid.sbatch; done
+
+# Copy corrected contig fastas to work directory
+
+# in work directory:
+> mkdir 06e_ragtag_correct_valid/
+> for f in /scratch/rec05938/06e_ragtag_correct_valid/*/*.fasta; do n=`echo $f | cut -d/ -f5 | cut -d. -f1`; echo $n; cp $f 06e_ragtag_correct_valid/${n}_ragtag_correct_valid.fasta; done
+
+15. dot plots for corrected contigs
+
+> for f in 06e_ragtag_correct_valid//*.fasta; do name=`basename $f .fasta`; echo $name; sbatch -o 00_log/06e_mumplot_${name}.out -e 00_log/06e_mumplot_${name}.err --export oDir=06f_MummerPlots_corrected_valid,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> seqkit stats 06e_ragtag_correct_valid/*.fasta
+
+file                                                             format  type  num_seqs        sum_len  min_len      avg_len     max_len
+Benning_ragtag_correct_valid.fasta      FASTA   DNA      1,787  1,086,562,888   10,000    608,037.4  55,752,628
+Clark_ragtag_correct_valid.fasta        FASTA   DNA      1,901  1,087,514,419   10,000    572,074.9  55,531,602
+Harosoy_ragtag_correct_valid.fasta      FASTA   DNA      1,026  1,055,076,571   10,000  1,028,339.7  55,646,352
+Kingawa_ragtag_correct_valid.fasta      FASTA   DNA      1,672  1,079,496,724   10,000      645,632  60,006,688
+Minsoy_ragtag_correct_valid.fasta       FASTA   DNA      1,928  1,095,922,249   10,250    568,424.4  54,887,948
+MiyakoWhite_ragtag_correct_valid.fasta  FASTA   DNA      1,454  1,085,627,448   10,000    746,648.9  89,465,616
+PI407020_ragtag_correct_valid.fasta     FASTA   DNA      5,588  1,734,017,501   10,000    310,310.9  56,763,792
+PI407303_ragtag_correct_valid.fasta     FASTA   DNA      1,235  1,074,888,667   10,577    870,355.2  68,344,814
+PI507847_ragtag_correct_valid.fasta     FASTA   DNA      1,887  1,083,883,507   10,016    574,395.1  60,243,986
+
+*** NOTES ***
+
+This ragtag correct setting almost fixed what we wanted but it missed a few. It did reduce the number of breaks that were made, but it did not break a few places we were aiming to break.
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+16. Running Ragtag correct with -f 100000 and read validation.
+
+# from: /scratch/rec05938
+# write output files to scratch
+** NOTE I CHANGED THE SCRIPT FROM STEP 14 -f 10000 to -f 100000
+> for f in /work/waplab/roth/05a_hifiasm_raw/*.bp.p_ctg.fa; do n=`basename $f .bp.p_ctg.fa`; sbatch -o 00_log/04g_ragtag_correct_${n}.out -e 00_log/04g_ragtag_correct_${n}.err --export oDir=06g_ragtag_correct_valid_f100000,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,queryG=$f,name=$n,refName=Williams82,queryR=/scratch/rec05938/01_raw_reads/$n.fastq.gz /work/waplab/roth/01_sbatch/ragtag_correct-valid.sbatch; done
+
+# Copy corrected contig fastas to work directory
+
+# in work directory:
+> mkdir 06g_ragtag_correct_valid_f100000/
+> for f in /scratch/rec05938/06g_ragtag_correct_valid_f100000/*/*.fasta; do n=`echo $f | cut -d/ -f5 | cut -d. -f1`; echo $n; cp $f 06g_ragtag_correct_valid_f100000/${n}_ragtag_correct_valid_f100000.fasta; done
+
+17. dot plots for corrected contigs
+
+> for f in 06g_ragtag_correct_valid_f100000/*.fasta; do name=`basename $f .fasta`; echo $name; sbatch -o 00_log/06e_mumplot_${name}.out -e 00_log/06e_mumplot_${name}.err --export oDir=06h_MummerPlots_corrected_valid_f100000,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> seqkit stats 06g_ragtag_correct_valid_f100000/*.fasta
+
+file                                            format  type  num_seqs        sum_len  min_len      avg_len     max_len
+Benning_ragtag_correct_valid_f100000.fasta      FASTA   DNA      1,736  1,086,562,888   11,728    625,900.3  57,076,620
+Clark_ragtag_correct_valid_f100000.fasta        FASTA   DNA      1,881  1,087,514,419   12,012    578,157.6  55,531,602
+Harosoy_ragtag_correct_valid_f100000.fasta      FASTA   DNA      1,006  1,055,076,571   12,785  1,048,783.9  55,646,352
+Kingawa_ragtag_correct_valid_f100000.fasta      FASTA   DNA      1,626  1,079,496,724   15,441    663,897.1  60,006,688
+Minsoy_ragtag_correct_valid_f100000.fasta       FASTA   DNA      1,886  1,095,922,249   11,170    581,082.8  54,887,948
+MiyakoWhite_ragtag_correct_valid_f100000.fasta  FASTA   DNA      1,383  1,085,627,448   13,036    784,980.1  95,127,858
+PI407020_ragtag_correct_valid_f100000.fasta     FASTA   DNA      5,365  1,734,017,501   15,208    323,209.2  56,763,792
+PI407303_ragtag_correct_valid_f100000.fasta     FASTA   DNA      1,214  1,074,888,667   13,482    885,410.8  68,344,814
+PI507847_ragtag_correct_valid_f100000.fasta     FASTA   DNA      1,865  1,083,883,507   12,607    581,170.8  60,243,986
+
+
+*** NOTES ***
+
+This ragtag correct setting did not fix what we wanted.
+
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+17. Running Ragtag correct with -f 1000 and read validation.
+
+# from: /scratch/rec05938
+# write output files to scratch
+** NOTE I CHANGED THE SCRIPT FROM STEP 14 -f 100000 to -f 1000
+> for f in /work/waplab/roth/05a_hifiasm_raw/*.bp.p_ctg.fa; do n=`basename $f .bp.p_ctg.fa`; sbatch -o 00_log/04i_ragtag_correct_${n}.out -e 00_log/04i_ragtag_correct_${n}.err --export oDir=06i_ragtag_correct_valid_f1000,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,queryG=$f,name=$n,refName=Williams82,queryR=/scratch/rec05938/01_raw_reads/$n.fastq.gz /work/waplab/roth/01_sbatch/ragtag_correct-valid.sbatch; done
+
+# Copy corrected contig fastas to work directory
+
+# in work directory:
+> mkdir 06i_ragtag_correct_valid_f1000/
+> for f in /scratch/rec05938/06i_ragtag_correct_valid_f1000/*/*.fasta; do n=`echo $f | cut -d/ -f5 | cut -d. -f1`; echo $n; cp $f 06i_ragtag_correct_valid_f1000/${n}_ragtag_correct_valid_f1000.fasta; done
+
+18. dot plots for corrected contigs
+
+> for f in 06i_ragtag_correct_valid_f1000/*.fasta; do name=`basename $f .fasta`; echo $name; sbatch -o 00_log/06i_mumplot_${name}.out -e 00_log/06i_mumplot_${name}.err --export oDir=06j_MummerPlots_corrected_valid_f1000,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> seqkit stats 06i_ragtag_correct_valid_f1000/*.fasta
+
+file                                          format  type  num_seqs        sum_len  min_len      avg_len     max_len
+Benning_ragtag_correct_valid_f1000.fasta      FASTA   DNA      1,825  1,086,562,888    2,056    595,376.9  55,752,628
+Clark_ragtag_correct_valid_f1000.fasta        FASTA   DNA      1,931  1,087,514,419    1,127    563,187.2  55,531,602
+Harosoy_ragtag_correct_valid_f1000.fasta      FASTA   DNA      1,052  1,055,076,571    2,552  1,002,924.5  55,646,352
+Kingawa_ragtag_correct_valid_f1000.fasta      FASTA   DNA      1,718  1,079,496,724    2,168      628,345  60,006,688
+Minsoy_ragtag_correct_valid_f1000.fasta       FASTA   DNA      1,971  1,095,922,249    1,280    556,023.5  54,887,948
+MiyakoWhite_ragtag_correct_valid_f1000.fasta  FASTA   DNA      1,493  1,085,627,448    6,466      727,145  95,127,858
+PI407020_ragtag_correct_valid_f1000.fasta     FASTA   DNA      6,016  1,734,017,501    1,507    288,234.3  56,763,792
+PI407303_ragtag_correct_valid_f1000.fasta     FASTA   DNA      1,250  1,074,888,667    2,626    859,910.9  68,344,814
+PI507847_ragtag_correct_valid_f1000.fasta     FASTA   DNA      1,949  1,083,883,507    1,168    556,122.9  60,243,986
+
+*** NOTES ***
+
+This ragtag correct setting kepts the breaks under 100 per assembly (roughly). Looks promising.
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+19. Try to fix PI407020 (Jellyfish, Genomescope, Contig length filter?)
+
+	-------- SIDEQUEST -------------------------------------------------
+	** Creata conda for general bioinformatics usage **
+
+	> ml Miniforge3/24.11.3-0
+	> conda create -p /home/rec05938/conda/jellyfish -c bioconda jellyfish
+	> source activate /home/rec05938/conda/jellyfish
+	--------------------------------------------------------------------
+
+# run jellyfish on reads and assembly
+# from: /scratch/rec05938
+
+> mkdir 06c_jellyfish
+> cp /work/waplab/jake/raw_data/PI407020.fastq.gz 06c_jellyfish/
+> gunzip 06c_jellyfish/PI407020.fastq.gz
+> cp /work/waplab/jake/raw_data/Benning?.fastq.gz 06c_jellyfish/
+> gunzip 06c_jellyfish/*.fastq.gz
+
+# PI407020 (problematic)
+> sbatch -o 00_log/06d_jellyfish_PI407020-reads.out -e 00_log/06d_jellyfish_PI407020-reads.err --export infile=06c_jellyfish/PI407020.fastq,sample=PI407020-reads,oDir=06c_jellyfish /work/waplab/roth/01_sbatch/jellyfish.sbatch
+
+> sbatch -o 00_log/06d_jellyfish_PI407020-assmbly.out -e 00_log/06d_jellyfish_PI407020-assmbly.err --export infile=/work/waplab/roth/05a_hifiasm_raw/PI407020.bp.p_ctg.fa,sample=PI407020-assmbly,oDir=06c_jellyfish /work/waplab/roth/01_sbatch/jellyfish.sbatch
+
+# Benning (control)
+> sbatch -o 00_log/06d_jellyfish_Benning-reads.out -e 00_log/06d_jellyfish_Benning-reads.err --export infile=06c_jellyfish/Benning.fastq,sample=Benning-reads,oDir=06c_jellyfish /work/waplab/roth/01_sbatch/jellyfish.sbatch
+
+> sbatch -o 00_log/06d_jellyfish_Benning-assmbly.out -e 00_log/06d_jellyfish_PI407020-assmbly.err --export infile=/work/waplab/roth/05a_hifiasm_raw/Benning.bp.p_ctg.fa,sample=Benning-assmbly,oDir=06c_jellyfish /work/waplab/roth/01_sbatch/jellyfish.sbatch
+
+!!?? GENOMESCOPE INCONCLUSIVE
+??!! CONTIG LENGTH FILTER INCONCLUSIVE
+
+20. Assembly PI407020 with HiFiASM in haploid mode.
+
+> sbatch -o 00_log/02c_hifiasm-l0_PI407020.out -e 00_log/02c_hifiasm-l0_PI407020.err --export infile=/scratch/rec05938/01_raw_reads/PI407020.fastq.gz,sample=PI407020-l0,oDir=05d_hifiasm_PI407020_tests /work/waplab/roth/01_sbatch/hifiasm-l0.sbatch 
+
+> sbatch -o 00_log/02d_hifiasm-nhap1_PI407020.out -e 00_log/02d_hifiasm-primary_PI407020.err --export infile=/scratch/rec05938/01_raw_reads/PI407020.fastq.gz,sample=PI407020-nhap1,oDir=05d_hifiasm_PI407020_tests /work/waplab/roth/01_sbatch/hifiasm-nhap1.sbatch 
+
+> sbatch -o 00_log/02e_hifiasm-primary_PI407020.out -e 00_log/02e_hifiasm-primary_PI407020.err --export infile=/scratch/rec05938/01_raw_reads/PI407020.fastq.gz,sample=PI407020-primary,oDir=05d_hifiasm_PI407020_tests /work/waplab/roth/01_sbatch/hifiasm-primary.sbatch 
+
+
+21. stats
+
+> sbatch --export inDir=05d_hifiasm_PI407020_tests,fout=05e_hifiasm_PI407020_tests_stats.txt /work/waplab/roth/01_sbatch/bbtools_stats.sbatch
+
+22. dot plots
+
+> for f in 05d_hifiasm_PI407020_tests/*.fa; do name=`basename $f .fa`; echo $name; sbatch -o 00_log/05f_mumplot_${name}.out -e 00_log/05f_mumplot_${name}.err --export oDir=05f_MummerPlots_PI407020_tests,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> seqkit stats 05d_hifiasm_PI407020_tests/*.fa
+
+$$$$$$$$$$$$$$$$$$$ ORIGINAL $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+file                     format  type  num_seqs        sum_len  min_len      avg_len     max_len
+PI407020.bp.p_ctg.fa     FASTA   DNA      5,355  1,734,017,501   15,208    323,812.8  56,763,792
+
+$$$$$$$$$$$$$$$$$$$  TESTS  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+file                              format  type  num_seqs        sum_len  min_len    avg_len     max_len
+PI407020-l0.bp.a_ctg.fa          FASTA   DNA      9,910    725,150,342    9,169   73,173.6   2,606,185
+PI407020-l0.bp.p_ctg.fa          FASTA   DNA      8,551  1,907,964,890   15,208  223,127.7  56,763,792
+PI407020-nhap1.bp.hap1.p_ctg.fa  FASTA   DNA      7,198  1,597,741,725   15,208  221,970.2  56,760,716
+PI407020-nhap1.bp.hap2.p_ctg.fa  FASTA   DNA      4,170  1,486,993,626   16,957  356,593.2  50,629,167
+PI407020-nhap1.bp.p_ctg.fa       FASTA   DNA      5,516  1,749,397,539   15,208  317,149.7  56,761,298
+PI407020-primary.a_ctg.fa        FASTA   DNA     14,101    905,058,976    8,470     64,184   2,606,185
+PI407020-primary.p_ctg.fa        FASTA   DNA      5,355  1,734,017,501   15,208  323,812.8  56,763,792
+
+$$$$$$$$$$$$$$$$$$$ REFERENCE $$$$#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+file         format  type  num_seqs      sum_len  min_len      avg_len     max_len
+Williams 82  FASTA   DNA        284  978,941,695      885  3,446,977.8  58,286,270
+
+
+#####################
+~~~~~~~~~~~~~~~~~
+
+23. Map reads and assembled contigs to reference genome with minimap2 for sam/bam files
+	Inspect regions of interest with geneious or IGV
+
+# from: /scratch/rec05938
+# write output files to scratch
+
+# Map HiFi reads to Williams 82
+> for f in 01_raw_reads/*; do n=`basename $f .fastq.gz`; echo $sample; sbatch -o 00_log/08a_minimap-hifireads_$n.out -e 00_log/08a_minimap-hifireads_$n.err --export query=$f,sample=$n,oDir=08a_minimap-hifireads,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna /work/waplab/roth/01_sbatch/minimap-hifireads-bam.sbatch; done
+
+# prep assembled contigs
+> for f in 05_hifiasm_raw/*/*.bp.p_ctg.fa; do cp $f 05_hifiasm_raw/; echo $f; done
+
+# Map Assembled Contigs
+> for f in 05_hifiasm_raw/*.fa; do n=`basename $f .bp.p_ctg.fa`; echo $sample; sbatch -o 00_log/08b_minimap-asmbldcontigs_$n.out -e 00_log/08b_minimap-asmbldcontigs_$n.err --export query=$f,sample=$n,oDir=08b_minimap-asmbldcontigs,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna /work/waplab/roth/01_sbatch/minimap-asmbldcontigs-bam.sbatch; done
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING BELOW HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+24. Load bam and bai into geneious. Locate positions and make manual contig breaks
+
+1. Benning
+	- break at position XXX contig XXX :: Williams 82 scaffold
+
+2. 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+OK SO I DON'T REALLY LOVE SCANNING MANUALLY THROUGH SEQUENCE FILES IN IGV OR GENEIOUS
+
+I developed a workflow called BREAKWRIGHT. following the steps below.
+Github repo:
+
+25. Here I'm going to try something with the PAF output from minimap2 and Python
+
+Load conda environment:
+> ml Miniforge3/24.11.3-0
+> conda create -p /home/rec05938/conda/breakwright -c conda-forge -c bioconda pysam seqkit hifiasm minimap samtools numpy pandas matplotlib
+> source activate /home/rec05938/conda/breakwright
+
+> source activate /home/rec05938/conda/binf
+> conda install bioconda::pysam
+
+# 1. Map assembled contigs to the reference genome
+> for f in 05_hifiasm_raw/*.fa; do n=`basename $f .bp.p_ctg.fa`; echo $sample; sbatch -o 00_log/09a_minimap-asmbldcontigs_$n.out -e 00_log/09a_minimap-asmbldcontigs_$n.err --export query=$f,sample=$n,oDir=09a_minimap-asmbldcontigs,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna /work/waplab/roth/01_sbatch/minimap-asmbldcontigs.sbatch; done
+
+# 2. Filter assembled contigs based on reference mapping
+> for f in 05_hifiasm_raw/*.fa; do n=`basename $f .bp.p_ctg.fa`; python /work/waplab/roth/02_scripts/01_breakwright_contig_paf_filter.py --assembly_fa $f --contigs_vs_ref_paf 09a_minimap-asmbldcontigs/$n.paf --outprefix 09b_fltrd_assmbld_contigs/$n; echo $n; done
+
+*** IN THIS CASE NO CONTIGS WERE REMOVED as all contigs were >10,000 bp. ***
+
+# 3. Map HiFi reads to assembled contigs
+> for f in 01_raw_reads/*; do n=`basename $f .fastq.gz`; echo $n; sbatch -o 00_log/09c_minimap-hifireads_$n.out -e 00_log/09c_minimap-hifireads_$n.err --export query=$f,sample=$n,oDir=09c_minimap-hifireads,refG=09b_fltrd_assmbld_contigs/$n.kept.fa /work/waplab/roth/01_sbatch/minimap-hifireads-bam.sbatch; done
+
+# 4. PAF Breakfinder
+
+> mkdir 09d_paf_breakfinder
+> for f in 09b_fltrd_assmbld_contigs/*.fa; do n=`basename $f .kept.fa`; echo $n ; python /work/waplab/roth/02_scripts/02_breakwright_paf_breakfinder.py --paf 09a_minimap-asmbldcontigs/$n.paf --outprefix 09d_paf_breakfinder/$n; done
+
+Number of proposed breaks for each genome with default settings:
+   249 09d_paf_breakfinder/Benning_breaks.tsv
+   234 09d_paf_breakfinder/Clark_breaks.tsv
+   149 09d_paf_breakfinder/Harosoy_breaks.tsv
+   255 09d_paf_breakfinder/Kingawa_breaks.tsv
+   275 09d_paf_breakfinder/Minsoy_breaks.tsv
+   254 09d_paf_breakfinder/MiyakoWhite_breaks.tsv
+   168 09d_paf_breakfinder/PI407020_breaks.tsv
+   144 09d_paf_breakfinder/PI407303_breaks.tsv
+   145 09d_paf_breakfinder/PI507847_breaks.tsv
+
+mkdir 12a_paf_breakfinder
+for f in 09b_fltrd_assmbld_contigs/*.fa; do n=`basename $f .kept.fa`; echo $n ; python /work/waplab/roth/02_scripts/02_breakwright_paf_breakfinder.py --paf 09a_minimap-asmbldcontigs/$n.paf --outprefix 12a_paf_breakfinder/$n; done
+
+
+We likely only want 0-5 cuts per genome so we want to explore proposed break positions to choose the ones we want
+
+# 5. GFA validation
+
+> mkdir 09e_gfa_validation
+> for f in 05_hifiasm_raw/*/*.bp.p_ctg.gfa; do n=`basename $f .bp.p_ctg.gfa`; echo $n; python /work/waplab/roth/02_scripts/03_breakwright_gfa_annotator.py --gfa $f --breaks 09d_paf_breakfinder/${n}_breaks.tsv --outprefix 09e_gfa_validation/$n; done
+
+mkdir 12b_gfa_validation
+for f in 05_hifiasm_raw/*/*.bp.p_ctg.gfa; do n=`basename $f .bp.p_ctg.gfa`; echo $n; python /work/waplab/roth/02_scripts/03_breakwright_gfa_annotator.py --gfa $f --breaks 12a_paf_breakfinder/${n}_breaks.tsv --outprefix 12b_gfa_validation/$n; done
+
+# 5. Visualize Proposed break points
+
+> mkdir 09f_break_dotplots
+> 
+
+python /work/waplab/roth/02_scripts/04_breakwright_dotplot.py --paf 09a_minimap-asmbldcontigs/Benning.paf --breaks 09d_paf_breakfinder/Benning_breaks.tsv --outdir 09f_break_dotplots/Benning
+
+> mkdir 09g_break_viz_plus
+> for f in 09c_minimap-hifireads/*.bam; do name=`basename $f .sorted.bam`; sbatch -o 00_log/09g_viz_$name.out -e 00_log/09g_viz_$name.err --export BAM=$f,BREAKS=09e_gfa_validation/${name}_breaks_gfa.tsv,LOWQ=05_hifiasm_raw/${name}/${name}.bp.p_ctg.lowQ.bed,name=$name,oDir=09g_break_viz_plus /work/waplab/roth/01_sbatch/breakwright.sbatch; done
+
+python /work/waplab/roth/02_scripts/05_breakwright_viz_plus.py --bam 09c_minimap-hifireads/Benning.sorted.bam --breaks 09e_gfa_validation/Benning_breaks_gfa.tsv --lowq_bed 05_hifiasm_raw/Benning/Benning.bp.p_ctg.lowQ.bed --outdir 09g_break_viz_plus/Benning --prefix Benning
+
+
+!!!! Testing 05b_breakwright_viz_plus.py
+> mkdir 09i_viz_plus-05b-test
+> mkdir 09i_viz_plus-05b-test/00_log
+> for f in 09c_minimap-hifireads/*.bam; do name=`basename $f .sorted.bam`; sbatch -o 09i_viz_plus-05b-test/00_log/09g_viz_$name.out -e 09i_viz_plus-05b-test/00_log/09g_viz_$name.err --export BAM=$f,BREAKS=09e_gfa_validation/${name}_breaks_gfa.tsv,LOWQ=05_hifiasm_raw/${name}/${name}.bp.p_ctg.lowQ.bed,PAF=09a_minimap-asmbldcontigs/$name.paf,name=$name,oDir=09i_viz_plus-05b-test /work/waplab/roth/01_sbatch/05_breakwright.sbatch; done
+
+
+mkdir 12c_viz_plus
+for f in 09c_minimap-hifireads/*.bam; do name=`basename $f .sorted.bam`; sbatch -o 00_log/12c_viz_$name.out -e 00_log/12c_viz_$name.err --export BAM=$f,BREAKS=12b_gfa_validation/${name}_breaks_gfa.tsv,LOWQ=05_hifiasm_raw/${name}/${name}.bp.p_ctg.lowQ.bed,PAF=09a_minimap-asmbldcontigs/$name.paf,refG=09b_fltrd_assmbld_contigs/$name.kept.fa,name=$name,oDir=12c_viz_plus /work/waplab/roth/01_sbatch/05_breakwright.sbatch; done
+
+# 6. Make cuts
+
+> python /work/waplab/roth/02_scripts/06_breakwright_split_breaks.py --fasta 05_hifiasm_raw/Benning.bp.p_ctg.fa --breaks 10_breakwright_temp/Benning_breaks_gfa.tsv --outfasta 10_breakwright_temp/Benning_corrected.fa
+
+> sbatch -o 10_breakwright_temp/mumplot.out -e 10_breakwright_temp/mumplot.err --export oDir=10_breakwright_temp,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=10_breakwright_temp/Benning_corrected.fa,name=Benning,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING ABOVE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING BELOW HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+------------------------------------------------------------------------
+STEP 03: Scaffold with RagTag
+------------------------------------------------------------------------
+
+0. Have to install ragtag. Did not find it available on Sapelo2 modules or singularities
+
+* 1st: go to home directory and mkdir conda
+
+> Miniforge3/24.11.3-0
+> conda create -p /home/rec05938/conda/ragtag -c bioconda ragtag
+
+1. scaffold
+
+# run on scratch
+> for f in /work/waplab/roth/05a_hifiasm_raw/*.fa; do n=`basename $f .fa`; sbatch -o 00_log/05_ragtag_scaffold_${n}.out -e 00_log/05_ragtag_scaffold_${n}.err --export oDir=07a_ragtag_scaffold,refG=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,queryG=$f,name=$n,refName=Williams82 /work/waplab/roth/01_sbatch/ragtag.sbatch; done
+
+# in work directory
+> mkdir 07a_RagTag_Scaffolds_raw/
+> for f in /scratch/rec05938/07_RagTag_Scaffolds_raw/*/*.fasta; do n=`echo $f | cut -d/ -f5`; cp $f 07a_RagTag_Scaffolds_raw/$n.fasta; done
+
+2. stats
+
+* adjust script to *.fasta
+> sbatch --export inDir=07a_RagTag_Scaffolds_raw,fout=07b_RagTag_raw_scaffold_stats.txt /work/waplab/roth/01_sbatch/bbtools_stats.sbatch
+
+3. dot plots
+
+> for f in 07a_RagTag_Scaffolds_raw/*.fasta; do name=`basename $f .fasta`; echo $name; sbatch -o 00_log/07c_mumplot_${name}.out -e 00_log/07c_mumplot_${name}.err --export oDir=07c_MummerPlots_scaffold_raw,ref=/work/waplab/roth/03_refgenome/GCF_000004515.6_Glycine_max_v4.0_genomic.fna,query=$f,name=$name,al=10000,ai=90,mincluster=100 /work/waplab/roth/01_sbatch/mummer_plot.sbatch; done
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING ABOVE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 04: Pangneome Graph with minigraph cactus (mgc)
+------------------------------------------------------------------------
+
+1. prepare input genome file list
+
+2. run mgc
+
+> sbatch -o 00_log/04_mgc_$n -e 00_log/04_mgc_$n --export inFile=,oName=,oDir=,ref= 01_sbatch/mgc.sbatch
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 0X: XXXXXXXX
+------------------------------------------------------------------------
+
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 0X: XXXXXXXX
+------------------------------------------------------------------------
+
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 0X: XXXXXXXX
+------------------------------------------------------------------------
+
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 0X: XXXXXXXX
+------------------------------------------------------------------------
+
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 0X: XXXXXXXX
+------------------------------------------------------------------------
+
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+------------------------------------------------------------------------
+STEP 0X: XXXXXXXX
+------------------------------------------------------------------------
+
+
+
+###############################################################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

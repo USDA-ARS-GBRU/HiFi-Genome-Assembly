@@ -1,0 +1,339 @@
+ACTION ITEMS - 
+
+###############################################################################
+-------------------------------------------------------------------------------
+1) all vs all mummer plots assemblies   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+###############################################################################
+
+from: sapelo2 :: /scratch/rec05938
+
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+
+> mkdir 22a-select_genomes
+> cp /work/waplab/roth/05a_hifiasm_raw/[BCHKM]*.bp.p_ctg.fa 22a-select_genomes/
+> cp /work/waplab/roth/03_refgenome/glyma.Wm82.gnm6.S97D.genome_main.fna 22a-select_genomes/
+
+> python /work/waplab/roth/02_scripts/generate_mumplot_pairs.py -i 22a-select_genomes -o 22b_genome_pairs.tsv
+
+* Adjust line X in mummer_plot-array.sbatch to match number of genome pairs created by generate_mumplot_pairs.py
+
+> sbatch --export=GENOMEDIR=22a-select_genomes,PAIRFILE=22b_genome_pairs.tsv,oBase=22c_mummer_allvsall,mincluster=100,ai=95,al=1000,max_chr=0 /work/waplab/roth/01_sbatch/mummer_plot-array.sbatch
+
+> mkdir 22c_mummer_allvsall/00_PS
+> cp 22c_mummer_allvsall/*/*.ps 22c_mummer_allvsall/00_PS/
+
+** NOTE: I made plots for each chromosome thinking Wm82.a6 would be the reference but the way that it ran the other genomes were used and it made a plot for each contig in those assemblies. This might be useful downstream but for now we want each genome viewed relative to each chromosome in the Wm82.a6 reference genome.
+
+>  for f in 22a-select_genomes/*.fa; do n=$(basename $f .bp.p_ctg.fa); echo $n; sbatch -o 00_log/22c_mumplot_$n.out -e 00_log/22c_mumplot_$n.err --export=oDir=22cC_mummer_allvsall,ref=22a-select_genomes/glyma.Wm82.gnm6.S97D.genome_main.fna,query=$f,name=$n,mincluster=100,ai=95,al=1000,max_chr=0 /work/waplab/roth/01_sbatch/mummer_plot-plus.sbatch; done
+
+> mkdir 22cC_mummer_allvsall/00_PS
+> cp 22cC_mummer_allvsall/*.ps 22cC_mummer_allvsall/00_PS/
+
+> COPY THE PER CHROMOSOME PS FILES from 22cC - these are to Wm86.a6 as ref
+
+** NOTE: The first attempt had 1 chromosome for each reference but the query axis still showed all query contigs. Let's try again with some additional adjustments
+
+>  for f in 22a-select_genomes/*.fa; do n=$(basename $f .bp.p_ctg.fa); echo $n; sbatch -o 00_log/22CCC_mumplot_$n.out -e 00_log/22CCC_mumplot_$n.err --export=oDir=22CCC_mummer_allvsall,ref=22a-select_genomes/glyma.Wm82.gnm6.S97D.genome_main.fna,query=$f,name=$n,mincluster=100,ai=95,al=1000,max_chr=0 /work/waplab/roth/01_sbatch/mummer_plot-plus-v2.sbatch; done
+
+> mkdir 22CCC_mummer_allvsall/00_PS 22CCC_mummer_allvsall/01_PS
+> cp 22CCC_mummer_allvsall/*.ps 22CCC_mummer_allvsall/00_PS/
+> cp 22CCC_mummer_allvsall/per_chr/*.ps 22CCC_mummer_allvsall/01_PS/
+
+> COPY THE PER CHROMOSOME PS FILES from 22CCC - these are to Wm86.a6 as ref
+
+
+
+###############################################################################
+-------------------------------------------------------------------------------
+2) scaffold 6 genomes with ragtag   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+###############################################################################
+
+* Copy corrected genomes. Address Benning duplicate.
+
+> mkdir 22d_corrected_genomes 22e_scaffoled_genomes
+> cp 21k_Genomes_Final/[BCHKM]* 22d_corrected_genomes/
+> mv 22d_corrected_genomes/Benning_Wm82a6_primary-corrected.fa 22d_corrected_genomes/Benning_Wm82a6_primary.fa 
+
+> for f in 22d_corrected_genomes/*; do n=`basename $f _Wm82a6_primary.fa`; echo $n; sbatch -o 00_log/22e_ragtag_${n}.out -e 00_log/22e_ragtag_${n}.err --export=oDir=22e_scaffoled_genomes,refG=22a-select_genomes/glyma.Wm82.gnm6.S97D.genome_main.fna,queryG=$f,name=$n,refName=Wm82-a6 /work/waplab/roth/01_sbatch/ragtag_scaffold.sbatch; done
+
+
+###############################################################################
+-------------------------------------------------------------------------------
+3) All vs all mummer plots scaffolds   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+###############################################################################
+
+
+> mkdir 22f_genome_scaffolds 22h_scaffold_mummer_allv
+> for d in 22e_scaffoled_genomes/*/; do id=$(basename "$d" | cut -d. -f1); cp "${d}/ragtag.scaffold.fasta" "22f_genome_scaffolds/${id}.scaffold.fasta"; done
+> cp 22a-select_genomes/glyma.Wm82.gnm6.S97D.genome_main.fna 22f_genome_scaffolds/
+
+> python /work/waplab/roth/02_scripts/generate_mumplot_pairs.py -i 22f_genome_scaffolds -o 22g_genome_pairs.tsv
+
+* Adjust line X in mummer_plot-array.sbatch to match number of genome pairs created by generate_mumplot_pairs.py
+
+> sbatch --export=GENOMEDIR=22f_genome_scaffolds,PAIRFILE=22g_genome_pairs.tsv,oBase=22h_scaffold_mummer_allv,mincluster=100,ai=95,al=1000,max_chr=0 /work/waplab/roth/01_sbatch/mummer_plot-array.sbatch
+
+> mv 22g_scaffold_mummer_allv 22h_scaffold_mummer_allv * delete this after finished it fixes a typo from above
+
+> mkdir 22h_scaffold_mummer_allv/00_PS
+> cp 22h_scaffold_mummer_allv/*/*.ps 22h_scaffold_mummer_allv/00_PS/
+
+> COPY THE PER CHROMOSOME PS FILES from 22cC - these are to Wm86.a6 as ref
+
+** NOTE: I made plots for each chromosome thinking Wm82.a6 would be the reference but the way that it ran the other genomes were used and it made a plot for each contig in those assemblies. This might be useful downstream but for now we want each genome viewed relative to each chromosome in the Wm82.a6 reference genome.
+
+>  for f in 22f_genome_scaffolds/*.fasta; do n=$(basename $f .scaffold.fasta); echo $n; sbatch -o 00_log/22h_mumplot_$n.out -e 00_log/22h_mumplot_$n.err --export=oDir=22hH_mummer_allvsall,ref=22f_genome_scaffolds/glyma.Wm82.gnm6.S97D.genome_main.fna,query=$f,name=$n,mincluster=100,ai=95,al=1000,max_chr=0 /work/waplab/roth/01_sbatch/mummer_plot-plus.sbatch; done
+
+> mkdir 22hH_mummer_allvsall/00_PS
+> cp 22hH_mummer_allvsall/*.ps 22hH_mummer_allvsall/00_PS/
+
+> COPY THE PER CHROMOSOME PS FILES from 22hH - these are to Wm86.a6 as ref
+
+** NOTE: The first attempt had 1 chromosome for each reference but the query axis still showed all query contigs. Let's try again with some additional adjustments
+
+>  for f in 22f_genome_scaffolds/*.fasta; do n=$(basename $f .scaffold.fasta); echo $n; sbatch -o 00_log/22HHH_mumplot_$n.out -e 00_log/22HHH_mumplot_$n.err --export=oDir=22HHH_mummer_allvsall,ref=22f_genome_scaffolds/glyma.Wm82.gnm6.S97D.genome_main.fna,query=$f,name=$n,mincluster=100,ai=95,al=1000,max_chr=0 /work/waplab/roth/01_sbatch/mummer_plot-plus-v2.sbatch; done
+
+> mkdir 22HHH_mummer_allvsall/00_PS 22HHH_mummer_allvsall/01_PS
+> cp 22HHH_mummer_allvsall/*.ps 22HHH_mummer_allvsall/00_PS/
+> cp 22HHH_mummer_allvsall/per_chr/*.ps 22HHH_mummer_allvsall/01_PS/
+
+> COPY THE PER CHROMOSOME PS FILES from 22HHH - these are to Wm86.a6 as ref
+
+###############################################################################
+-------------------------------------------------------------------------------
+4) MGC graph scaffolds 7 genomes   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+###############################################################################
+
+1. prepare input genome file list
+# Get sample name file name list. Retain *-corrected.fa for Benning and PI407303
+* Add the reference genome as line 1
+
+> nano 22i_mgc_sample_list.txt
+
+Wm82a6 /scratch/rec05938/22f_genome_scaffolds/glyma.Wm82.gnm6.S97D.genome_main.fna
+Benning /scratch/rec05938/22f_genome_scaffolds/Benning.scaffold.fasta
+Clark /scratch/rec05938/22f_genome_scaffolds/Clark.scaffold.fasta
+Harosoy /scratch/rec05938/22f_genome_scaffolds/Harosoy.scaffold.fasta
+Kingawa /scratch/rec05938/22f_genome_scaffolds/Kingawa.scaffold.fasta
+Minsoy /scratch/rec05938/22f_genome_scaffolds/Minsoy.scaffold.fasta
+MiyakoWhite /scratch/rec05938/22f_genome_scaffolds/MiyakoWhite.scaffold.fasta
+
+
+
+2. run mgc
+
+# Install cactus by creating apptainer image from docker image provided on cactust github
+> mkdir apps
+> cd apps
+> apptainer pull cactus_v3.1.0.sif docker://quay.io/comparative-genomics-toolkit/cactus:v3.1.0
+
+> sbatch -o 00_log/22j_mgc.out -e 00_log/22j_mgc.err --export inFile=22i_mgc_sample_list.txt,oName=22j,oDir=22j_MGC,ref=Wm82a6 /work/waplab/roth/01_sbatch/mgc-image.sbatch
+
+3. Check out the cactus-pangenome outputs
+
+
+###############################################################################
+-------------------------------------------------------------------------------
+5) XMFA shuffle   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+###############################################################################
+
+
+1) cactus-hal2maf
+
+> for f in 22j_MGC/chrom-alignments/*.hal; do name=`basename $f .hal | cut -d. -f4`; echo $name; sbatch -o 00_log/22k_cactus-hal2maf-$name.out -e 00_log/22k_cactus-hal2maf-$name.err --export inFile=$f,oName=$name,oDir=22k_cactus-hal2maf,ref=Wm82a6 /work/waplab/roth/01_sbatch/cactus-hal2maf.sbatch; done
+
+---------------------------------------
+
+* Ran cactus hal2maf with --outType raw norm single
+* we want to start with the "norm" stage which is the default output and labeled simply as .maf
+> mkdir 22k_cactus-hal2maf/00_RAW 22k_cactus-hal2maf/01_SINGLE
+> mv 22k_cactus-hal2maf/*.raw.maf 22k_cactus-hal2maf/00_RAW/
+> mv 22k_cactus-hal2maf/*.single.maf 22k_cactus-hal2maf/01_SINGLE/
+
+---------------------------------------
+
+# prepare conda environment
+> ml Miniforge3/24.11.3-0
+> source activate /home/rec05938/conda/binf
+> conda install -c conda-forge biopython
+
+---------------------------------------
+
+i) maf2xmfa.pl
+
+> for f in 22k_cactus-hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22k-xmfa-pl-$name.out -e 00_log/22k-xmfa-pl-$name.out --export inFile=$f,oName=$name,oDir=22k-xmfa-pl /work/waplab/roth/01_sbatch/maf2xmfa-pl.sbatch; done
+
+ii) maf2xmfa.py
+
+> for f in 22k_cactus-hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22k-xmfa-py-$name.out -e 00_log/22k-xmfa-py-$name.out --export inFile=$f,oName=$name,oDir=22k-xmfa-py /work/waplab/roth/01_sbatch/maf2xmfa-py.sbatch; done
+
+iii) maf2xmfa-rc.py
+
+> for f in 22k_cactus-hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22k-xmfa-rc-$name.out -e 00_log/22k-xmfa-rc-$name.out --export inFile=$f,oName=$name,oDir=22k-xmfa-rc /work/waplab/roth/01_sbatch/maf2xmfa-py-rc.sbatch; done
+
+---------------------------------------
+
+1b) cactus-hal2maf  --maximumBlockLengthToMerge 1000000000
+> for f in 22j_MGC/chrom-alignments/*.hal; do name=`basename $f .hal | cut -d. -f4`; echo $name; sbatch -o 00_log/22k-B_cactus-hal2maf-$name.out -e 00_log/22k-B_cactus-hal2maf-$name.err --export inFile=$f,oName=$name,oDir=22k-B_cactus-hal2maf,ref=Wm82a6 /work/waplab/roth/01_sbatch/cactus-hal2maf-B.sbatch; done
+
+** NOTES:
+	--maximumGapLength 1000000 caused errors and jobs did not finish for any chromosome
+	-- 8 threads instead of 32 threads ran faster oddly.
+	-- hypothesis that multithreading may result in short alignment blocks
+	-- trying again below (1c) with a single thread.
+
+---------------------------------------
+
+i) maf2xmfa.pl
+
+> for f in 22k-B_cactus-hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22k-B-xmfa-pl-$name.out -e 00_log/22k-B-xmfa-pl-$name.out --export inFile=$f,oName=$name,oDir=22k-B-xmfa-pl /work/waplab/roth/01_sbatch/maf2xmfa-pl.sbatch; done
+
+ii) maf2xmfa.py
+
+> for f in 22k-B_cactus-hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22k-B-xmfa-py-$name.out -e 00_log/22k-B-xmfa-py-$name.out --export inFile=$f,oName=$name,oDir=22k-B-xmfa-py /work/waplab/roth/01_sbatch/maf2xmfa-py.sbatch; done
+
+iii) maf2xmfa-rc.py
+
+> for f in 22k-B_cactus-hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22k-B-xmfa-rc-$name.out -e 00_log/22k-B-xmfa-rc-$name.out --export inFile=$f,oName=$name,oDir=22k-B-xmfa-rc /work/waplab/roth/01_sbatch/maf2xmfa-py-rc.sbatch; done
+
+
+---------------------------------------
+---------------------------------------
+
+
+1c) cactus-hal2maf  SINGLE THREAD
+> for f in 22j_MGC/chrom-alignments/*.hal; do name=`basename $f .hal | cut -d. -f4`; echo $name; sbatch -o 00_log/22k-C_cactus-hal2maf-$name.out -e 00_log/22k-C_cactus-hal2maf-$name.err --export inFile=$f,oName=$name,oDir=22k-C_cactus-hal2maf,ref=Wm82a6 /work/waplab/roth/01_sbatch/cactus-hal2maf-C.sbatch; done
+
+
+---------------------------------------
+
+ii) maf2xmfa.py
+
+> for f in 22k-C_cactus-hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22k-C-xmfa-py-$name.out -e 00_log/22k-C-xmfa-py-$name.out --export inFile=$f,oName=$name,oDir=22k-C-xmfa-py /work/waplab/roth/01_sbatch/maf2xmfa-py.sbatch; done
+
+
+---------------------------------------
+---------------------------------------
+
+
+2) oldschool hal2maf
+
+> for f in 22j_MGC/chrom-alignments/*.hal; do name=`basename $f .hal | cut -d. -f4`; echo $name; sbatch -o 00_log/22l_hal2maf-$name.out -e 00_log/22l_hal2maf-$name.err --export inFile=$f,oName=$name,oDir=22l_hal2maf,ref=Wm82a6 /work/waplab/roth/01_sbatch/hal2maf.sbatch; done
+
+---------------------------------------
+
+i) maf2xmfa.pl
+
+> for f in 22l_hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22l-xmfa-pl-$name.out -e 00_log/22l-xmfa-pl-$name.out --export inFile=$f,oName=$name,oDir=22l-xmfa-pl /work/waplab/roth/01_sbatch/maf2xmfa-pl.sbatch; done
+
+ii) maf2xmfa.py
+
+> for f in 22l_hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22l-xmfa-py-$name.out -e 00_log/22l-xmfa-py-$name.out --export inFile=$f,oName=$name,oDir=22l-xmfa-py /work/waplab/roth/01_sbatch/maf2xmfa-py.sbatch; done
+
+iii) maf2xmfa-rc.py
+
+> for f in 22l_hal2maf/*.maf; do name=`basename $f .maf`; sbatch -o 00_log/22l-xmfa-rc-$name.out -e 00_log/22l-xmfa-rc-$name.out --export inFile=$f,oName=$name,oDir=22l-xmfa-rc /work/waplab/roth/01_sbatch/maf2xmfa-py-rc.sbatch; done
+
+---------------------------------------
+
+
+
+##############################################
+### Meeting Wed Jan 21 ###########################################
+########################################################################
+
+working directory: /scratch/rec05938
+
+1) make individual fasta files for each chromosome for each genome
+
+* We'll use seqkit for this
+
+> ml SeqKit # load seqkit
+> mkdir -p 22m_chrom_fasta # make a new directory for output
+
+* hit the assembled genomes
+> for f in 22f_genome_scaffolds/*.fasta; do name=$(basename "$f" .scaffold.fasta); echo "Processing $name"; for i in $(seq 1 20); do p=$(printf "%02d" "$i"); chr=$(printf "glyma.Wm82.gnm6.Gm%02d_RagTag" "$i"); out="22m_chrom_fasta/${name}_chrom${p}.fasta"; echo "      $chr -> $out"; seqkit grep -n -p "$chr" "$f" | sed "s/^>.*/>${name}_chrom${p}/" > "$out"; done; done
+
+* hit the reference genome
+> for f in 22f_genome_scaffolds/*.fna; do name="Wm82a6"; echo "Processing $name"; for i in $(seq 1 20); do p=$(printf "%02d" "$i"); chr=$(printf "glyma.Wm82.gnm6.Gm%02d" "$i"); out="22m_chrom_fasta/${name}_chrom${p}.fasta"; echo "      $chr -> $out"; seqkit grep -n -p "$chr" "$f" | sed "s/^>.*/>${name}_chrom${p}/" > "$out"; done; done
+
+2) make fasta files for first 4 mb of chrom 15 for each genome
+
+> mkdir -p 22n_chrom15_QTL
+> for f in 22m_chrom_fasta/*_chrom15.fasta; do base=$(basename "$f" .fasta); out="22n_chrom15_QTL/${base}_QTL_1-4000000.fasta"; echo "$f -> $out"; seqkit subseq -r 1:4000000 "$f" | sed "s/^>.*/>${base}_IQL_1-4000000/" > "$out"; done
+
+3) minimap each scaffold genome to wm82
+
+> for f in 22f_genome_scaffolds/*.fasta; do n=`basename $f .scaffold.fasta`; echo $n; sbatch -o 00_log/22o_minimap-$n.out -e 00_log/22o_minimap-$n.err --export query=$f,sample=$n,oDir=22o_Scaffold_minimap,refG=22f_genome_scaffolds/glyma.Wm82.gnm6.S97D.genome_main.fna  /work/waplab/roth/01_sbatch/minimap-asmbldcontigs-bam.sbatch; done
+
+########################################################################
+
+
+
+############ ******************* !!!!!!!!!!!!!!!!!
+############   NOTES FROM WAYNE  !!!!!!!!!!!!!!!!!
+############ ******************* !!!!!!!!!!!!!!!!!
+
+Thanks!  I will be anxious to see what it looks like.
+
+The area with weird recombination starts at bp 632,659 of LG15 of the W82 reference genome and goes through at least bp 2,653, 214
+
+The area of of genetic interest is nested in that region between 1,006, 618 and 1,348,467 of the w82 genome.
+
+Specifically, looking at polymorphisms between the genotypes for Glyma.15g016500
+
+The other gene of interest lies outside the smaller region, but still within the larger region, and is Glyma.15g025500.  Also looking for polymorphisms between the genotypes.
+
+Thanks.
+
+############ ******************* !!!!!!!!!!!!!!!!!
+############ ******************* !!!!!!!!!!!!!!!!!
+############ ******************* !!!!!!!!!!!!!!!!!
+
+
+
+0) mummer plot combo's of 6 genomes
+0) mummer plot combo's of chrome 15 alone
+
+
+2) Build graph with 6 genomes plus Wm82 ref.
+3) XMFA - chrom 15 is focus
+4) if xmfa won't open try explicit region position specified by wayne below
+5) if xmfa still won't open have to dig into the scripts.
+
+
+
+
+
+8Mb chunkSize
+200kb maximumBlocklengthToMerge
+
+120Mb chromosome length in peanut with 6
+
+Use the Mauve Viewer - Justin has a little perl script he puts coordinates in.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

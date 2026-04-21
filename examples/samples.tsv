@@ -1,0 +1,2 @@
+sample_id	cultivar	species	taxon_id	ploidy	expected_genome_size_bp	hifi_reads	hic_read1	hic_read2	notes
+Example01	ExampleCultivar	Genus species	0000	2	1000000000	03_reads_raw/Example01.fastq.gz			Replace this row with real project metadata.

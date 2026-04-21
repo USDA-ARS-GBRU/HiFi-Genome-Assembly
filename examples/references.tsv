@@ -1,0 +1,2 @@
+reference_id	species	cultivar	accession	fasta	path_or_url	notes
+CloseRef01	Genus species	ReferenceCultivar	GCF_000000000.0	CloseRef01.fa	references/CloseRef01.fa	Use close references for dotplots and optional scaffolding, not as unquestioned truth.
