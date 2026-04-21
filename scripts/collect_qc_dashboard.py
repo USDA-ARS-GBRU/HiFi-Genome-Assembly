@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Collect first-pass assembly QC metrics into one TSV dashboard.
+"""Collect assembly QC metrics into one TSV dashboard.
 
 The script is intentionally permissive. It reads files when they exist and
-leaves unknown values blank, which lets a project grow from v0.1 assembly
-metrics into a fuller v1.0 release dashboard.
+leaves unknown values blank. The fixed columns cover common assembly metrics,
+and extra TSV inputs can add project-specific telomere, repeat, annotation, or
+submission-readiness metrics as the workflow matures.
 """
 
 from __future__ import annotations
@@ -56,9 +57,19 @@ FIELDS = [
     "quast_n50",
     "quast_l50",
     "quast_gc",
+    "bbtools_scaffolds",
+    "bbtools_contigs",
+    "bbtools_total_length",
+    "bbtools_gc",
+    "bbtools_n50",
+    "bbtools_l50",
     "merqury_qv",
     "merqury_error_rate",
     "merqury_completeness",
+    "fcs_adaptor_records",
+    "fcs_adaptor_status",
+    "fcs_gx_records",
+    "fcs_gx_status",
 ]
 
 
@@ -75,6 +86,12 @@ def clean_int(value: str) -> str:
 def sample_from_path(path: Path) -> str:
     name = path.name
     for suffix in [
+        ".bbtools_stats.txt",
+        ".fcs_report.txt",
+        ".fcs_adaptor_report.txt",
+        ".fcs_gx_report.txt",
+        ".short_summary.txt",
+        ".short_summary.json",
         ".primary.fa",
         ".fa",
         ".fasta",
@@ -224,6 +241,40 @@ def parse_quast(paths: list[Path]) -> dict[str, dict[str, str]]:
     return rows
 
 
+def parse_bbtools(paths: list[Path]) -> dict[str, dict[str, str]]:
+    rows: dict[str, dict[str, str]] = {}
+    label_map = {
+        "scaffolds": "bbtools_scaffolds",
+        "contigs": "bbtools_contigs",
+        "total length": "bbtools_total_length",
+        "gc": "bbtools_gc",
+        "n50": "bbtools_n50",
+        "l50": "bbtools_l50",
+    }
+
+    for path in paths:
+        if not path.exists():
+            continue
+        sample = sample_from_path(path)
+        row: dict[str, str] = {}
+        for line in path.read_text(errors="replace").splitlines():
+            cleaned = line.strip()
+            if not cleaned:
+                continue
+            parts = re.split(r"\s*[:=]\s*|\t+", cleaned, maxsplit=1)
+            if len(parts) != 2:
+                parts = cleaned.split(None, 1)
+            if len(parts) != 2:
+                continue
+            label = parts[0].strip().lower().replace("_", " ")
+            value = parts[1].strip().split()[0].replace(",", "")
+            key = label_map.get(label)
+            if key:
+                row[key] = value
+        rows[sample] = row
+    return rows
+
+
 def parse_merqury(paths: list[Path]) -> dict[str, dict[str, str]]:
     rows: dict[str, dict[str, str]] = {}
     for path in paths:
@@ -264,15 +315,67 @@ def parse_merqury(paths: list[Path]) -> dict[str, dict[str, str]]:
     return rows
 
 
-def merge_rows(*tables: dict[str, dict[str, str]]) -> list[dict[str, str]]:
+def parse_fcs(paths: list[Path], prefix: str) -> dict[str, dict[str, str]]:
+    rows: dict[str, dict[str, str]] = {}
+    for path in paths:
+        if not path.exists():
+            continue
+        sample = sample_from_path(path)
+        records = 0
+        for line in path.read_text(errors="replace").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                continue
+            # FCS reports may include one or two descriptive header rows.
+            lowered = stripped.lower()
+            if lowered.startswith("seq_id") or lowered.startswith("accession") or "action_report" in lowered:
+                continue
+            records += 1
+        rows[sample] = {
+            f"{prefix}_records": str(records),
+            f"{prefix}_status": "clean" if records == 0 else "review",
+        }
+    return rows
+
+
+def parse_extra_tsv(paths: list[Path], prefix: str = "") -> dict[str, dict[str, str]]:
+    rows: dict[str, dict[str, str]] = {}
+    for path in paths:
+        if not path.exists():
+            continue
+        with path.open(newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if not reader.fieldnames:
+                continue
+            sample_field = "sample" if "sample" in reader.fieldnames else "sample_id" if "sample_id" in reader.fieldnames else None
+            if not sample_field:
+                continue
+            for raw in reader:
+                sample = raw.get(sample_field, "")
+                if not sample:
+                    continue
+                row = rows.setdefault(sample, {})
+                for key, value in raw.items():
+                    if key == sample_field or value is None:
+                        continue
+                    out_key = f"{prefix}_{key}" if prefix and not key.startswith(f"{prefix}_") else key
+                    row[out_key] = value
+    return rows
+
+
+def merge_rows(*tables: dict[str, dict[str, str]]) -> tuple[list[dict[str, str]], list[str]]:
     samples = sorted({sample for table in tables for sample in table})
     merged = []
+    extra_fields: list[str] = []
     for sample in samples:
         row = empty_row(sample)
         for table in tables:
             row.update(table.get(sample, {}))
+        for key in row:
+            if key not in FIELDS and key not in extra_fields:
+                extra_fields.append(key)
         merged.append(row)
-    return merged
+    return merged, FIELDS + sorted(extra_fields)
 
 
 def main() -> None:
@@ -281,21 +384,35 @@ def main() -> None:
     parser.add_argument("--hifiasm-logs", nargs="*", type=Path, default=[], help="hifiasm log files")
     parser.add_argument("--busco", nargs="*", type=Path, default=[], help="BUSCO short_summary txt/json files")
     parser.add_argument("--quast", nargs="*", type=Path, default=[], help="QUAST report.tsv files")
+    parser.add_argument("--bbtools", nargs="*", type=Path, default=[], help="BBTools stats.sh text outputs")
     parser.add_argument("--merqury", nargs="*", type=Path, default=[], help="Merqury text reports, if available")
+    parser.add_argument("--fcs-adaptor", nargs="*", type=Path, default=[], help="NCBI FCS-adaptor reports")
+    parser.add_argument("--fcs-gx", nargs="*", type=Path, default=[], help="NCBI FCS-GX reports")
+    parser.add_argument("--telomere-summary", nargs="*", type=Path, default=[], help="TSV with sample/sample_id plus telomere metrics")
+    parser.add_argument("--repeat-summary", nargs="*", type=Path, default=[], help="TSV with sample/sample_id plus repeat metrics")
+    parser.add_argument("--annotation-summary", nargs="*", type=Path, default=[], help="TSV with sample/sample_id plus annotation metrics")
+    parser.add_argument("--extra-tsv", nargs="*", type=Path, default=[], help="additional TSV files with sample/sample_id column")
     parser.add_argument("-o", "--output", required=True, type=Path, help="output dashboard TSV")
     args = parser.parse_args()
 
-    rows = merge_rows(
+    rows, fieldnames = merge_rows(
         parse_seqkit(args.seqkit) if args.seqkit else {},
         parse_hifiasm_logs(args.hifiasm_logs),
         parse_busco(args.busco),
         parse_quast(args.quast),
+        parse_bbtools(args.bbtools),
         parse_merqury(args.merqury),
+        parse_fcs(args.fcs_adaptor, "fcs_adaptor"),
+        parse_fcs(args.fcs_gx, "fcs_gx"),
+        parse_extra_tsv(args.telomere_summary, "telomere"),
+        parse_extra_tsv(args.repeat_summary, "repeat"),
+        parse_extra_tsv(args.annotation_summary, "annotation"),
+        parse_extra_tsv(args.extra_tsv),
     )
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDS, delimiter="\t")
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, delimiter="\t", extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
 

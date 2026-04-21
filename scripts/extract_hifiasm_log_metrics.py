@@ -12,6 +12,7 @@ import argparse
 import csv
 import re
 from pathlib import Path
+from typing import Optional
 
 
 RE_BASES = re.compile(r"collected\s+([\d,]+)\s+bases\s+in\s+([\d,]+)\s+reads")
@@ -20,7 +21,7 @@ RE_GENOME_SIZE = re.compile(r"estimated genome size:\s*([\d,]+)")
 RE_PEAK = re.compile(r"peak_hom:\s*(-?\d+);\s*peak_het:\s*(-?\d+)")
 
 
-def clean_int(value: str | None) -> str:
+def clean_int(value: Optional[str]) -> str:
     if value is None:
         return ""
     return value.replace(",", "")

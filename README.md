@@ -1,8 +1,8 @@
 # PacBio HiFi Genome Assembly for Crop Plants
 
-This repository is a modular, beginner-friendly protocol for assembling crop plant genomes from PacBio HiFi reads, evaluating assembly quality, preparing annotation tracks, and getting the final product ready for public release through NCBI/INSDC and related community databases.
+This repository is a modular, beginner-friendly, peer-review-oriented protocol for assembling crop plant genomes from PacBio HiFi reads, evaluating assembly quality, preparing annotation tracks, and getting the final product ready for public release through NCBI/INSDC and related community databases.
 
-The first draft was built from the project notes in `bulk-notes/`, including lima bean, soybean, and other working assembly scripts. Those notes contain real cluster experience: BAM-to-FASTQ conversion, read QC, hifiasm runs, MUMmer dotplots, RagTag experiments, k-mer peak interpretation, BUSCO, and contamination side quests. This README turns that noisy history into a reusable workflow.
+The protocol is designed as a practical representation of contemporary crop plant genome assembly work. It emphasizes transparent decisions, independent quality evidence, reproducible HPC execution, and release products that can withstand manuscript review, database validation, and reuse by breeding and genomics communities.
 
 The protocol is intentionally written as a longform guide. A beginning bioinformatics graduate student should be able to follow the logic, not just copy commands.
 
@@ -124,6 +124,7 @@ Starter helper scripts are available in:
 scripts/collect_qc_dashboard.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
+scripts/plot_qc_dashboard.py
 ```
 
 Example usage:
@@ -136,7 +137,17 @@ scripts/collect_qc_dashboard.py \
   --hifiasm-logs 00_log/hifiasm_*.err \
   --busco 08_stats/busco/*/short_summary*.txt \
   --quast 08_stats/quast*/report.tsv \
+  --bbtools 08_stats/*.bbtools_stats.txt \
+  --fcs-adaptor 11_contamination/*fcs_adaptor*.txt \
+  --fcs-gx 11_contamination/*fcs_gx*.txt \
+  --telomere-summary examples/telomere_summary.tsv \
+  --repeat-summary examples/repeat_summary.tsv \
+  --annotation-summary examples/annotation_summary.tsv \
   -o 08_stats/assembly_qc_dashboard.tsv
+
+scripts/plot_qc_dashboard.py \
+  -i 08_stats/assembly_qc_dashboard.tsv \
+  -o 08_stats/qc_plots
 
 scripts/filter_rename_fasta.py \
   -i 07_assemblies/sample.primary.fa \
@@ -144,6 +155,15 @@ scripts/filter_rename_fasta.py \
   --min-length 200 \
   --prefix SampleID \
   --map 15_release/sample.filtered_renamed.id_map.tsv
+```
+
+Review and release templates are available in:
+
+```text
+docs/qc_report_template.md
+docs/release_checklist.md
+docs/methods_text_template.md
+examples/release_manifest.tsv
 ```
 
 ## Software Setup
@@ -370,7 +390,7 @@ Possible tools:
 - `cutadapt` for known adapter sequences.
 - NCBI FCS-adaptor on the assembly before submission.
 
-From the working notes: trimming with `fastplong` did not improve soybean assemblies and sometimes made contiguity worse. This is an important lesson: run trimmed and untrimmed comparisons for one or two samples before committing to trimming every dataset.
+Empirically test trimming before applying it project-wide. In many HiFi plant projects, raw HiFi reads already assemble well; unnecessary trimming can reduce total read length, remove informative terminal sequence, and occasionally reduce contiguity. A defensible approach is to compare raw and trimmed assemblies for one representative sample, then choose the strategy supported by assembly size, contiguity, BUSCO, Merqury, and dotplot evidence.
 
 Example:
 
@@ -507,12 +527,6 @@ Compare default and `-l0` assemblies using assembly size, contig count, BUSCO du
 
 ### Memory and Runtime
 
-From the project notes:
-
-- Small fungal genomes ran with modest memory.
-- Lima bean samples generally worked with about 100G, but one sample needed more.
-- Soybean-scale assemblies used 32 threads and larger memory allocations.
-
 For crop plants, start conservatively:
 
 | Genome size | Initial hifiasm request |
@@ -642,7 +656,7 @@ In common MUMmer plot coloring:
 - Broken diagonals can indicate contig breaks, real structural variation, or misassembly.
 - Dense clusters often represent repeats, centromeres, segmental duplications, or over-alignment.
 
-Do not automatically "fix" every difference from the reference. The soybean notes showed that aggressive RagTag correction made dotplots look very clean but introduced many breaks, potentially erasing real variation.
+Do not automatically "fix" every difference from the reference. Aggressive reference-guided correction can make dotplots look cleaner while introducing excessive breaks or erasing real cultivar-specific structural variation. Treat a cleaner reference-alignment plot as one line of evidence, not as proof that the assembly is more biologically accurate.
 
 ## Step 7: Haplotigs, Duplications, and Ploidy
 
@@ -1542,7 +1556,7 @@ sbatch \
 
 Goal: a usable protocol for HiFi-only primary assemblies.
 
-- Convert messy notes into a coherent README.
+- Establish a coherent, standalone README for crop plant PacBio HiFi assemblies.
 - Add reusable sbatch examples for BAM-to-FASTQ, hifiasm, stats, BUSCO, dotplots.
 - Add sample metadata templates.
 - Add a small helper script to parse hifiasm logs for k-mer peaks and collected bases.
@@ -1554,8 +1568,9 @@ Goal: a usable protocol for HiFi-only primary assemblies.
 
 Goal: standardized assembly quality reports.
 
-- Expand `scripts/collect_qc_dashboard.py` to collect BBTools, contamination, telomere, and annotation metrics in addition to seqkit, BUSCO, QUAST, Merqury, and hifiasm log metrics.
-- Add Markdown report template per sample.
+- Maintain `scripts/collect_qc_dashboard.py` as the central metric aggregator for seqkit, BBTools, BUSCO, QUAST, Merqury, hifiasm logs, FCS, and project-specific telomere/repeat/annotation summaries.
+- Maintain `docs/qc_report_template.md` as the per-assembly peer-review report template.
+- Maintain `docs/release_checklist.md`, `docs/methods_text_template.md`, and `examples/release_manifest.tsv` for release preparation.
 - Add example plots for read length, assembly length, BUSCO, and Merqury QV.
 - Add guidance for interpreting problematic k-mer profiles.
 
@@ -1627,7 +1642,7 @@ Goal: submission-ready assemblies.
 - Add AGP validation.
 - Add table2asn examples.
 - Add BioProject/BioSample/SRA checklist.
-- Add release manifest template.
+- Refine release manifest template.
 - Add methods text template for manuscripts and NCBI structured comments.
 
 ### v1.0: Stable Public Protocol
@@ -1698,17 +1713,3 @@ NCBI submission:
 - Eukaryotic genome submission guide: https://www.ncbi.nlm.nih.gov/genbank/eukaryotic_genome_submission/
 - Eukaryotic annotation guide: https://www.ncbi.nlm.nih.gov/genbank/eukaryotic_genome_submission_annotation/
 - Submitting eukaryotic genome data: https://www.ncbi.nlm.nih.gov/genbank/eukaryotic_submission/
-
-## Working Notes Incorporated
-
-This README distilled patterns from:
-
-- `bulk-notes/01a_LimaBean-Working-Notes-01.txt`
-- `bulk-notes/01b_LimaBean-Assembly-Scratch-01.txt`
-- `bulk-notes/ParrotLab_GenomeAssembly_Notes.txt`
-- `bulk-notes/FusariumTr4_WorkingNotes.txt`
-- `bulk-notes/02a_MummerPlot_Notes.txt`
-- `bulk-notes/02b_HifiASM_Notes.txt`
-- existing sbatch scripts for BAM conversion, fastp-long, hifiasm, stats, MUMmer, and RagTag
-
-The notes remain valuable as provenance, but the protocol above should become the maintained path forward.
