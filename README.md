@@ -51,7 +51,7 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.3.0-dev**. See `VERSION` and `CHANGELOG.md`.
+Current roadmap version: **v0.3.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.3 is still active, but its release-readiness foundation is now mostly in place.
 
 Completed baseline:
 
@@ -60,7 +60,7 @@ Completed baseline:
 
 Current focus:
 
-- **v0.3 Validation and Release Readiness**: FASTA validation, AGP validation, formal assembly decision logging, tool-version policy, and stronger heterozygosity evaluation options.
+- **v0.3 Validation and Release Readiness**: maintain the NCBI submission validation examples, repeat/gene annotation starter templates, and contamination/release helpers while we polish the protocol toward v0.4.
 
 ## Workflow Overview
 
@@ -199,10 +199,13 @@ Review and release templates are available in:
 ```text
 docs/assembly_decision_log_template.md
 docs/contamination_workflow.md
+docs/gene_annotation.md
+docs/ncbi_submission.md
 docs/organelle_workflow.md
 docs/pacbio_watchlist.md
 docs/qc_figures.md
 docs/qc_report_template.md
+docs/repeat_annotation.md
 docs/release_checklist.md
 docs/review_standards.md
 docs/tool_version_policy.md
@@ -1695,7 +1698,7 @@ Goal: standardized assembly quality reports.
 
 ### v0.3: Validation, Contamination, and Organelle Handling
 
-Status: **current development focus, expanded to validation and release readiness**.
+Status: **active, mostly complete baseline**.
 
 Goal: prevent release problems and make validation reproducible.
 
@@ -1713,6 +1716,9 @@ Goal: prevent release problems and make validation reproducible.
 - Maintain contamination decision TSV template.
 - Maintain organelle PAF hit summarizer.
 - Maintain decision tree for remove, mask, retain, split, or submit separately.
+- Maintain NCBI-oriented FASTA header, manifest, and release bundle helper scripts.
+- Maintain btrim, PacBio-watch, and QC-figure guidance.
+- Remaining before v0.4: final review pass across validation, annotation, and release-readiness sections; then move active development to dotplot and misassembly curation.
 
 ### v0.4: Dotplot and Misassembly Curation
 
@@ -1746,6 +1752,8 @@ Goal: track chromosome completeness.
 
 ### v0.7: Repeat Annotation
 
+Status: **started in v0.3, full refinement planned for v0.7**.
+
 Goal: crop-appropriate repeat libraries and soft-masked genomes.
 
 - Add EDTA workflow.
@@ -1754,14 +1762,19 @@ Goal: crop-appropriate repeat libraries and soft-masked genomes.
 - Add softmasked FASTA output standard.
 - Add repeat GFF/BED track preparation.
 - Maintain EDTA and RepeatModeler2/RepeatMasker sbatch templates.
+- Maintain repeat annotation strategy guide.
 
 ### v0.8: Gene Annotation
+
+Status: **started in v0.3, full refinement planned for v0.8**.
 
 Goal: evidence-based gene models.
 
 - Add Liftoff workflow for cultivar-to-cultivar transfer.
 - Add BRAKER3 workflow with RNA-seq/protein evidence.
 - Add MAKER workflow for projects needing full evidence integration.
+- Maintain Liftoff, BRAKER3, and MAKER sbatch templates.
+- Maintain gene annotation strategy guide.
 - Add functional annotation examples.
 - Add annotation QC dashboard.
 
@@ -1773,7 +1786,8 @@ Goal: submission-ready assemblies.
 - Add AGP validation.
 - Maintain release bundle checker.
 - Maintain manifest audit helper.
-- Add table2asn examples.
+- Maintain table2asn validation example.
+- Maintain NCBI submission and annotation validation guide.
 - Add BioProject/BioSample/SRA checklist.
 - Refine release manifest template.
 - Add methods text template for manuscripts and NCBI structured comments.

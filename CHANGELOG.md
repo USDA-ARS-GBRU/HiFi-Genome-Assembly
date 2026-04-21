@@ -2,7 +2,7 @@
 
 ## 0.3.0-dev
 
-Current development focus:
+Current development focus. v0.3 remains active, but the release-readiness foundation is mostly in place:
 
 - FASTA and AGP release-readiness validation.
 - Tool version and command-capture policy.
@@ -21,6 +21,9 @@ Current development focus:
 - NCBI-oriented FASTA header, manifest, and release bundle helper scripts.
 - EDTA and RepeatModeler2/RepeatMasker sbatch templates.
 - QC figures guide for review and manuscripts.
+- Added table2asn validation template and NCBI submission guide.
+- Added Liftoff, BRAKER3, and MAKER sbatch templates.
+- Added repeat and gene annotation strategy guides.
 
 ## 0.2.0
 
