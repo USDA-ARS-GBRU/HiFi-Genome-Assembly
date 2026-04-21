@@ -9,6 +9,9 @@ Current development focus:
 - Assembly decision logging.
 - Standardized heterozygosity evaluation option for haplotype assemblies.
 - Toy dataset and GitHub Actions validation for helper scripts.
+- FCS-adaptor/FCS-GX template jobs.
+- Organelle detection and release decision workflow.
+- Assembly review standards.
 
 ## 0.2.0
 

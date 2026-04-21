@@ -2,6 +2,8 @@
 
 This repository is a modular, beginner-friendly, peer-review-oriented protocol for assembling crop plant genomes from PacBio HiFi reads, evaluating assembly quality, preparing annotation tracks, and getting the final product ready for public release through NCBI/INSDC and related community databases.
 
+> This repository is under active development. Suggestions, corrections, teaching examples, and issue reports are welcome through GitHub Issues or pull requests.
+
 The protocol is designed as a practical representation of contemporary crop plant genome assembly work. It emphasizes transparent decisions, independent quality evidence, reproducible HPC execution, and release products that can withstand manuscript review, database validation, and reuse by breeding and genomics communities.
 
 The protocol is intentionally written as a longform guide. A beginning bioinformatics graduate student should be able to follow the logic, not just copy commands.
@@ -185,8 +187,10 @@ Review and release templates are available in:
 
 ```text
 docs/assembly_decision_log_template.md
+docs/organelle_workflow.md
 docs/qc_report_template.md
 docs/release_checklist.md
+docs/review_standards.md
 docs/tool_version_policy.md
 docs/methods_text_template.md
 examples/release_manifest.tsv
@@ -1654,10 +1658,11 @@ Goal: prevent release problems and make validation reproducible.
 - Maintain tool-version policy.
 - Maintain StandardizedHeterozygosityEvaluation option for haplotype-level assemblies.
 - Maintain toy dataset and GitHub Actions helper validation.
-- Add FCS-adaptor and FCS-GX examples.
+- Maintain FCS-adaptor and FCS-GX examples.
+- Maintain organelle detection/removal decision workflow.
+- Maintain assembly review standards.
 - Add BlobToolKit workflow.
 - Add sourmash database setup and search templates.
-- Add chloroplast/mitochondrial detection and separation strategy.
 - Add decision tree for remove, mask, retain, or submit separately.
 
 ### v0.4: Dotplot and Misassembly Curation
