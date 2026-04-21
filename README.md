@@ -46,6 +46,19 @@ This workflow favors:
 22. [Development Roadmap](#development-roadmap)
 23. [Key References and Tool Links](#key-references-and-tool-links)
 
+## Current Version
+
+Current roadmap version: **v0.3.0-dev**. See `VERSION` and `CHANGELOG.md`.
+
+Completed baseline:
+
+- **v0.1 Assembly Core**: longform protocol, reusable sbatch templates, starter metadata, hifiasm log parsing, and FASTA filtering/renaming helpers.
+- **v0.2 QC Dashboard**: peer-review QC/report templates, release checklist, methods text template, release manifest, dashboard aggregation, and quick dashboard plotting.
+
+Current focus:
+
+- **v0.3 Validation and Release Readiness**: FASTA validation, AGP validation, formal assembly decision logging, tool-version policy, and stronger heterozygosity evaluation options.
+
 ## Workflow Overview
 
 The recommended first-pass workflow is:
@@ -125,6 +138,8 @@ scripts/collect_qc_dashboard.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/plot_qc_dashboard.py
+scripts/validate_agp.py
+scripts/validate_fasta.py
 ```
 
 Example usage:
@@ -155,20 +170,31 @@ scripts/filter_rename_fasta.py \
   --min-length 200 \
   --prefix SampleID \
   --map 15_release/sample.filtered_renamed.id_map.tsv
+
+scripts/validate_fasta.py \
+  15_release/sample.filtered_renamed.fa \
+  --min-length 200 \
+  -o 15_release/sample.fasta_validation.tsv
+
+scripts/validate_agp.py \
+  15_release/sample.agp \
+  -o 15_release/sample.agp_validation.tsv
 ```
 
 Review and release templates are available in:
 
 ```text
+docs/assembly_decision_log_template.md
 docs/qc_report_template.md
 docs/release_checklist.md
+docs/tool_version_policy.md
 docs/methods_text_template.md
 examples/release_manifest.tsv
 ```
 
 ## Software Setup
 
-No single installation method works everywhere. The protocol supports four styles: HPC modules, conda/mamba, pixi, and direct install or containers.
+No single installation method works everywhere. The protocol supports four styles: HPC modules, conda/mamba, pixi, and direct install or containers. See `docs/tool_version_policy.md` for the minimum version and command-capture expectations for review-quality releases.
 
 ### Option A: HPC Modules
 
@@ -443,6 +469,44 @@ Record:
 - whether the model fit looks believable
 
 For polyploid crops, also use Smudgeplot when ploidy or subgenome structure is uncertain.
+
+### Standardized Heterozygosity from Haplotype Assemblies
+
+When high-quality haplotype-level assemblies are available for the same individual, use the USDA-ARS-GBRU [StandardizedHeterozygosityEvaluation](https://github.com/USDA-ARS-GBRU/StandardizedHeterozygosityEvaluation) approach as an optional standardized estimate of percent heterozygosity.
+
+Conceptual workflow:
+
+1. Align haplotype assembly 1 and haplotype assembly 2 with MUMmer `nucmer`.
+2. Extract non-repetitive SNPs with `show-snps -Clr`.
+3. Count SNP records, excluding the `show-snps` header lines.
+4. Divide the SNP count by organism genome size.
+5. Multiply by 100 to report percent heterozygosity.
+
+Example:
+
+```bash
+module load mummer
+
+ref=07_assemblies/sample.hap1.fa
+query=07_assemblies/sample.hap2.fa
+out=05_kmers/sample.hap1_vs_hap2
+genome_size=1000000000
+
+nucmer --prefix="${out}" "${ref}" "${query}"
+show-snps -Clr "${out}.delta" > "${out}.nonrepeat.snps"
+
+total_lines=$(wc -l < "${out}.nonrepeat.snps")
+snp_count=$((total_lines - 5))
+awk -v snps="${snp_count}" -v genome="${genome_size}" \
+  'BEGIN { printf "percent_heterozygosity\t%.6f\n", (snps / genome) * 100 }'
+```
+
+Use this estimate with care:
+
+- It requires reliable haplotype assemblies from the same individual.
+- It measures SNP differences captured between assembled haplotypes, not all possible heterozygous variation.
+- It is most comparable across projects when the same alignment, SNP extraction, repeat handling, and genome-size assumptions are used.
+- It complements k-mer approaches such as GenomeScope/Smudgeplot, which estimate heterozygosity directly from reads before assembly.
 
 ### Jellyfish Alternative
 
@@ -1554,6 +1618,8 @@ sbatch \
 
 ### v0.1: Assembly Core
 
+Status: **complete baseline**.
+
 Goal: a usable protocol for HiFi-only primary assemblies.
 
 - Establish a coherent, standalone README for crop plant PacBio HiFi assemblies.
@@ -1566,6 +1632,8 @@ Goal: a usable protocol for HiFi-only primary assemblies.
 
 ### v0.2: QC Dashboard
 
+Status: **complete baseline, continuing refinement**.
+
 Goal: standardized assembly quality reports.
 
 - Maintain `scripts/collect_qc_dashboard.py` as the central metric aggregator for seqkit, BBTools, BUSCO, QUAST, Merqury, hifiasm logs, FCS, and project-specific telomere/repeat/annotation summaries.
@@ -1574,10 +1642,18 @@ Goal: standardized assembly quality reports.
 - Add example plots for read length, assembly length, BUSCO, and Merqury QV.
 - Add guidance for interpreting problematic k-mer profiles.
 
-### v0.3: Contamination and Organelle Handling
+### v0.3: Validation, Contamination, and Organelle Handling
 
-Goal: prevent embarrassing release problems.
+Status: **current development focus, expanded to validation and release readiness**.
 
+Goal: prevent release problems and make validation reproducible.
+
+- Maintain FASTA validation helper.
+- Maintain AGP validation helper.
+- Maintain assembly decision log template.
+- Maintain tool-version policy.
+- Maintain StandardizedHeterozygosityEvaluation option for haplotype-level assemblies.
+- Maintain toy dataset and GitHub Actions helper validation.
 - Add FCS-adaptor and FCS-GX examples.
 - Add BlobToolKit workflow.
 - Add sourmash database setup and search templates.
@@ -1669,6 +1745,7 @@ Assembly:
 Genome profiling and quality:
 
 - GenomeScope 2.0 and Smudgeplot: https://www.nature.com/articles/s41467-020-14998-3
+- USDA-ARS-GBRU StandardizedHeterozygosityEvaluation: https://github.com/USDA-ARS-GBRU/StandardizedHeterozygosityEvaluation
 - Merqury paper: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02134-9
 - BUSCO user guide: https://busco.ezlab.org/busco_userguide
 - Inspector paper: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02527-4

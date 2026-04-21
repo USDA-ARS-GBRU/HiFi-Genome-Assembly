@@ -1,0 +1,29 @@
+name: validate-helpers
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile Python helpers
+        run: python -m py_compile scripts/*.py
+      - name: Validate sbatch shell syntax
+        run: bash -n 01_sbatch_templates/*.sbatch
+      - name: Validate toy FASTA
+        run: python scripts/validate_fasta.py examples/toy/toy_assembly.fa --min-length 1
+      - name: Validate toy AGP
+        run: python scripts/validate_agp.py examples/toy/toy.agp
+      - name: Build toy dashboard
+        run: |
+          python scripts/collect_qc_dashboard.py \
+            --telomere-summary examples/telomere_summary.tsv \
+            --repeat-summary examples/repeat_summary.tsv \
+            --annotation-summary examples/annotation_summary.tsv \
+            -o /tmp/assembly_qc_dashboard.tsv
