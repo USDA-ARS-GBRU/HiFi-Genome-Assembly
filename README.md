@@ -191,6 +191,7 @@ Review and release templates are available in:
 docs/assembly_decision_log_template.md
 docs/contamination_workflow.md
 docs/organelle_workflow.md
+docs/pacbio_watchlist.md
 docs/qc_report_template.md
 docs/release_checklist.md
 docs/review_standards.md
@@ -198,6 +199,7 @@ docs/tool_version_policy.md
 docs/methods_text_template.md
 examples/release_manifest.tsv
 examples/contamination_decisions.tsv
+examples/btrim_patterns.example.txt
 ```
 
 ## Software Setup
@@ -420,6 +422,7 @@ PacBio HiFi reads should already be high quality. Avoid aggressive trimming unle
 Possible tools:
 
 - `fastplong` for long-read adapter/quality cleanup.
+- `btrim` for explicit adapter-pattern screening/removal when a validated long-read-capable build and adapter pattern file are available.
 - `HiFiAdapterFilt` for PacBio HiFi adapter contamination.
 - `cutadapt` for known adapter sequences.
 - NCBI FCS-adaptor on the assembly before submission.
@@ -436,6 +439,36 @@ fastplong \
   -j 04_reads_qc/sample.fastplong.json \
   -5 -3
 ```
+
+### btrim Option for HiFi Adapter Screening
+
+`btrim` is a fast adapter and quality trimming program originally described by Kong (2011). It can be used as an optional HiFi read sanitation step when you have a build that supports the read lengths in your data and a validated PacBio adapter pattern file. In this workflow, the most conservative btrim use is to separate reads with detected adapter sequence from reads with no detected adapter sequence, then assemble the adapter-free reads and compare against the raw-read assembly.
+
+Important btrim logic:
+
+- `-p patterns.txt`: adapter pattern pairs.
+- `-t reads.fastq.gz`: query reads.
+- `-o reads_adapter_detected.fastq`: reads where adapter sequence was detected and trimmed.
+- `-K reads_adapter_free.fastq`: reads with no detected adapter; these are the conservative passing reads for assembly.
+- `-3`: search/trim the 3-prime end.
+- `-e 0`: trim to the first base after detection.
+- `-v 3`: allow a small edit distance to the adapter pattern; tune only with evidence.
+- `-s summary.txt`: write summary counts.
+
+Example:
+
+```bash
+sbatch \
+  --export iFiles="03_reads_raw/*.fastq.gz",oDir=04_reads_qc/btrim,btrim_bin=/path/to/btrim,patterns=examples/btrim_patterns.example.txt,edit_distance=3 \
+  01_sbatch/btrim_hifi_adapters.sbatch
+```
+
+Interpretation:
+
+- If very few reads are flagged, compare raw and adapter-free assemblies before changing the production workflow.
+- If many reads are flagged, inspect the btrim summary, BLAST/locate adapter motifs, and run FCS-adaptor on the downstream assembly.
+- Do not assume btrim replaces FCS-adaptor; NCBI screening still matters for release.
+- Record the btrim binary/source, compile settings, pattern file, and command in `00_metadata/tool_versions.tsv` and the assembly decision log.
 
 ### Coverage Calculation
 
@@ -1752,6 +1785,10 @@ Assembly:
 - hifiasm documentation: https://hifiasm.readthedocs.io/
 - hifiasm paper: https://www.nature.com/articles/s41592-020-01056-5
 - hifiasm GitHub: https://github.com/chhylp123/hifiasm
+- PacBio GitHub organization: https://github.com/PacificBiosciences
+- PacBio pbtk: https://github.com/PacificBiosciences/pbtk
+- PacBio pbmm2: https://github.com/PacificBiosciences/pbmm2
+- PacBio HiFi human assembly WDL: https://github.com/PacificBiosciences/HiFi-human-assembly-WDL
 
 Genome profiling and quality:
 
@@ -1780,6 +1817,8 @@ Contamination:
 - NCBI FCS documentation: https://www.ncbi.nlm.nih.gov/datasets/docs/v2/data-processing/policies-annotation/quality/contamination/fcs-contamination/
 - NCBI FCS GitHub: https://github.com/ncbi/fcs
 - VecScreen/UniVec: https://www.ncbi.nlm.nih.gov/tools/vecscreen/
+- btrim paper: https://doi.org/10.1016/j.ygeno.2011.05.009
+- HiFiAdapterFilt paper: https://doi.org/10.1186/s12864-022-08375-1
 - BlobToolKit paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC7144090/
 
 Repeat annotation:

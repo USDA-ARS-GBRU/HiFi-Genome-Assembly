@@ -1,6 +1,7 @@
 .DS_Store
 __pycache__/
 *.py[cod]
+temp/
 
 # Large local analysis products
 00_log/

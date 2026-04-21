@@ -15,6 +15,8 @@ Current development focus:
 - BlobToolKit and sourmash contamination review templates.
 - Organelle PAF hit summarizer.
 - Contamination decision TSV template.
+- btrim option for HiFi adapter screening.
+- PacBio GitHub watchlist for relevant QC and assembly guidance.
 
 ## 0.2.0
 
