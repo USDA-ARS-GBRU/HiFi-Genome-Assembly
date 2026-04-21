@@ -1,0 +1,4 @@
+sample	metric	value	source
+sample	assembly_span_bp	64	example
+sample	contig_count	2	example
+sample	busco_complete_pct	98.0	example

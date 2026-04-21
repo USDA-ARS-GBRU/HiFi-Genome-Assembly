@@ -24,6 +24,8 @@ Current development focus. v0.3 remains active, but the release-readiness founda
 - Added table2asn validation template and NCBI submission guide.
 - Added Liftoff, BRAKER3, and MAKER sbatch templates.
 - Added repeat and gene annotation strategy guides.
+- Added tracked toy release bundle so manifest audits pass as real tests.
+- Added NCBI metadata template guide for BioProject, BioSample, SRA, assembly, and annotation planning.
 
 ## 0.2.0
 

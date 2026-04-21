@@ -200,6 +200,7 @@ Review and release templates are available in:
 docs/assembly_decision_log_template.md
 docs/contamination_workflow.md
 docs/gene_annotation.md
+docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
 docs/organelle_workflow.md
 docs/pacbio_watchlist.md
@@ -211,6 +212,7 @@ docs/review_standards.md
 docs/tool_version_policy.md
 docs/methods_text_template.md
 examples/release_manifest.tsv
+examples/release_bundle/
 examples/contamination_decisions.tsv
 examples/btrim_patterns.example.txt
 ```

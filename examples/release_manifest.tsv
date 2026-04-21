@@ -1,13 +1,13 @@
 file	category	description	required_for_release
-15_release/sample.genome.fa.gz	assembly	Final genome assembly FASTA	yes
-15_release/sample.genome.fa.gz.fai	assembly	FASTA index	yes
-15_release/sample.agp	assembly	AGP scaffold/chromosome component file	if scaffolded
-15_release/sample.annotation.gff3.gz	annotation	Final structural gene annotation	if annotated
-15_release/sample.proteins.fa.gz	annotation	Predicted proteins	if annotated
-15_release/sample.transcripts.fa.gz	annotation	Predicted transcripts	if annotated
-15_release/sample.repeats.gff3.gz	repeats	Repeat annotation track	recommended
-15_release/sample.repeat_library.fa.gz	repeats	Project repeat library	recommended
-15_release/sample.assembly_qc_dashboard.tsv	qc	Summary QC dashboard	yes
-15_release/sample.qc_report.md	qc	Per-assembly QC report	yes
-15_release/sample.contamination_reports/	qc	FCS and contamination reports	yes
-15_release/sample.methods.md	documentation	Methods text and tool versions	yes
+examples/release_bundle/sample.genome.fa	assembly	Toy final genome assembly FASTA	yes
+examples/release_bundle/sample.genome.fa.fai	assembly	Toy FASTA index	yes
+examples/release_bundle/sample.agp	assembly	Toy AGP scaffold/chromosome component file	if scaffolded
+examples/release_bundle/sample.annotation.gff3	annotation	Toy structural gene annotation	if annotated
+examples/release_bundle/sample.proteins.fa	annotation	Toy predicted proteins	if annotated
+examples/release_bundle/sample.transcripts.fa	annotation	Toy predicted transcripts	if annotated
+examples/release_bundle/sample.repeats.gff3	repeats	Toy repeat annotation track	recommended
+examples/release_bundle/sample.repeat_library.fa	repeats	Toy project repeat library	recommended
+examples/release_bundle/sample.assembly_qc_dashboard.tsv	qc	Toy summary QC dashboard	yes
+examples/release_bundle/sample.qc_report.md	qc	Toy per-assembly QC report	yes
+examples/release_bundle/sample.contamination_reports/	qc	Toy FCS and contamination reports	yes
+examples/release_bundle/sample.methods.md	documentation	Toy methods text and tool versions	yes

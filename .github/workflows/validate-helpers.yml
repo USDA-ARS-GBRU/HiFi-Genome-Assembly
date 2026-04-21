@@ -23,7 +23,7 @@ jobs:
       - name: Audit toy FASTA headers
         run: python scripts/audit_fasta_headers.py examples/toy/toy_assembly.fa -o /tmp/toy_header_audit.tsv
       - name: Audit example release manifest
-        run: python scripts/audit_release_manifest.py examples/release_manifest.tsv -o /tmp/manifest_audit.tsv || true
+        run: python scripts/audit_release_manifest.py examples/release_manifest.tsv -o /tmp/manifest_audit.tsv
       - name: Build toy dashboard
         run: |
           python scripts/collect_qc_dashboard.py \
