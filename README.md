@@ -1,8 +1,9 @@
 # PacBio HiFi Genome Assembly for Crop Plants
 
-This repository is a modular, beginner-friendly, peer-review-oriented protocol for assembling crop plant genomes from PacBio HiFi reads, evaluating assembly quality, preparing annotation tracks, and getting the final product ready for public release through NCBI/INSDC and related community databases.
-
+> [!NOTE]
 > This repository is under active development. Suggestions, corrections, teaching examples, and issue reports are welcome through GitHub Issues or pull requests.
+
+This repository is a modular, beginner-friendly, peer-review-oriented protocol for assembling crop plant genomes from PacBio HiFi reads, evaluating assembly quality, preparing annotation tracks, and getting the final product ready for public release through NCBI/INSDC and related community databases.
 
 The protocol is designed as a practical representation of contemporary crop plant genome assembly work. It emphasizes transparent decisions, independent quality evidence, reproducible HPC execution, and release products that can withstand manuscript review, database validation, and reuse by breeding and genomics communities.
 
