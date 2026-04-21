@@ -12,6 +12,9 @@ Current development focus:
 - FCS-adaptor/FCS-GX template jobs.
 - Organelle detection and release decision workflow.
 - Assembly review standards.
+- BlobToolKit and sourmash contamination review templates.
+- Organelle PAF hit summarizer.
+- Contamination decision TSV template.
 
 ## 0.2.0
 

@@ -27,3 +27,7 @@ jobs:
             --repeat-summary examples/repeat_summary.tsv \
             --annotation-summary examples/annotation_summary.tsv \
             -o /tmp/assembly_qc_dashboard.tsv
+      - name: Summarize toy organelle PAF
+        run: |
+          printf 'unplaced_000001\t47\t0\t42\t+\tchloroplast_ref\t150000\t10\t52\t42\t42\t60\n' > /tmp/toy_organelle.paf
+          python scripts/summarize_organelle_hits.py /tmp/toy_organelle.paf -o /tmp/toy_organelle_summary.tsv

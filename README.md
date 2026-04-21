@@ -141,6 +141,7 @@ scripts/collect_qc_dashboard.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/plot_qc_dashboard.py
+scripts/summarize_organelle_hits.py
 scripts/validate_agp.py
 scripts/validate_fasta.py
 ```
@@ -188,6 +189,7 @@ Review and release templates are available in:
 
 ```text
 docs/assembly_decision_log_template.md
+docs/contamination_workflow.md
 docs/organelle_workflow.md
 docs/qc_report_template.md
 docs/release_checklist.md
@@ -195,6 +197,7 @@ docs/review_standards.md
 docs/tool_version_policy.md
 docs/methods_text_template.md
 examples/release_manifest.tsv
+examples/contamination_decisions.tsv
 ```
 
 ## Software Setup
@@ -1662,8 +1665,10 @@ Goal: prevent release problems and make validation reproducible.
 - Maintain FCS-adaptor and FCS-GX examples.
 - Maintain organelle detection/removal decision workflow.
 - Maintain assembly review standards.
-- Add BlobToolKit workflow.
-- Add sourmash database setup and search templates.
+- Maintain BlobToolKit workflow.
+- Maintain sourmash read-screening template.
+- Maintain contamination decision TSV template.
+- Maintain organelle PAF hit summarizer.
 - Add decision tree for remove, mask, retain, or submit separately.
 
 ### v0.4: Dotplot and Misassembly Curation

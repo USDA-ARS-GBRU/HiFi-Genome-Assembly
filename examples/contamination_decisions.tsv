@@ -1,0 +1,2 @@
+sample	sequence_id	length_bp	evidence	source_tool	decision	rationale	reviewer	date
+Example01	chr01	0	no_actionable_records	example	keep	Example placeholder only.		YYYY-MM-DD
