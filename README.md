@@ -138,6 +138,9 @@ Starter helper scripts are available in:
 
 ```text
 scripts/collect_qc_dashboard.py
+scripts/audit_fasta_headers.py
+scripts/audit_release_manifest.py
+scripts/check_release_bundle.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/plot_qc_dashboard.py
@@ -183,6 +186,12 @@ scripts/validate_fasta.py \
 scripts/validate_agp.py \
   15_release/sample.agp \
   -o 15_release/sample.agp_validation.tsv
+
+scripts/check_release_bundle.py \
+  --fasta 15_release/sample.filtered_renamed.fa \
+  --agp 15_release/sample.agp \
+  --manifest examples/release_manifest.tsv \
+  --out-dir 15_release/validation
 ```
 
 Review and release templates are available in:
@@ -192,6 +201,7 @@ docs/assembly_decision_log_template.md
 docs/contamination_workflow.md
 docs/organelle_workflow.md
 docs/pacbio_watchlist.md
+docs/qc_figures.md
 docs/qc_report_template.md
 docs/release_checklist.md
 docs/review_standards.md
@@ -1702,7 +1712,7 @@ Goal: prevent release problems and make validation reproducible.
 - Maintain sourmash read-screening template.
 - Maintain contamination decision TSV template.
 - Maintain organelle PAF hit summarizer.
-- Add decision tree for remove, mask, retain, or submit separately.
+- Maintain decision tree for remove, mask, retain, split, or submit separately.
 
 ### v0.4: Dotplot and Misassembly Curation
 
@@ -1743,6 +1753,7 @@ Goal: crop-appropriate repeat libraries and soft-masked genomes.
 - Add repeat landscape summary.
 - Add softmasked FASTA output standard.
 - Add repeat GFF/BED track preparation.
+- Maintain EDTA and RepeatModeler2/RepeatMasker sbatch templates.
 
 ### v0.8: Gene Annotation
 
@@ -1760,6 +1771,8 @@ Goal: submission-ready assemblies.
 
 - Add FASTA header validation.
 - Add AGP validation.
+- Maintain release bundle checker.
+- Maintain manifest audit helper.
 - Add table2asn examples.
 - Add BioProject/BioSample/SRA checklist.
 - Refine release manifest template.

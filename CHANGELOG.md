@@ -17,6 +17,10 @@ Current development focus:
 - Contamination decision TSV template.
 - btrim option for HiFi adapter screening.
 - PacBio GitHub watchlist for relevant QC and assembly guidance.
+- Contamination decision tree.
+- NCBI-oriented FASTA header, manifest, and release bundle helper scripts.
+- EDTA and RepeatModeler2/RepeatMasker sbatch templates.
+- QC figures guide for review and manuscripts.
 
 ## 0.2.0
 

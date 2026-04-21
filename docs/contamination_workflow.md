@@ -85,3 +85,37 @@ sbatch \
 
 Every action other than keep should be represented in the contamination decision table and assembly decision log.
 
+## Decision Tree
+
+```mermaid
+flowchart TD
+    A["Sequence flagged by FCS, BlobToolKit, sourmash, organelle screen, or manual review"] --> B{"Adapter/vector sequence?"}
+    B -->|Yes| C{"Localized and removable without changing biological sequence?"}
+    C -->|Yes| D["mask or trim; validate with FCS-adaptor"]
+    C -->|No| E["remove sequence or split if chimeric; document"]
+    B -->|No| F{"Foreign organism assignment?"}
+    F -->|Yes| G{"Supported as expected biology, symbiont, introgression, or host-associated sequence?"}
+    G -->|Yes| H["keep or submit separately; document rationale"]
+    G -->|No| I["remove; document evidence"]
+    F -->|No| J{"Chloroplast or mitochondrial sequence?"}
+    J -->|Yes| K{"Embedded in nuclear context with nuclear coverage?"}
+    K -->|Yes| L["keep as nuclear organellar insertion; document"]
+    K -->|No| M["remove from nuclear assembly or submit organelle separately"]
+    J -->|No| N{"Chimeric join or unsupported breakpoint?"}
+    N -->|Yes| O["split if read/Hi-C/dotplot evidence supports break"]
+    N -->|No| P{"Low-confidence or ambiguous evidence?"}
+    P -->|Yes| Q["review; gather read depth, dotplot, Hi-C, and taxonomy evidence"]
+    P -->|No| R["keep"]
+```
+
+## Decision Table
+
+| Evidence pattern | Recommended decision | Required follow-up |
+| --- | --- | --- |
+| Adapter/vector hit only | `mask`, `trim`, or `remove` | rerun FCS-adaptor |
+| Mostly bacterial/fungal/animal contig, abnormal GC/coverage | `remove` | record taxonomic evidence and file checksum |
+| Putative symbiont/endophyte sequence | `submit_separately` or `review` | confirm biological source and avoid mixing with nuclear genome |
+| Complete chloroplast or mitochondrion | `remove` from nuclear assembly or `submit_separately` | prepare organelle-specific record if releasing |
+| Organelle-like segment inside nuclear-depth contig | `keep` | annotate as nuclear organellar insertion if needed |
+| Chimeric nuclear-organelle contig | `split` or `remove` | require read, dotplot, or Hi-C support |
+| Short low-identity hit | `review` or `keep` | do not remove without stronger evidence |
