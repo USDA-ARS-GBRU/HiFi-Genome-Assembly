@@ -30,6 +30,9 @@ Current development focus. v0.3 remains active, but the release-readiness founda
 - Added GFF3-vs-FASTA sequence ID audit helper.
 - Started v0.4 dotplot and misassembly curation guide with example decision cases.
 - Added accession tracking TSV linking BioProject, BioSample, SRA, Assembly, and Annotation records.
+- Added correction decision log template.
+- Added FASTA split helper for curated breakpoints.
+- Added dotplot figure guide for reports and manuscripts.
 
 ## 0.2.0
 

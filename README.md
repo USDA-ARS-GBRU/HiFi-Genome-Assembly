@@ -145,6 +145,7 @@ scripts/check_release_bundle.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/plot_qc_dashboard.py
+scripts/split_fasta_at_breaks.py
 scripts/summarize_organelle_hits.py
 scripts/validate_agp.py
 scripts/validate_fasta.py
@@ -198,6 +199,12 @@ scripts/audit_gff3_fasta_ids.py \
   --fasta examples/annotation_validation/toy_genome.fsa \
   --gff3 examples/annotation_validation/toy_annotation.gff3 \
   -o /tmp/toy_annotation_id_audit.tsv
+
+scripts/split_fasta_at_breaks.py \
+  --fasta examples/toy/toy_assembly.fa \
+  --breaks examples/toy/toy_breaks.tsv \
+  -o /tmp/toy_split.fa \
+  --map /tmp/toy_split.map.tsv
 ```
 
 Review and release templates are available in:
@@ -206,7 +213,9 @@ Review and release templates are available in:
 docs/assembly_decision_log_template.md
 docs/annotation_validation_examples.md
 docs/contamination_workflow.md
+docs/correction_decision_log_template.md
 docs/dotplot_misassembly_curation.md
+docs/dotplot_figures.md
 docs/gene_annotation.md
 docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
@@ -1731,7 +1740,7 @@ Goal: prevent release problems and make validation reproducible.
 - Maintain decision tree for remove, mask, retain, split, or submit separately.
 - Maintain NCBI-oriented FASTA header, manifest, and release bundle helper scripts.
 - Maintain btrim, PacBio-watch, and QC-figure guidance.
-- Remaining before v0.4: final review pass across validation, annotation, and release-readiness sections; then move active development to dotplot and misassembly curation.
+- Remaining before formal v0.4 focus: final review pass across validation, annotation, and release-readiness sections while continuing dotplot and misassembly curation work.
 
 ### v0.4: Dotplot and Misassembly Curation
 
@@ -1743,8 +1752,9 @@ Goal: make structural review teachable and reproducible.
 - Add example interpretations for clean, inverted, translocated, duplicated, and chimeric patterns.
 - Maintain dotplot and misassembly curation guide.
 - Maintain example dotplot decision cases.
-- Add manual-break helper script.
-- Add correction decision log template.
+- Maintain manual-break helper script.
+- Maintain correction decision log template.
+- Maintain dotplot figure guide.
 - Add RagTag correct/scaffold comparison workflow.
 
 ### v0.5: Scaffolding

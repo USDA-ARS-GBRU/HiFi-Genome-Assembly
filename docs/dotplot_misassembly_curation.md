@@ -58,7 +58,9 @@ Do not break solely because of one dotplot against one reference. Crop reference
 
 ## Correction Log Template
 
-For every proposed edit, record:
+For every proposed edit, record the evidence in `docs/correction_decision_log_template.md`.
+
+Minimal fields:
 
 ```text
 edit_id:
@@ -73,6 +75,20 @@ date:
 final_decision:
 reason_not_automated:
 ```
+
+For break edits, `scripts/split_fasta_at_breaks.py` accepts a TSV with `sequence_id` and `break_after_1based` columns. A value of `1000` means the first output segment ends at base 1000 and the next begins at base 1001.
+
+Toy example:
+
+```bash
+scripts/split_fasta_at_breaks.py \
+  --fasta examples/toy/toy_assembly.fa \
+  --breaks examples/toy/toy_breaks.tsv \
+  -o /tmp/toy_split.fa \
+  --map /tmp/toy_split.map.tsv
+```
+
+See `docs/dotplot_figures.md` for figure and caption expectations.
 
 ## Release Rule
 

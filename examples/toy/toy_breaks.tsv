@@ -1,0 +1,2 @@
+sequence_id	break_after_1based	action	evidence	reviewer	notes
+chr01	16	break	dotplot_jump_and_read_depth	ExampleReviewer	Toy example: split chr01 after base 16.
