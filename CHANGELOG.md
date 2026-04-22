@@ -20,6 +20,9 @@ Current development focus: dotplot review, evidence-first manual curation, conse
 - Added IGV session setup guide.
 - Added common false-positive correction guide.
 - Added v0.4 release-candidate checklist.
+- Added v0.4 review-pass document.
+- Added README inventory checker.
+- Added v0.5 scaffolding kickoff guide.
 
 ## 0.3.0-dev
 

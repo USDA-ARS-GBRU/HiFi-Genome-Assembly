@@ -16,6 +16,8 @@ jobs:
         run: python -m py_compile scripts/*.py
       - name: Validate sbatch shell syntax
         run: bash -n 01_sbatch_templates/*.sbatch
+      - name: Check README inventory
+        run: python scripts/check_repo_inventory.py --readme README.md -o /tmp/repo_inventory.tsv
       - name: Validate toy FASTA
         run: python scripts/validate_fasta.py examples/toy/toy_assembly.fa --min-length 1
       - name: Validate toy AGP
@@ -26,6 +28,8 @@ jobs:
         run: python scripts/audit_gff3_fasta_ids.py --fasta examples/annotation_validation/toy_genome.fsa --gff3 examples/annotation_validation/toy_annotation.gff3 -o /tmp/toy_annotation_id_audit.tsv
       - name: Split toy FASTA at curated breakpoints
         run: python scripts/split_fasta_at_breaks.py --fasta examples/toy/toy_assembly.fa --breaks examples/toy/toy_breaks.tsv -o /tmp/toy_split.fa --map /tmp/toy_split.map.tsv
+      - name: Validate split toy FASTA
+        run: python scripts/validate_fasta.py /tmp/toy_split.fa --min-length 1 -o /tmp/toy_split_validation.tsv
       - name: Validate toy breakpoints
         run: python scripts/validate_breaks.py --fasta examples/toy/toy_assembly.fa --breaks examples/toy/toy_breaks.tsv -o /tmp/toy_breaks_validation.tsv
       - name: Summarize toy corrections

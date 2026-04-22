@@ -139,6 +139,7 @@ Starter helper scripts are available in:
 
 ```text
 scripts/collect_qc_dashboard.py
+scripts/check_repo_inventory.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
 scripts/audit_gff3_fasta_ids.py
@@ -280,6 +281,8 @@ docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
 docs/v0.4_curation_index.md
 docs/v0.4_release_candidate_checklist.md
+docs/v0.4_review_pass.md
+docs/v0.5_scaffolding_kickoff.md
 docs/methods_text_template.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
@@ -1837,11 +1840,16 @@ Goal: make structural review teachable and reproducible.
 - Maintain IGV session setup guide.
 - Maintain common false-positive correction guide.
 - Maintain v0.4 release-candidate checklist.
+- Maintain v0.4 review-pass document.
+- Maintain repo inventory checker.
 
 ### v0.5: Scaffolding
 
+Status: **kickoff stubs started during v0.4.0-dev**.
+
 Goal: chromosome-scale assemblies with clear evidence.
 
+- Maintain v0.5 scaffolding kickoff guide.
 - Add YaHS Hi-C scaffolding workflow.
 - Add 3D-DNA/Juicebox visual curation workflow.
 - Add RagTag reference-guided scaffold workflow with reference-bias warnings.
