@@ -39,15 +39,16 @@ This workflow favors:
 12. [Step 7: Haplotigs, Duplications, and Ploidy](#step-7-haplotigs-duplications-and-ploidy)
 13. [Step 8: Misassembly Review and Correction](#step-8-misassembly-review-and-correction)
 14. [Step 9: Chromosome-Scale Scaffolding](#step-9-chromosome-scale-scaffolding)
-15. [Step 10: Telomeres, Centromeres, and Gap Status](#step-10-telomeres-centromeres-and-gap-status)
-16. [Step 11: Contamination Screening](#step-11-contamination-screening)
-17. [Step 12: Repeat Annotation and Masking](#step-12-repeat-annotation-and-masking)
-18. [Step 13: Gene Annotation](#step-13-gene-annotation)
-19. [Step 14: Final Quality Metrics](#step-14-final-quality-metrics)
-20. [Step 15: NCBI and Community Database Release](#step-15-ncbi-and-community-database-release)
-21. [Example sbatch Scripts](#example-sbatch-scripts)
-22. [Development Roadmap](#development-roadmap)
-23. [Key References and Tool Links](#key-references-and-tool-links)
+15. [Step 9B: Gap Filling](#step-9b-gap-filling)
+16. [Step 10: Telomeres, Centromeres, and Gap Status](#step-10-telomeres-centromeres-and-gap-status)
+17. [Step 11: Contamination Screening](#step-11-contamination-screening)
+18. [Step 12: Repeat Annotation and Masking](#step-12-repeat-annotation-and-masking)
+19. [Step 13: Gene Annotation](#step-13-gene-annotation)
+20. [Step 14: Final Quality Metrics](#step-14-final-quality-metrics)
+21. [Step 15: NCBI and Community Database Release](#step-15-ncbi-and-community-database-release)
+22. [Example sbatch Scripts](#example-sbatch-scripts)
+23. [Development Roadmap](#development-roadmap)
+24. [Key References and Tool Links](#key-references-and-tool-links)
 
 ## Current Version
 
@@ -152,6 +153,7 @@ scripts/make_correction_report.py
 scripts/plot_qc_dashboard.py
 scripts/split_fasta_at_breaks.py
 scripts/summarize_corrections.py
+scripts/summarize_fasta_gaps.py
 scripts/summarize_organelle_hits.py
 scripts/validate_breaks.py
 scripts/validate_agp.py
@@ -244,6 +246,11 @@ scripts/make_correction_report.py \
   --break-validation /tmp/toy_breaks_validation.tsv \
   --fasta-validation /tmp/toy_split_validation.tsv \
   -o /tmp/toy_post_correction_report.md
+
+scripts/summarize_fasta_gaps.py \
+  examples/toy/toy_assembly.fa \
+  -o /tmp/toy_gaps.tsv \
+  --summary /tmp/toy_gap_summary.tsv
 ```
 
 Review and release templates are available in:
@@ -258,6 +265,7 @@ docs/correction_decision_log_template.md
 docs/correction_report_examples.md
 docs/dotplot_misassembly_curation.md
 docs/dotplot_figures.md
+docs/gap_filling_workflow.md
 docs/gene_annotation.md
 docs/hic_contact_map_qc.md
 docs/igv_breakpoint_reporting.md
@@ -291,6 +299,7 @@ examples/accession_tracking.tsv
 examples/annotation_validation/
 examples/correction_evidence_checklist.tsv
 examples/dotplot_decisions.tsv
+examples/gap_filling_decisions.tsv
 examples/release_manifest.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
@@ -1042,6 +1051,42 @@ Risks:
 ### Genetic Map or Optical Map
 
 Use when available, especially for crops with strong breeding maps. These data can validate chromosome order independently of sequence similarity.
+
+## Step 9B: Gap Filling
+
+Gap filling replaces `N` runs in scaffolded assemblies with sequence. It is a targeted finishing step, not a default polishing command. In crop plant HiFi projects, the strongest use cases are chromosome-scale scaffolds with a small number of gaps, independent evidence that the flanking scaffold structure is correct, and HiFi, ONT, Hi-C, optical map, or reference evidence supporting the candidate fill.
+
+Start with the dedicated guide:
+
+```text
+docs/gap_filling_workflow.md
+```
+
+First, count and prioritize gaps:
+
+```bash
+scripts/summarize_fasta_gaps.py \
+  10_scaffolding/sample.scaffolds.fa \
+  -o 10_scaffolding/sample.gaps.tsv \
+  --summary 10_scaffolding/sample.gap_summary.tsv
+```
+
+Current tool options in this protocol:
+
+- LR_Gapcloser for long-read gap closure with raw or corrected long reads.
+- TGS-GapCloser2 for large-genome long-read gap filling, including HiFi-style inputs.
+- Gapless for combined scaffolding, gap filling, and correction workflows.
+- TRFill for targeted complex repeat gaps when HiFi and optional Hi-C/reference evidence support the local model.
+
+Use the sbatch templates as starting points:
+
+```text
+01_sbatch_templates/lr_gapcloser.sbatch
+01_sbatch_templates/tgsgapcloser2.sbatch
+01_sbatch_templates/trfill.sbatch
+```
+
+Decision rule: accept a filled gap only when the filled interval improves the assembly and does not hide uncertainty. A documented unresolved gap is preferable to an unsupported fill that reviewers, NCBI validation, or downstream pangenome users cannot reproduce.
 
 ## Step 10: Telomeres, Centromeres, and Gap Status
 
@@ -1850,7 +1895,7 @@ Goal: make structural review teachable and reproducible.
 
 Status: **kickoff stubs started during v0.4.0-dev**.
 
-Goal: chromosome-scale assemblies with clear evidence.
+Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 
 - Maintain v0.5 scaffolding kickoff guide.
 - Maintain YaHS Hi-C scaffolding workflow.
@@ -1859,6 +1904,10 @@ Goal: chromosome-scale assemblies with clear evidence.
 - Add AGP generation and validation notes.
 - Maintain Hi-C contact map QC checklist.
 - Maintain scaffolding decision log template.
+- Maintain conservative gap-filling workflow.
+- Maintain LR_Gapcloser, TGS-GapCloser2, and TRFill sbatch templates.
+- Maintain FASTA gap summarizer.
+- Maintain gap-filling decision log example.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 
@@ -1867,7 +1916,7 @@ Goal: track chromosome completeness.
 - Add tidk examples for known and de novo telomere motifs.
 - Add quarTeT telomere/centromere examples.
 - Add terminal telomere summary script.
-- Add gap summary script.
+- Refine gap status summaries into T2T readiness reporting.
 - Add T2T readiness checklist for projects with ultra-long ONT or optical maps.
 
 ### v0.7: Repeat Annotation
@@ -1951,6 +2000,18 @@ Scaffolding and structural review:
 - RagTag GitHub: https://github.com/malonge/RagTag
 - MUMmer4 GitHub: https://github.com/mummer4/mummer
 - minimap2: https://github.com/lh3/minimap2
+
+Gap filling:
+
+- Comprehensive evaluation of long-read gap-filling tools: https://pubmed.ncbi.nlm.nih.gov/38275608/
+- LR_Gapcloser paper: https://academic.oup.com/gigascience/article/8/1/giy157/5256637
+- LR_Gapcloser GitHub: https://github.com/CAFS-bioinformatics/LR_Gapcloser
+- TGS-GapCloser paper: https://academic.oup.com/gigascience/article/9/9/giaa094/5902284
+- TGS-GapCloser2 GitHub: https://github.com/BGI-Qingdao/TGS-GapCloser2
+- Gapless paper/tool: https://www.life-science-alliance.org/content/6/7/e202201471
+- Gapless GitHub: https://github.com/schmeing/gapless
+- TRFill paper: https://pubmed.ncbi.nlm.nih.gov/40721805/
+- TRFill GitHub: https://github.com/panlab-bioinfo/TRFill
 
 Telomere and centromere:
 

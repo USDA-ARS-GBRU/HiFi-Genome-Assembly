@@ -26,6 +26,10 @@ Current development focus: dotplot review, evidence-first manual curation, conse
 - Refined YaHS Hi-C scaffolding template and workflow guide.
 - Added Hi-C contact map QC checklist.
 - Added scaffolding decision log template.
+- Added conservative gap-filling workflow.
+- Added LR_Gapcloser, TGS-GapCloser2, and TRFill sbatch templates.
+- Added FASTA gap summarizer helper.
+- Added gap-filling decision log example.
 
 ## 0.3.0-dev
 

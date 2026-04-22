@@ -1,0 +1,3 @@
+gap_id	sample_id	assembly_version	sequence_id	start_1based	end_1based	gap_length	proposed_tool	final_decision	primary_evidence	secondary_evidence	reviewer	review_date	notes
+gap_0001	SampleID	0.5.0-dev	chr01	1000001	1000500	500	TGS-GapCloser2	fill	HiFi reads span gap	Hi-C map supports local structure	ReviewerName	2026-04-22	Example accepted gap fill.
+gap_0002	SampleID	0.5.0-dev	chr03	2400001	2600000	200000	TRFill	review_only	complex tandem repeat gap	no defensible fill sequence yet	ReviewerName	2026-04-22	Example retained gap pending T2T evidence.
