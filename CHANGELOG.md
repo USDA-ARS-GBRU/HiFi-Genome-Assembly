@@ -12,6 +12,9 @@ Current development focus: dotplot review, evidence-first manual curation, conse
 - Added post-correction report template.
 - Added correction decision audit helper.
 - Added rejected-correction examples.
+- Added v0.4 curation workflow index.
+- Added toy manual correction case study.
+- Added correction report generator.
 
 ## 0.3.0-dev
 

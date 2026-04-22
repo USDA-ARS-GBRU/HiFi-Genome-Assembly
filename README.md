@@ -146,6 +146,7 @@ scripts/audit_release_manifest.py
 scripts/check_release_bundle.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
+scripts/make_correction_report.py
 scripts/plot_qc_dashboard.py
 scripts/split_fasta_at_breaks.py
 scripts/summarize_corrections.py
@@ -224,6 +225,17 @@ scripts/summarize_corrections.py \
 scripts/audit_correction_decisions.py \
   examples/toy/toy_correction_decisions.tsv \
   -o /tmp/toy_correction_decision_audit.tsv
+
+scripts/make_correction_report.py \
+  --sample toy \
+  --version 0.4.0-dev \
+  --decision-log examples/toy/toy_correction_decisions.tsv \
+  --decision-audit /tmp/toy_correction_decision_audit.tsv \
+  --correction-summary /tmp/toy_correction_summary.tsv \
+  --split-map /tmp/toy_split.map.tsv \
+  --break-validation /tmp/toy_breaks_validation.tsv \
+  --fasta-validation /tmp/toy_split_validation.tsv \
+  -o /tmp/toy_post_correction_report.md
 ```
 
 Review and release templates are available in:
@@ -256,6 +268,8 @@ docs/release_checklist.md
 docs/rejected_corrections.md
 docs/review_standards.md
 docs/tool_version_policy.md
+docs/toy_manual_correction_case_study.md
+docs/v0.4_curation_index.md
 docs/methods_text_template.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
@@ -1795,6 +1809,9 @@ Goal: make structural review teachable and reproducible.
 - Maintain post-correction report template.
 - Maintain correction decision audit helper.
 - Maintain rejected-correction examples.
+- Maintain v0.4 curation workflow index.
+- Maintain toy manual correction case study.
+- Maintain correction report generator.
 
 ### v0.5: Scaffolding
 

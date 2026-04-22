@@ -90,3 +90,16 @@ blocking_items:
 nonblocking_caveats:
 next_review_date:
 ```
+
+Generate a draft report from project TSV outputs:
+
+```bash
+scripts/make_correction_report.py \
+  --sample sample \
+  --decision-log sample.correction_decisions.tsv \
+  --decision-audit sample.correction_decision_audit.tsv \
+  --correction-summary sample.correction_summary.tsv \
+  --split-map sample.split_map.tsv \
+  --break-validation sample.breaks.validation.tsv \
+  -o sample.post_correction_report.md
+```
