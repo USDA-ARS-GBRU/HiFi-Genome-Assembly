@@ -142,6 +142,7 @@ Starter helper scripts are available in:
 ```text
 scripts/collect_qc_dashboard.py
 scripts/check_repo_inventory.py
+scripts/compare_scaffolding_candidates.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
 scripts/audit_gff3_fasta_ids.py
@@ -157,6 +158,7 @@ scripts/split_fasta_at_breaks.py
 scripts/summarize_corrections.py
 scripts/summarize_fasta_gaps.py
 scripts/summarize_organelle_hits.py
+scripts/summarize_telomeres.py
 scripts/validate_breaks.py
 scripts/validate_agp.py
 scripts/validate_fasta.py
@@ -262,6 +264,18 @@ scripts/make_gap_filling_report.py \
   --version 0.5.0-dev \
   -o /tmp/toy_gap_filling_report.tsv \
   --markdown /tmp/toy_gap_filling_report.md
+
+scripts/compare_scaffolding_candidates.py \
+  --candidate draft=examples/toy/toy_assembly.fa \
+  --candidate gapfilled=examples/toy/toy_gapfilled.fa \
+  -o /tmp/toy_scaffolding_candidates.tsv
+
+scripts/summarize_telomeres.py \
+  examples/toy/toy_assembly.fa \
+  --motif TTTAGGG \
+  --window 30 \
+  --min-hits 2 \
+  -o /tmp/toy_telomere_summary.tsv
 ```
 
 Review and release templates are available in:
@@ -300,6 +314,8 @@ docs/release_checklist.md
 docs/rejected_corrections.md
 docs/review_standards.md
 docs/scaffolding_decision_log_template.md
+docs/scaffolding_candidate_comparison.md
+docs/telomere_summary_workflow.md
 docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
 docs/t2t_readiness_checklist.md
@@ -309,6 +325,14 @@ docs/v0.4_review_pass.md
 docs/v0.5_scaffolding_kickoff.md
 docs/yahs_hic_workflow.md
 docs/methods_text_template.md
+docs/index.md
+docs/setup/index.md
+docs/assembly/index.md
+docs/qc/index.md
+docs/curation/index.md
+docs/scaffolding/index.md
+docs/annotation/index.md
+docs/release/index.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
 examples/correction_evidence_checklist.tsv
@@ -1071,6 +1095,18 @@ For 3D-DNA/Juicebox/JBAT workflows, use:
 
 Treat any 3D-DNA automated break or JBAT manual drag as a proposal until it is supported by contact maps, dotplots, and decision-log evidence.
 
+Compare candidate scaffold FASTAs before choosing the release path:
+
+```bash
+scripts/compare_scaffolding_candidates.py \
+  --candidate yahs=10_scaffolding/sample/yahs/sample.yahs_scaffolds_final.fa \
+  --candidate 3d_dna=10_scaffolding/sample/3d_dna/sample.FINAL.fasta \
+  --candidate ragtag=10_scaffolding/sample/ragtag/ragtag.scaffold.fasta \
+  -o 10_scaffolding/sample.scaffolding_candidate_metrics.tsv
+```
+
+Use `docs/scaffolding_candidate_comparison.md` for the interpretation rules.
+
 ### Reference-Guided Scaffolding
 
 Use when Hi-C is absent and a close, high-quality reference exists. Be explicit that it is reference-guided.
@@ -1167,6 +1203,19 @@ tidk search \
   --output 12_telomere_centromere/sample.tidk \
   07_assemblies/sample.primary.fa
 ```
+
+Fast terminal motif summary:
+
+```bash
+scripts/summarize_telomeres.py \
+  07_assemblies/sample.primary.fa \
+  --motif TTTAGGG \
+  --window 10000 \
+  --min-hits 3 \
+  -o 12_telomere_centromere/sample.telomere_summary.tsv
+```
+
+See `docs/telomere_summary_workflow.md` for interpretation and stronger `tidk`/`quarTeT` options.
 
 Interpretation:
 
@@ -1962,6 +2011,8 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 - Maintain FASTA gap summarizer.
 - Maintain gap-filling report helper.
 - Maintain gap-filling decision log example.
+- Maintain scaffolding candidate comparison helper and guidance.
+- Maintain documentation-site skeleton as preparation for v1.0 migration.
 - Maintain T2T readiness checklist as the bridge into v0.6.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
@@ -1970,7 +2021,7 @@ Goal: track chromosome completeness.
 
 - Add tidk examples for known and de novo telomere motifs.
 - Add quarTeT telomere/centromere examples.
-- Add terminal telomere summary script.
+- Maintain terminal telomere summary script.
 - Refine gap status summaries into T2T readiness reporting.
 - Refine T2T readiness checklist for projects with ultra-long ONT or optical maps.
 

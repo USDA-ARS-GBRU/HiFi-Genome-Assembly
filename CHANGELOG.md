@@ -12,6 +12,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added gap-filling report helper and toy gap-filled FASTA example.
 - Added documentation-site migration plan for the eventual GitHub-compatible web documentation split.
 - Updated README versioning, roadmap, inventories, scaffolding references, and gap-filling examples.
+- Added scaffolding candidate comparison helper and guidance.
+- Added terminal telomere motif summary helper and workflow.
+- Added initial documentation-site section index pages.
 
 ## 0.4.0-dev
 

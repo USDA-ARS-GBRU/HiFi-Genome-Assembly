@@ -42,6 +42,10 @@ jobs:
         run: python scripts/summarize_fasta_gaps.py examples/toy/toy_assembly.fa -o /tmp/toy_gaps.tsv --summary /tmp/toy_gap_summary.tsv
       - name: Build toy gap filling report
         run: python scripts/make_gap_filling_report.py --before examples/toy/toy_assembly.fa --after examples/toy/toy_gapfilled.fa --decision-log examples/gap_filling_decisions.tsv --sample toy --version 0.5.0-dev -o /tmp/toy_gap_filling_report.tsv --markdown /tmp/toy_gap_filling_report.md
+      - name: Compare toy scaffolding candidates
+        run: python scripts/compare_scaffolding_candidates.py --candidate draft=examples/toy/toy_assembly.fa --candidate gapfilled=examples/toy/toy_gapfilled.fa -o /tmp/toy_scaffolding_candidates.tsv
+      - name: Summarize toy telomeres
+        run: python scripts/summarize_telomeres.py examples/toy/toy_assembly.fa --motif TTTAGGG --window 30 --min-hits 2 -o /tmp/toy_telomere_summary.tsv
       - name: Build toy correction report
         run: python scripts/make_correction_report.py --sample toy --version 0.5.0-dev --decision-log examples/toy/toy_correction_decisions.tsv --decision-audit /tmp/toy_correction_decision_audit.tsv --correction-summary /tmp/toy_correction_summary.tsv --split-map /tmp/toy_split.map.tsv --fasta-comparison /tmp/toy_fasta_comparison.tsv --break-validation /tmp/toy_breaks_validation.tsv --fasta-validation /tmp/toy_split_validation.tsv -o /tmp/toy_post_correction_report.md
       - name: Audit example release manifest

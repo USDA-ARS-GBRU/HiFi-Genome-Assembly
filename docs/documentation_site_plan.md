@@ -37,6 +37,8 @@ docs/
     checklist.md
 ```
 
+The initial section landing pages now exist under `docs/`. They are intentionally light index pages until the README-to-docs migration begins.
+
 ## Migration Rules
 
 - Keep the root README as the project overview, quickstart, and roadmap.

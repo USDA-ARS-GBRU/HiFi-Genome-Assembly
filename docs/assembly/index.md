@@ -1,0 +1,13 @@
+# Assembly
+
+Primary pages:
+
+- [Assembly decision log template](../assembly_decision_log_template.md)
+- [Tool version policy](../tool_version_policy.md)
+
+Planned pages:
+
+- assembly strategy selection
+- hifiasm workflows
+- haplotype and trio assembly interpretation
+- raw-vs-trimmed read comparison
