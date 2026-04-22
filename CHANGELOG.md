@@ -15,6 +15,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added scaffolding candidate comparison helper and guidance.
 - Added terminal telomere motif summary helper and workflow.
 - Added initial documentation-site section index pages.
+- Added AGP definition, AGP summary workflow, and AGP summary helper.
+- Added first focused hifiasm docs page for the future web documentation.
+- Added T2T readiness report helper and centromere candidate example table.
 
 ## 0.4.0-dev
 

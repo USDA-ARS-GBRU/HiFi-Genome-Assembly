@@ -85,6 +85,8 @@ sample metadata
   -> final FASTA, AGP, GFF3, metadata, and NCBI submission package
 ```
 
+AGP means **A Golden Path**. In this protocol, an AGP file is the tab-delimited assembly map that describes how smaller component sequences, usually contigs, are arranged into larger scaffolds or chromosomes and where unresolved gaps occur. It is used for scaffolded assemblies and public submission; it is not a read-alignment file or a gene/repeat annotation file.
+
 For many diploid, inbred crop cultivars, the practical v0.1 target is a high-quality primary contig assembly. For a v1.0 release, the target should usually be chromosome-scale, QC-screened, repeat-annotated, and ready for GenBank, SRA, BioProject, BioSample, and organism-specific community databases.
 
 ## Project Layout
@@ -153,9 +155,11 @@ scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/make_correction_report.py
 scripts/make_gap_filling_report.py
+scripts/make_t2t_readiness_report.py
 scripts/plot_qc_dashboard.py
 scripts/split_fasta_at_breaks.py
 scripts/summarize_corrections.py
+scripts/summarize_agp.py
 scripts/summarize_fasta_gaps.py
 scripts/summarize_organelle_hits.py
 scripts/summarize_telomeres.py
@@ -276,6 +280,19 @@ scripts/summarize_telomeres.py \
   --window 30 \
   --min-hits 2 \
   -o /tmp/toy_telomere_summary.tsv
+
+scripts/summarize_agp.py \
+  examples/toy/toy.agp \
+  -o /tmp/toy_agp_summary.tsv
+
+scripts/make_t2t_readiness_report.py \
+  --fasta examples/toy/toy_assembly.fa \
+  --telomere-summary /tmp/toy_telomere_summary.tsv \
+  --centromere-table examples/centromere_candidates.tsv \
+  --sample toy \
+  --version 0.5.0-dev \
+  -o /tmp/toy_t2t_readiness.tsv \
+  --markdown /tmp/toy_t2t_readiness.md
 ```
 
 Review and release templates are available in:
@@ -283,6 +300,7 @@ Review and release templates are available in:
 ```text
 docs/assembly_decision_log_template.md
 docs/3d_dna_juicebox_workflow.md
+docs/agp_summary_workflow.md
 docs/agp_after_splitting.md
 docs/annotation_validation_examples.md
 docs/common_false_positive_corrections.md
@@ -335,6 +353,7 @@ docs/annotation/index.md
 docs/release/index.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
+examples/centromere_candidates.tsv
 examples/correction_evidence_checklist.tsv
 examples/dotplot_decisions.tsv
 examples/gap_filling_decisions.tsv
@@ -1254,6 +1273,19 @@ Use the T2T readiness checklist when the project wants to claim near-gapless or 
 docs/t2t_readiness_checklist.md
 ```
 
+Build a first-pass readiness report:
+
+```bash
+scripts/make_t2t_readiness_report.py \
+  --fasta 07_assemblies/sample.primary.fa \
+  --telomere-summary 12_telomere_centromere/sample.telomere_summary.tsv \
+  --centromere-table 12_telomere_centromere/sample.centromere_candidates.tsv \
+  --sample sample \
+  --version 0.5.0-dev \
+  -o 12_telomere_centromere/sample.t2t_readiness.tsv \
+  --markdown 12_telomere_centromere/sample.t2t_readiness.md
+```
+
 ## Step 11: Contamination Screening
 
 Contamination checks should happen before and after assembly.
@@ -1601,13 +1633,23 @@ For WGS contigs/scaffolds, a simpler stable ID may be better:
 
 ### AGP
 
-If scaffolds/chromosomes are built from contigs with gaps, provide AGP when required.
+AGP means **A Golden Path**. If scaffolds/chromosomes are built from contigs with gaps, provide AGP when required. The AGP describes the component sequence spans and gap spans that make up each larger assembly object.
 
 Validate AGP:
 
 ```bash
 agp_validate sample.agp
 ```
+
+Summarize AGP structure:
+
+```bash
+scripts/summarize_agp.py \
+  sample.agp \
+  -o sample.agp_summary.tsv
+```
+
+See `docs/agp_summary_workflow.md` for a beginner-friendly explanation of the format and how to interpret component, gap, and linkage-evidence summaries.
 
 Make sure:
 
@@ -2004,6 +2046,8 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 - Maintain 3D-DNA/Juicebox visual curation workflow and sbatch template.
 - Maintain RagTag reference-guided scaffold workflow with reference-bias warnings.
 - Maintain AGP generation and validation notes.
+- Maintain AGP definition and summary workflow.
+- Maintain AGP summary helper.
 - Maintain Hi-C contact map QC checklist.
 - Maintain scaffolding decision log template.
 - Maintain conservative gap-filling workflow.
@@ -2014,6 +2058,7 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 - Maintain scaffolding candidate comparison helper and guidance.
 - Maintain documentation-site skeleton as preparation for v1.0 migration.
 - Maintain T2T readiness checklist as the bridge into v0.6.
+- Maintain T2T readiness report helper.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 
@@ -2088,6 +2133,8 @@ Assembly:
 - hifiasm documentation: https://hifiasm.readthedocs.io/
 - hifiasm paper: https://www.nature.com/articles/s41592-020-01056-5
 - hifiasm GitHub: https://github.com/chhylp123/hifiasm
+- NCBI AGP Specification v2.1: https://www.ncbi.nlm.nih.gov/genbank/genome_agp_specification/
+- NCBI AGP validation: https://www.ncbi.nlm.nih.gov/assembly/agp/
 - PacBio GitHub organization: https://github.com/PacificBiosciences
 - PacBio pbtk: https://github.com/PacificBiosciences/pbtk
 - PacBio pbmm2: https://github.com/PacificBiosciences/pbmm2

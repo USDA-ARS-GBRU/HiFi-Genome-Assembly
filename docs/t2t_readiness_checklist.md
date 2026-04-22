@@ -18,7 +18,7 @@ Use this checklist when a project wants to claim chromosome completeness, near-g
 Prepare these tables for every chromosome-scale assembly:
 
 - FASTA statistics before and after scaffolding.
-- AGP validation summary.
+- AGP validation summary. AGP means A Golden Path: the tab-delimited map describing how component sequences and gaps form larger scaffolds or chromosomes.
 - Gap count, gap length, and maximum gap length per chromosome.
 - Terminal telomere motif count and orientation per chromosome end.
 - Internal telomere motif candidates with interpretation.

@@ -1,0 +1,2 @@
+sequence_id	start_1based	end_1based	method	evidence	notes
+unplaced_000001	20	28	toy_repeat_scan	tandem repeat placeholder	Example only; replace with quarTeT, repeat, Hi-C, or CENH3 evidence.

@@ -2,6 +2,7 @@
 
 Primary pages:
 
+- [hifiasm assembly workflow](hifiasm.md)
 - [Assembly decision log template](../assembly_decision_log_template.md)
 - [Tool version policy](../tool_version_policy.md)
 
