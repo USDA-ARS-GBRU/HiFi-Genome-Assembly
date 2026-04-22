@@ -251,6 +251,7 @@ Review and release templates are available in:
 docs/assembly_decision_log_template.md
 docs/agp_after_splitting.md
 docs/annotation_validation_examples.md
+docs/common_false_positive_corrections.md
 docs/contamination_workflow.md
 docs/correction_decision_log_template.md
 docs/correction_report_examples.md
@@ -258,6 +259,7 @@ docs/dotplot_misassembly_curation.md
 docs/dotplot_figures.md
 docs/gene_annotation.md
 docs/igv_breakpoint_reporting.md
+docs/igv_session_setup.md
 docs/manual_correction_workflow.md
 docs/minimum_evidence_checklist.md
 docs/ncbi_metadata_templates.md
@@ -277,6 +279,7 @@ docs/review_standards.md
 docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
 docs/v0.4_curation_index.md
+docs/v0.4_release_candidate_checklist.md
 docs/methods_text_template.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
@@ -1831,6 +1834,9 @@ Goal: make structural review teachable and reproducible.
 - Maintain v0.4 curation workflow index.
 - Maintain toy manual correction case study.
 - Maintain correction report generator.
+- Maintain IGV session setup guide.
+- Maintain common false-positive correction guide.
+- Maintain v0.4 release-candidate checklist.
 
 ### v0.5: Scaffolding
 

@@ -32,6 +32,7 @@ minimap2 -x asm20 -t 32 reference.fa sample.fa > sample_vs_ref.paf
 Use more permissive presets for distant references and more stringent filters for close cultivar-to-cultivar comparisons.
 
 See `docs/paf_dotplot_options.md` for PAF-based dotplot options including dotPlotly, pafr, SVbyEye, wgatools, PanDots, and Pteranodon-style visual curation.
+See `docs/common_false_positive_corrections.md` before accepting candidate breaks from dotplots, PAF summaries, RagTag, or Pteranodon.
 
 ## Manual Reference-to-Assembly Correction
 

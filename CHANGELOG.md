@@ -17,6 +17,9 @@ Current development focus: dotplot review, evidence-first manual curation, conse
 - Added correction report generator.
 - Added pre/post correction FASTA stats comparison helper.
 - Updated Step 8 to point readers into the v0.4 curation workflow.
+- Added IGV session setup guide.
+- Added common false-positive correction guide.
+- Added v0.4 release-candidate checklist.
 
 ## 0.3.0-dev
 

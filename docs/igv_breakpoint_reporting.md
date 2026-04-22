@@ -11,6 +11,8 @@ For reference-to-assembly review:
 3. Load optional tracks such as HiFi read depth, Hi-C evidence summaries, repeat annotation, or contamination intervals.
 4. Navigate only to contigs flagged by dotplot review or another evidence source.
 
+See `docs/igv_session_setup.md` for loading order, track naming, and session-file guidance.
+
 ## Screenshot Set
 
 For each accepted break, archive:
