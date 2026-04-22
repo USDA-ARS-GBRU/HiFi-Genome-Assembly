@@ -1,0 +1,7 @@
+object	local_name	accession	status	release_date	parent_or_linked_object	notes
+BioProject	ExampleCropGenomeProject	PRJNA_pending	draft		none	Study-level umbrella record for assembly and raw reads.
+BioSample	ExampleCultivarLeaf	SAMN_pending	draft		ExampleCropGenomeProject	Exact plant material used for HiFi sequencing.
+SRA	ExampleCultivar_PacBio_HiFi	SRR_pending	draft		ExampleCultivarLeaf	PacBio HiFi WGS reads.
+SRA	ExampleCultivar_HiC	SRR_pending	draft		ExampleCultivarLeaf	Optional Hi-C reads used for scaffolding.
+Assembly	ExampleCultivar_v1	GCA_pending	draft		ExampleCultivarLeaf	Genome assembly submission linked to BioProject, BioSample, and SRA reads.
+Annotation	ExampleCultivar_v1_gene_models	pending	draft		ExampleCultivar_v1	Annotation submission or community release track for the assembly.

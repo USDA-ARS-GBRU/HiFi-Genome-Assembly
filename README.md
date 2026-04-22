@@ -51,7 +51,7 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.3.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.3 is still active, but its release-readiness foundation is now mostly in place.
+Current roadmap version: **v0.3.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.3 is still active, its release-readiness foundation is mostly in place, and early v0.4 curation material has started.
 
 Completed baseline:
 
@@ -60,7 +60,7 @@ Completed baseline:
 
 Current focus:
 
-- **v0.3 Validation and Release Readiness**: maintain the NCBI submission validation examples, repeat/gene annotation starter templates, and contamination/release helpers while we polish the protocol toward v0.4.
+- **v0.3 to v0.4 transition**: maintain validation/release helpers while starting dotplot and misassembly curation examples.
 
 ## Workflow Overview
 
@@ -139,6 +139,7 @@ Starter helper scripts are available in:
 ```text
 scripts/collect_qc_dashboard.py
 scripts/audit_fasta_headers.py
+scripts/audit_gff3_fasta_ids.py
 scripts/audit_release_manifest.py
 scripts/check_release_bundle.py
 scripts/extract_hifiasm_log_metrics.py
@@ -192,13 +193,20 @@ scripts/check_release_bundle.py \
   --agp 15_release/sample.agp \
   --manifest examples/release_manifest.tsv \
   --out-dir 15_release/validation
+
+scripts/audit_gff3_fasta_ids.py \
+  --fasta examples/annotation_validation/toy_genome.fsa \
+  --gff3 examples/annotation_validation/toy_annotation.gff3 \
+  -o /tmp/toy_annotation_id_audit.tsv
 ```
 
 Review and release templates are available in:
 
 ```text
 docs/assembly_decision_log_template.md
+docs/annotation_validation_examples.md
 docs/contamination_workflow.md
+docs/dotplot_misassembly_curation.md
 docs/gene_annotation.md
 docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
@@ -211,6 +219,9 @@ docs/release_checklist.md
 docs/review_standards.md
 docs/tool_version_policy.md
 docs/methods_text_template.md
+examples/accession_tracking.tsv
+examples/annotation_validation/
+examples/dotplot_decisions.tsv
 examples/release_manifest.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
@@ -1724,10 +1735,14 @@ Goal: prevent release problems and make validation reproducible.
 
 ### v0.4: Dotplot and Misassembly Curation
 
+Status: **started during v0.3.0-dev**.
+
 Goal: make structural review teachable and reproducible.
 
 - Add MUMmer/minimap2 dotplot workflows.
 - Add example interpretations for clean, inverted, translocated, duplicated, and chimeric patterns.
+- Maintain dotplot and misassembly curation guide.
+- Maintain example dotplot decision cases.
 - Add manual-break helper script.
 - Add correction decision log template.
 - Add RagTag correct/scaffold comparison workflow.

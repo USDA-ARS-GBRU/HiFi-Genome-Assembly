@@ -1,0 +1,9 @@
+##gff-version 3
+Toy_chr01	example	gene	1	30	.	+	.	ID=gene:ToyG000001;Name=ToyG000001;locus_tag=TOY_000001
+Toy_chr01	example	mRNA	1	30	.	+	.	ID=transcript:ToyG000001.1;Parent=gene:ToyG000001;product=example protein
+Toy_chr01	example	exon	1	30	.	+	.	ID=exon:ToyG000001.1.1;Parent=transcript:ToyG000001.1
+Toy_chr01	example	CDS	1	30	.	+	0	ID=cds:ToyG000001.1;Parent=transcript:ToyG000001.1;product=example protein
+Toy_unplaced_000001	example	gene	1	30	.	+	.	ID=gene:ToyG000002;Name=ToyG000002;locus_tag=TOY_000002
+Toy_unplaced_000001	example	mRNA	1	30	.	+	.	ID=transcript:ToyG000002.1;Parent=gene:ToyG000002;product=hypothetical protein
+Toy_unplaced_000001	example	exon	1	30	.	+	.	ID=exon:ToyG000002.1.1;Parent=transcript:ToyG000002.1
+Toy_unplaced_000001	example	CDS	1	30	.	+	0	ID=cds:ToyG000002.1;Parent=transcript:ToyG000002.1;product=hypothetical protein

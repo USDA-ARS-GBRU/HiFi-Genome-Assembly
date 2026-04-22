@@ -1,0 +1,6 @@
+case_id	evidence_pattern	likely_interpretation	recommended_action	reviewer_note
+clean_collinear	Single strong diagonal between query and reference	Assembly agrees with reference at chromosome scale	Retain sequence	Do not overinterpret tiny local breaks in repeat-rich regions.
+terminal_inversion	Diagonal changes orientation near a chromosome end	True inversion, orientation error, or reference difference	Check read/Hi-C support before editing	Do not flip sequence only because one reference disagrees.
+mid_contig_translocation	One contig segment aligns to a different chromosome	Chimera or real structural variant	Inspect HiFi read depth, Hi-C map, k-mer support, and alternate references	Break only when independent evidence supports misassembly.
+tandem_duplication	Repeated diagonal block with elevated self-alignment	Duplicated haplotig, segmental duplication, or collapsed/expanded repeat	Compare depth and purge/retain decision	Real crop duplications are common; avoid automatic deletion.
+reference_gap_conflict	Assembly spans a region missing in reference	Assembly improvement or contaminant insertion	Check read support, taxonomy, and related assemblies	Retain if supported and biologically plausible.

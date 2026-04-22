@@ -26,6 +26,10 @@ Current development focus. v0.3 remains active, but the release-readiness founda
 - Added repeat and gene annotation strategy guides.
 - Added tracked toy release bundle so manifest audits pass as real tests.
 - Added NCBI metadata template guide for BioProject, BioSample, SRA, assembly, and annotation planning.
+- Added toy annotation validation fixtures and expected table2asn-style review notes.
+- Added GFF3-vs-FASTA sequence ID audit helper.
+- Started v0.4 dotplot and misassembly curation guide with example decision cases.
+- Added accession tracking TSV linking BioProject, BioSample, SRA, Assembly, and Annotation records.
 
 ## 0.2.0
 

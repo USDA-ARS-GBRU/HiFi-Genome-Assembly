@@ -1,0 +1,7 @@
+##gff-version 3
+Toy_chr01	example	gene	1	30	.	+	.	ID=gene:ToyG000003;Name=ToyG000003
+Toy_chr01	example	mRNA	1	30	.	+	.	ID=transcript:ToyG000003.1;Parent=gene:ToyG000003;product=putative nice gene
+Toy_chr01	example	exon	1	30	.	+	.	ID=exon:ToyG000003.1.1;Parent=transcript:ToyG000003.1
+Toy_chr01	example	CDS	1	30	.	+	0	ID=cds:ToyG000003.1;Parent=transcript:ToyG000003.1;product=putative nice gene
+Toy_missing_scaffold	example	gene	1	30	.	+	.	ID=gene:ToyG000004;Name=ToyG000004;locus_tag=TOY_000004
+Toy_missing_scaffold	example	mRNA	1	30	.	+	.	ID=transcript:ToyG000004.1;Parent=gene:ToyG000004;product=hypothetical protein
