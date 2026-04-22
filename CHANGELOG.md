@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0-dev
+
+Current development focus: chromosome-scale scaffolding, contact-map review, conservative gap filling, and T2T-readiness triage.
+
+- Promoted v0.5 to the active development version.
+- v0.4 is now maintained as the dotplot and misassembly curation baseline.
+- Added 3D-DNA/Juicebox/JBAT workflow guide.
+- Added 3D-DNA scaffold sbatch template.
+- Added T2T readiness checklist.
+- Added gap-filling report helper and toy gap-filled FASTA example.
+- Added documentation-site migration plan for the eventual GitHub-compatible web documentation split.
+- Updated README versioning, roadmap, inventories, scaffolding references, and gap-filling examples.
+
 ## 0.4.0-dev
 
 Current development focus: dotplot review, evidence-first manual curation, conservative assembly correction, and post-correction validation.

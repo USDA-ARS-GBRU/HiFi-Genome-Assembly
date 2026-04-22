@@ -34,7 +34,7 @@ def write_table(handle, headers: list[str], rows: list[dict[str, str]]) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build a Markdown report for an assembly correction round.")
     parser.add_argument("--sample", required=True, help="sample or assembly name")
-    parser.add_argument("--version", default="0.4.0-dev", help="protocol or assembly version")
+    parser.add_argument("--version", default="0.5.0-dev", help="protocol or assembly version")
     parser.add_argument("--decision-log", type=Path, required=True, help="correction decision log TSV")
     parser.add_argument("--decision-audit", type=Path, help="audit_correction_decisions.py output TSV")
     parser.add_argument("--correction-summary", type=Path, help="summarize_corrections.py output TSV")

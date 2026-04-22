@@ -52,17 +52,18 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.4.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.3 is now a maintained release-readiness baseline, and v0.4 is the active development focus for dotplot review, manual curation, and misassembly correction.
+Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, and v0.5 is the active development focus for chromosome-scale scaffolding, contact-map review, conservative gap filling, and T2T-readiness triage.
 
 Completed baseline:
 
 - **v0.1 Assembly Core**: longform protocol, reusable sbatch templates, starter metadata, hifiasm log parsing, and FASTA filtering/renaming helpers.
 - **v0.2 QC Dashboard**: peer-review QC/report templates, release checklist, methods text template, release manifest, dashboard aggregation, and quick dashboard plotting.
 - **v0.3 Validation and Release Readiness**: FASTA/AGP/header/manifest validation, contamination and organelle decision workflows, release bundle helpers, annotation validation examples, and NCBI metadata templates.
+- **v0.4 Dotplot and Misassembly Curation**: evidence-first structural review, reference-to-assembly IGV inspection, conservative breakpoint selection, post-correction validation, and reproducible correction reporting.
 
 Current focus:
 
-- **v0.4 Dotplot and Misassembly Curation**: teach evidence-first structural review, reference-to-assembly IGV inspection, conservative breakpoint selection, post-correction validation, and reproducible correction reporting.
+- **v0.5 Scaffolding and Finishing**: chromosome-scale scaffolding with YaHS, 3D-DNA/Juicebox, RagTag comparison, conservative gap filling, and early T2T readiness checks.
 
 ## Workflow Overview
 
@@ -150,6 +151,7 @@ scripts/compare_fasta_stats.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/make_correction_report.py
+scripts/make_gap_filling_report.py
 scripts/plot_qc_dashboard.py
 scripts/split_fasta_at_breaks.py
 scripts/summarize_corrections.py
@@ -237,7 +239,7 @@ scripts/compare_fasta_stats.py \
 
 scripts/make_correction_report.py \
   --sample toy \
-  --version 0.4.0-dev \
+  --version 0.5.0-dev \
   --decision-log examples/toy/toy_correction_decisions.tsv \
   --decision-audit /tmp/toy_correction_decision_audit.tsv \
   --correction-summary /tmp/toy_correction_summary.tsv \
@@ -251,18 +253,29 @@ scripts/summarize_fasta_gaps.py \
   examples/toy/toy_assembly.fa \
   -o /tmp/toy_gaps.tsv \
   --summary /tmp/toy_gap_summary.tsv
+
+scripts/make_gap_filling_report.py \
+  --before examples/toy/toy_assembly.fa \
+  --after examples/toy/toy_gapfilled.fa \
+  --decision-log examples/gap_filling_decisions.tsv \
+  --sample toy \
+  --version 0.5.0-dev \
+  -o /tmp/toy_gap_filling_report.tsv \
+  --markdown /tmp/toy_gap_filling_report.md
 ```
 
 Review and release templates are available in:
 
 ```text
 docs/assembly_decision_log_template.md
+docs/3d_dna_juicebox_workflow.md
 docs/agp_after_splitting.md
 docs/annotation_validation_examples.md
 docs/common_false_positive_corrections.md
 docs/contamination_workflow.md
 docs/correction_decision_log_template.md
 docs/correction_report_examples.md
+docs/documentation_site_plan.md
 docs/dotplot_misassembly_curation.md
 docs/dotplot_figures.md
 docs/gap_filling_workflow.md
@@ -289,6 +302,7 @@ docs/review_standards.md
 docs/scaffolding_decision_log_template.md
 docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
+docs/t2t_readiness_checklist.md
 docs/v0.4_curation_index.md
 docs/v0.4_release_candidate_checklist.md
 docs/v0.4_review_pass.md
@@ -300,6 +314,7 @@ examples/annotation_validation/
 examples/correction_evidence_checklist.tsv
 examples/dotplot_decisions.tsv
 examples/gap_filling_decisions.tsv
+examples/toy/toy_gapfilled.fa
 examples/release_manifest.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
@@ -1010,6 +1025,17 @@ Recommended current tools:
 - SALSA2: older but still used.
 - ALLHiC: useful for polyploids in some contexts.
 
+Start with the v0.5 scaffolding guides:
+
+```text
+docs/v0.5_scaffolding_kickoff.md
+docs/yahs_hic_workflow.md
+docs/3d_dna_juicebox_workflow.md
+docs/ragtag_workflow.md
+docs/hic_contact_map_qc.md
+docs/scaffolding_decision_log_template.md
+```
+
 Generic YaHS workflow:
 
 ```bash
@@ -1036,6 +1062,14 @@ Convert YaHS outputs to `.hic` for Juicebox review using the YaHS helper scripts
 - sudden coverage/contact drops
 - contig orientation errors
 - small unplaced contigs that should remain unplaced
+
+For 3D-DNA/Juicebox/JBAT workflows, use:
+
+```text
+01_sbatch_templates/3d_dna_scaffold.sbatch
+```
+
+Treat any 3D-DNA automated break or JBAT manual drag as a proposal until it is supported by contact maps, dotplots, and decision-log evidence.
 
 ### Reference-Guided Scaffolding
 
@@ -1084,6 +1118,19 @@ Use the sbatch templates as starting points:
 01_sbatch_templates/lr_gapcloser.sbatch
 01_sbatch_templates/tgsgapcloser2.sbatch
 01_sbatch_templates/trfill.sbatch
+```
+
+Summarize accepted and rejected fills:
+
+```bash
+scripts/make_gap_filling_report.py \
+  --before 10_scaffolding/sample.scaffolds.fa \
+  --after 10_scaffolding/sample.gapfilled.fa \
+  --decision-log 10_scaffolding/sample.gap_filling_decisions.tsv \
+  --sample sample \
+  --version 0.5.0-dev \
+  -o 10_scaffolding/sample.gap_filling_report.tsv \
+  --markdown 10_scaffolding/sample.gap_filling_report.md
 ```
 
 Decision rule: accept a filled gap only when the filled interval improves the assembly and does not hide uncertainty. A documented unresolved gap is preferable to an unsupported fill that reviewers, NCBI validation, or downstream pangenome users cannot reproduce.
@@ -1151,6 +1198,12 @@ For scaffolded assemblies, distinguish:
 - telomere-to-telomere chromosomes with no gaps
 
 NCBI submission may require AGP information and correct gap feature handling for annotated scaffolds.
+
+Use the T2T readiness checklist when the project wants to claim near-gapless or candidate T2T chromosomes:
+
+```text
+docs/t2t_readiness_checklist.md
+```
 
 ## Step 11: Contamination Screening
 
@@ -1861,7 +1914,7 @@ Goal: prevent release problems and make validation reproducible.
 
 ### v0.4: Dotplot and Misassembly Curation
 
-Status: **current development focus**.
+Status: **maintained baseline**.
 
 Goal: make structural review teachable and reproducible.
 
@@ -1893,21 +1946,23 @@ Goal: make structural review teachable and reproducible.
 
 ### v0.5: Scaffolding
 
-Status: **kickoff stubs started during v0.4.0-dev**.
+Status: **current development focus**.
 
 Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 
 - Maintain v0.5 scaffolding kickoff guide.
 - Maintain YaHS Hi-C scaffolding workflow.
-- Add 3D-DNA/Juicebox visual curation workflow.
-- Add RagTag reference-guided scaffold workflow with reference-bias warnings.
-- Add AGP generation and validation notes.
+- Maintain 3D-DNA/Juicebox visual curation workflow and sbatch template.
+- Maintain RagTag reference-guided scaffold workflow with reference-bias warnings.
+- Maintain AGP generation and validation notes.
 - Maintain Hi-C contact map QC checklist.
 - Maintain scaffolding decision log template.
 - Maintain conservative gap-filling workflow.
 - Maintain LR_Gapcloser, TGS-GapCloser2, and TRFill sbatch templates.
 - Maintain FASTA gap summarizer.
+- Maintain gap-filling report helper.
 - Maintain gap-filling decision log example.
+- Maintain T2T readiness checklist as the bridge into v0.6.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 
@@ -1917,7 +1972,7 @@ Goal: track chromosome completeness.
 - Add quarTeT telomere/centromere examples.
 - Add terminal telomere summary script.
 - Refine gap status summaries into T2T readiness reporting.
-- Add T2T readiness checklist for projects with ultra-long ONT or optical maps.
+- Refine T2T readiness checklist for projects with ultra-long ONT or optical maps.
 
 ### v0.7: Repeat Annotation
 
@@ -1973,6 +2028,7 @@ Goal: polished GitHub release for USDA-ARS-GBRU crop genome assembly projects.
 - Add GitHub Actions or local lint checks for scripts.
 - Add versioned release notes.
 - Add citation and contribution guidelines.
+- Split the longform README into a GitHub-compatible documentation site while preserving the README as the landing page.
 
 ## Key References and Tool Links
 
@@ -1997,6 +2053,9 @@ Genome profiling and quality:
 Scaffolding and structural review:
 
 - YaHS paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC9848053/
+- 3D-DNA GitHub: https://github.com/aidenlab/3d-dna
+- Juicebox GitHub: https://github.com/aidenlab/Juicebox
+- Juicebox Assembly Tools documentation: https://github.com/aidenlab/Juicebox/wiki/Juicebox-Assembly-Tools
 - RagTag GitHub: https://github.com/malonge/RagTag
 - MUMmer4 GitHub: https://github.com/mummer4/mummer
 - minimap2: https://github.com/lh3/minimap2
