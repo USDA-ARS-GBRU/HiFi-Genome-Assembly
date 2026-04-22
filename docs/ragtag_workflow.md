@@ -1,6 +1,6 @@
 # RagTag Correction and Scaffolding Comparison
 
-RagTag is useful for comparing an assembly against a close reference, testing homology-based correction, and building a reference-guided scaffold proposal. It should be treated as a review aid, not as a substitute for biological judgment.
+RagTag is useful for comparing an assembly against a close reference, testing homology-based correction, and building a reference-guided scaffold proposal. It should be treated as a review aid, not as a substitute for biological judgment. In high-quality PacBio HiFi crop assemblies, excessive proposed breaks should be interpreted as a warning sign for reference bias or overcorrection.
 
 ## What RagTag Does
 
@@ -24,6 +24,7 @@ Poor use cases:
 - the crop lineage has known inversions, introgressions, or pan-genome presence/absence variation
 - the goal is to force a new assembly to match an older reference
 - contamination or haplotig duplication has not been reviewed yet
+- RagTag `correct` proposes many more breaks than expected for a HiFi assembly
 
 ## Template Job
 
@@ -71,6 +72,8 @@ Review:
 - BUSCO/Merqury/contiguity changes
 
 Do not automatically accept the most contiguous result. A reference-guided scaffold can look tidy while hiding real cultivar-specific structure.
+
+If RagTag proposes a plausible correction, inspect the region with the manual reference-to-assembly IGV workflow in `docs/manual_correction_workflow.md` before editing the FASTA.
 
 ## Decision Table
 

@@ -1,0 +1,2 @@
+edit_id	sample_id	assembly_version	sequence_id	start_1based	end_1based	proposed_action	final_action	primary_evidence	secondary_evidence	tools_and_versions	reviewer	review_date	downstream_files_regenerated	notes
+edit_0001	toy	v0.3.0-dev	chr01	16	17	break	break	dotplot chromosome jump	reference-to-assembly IGV alignment break	minimap2; IGV; split_fasta_at_breaks.py	ExampleReviewer	2026-04-22	yes	Toy example only.

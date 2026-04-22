@@ -146,6 +146,7 @@ scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/plot_qc_dashboard.py
 scripts/split_fasta_at_breaks.py
+scripts/summarize_corrections.py
 scripts/summarize_organelle_hits.py
 scripts/validate_breaks.py
 scripts/validate_agp.py
@@ -211,12 +212,19 @@ scripts/validate_breaks.py \
   --fasta examples/toy/toy_assembly.fa \
   --breaks examples/toy/toy_breaks.tsv \
   -o /tmp/toy_breaks_validation.tsv
+
+scripts/summarize_corrections.py \
+  --split-map /tmp/toy_split.map.tsv \
+  --decision-log examples/toy/toy_correction_decisions.tsv \
+  -o /tmp/toy_correction_summary.tsv \
+  --markdown /tmp/toy_correction_summary.md
 ```
 
 Review and release templates are available in:
 
 ```text
 docs/assembly_decision_log_template.md
+docs/agp_after_splitting.md
 docs/annotation_validation_examples.md
 docs/contamination_workflow.md
 docs/correction_decision_log_template.md
@@ -224,9 +232,11 @@ docs/correction_report_examples.md
 docs/dotplot_misassembly_curation.md
 docs/dotplot_figures.md
 docs/gene_annotation.md
+docs/manual_correction_workflow.md
 docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
 docs/organelle_workflow.md
+docs/paf_dotplot_options.md
 docs/pacbio_watchlist.md
 docs/qc_figures.md
 docs/qc_report_template.md
@@ -1764,6 +1774,9 @@ Goal: make structural review teachable and reproducible.
 - Maintain correction decision log template.
 - Maintain dotplot figure guide.
 - Maintain RagTag correct/scaffold comparison workflow.
+- Maintain manual reference-to-assembly IGV correction workflow.
+- Maintain minimap2 PAF dotplot options.
+- Maintain correction summary helper and AGP-after-splitting guidance.
 
 ### v0.5: Scaffolding
 

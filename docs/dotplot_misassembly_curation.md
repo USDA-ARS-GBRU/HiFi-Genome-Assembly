@@ -31,6 +31,20 @@ minimap2 -x asm20 -t 32 reference.fa sample.fa > sample_vs_ref.paf
 
 Use more permissive presets for distant references and more stringent filters for close cultivar-to-cultivar comparisons.
 
+See `docs/paf_dotplot_options.md` for PAF-based dotplot options including dotPlotly, pafr, SVbyEye, wgatools, PanDots, and Pteranodon-style visual curation.
+
+## Manual Reference-to-Assembly Correction
+
+For HiFi crop assemblies, prefer manual evidence-first correction over broad automatic breaking. A practical workflow is:
+
+1. Use dotplots to identify questionable contigs.
+2. Map the reference genome to the HiFi assembly with minimap2.
+3. Open the HiFi assembly as the IGV genome and load the reference-to-assembly BAM.
+4. Manually inspect only the questionable contigs.
+5. Record defensible breakpoints and split only where the reference alignment break is clear and independently supported.
+
+See `docs/manual_correction_workflow.md` and `01_sbatch_templates/minimap_reference_to_assembly_igv.sbatch`.
+
 ## RagTag Comparison
 
 RagTag can be used as a reference-guided correction and scaffolding comparison after dotplot review. See `docs/ragtag_workflow.md` and `01_sbatch_templates/ragtag_correct_scaffold.sbatch`.
@@ -42,6 +56,8 @@ sbatch \
 ```
 
 Use RagTag output as a candidate edit set. Do not accept correction or scaffolding changes until they are supported by independent evidence such as Hi-C maps, read-depth profiles, k-mer support, or multiple related references.
+
+Breakwright-style algorithmic searches, RagTag `correct`, and Pteranodon auto mode should be treated as candidate generators. If they nominate many breaks in a high-quality HiFi assembly, assume the tool may be overcorrecting until manual review proves otherwise.
 
 ## Decision Cases
 
@@ -111,6 +127,7 @@ scripts/split_fasta_at_breaks.py \
 
 See `docs/dotplot_figures.md` for figure and caption expectations.
 See `docs/correction_report_examples.md` for manuscript methods and reviewer-response language.
+See `docs/agp_after_splitting.md` for AGP review after FASTA edits.
 
 ## Release Rule
 

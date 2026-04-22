@@ -36,6 +36,10 @@ Current development focus. v0.3 remains active, but the release-readiness founda
 - Added RagTag correction/scaffolding comparison guide and sbatch template.
 - Added breakpoint validation helper.
 - Added before/after correction report text examples for methods and reviewer response.
+- Added manual reference-to-assembly IGV correction workflow.
+- Added minimap2 PAF dotplot guidance and sbatch templates.
+- Added correction summary helper and AGP-after-splitting guidance.
+- Added cautious notes for automated correction tools including RagTag, Breakwright-style methods, and Pteranodon.
 
 ## 0.2.0
 
