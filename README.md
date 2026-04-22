@@ -51,16 +51,17 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.3.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.3 is still active, its release-readiness foundation is mostly in place, and early v0.4 curation material has started.
+Current roadmap version: **v0.4.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.3 is now a maintained release-readiness baseline, and v0.4 is the active development focus for dotplot review, manual curation, and misassembly correction.
 
 Completed baseline:
 
 - **v0.1 Assembly Core**: longform protocol, reusable sbatch templates, starter metadata, hifiasm log parsing, and FASTA filtering/renaming helpers.
 - **v0.2 QC Dashboard**: peer-review QC/report templates, release checklist, methods text template, release manifest, dashboard aggregation, and quick dashboard plotting.
+- **v0.3 Validation and Release Readiness**: FASTA/AGP/header/manifest validation, contamination and organelle decision workflows, release bundle helpers, annotation validation examples, and NCBI metadata templates.
 
 Current focus:
 
-- **v0.3 to v0.4 transition**: maintain validation/release helpers while starting dotplot and misassembly curation examples.
+- **v0.4 Dotplot and Misassembly Curation**: teach evidence-first structural review, reference-to-assembly IGV inspection, conservative breakpoint selection, post-correction validation, and reproducible correction reporting.
 
 ## Workflow Overview
 
@@ -232,12 +233,15 @@ docs/correction_report_examples.md
 docs/dotplot_misassembly_curation.md
 docs/dotplot_figures.md
 docs/gene_annotation.md
+docs/igv_breakpoint_reporting.md
 docs/manual_correction_workflow.md
+docs/minimum_evidence_checklist.md
 docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
 docs/organelle_workflow.md
 docs/paf_dotplot_options.md
 docs/pacbio_watchlist.md
+docs/post_correction_validation.md
 docs/qc_figures.md
 docs/qc_report_template.md
 docs/ragtag_workflow.md
@@ -248,6 +252,7 @@ docs/tool_version_policy.md
 docs/methods_text_template.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
+examples/correction_evidence_checklist.tsv
 examples/dotplot_decisions.tsv
 examples/release_manifest.tsv
 examples/release_bundle/
@@ -1738,7 +1743,7 @@ Goal: standardized assembly quality reports.
 
 ### v0.3: Validation, Contamination, and Organelle Handling
 
-Status: **active, mostly complete baseline**.
+Status: **maintained baseline**.
 
 Goal: prevent release problems and make validation reproducible.
 
@@ -1758,11 +1763,11 @@ Goal: prevent release problems and make validation reproducible.
 - Maintain decision tree for remove, mask, retain, split, or submit separately.
 - Maintain NCBI-oriented FASTA header, manifest, and release bundle helper scripts.
 - Maintain btrim, PacBio-watch, and QC-figure guidance.
-- Remaining before formal v0.4 focus: final review pass across validation, annotation, and release-readiness sections while continuing dotplot and misassembly curation work.
+- Continue maintaining validation, annotation, contamination, and release-readiness helpers as v0.4 adds correction and curation workflows.
 
 ### v0.4: Dotplot and Misassembly Curation
 
-Status: **started during v0.3.0-dev**.
+Status: **current development focus**.
 
 Goal: make structural review teachable and reproducible.
 
@@ -1777,6 +1782,9 @@ Goal: make structural review teachable and reproducible.
 - Maintain manual reference-to-assembly IGV correction workflow.
 - Maintain minimap2 PAF dotplot options.
 - Maintain correction summary helper and AGP-after-splitting guidance.
+- Maintain minimum evidence checklist for retain, break, flip, remove, mask, and submit-separately decisions.
+- Maintain IGV breakpoint screenshot/reporting guide.
+- Maintain post-correction validation mini-workflow and sbatch template.
 
 ### v0.5: Scaffolding
 

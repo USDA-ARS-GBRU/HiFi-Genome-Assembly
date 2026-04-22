@@ -1,8 +1,18 @@
 # Changelog
 
+## 0.4.0-dev
+
+Current development focus: dotplot review, evidence-first manual curation, conservative assembly correction, and post-correction validation.
+
+- Promoted v0.4 to the active development version.
+- v0.3 is now maintained as the release-readiness baseline.
+- Added minimum evidence checklist for correction decisions.
+- Added IGV breakpoint reporting guide.
+- Added post-correction validation mini-workflow and sbatch template.
+
 ## 0.3.0-dev
 
-Current development focus. v0.3 remains active, but the release-readiness foundation is mostly in place:
+Release-readiness baseline:
 
 - FASTA and AGP release-readiness validation.
 - Tool version and command-capture policy.
