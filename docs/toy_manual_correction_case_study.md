@@ -58,6 +58,15 @@ scripts/audit_correction_decisions.py \
   -o /tmp/toy_correction_decision_audit.tsv
 ```
 
+Compare pre/post FASTA statistics:
+
+```bash
+scripts/compare_fasta_stats.py \
+  --before examples/toy/toy_assembly.fa \
+  --after /tmp/toy_split.fa \
+  -o /tmp/toy_fasta_comparison.tsv
+```
+
 Create a report:
 
 ```bash
@@ -68,6 +77,7 @@ scripts/make_correction_report.py \
   --decision-audit /tmp/toy_correction_decision_audit.tsv \
   --correction-summary /tmp/toy_correction_summary.tsv \
   --split-map /tmp/toy_split.map.tsv \
+  --fasta-comparison /tmp/toy_fasta_comparison.tsv \
   --break-validation /tmp/toy_breaks_validation.tsv \
   --fasta-validation /tmp/toy_split_validation.tsv \
   -o /tmp/toy_post_correction_report.md

@@ -144,6 +144,7 @@ scripts/audit_correction_decisions.py
 scripts/audit_gff3_fasta_ids.py
 scripts/audit_release_manifest.py
 scripts/check_release_bundle.py
+scripts/compare_fasta_stats.py
 scripts/extract_hifiasm_log_metrics.py
 scripts/filter_rename_fasta.py
 scripts/make_correction_report.py
@@ -226,6 +227,11 @@ scripts/audit_correction_decisions.py \
   examples/toy/toy_correction_decisions.tsv \
   -o /tmp/toy_correction_decision_audit.tsv
 
+scripts/compare_fasta_stats.py \
+  --before examples/toy/toy_assembly.fa \
+  --after /tmp/toy_split.fa \
+  -o /tmp/toy_fasta_comparison.tsv
+
 scripts/make_correction_report.py \
   --sample toy \
   --version 0.4.0-dev \
@@ -233,6 +239,7 @@ scripts/make_correction_report.py \
   --decision-audit /tmp/toy_correction_decision_audit.tsv \
   --correction-summary /tmp/toy_correction_summary.tsv \
   --split-map /tmp/toy_split.map.tsv \
+  --fasta-comparison /tmp/toy_fasta_comparison.tsv \
   --break-validation /tmp/toy_breaks_validation.tsv \
   --fasta-validation /tmp/toy_split_validation.tsv \
   -o /tmp/toy_post_correction_report.md
@@ -899,9 +906,48 @@ Treat purged outputs as candidates. Re-run BUSCO, Merqury, and dotplots before a
 
 Misassembly correction should be conservative and evidence-based.
 
-Evidence types:
+Start with the v0.4 curation index:
+
+```text
+docs/v0.4_curation_index.md
+```
+
+The recommended workflow is:
+
+1. Generate whole-genome and focused dotplots.
+2. Use minimap2 PAF, MUMmer, or both to identify questionable contigs.
+3. Map the reference genome to the HiFi assembly and inspect only candidate regions in IGV.
+4. Record accepted and rejected candidate edits in a correction decision log.
+5. Validate breakpoints before editing FASTA.
+6. Split only at defensible coordinates.
+7. Regenerate FASTA stats, AGP, dotplots, annotation inputs, and release validation outputs.
+8. Generate a post-correction report.
+
+Core v0.4 documents:
+
+- `docs/dotplot_misassembly_curation.md`
+- `docs/manual_correction_workflow.md`
+- `docs/paf_dotplot_options.md`
+- `docs/igv_breakpoint_reporting.md`
+- `docs/minimum_evidence_checklist.md`
+- `docs/rejected_corrections.md`
+- `docs/post_correction_validation.md`
+- `docs/post_correction_report_template.md`
+
+Core helper scripts:
+
+- `scripts/validate_breaks.py`
+- `scripts/split_fasta_at_breaks.py`
+- `scripts/summarize_corrections.py`
+- `scripts/audit_correction_decisions.py`
+- `scripts/compare_fasta_stats.py`
+- `scripts/make_correction_report.py`
+
+Useful evidence types:
 
 - MUMmer/minimap whole-genome alignments
+- PAF-based dotplots
+- reference-to-assembly IGV inspection
 - HiFi read mapping across suspected breakpoints
 - Hi-C contact map
 - optical map or Bionano map
@@ -910,43 +956,16 @@ Evidence types:
 - telomere/centromere orientation
 - coverage changes
 
-### RagTag Correct and Scaffold
+### Automated Correction Tools
 
-RagTag is useful but can introduce reference bias. Use it as a candidate generator, not an oracle.
+Automated or semi-automated tools can nominate candidate corrections, but high-quality HiFi crop assemblies should not be broken aggressively. Treat RagTag `correct`, Breakwright-style methods, Pteranodon auto mode, and structural-difference summaries as candidate generators.
 
-Reference-guided correction:
+RagTag correction/scaffolding examples are in:
 
-```bash
-ragtag.py correct \
-  -t 32 \
-  --mm2-params "-x asm5 -t 32" \
-  --remove-small \
-  --min-aln 10000 \
-  -o 10_scaffolding/sample.ragtag_correct \
-  references/close_reference.fa \
-  07_assemblies/sample.primary.fa
+```text
+docs/ragtag_workflow.md
+01_sbatch_templates/ragtag_correct_scaffold.sbatch
 ```
-
-Reference-guided scaffolding:
-
-```bash
-ragtag.py scaffold \
-  -t 32 \
-  -C \
-  -r \
-  -f 1000 \
-  --remove-small \
-  -o 10_scaffolding/sample.ragtag_scaffold \
-  references/close_reference.fa \
-  07_assemblies/sample.primary.fa
-```
-
-Notes from the soybean work:
-
-- Default correction made very clean dotplots but introduced too many breaks.
-- `--inter` and larger break thresholds reduced break count but missed some intra-chromosomal issues.
-- Read validation helped but still required manual review.
-- Some "errors" may be real structural variation.
 
 ### Manual Breaks
 

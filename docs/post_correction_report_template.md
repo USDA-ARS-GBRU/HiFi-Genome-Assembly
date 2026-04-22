@@ -100,6 +100,7 @@ scripts/make_correction_report.py \
   --decision-audit sample.correction_decision_audit.tsv \
   --correction-summary sample.correction_summary.tsv \
   --split-map sample.split_map.tsv \
+  --fasta-comparison sample.fasta_comparison.tsv \
   --break-validation sample.breaks.validation.tsv \
   -o sample.post_correction_report.md
 ```

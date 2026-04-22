@@ -39,6 +39,7 @@ def main() -> int:
     parser.add_argument("--decision-audit", type=Path, help="audit_correction_decisions.py output TSV")
     parser.add_argument("--correction-summary", type=Path, help="summarize_corrections.py output TSV")
     parser.add_argument("--split-map", type=Path, help="split_fasta_at_breaks.py map TSV")
+    parser.add_argument("--fasta-comparison", type=Path, help="compare_fasta_stats.py output TSV")
     parser.add_argument("--break-validation", type=Path, help="validate_breaks.py output TSV")
     parser.add_argument("--fasta-validation", type=Path, help="validate_fasta.py output TSV")
     parser.add_argument("--agp-validation", type=Path, help="validate_agp.py output TSV")
@@ -48,6 +49,7 @@ def main() -> int:
     decisions = read_tsv(args.decision_log)
     audit_rows = read_tsv(args.decision_audit)
     correction_rows = read_tsv(args.correction_summary)
+    fasta_comparison_rows = read_tsv(args.fasta_comparison)
     action_counts = Counter(row.get("final_action", "") for row in decisions)
     accepted = [row for row in decisions if row.get("proposed_action") == row.get("final_action") and row.get("final_action") != "retain"]
     rejected = [row for row in decisions if row.get("final_action") == "retain"]
@@ -83,9 +85,14 @@ def main() -> int:
         handle.write("## Split/Correction Products\n\n")
         handle.write(f"- split_map: {link(args.split_map)}\n")
         handle.write(f"- correction_summary: {link(args.correction_summary)}\n")
+        handle.write(f"- fasta_comparison: {link(args.fasta_comparison)}\n")
         if correction_rows:
             handle.write("\n")
             write_table(handle, ["source_id", "new_segments", "split_count", "primary_evidence", "secondary_evidence"], correction_rows)
+        handle.write("\n")
+
+        handle.write("## FASTA Stat Changes\n\n")
+        write_table(handle, ["metric", "before", "after", "delta"], fasta_comparison_rows)
         handle.write("\n")
 
         handle.write("## Validation Files\n\n")

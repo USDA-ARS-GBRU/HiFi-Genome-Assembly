@@ -15,6 +15,8 @@ Current development focus: dotplot review, evidence-first manual curation, conse
 - Added v0.4 curation workflow index.
 - Added toy manual correction case study.
 - Added correction report generator.
+- Added pre/post correction FASTA stats comparison helper.
+- Updated Step 8 to point readers into the v0.4 curation workflow.
 
 ## 0.3.0-dev
 
