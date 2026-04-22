@@ -259,6 +259,7 @@ docs/correction_report_examples.md
 docs/dotplot_misassembly_curation.md
 docs/dotplot_figures.md
 docs/gene_annotation.md
+docs/hic_contact_map_qc.md
 docs/igv_breakpoint_reporting.md
 docs/igv_session_setup.md
 docs/manual_correction_workflow.md
@@ -277,12 +278,14 @@ docs/repeat_annotation.md
 docs/release_checklist.md
 docs/rejected_corrections.md
 docs/review_standards.md
+docs/scaffolding_decision_log_template.md
 docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
 docs/v0.4_curation_index.md
 docs/v0.4_release_candidate_checklist.md
 docs/v0.4_review_pass.md
 docs/v0.5_scaffolding_kickoff.md
+docs/yahs_hic_workflow.md
 docs/methods_text_template.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
@@ -1850,11 +1853,12 @@ Status: **kickoff stubs started during v0.4.0-dev**.
 Goal: chromosome-scale assemblies with clear evidence.
 
 - Maintain v0.5 scaffolding kickoff guide.
-- Add YaHS Hi-C scaffolding workflow.
+- Maintain YaHS Hi-C scaffolding workflow.
 - Add 3D-DNA/Juicebox visual curation workflow.
 - Add RagTag reference-guided scaffold workflow with reference-bias warnings.
 - Add AGP generation and validation notes.
-- Add Hi-C contact map QC checklist.
+- Maintain Hi-C contact map QC checklist.
+- Maintain scaffolding decision log template.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 

@@ -23,6 +23,9 @@ Current development focus: dotplot review, evidence-first manual curation, conse
 - Added v0.4 review-pass document.
 - Added README inventory checker.
 - Added v0.5 scaffolding kickoff guide.
+- Refined YaHS Hi-C scaffolding template and workflow guide.
+- Added Hi-C contact map QC checklist.
+- Added scaffolding decision log template.
 
 ## 0.3.0-dev
 

@@ -20,22 +20,31 @@ module load yahs
 : "${hic_r2:?Set hic_r2=/path/to/HiC_R2.fastq.gz}"
 : "${sample:?Set sample=SampleID}"
 
-mkdir -p "10_scaffolding/${sample}"
+outdir="${outdir:-10_scaffolding/${sample}/yahs}"
+
+mkdir -p "${outdir}"
+
+bwa 2>&1 | head -n 1 || true
+samtools --version | head -n 1
+yahs --version || true
 
 bwa index "${assembly}"
+samtools faidx "${assembly}"
 
 bwa mem -5SP -t "${SLURM_NTASKS}" \
   "${assembly}" \
   "${hic_r1}" \
   "${hic_r2}" \
   | samtools view -b -@ 8 \
-  | samtools sort -@ 8 -o "10_scaffolding/${sample}/${sample}.hic.bam"
+  | samtools sort -@ 8 -o "${outdir}/${sample}.hic.bam"
 
-samtools index "10_scaffolding/${sample}/${sample}.hic.bam"
+samtools index "${outdir}/${sample}.hic.bam"
 
 yahs \
   "${assembly}" \
-  "10_scaffolding/${sample}/${sample}.hic.bam" \
-  -o "10_scaffolding/${sample}/${sample}.yahs"
+  "${outdir}/${sample}.hic.bam" \
+  -o "${outdir}/${sample}.yahs"
+
+samtools flagstat "${outdir}/${sample}.hic.bam" > "${outdir}/${sample}.hic.flagstat.txt"
 
 echo "Job ID: ${SLURM_JOBID}"
