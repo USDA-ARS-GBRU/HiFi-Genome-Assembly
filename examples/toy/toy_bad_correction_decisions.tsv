@@ -1,0 +1,2 @@
+edit_id	sample_id	assembly_version	sequence_id	start_1based	end_1based	proposed_action	final_action	primary_evidence	secondary_evidence	tools_and_versions	reviewer	review_date	downstream_files_regenerated	notes
+bad_0001	toy	v0.4.0-dev	chr01	16	17	break	break	dotplot jump			ExampleReviewer	2026-04-22	no	Missing secondary evidence, tools, and downstream regeneration.

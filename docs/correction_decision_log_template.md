@@ -47,6 +47,16 @@ edit_0002	SampleID	v0.3.0-dev	chr07	1	9800000	reverse_complement	retain	dotplot 
 
 For destructive edits such as breaking or removing sequence, require at least two independent evidence types when possible. Dotplots are excellent triage tools, but a dotplot alone is usually not enough for a crop genome correction.
 
+Audit the decision log before release:
+
+```bash
+scripts/audit_correction_decisions.py \
+  examples/toy/toy_correction_decisions.tsv \
+  -o /tmp/toy_correction_decision_audit.tsv
+```
+
+Rejected corrections should be recorded with `final_action=retain`. See `docs/rejected_corrections.md`.
+
 ## Coordinate Rule
 
 For breakpoints used with `scripts/split_fasta_at_breaks.py`, record `break_after_1based`. A value of `1000` means the first output segment ends at base 1000 and the next begins at base 1001.

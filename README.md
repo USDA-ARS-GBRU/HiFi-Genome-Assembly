@@ -140,6 +140,7 @@ Starter helper scripts are available in:
 ```text
 scripts/collect_qc_dashboard.py
 scripts/audit_fasta_headers.py
+scripts/audit_correction_decisions.py
 scripts/audit_gff3_fasta_ids.py
 scripts/audit_release_manifest.py
 scripts/check_release_bundle.py
@@ -219,6 +220,10 @@ scripts/summarize_corrections.py \
   --decision-log examples/toy/toy_correction_decisions.tsv \
   -o /tmp/toy_correction_summary.tsv \
   --markdown /tmp/toy_correction_summary.md
+
+scripts/audit_correction_decisions.py \
+  examples/toy/toy_correction_decisions.tsv \
+  -o /tmp/toy_correction_decision_audit.tsv
 ```
 
 Review and release templates are available in:
@@ -242,11 +247,13 @@ docs/organelle_workflow.md
 docs/paf_dotplot_options.md
 docs/pacbio_watchlist.md
 docs/post_correction_validation.md
+docs/post_correction_report_template.md
 docs/qc_figures.md
 docs/qc_report_template.md
 docs/ragtag_workflow.md
 docs/repeat_annotation.md
 docs/release_checklist.md
+docs/rejected_corrections.md
 docs/review_standards.md
 docs/tool_version_policy.md
 docs/methods_text_template.md
@@ -1785,6 +1792,9 @@ Goal: make structural review teachable and reproducible.
 - Maintain minimum evidence checklist for retain, break, flip, remove, mask, and submit-separately decisions.
 - Maintain IGV breakpoint screenshot/reporting guide.
 - Maintain post-correction validation mini-workflow and sbatch template.
+- Maintain post-correction report template.
+- Maintain correction decision audit helper.
+- Maintain rejected-correction examples.
 
 ### v0.5: Scaffolding
 

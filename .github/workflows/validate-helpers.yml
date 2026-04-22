@@ -30,6 +30,8 @@ jobs:
         run: python scripts/validate_breaks.py --fasta examples/toy/toy_assembly.fa --breaks examples/toy/toy_breaks.tsv -o /tmp/toy_breaks_validation.tsv
       - name: Summarize toy corrections
         run: python scripts/summarize_corrections.py --split-map /tmp/toy_split.map.tsv --decision-log examples/toy/toy_correction_decisions.tsv -o /tmp/toy_correction_summary.tsv --markdown /tmp/toy_correction_summary.md
+      - name: Audit toy correction decisions
+        run: python scripts/audit_correction_decisions.py examples/toy/toy_correction_decisions.tsv -o /tmp/toy_correction_decision_audit.tsv
       - name: Audit example release manifest
         run: python scripts/audit_release_manifest.py examples/release_manifest.tsv -o /tmp/manifest_audit.tsv
       - name: Build toy dashboard

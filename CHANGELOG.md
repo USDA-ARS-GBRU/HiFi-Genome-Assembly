@@ -9,6 +9,9 @@ Current development focus: dotplot review, evidence-first manual curation, conse
 - Added minimum evidence checklist for correction decisions.
 - Added IGV breakpoint reporting guide.
 - Added post-correction validation mini-workflow and sbatch template.
+- Added post-correction report template.
+- Added correction decision audit helper.
+- Added rejected-correction examples.
 
 ## 0.3.0-dev
 
