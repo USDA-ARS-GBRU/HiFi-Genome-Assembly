@@ -33,6 +33,9 @@ Current development focus. v0.3 remains active, but the release-readiness founda
 - Added correction decision log template.
 - Added FASTA split helper for curated breakpoints.
 - Added dotplot figure guide for reports and manuscripts.
+- Added RagTag correction/scaffolding comparison guide and sbatch template.
+- Added breakpoint validation helper.
+- Added before/after correction report text examples for methods and reviewer response.
 
 ## 0.2.0
 

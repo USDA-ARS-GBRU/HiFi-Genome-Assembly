@@ -31,6 +31,18 @@ minimap2 -x asm20 -t 32 reference.fa sample.fa > sample_vs_ref.paf
 
 Use more permissive presets for distant references and more stringent filters for close cultivar-to-cultivar comparisons.
 
+## RagTag Comparison
+
+RagTag can be used as a reference-guided correction and scaffolding comparison after dotplot review. See `docs/ragtag_workflow.md` and `01_sbatch_templates/ragtag_correct_scaffold.sbatch`.
+
+```bash
+sbatch \
+  --export reference=references/close_reference.fa,query=07_assemblies/sample.primary.fa,sample=sample,mode=both \
+  01_sbatch/ragtag_correct_scaffold.sbatch
+```
+
+Use RagTag output as a candidate edit set. Do not accept correction or scaffolding changes until they are supported by independent evidence such as Hi-C maps, read-depth profiles, k-mer support, or multiple related references.
+
 ## Decision Cases
 
 | Pattern | Possible meaning | Before editing | Default action |
@@ -78,6 +90,15 @@ reason_not_automated:
 
 For break edits, `scripts/split_fasta_at_breaks.py` accepts a TSV with `sequence_id` and `break_after_1based` columns. A value of `1000` means the first output segment ends at base 1000 and the next begins at base 1001.
 
+Validate the break table before editing:
+
+```bash
+scripts/validate_breaks.py \
+  --fasta examples/toy/toy_assembly.fa \
+  --breaks examples/toy/toy_breaks.tsv \
+  -o /tmp/toy_breaks_validation.tsv
+```
+
 Toy example:
 
 ```bash
@@ -89,6 +110,7 @@ scripts/split_fasta_at_breaks.py \
 ```
 
 See `docs/dotplot_figures.md` for figure and caption expectations.
+See `docs/correction_report_examples.md` for manuscript methods and reviewer-response language.
 
 ## Release Rule
 

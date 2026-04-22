@@ -1,0 +1,5 @@
+sequence_id	break_after_1based	action	evidence	reviewer	notes
+missing_chr	16	break	dotplot_jump	ExampleReviewer	Missing sequence ID.
+chr01	9999	break	dotplot_jump	ExampleReviewer	Out-of-range breakpoint.
+chr01	16	break	dotplot_jump	ExampleReviewer	Duplicate coordinate example.
+chr01	16	break	dotplot_jump	ExampleReviewer	Duplicate coordinate example.
