@@ -24,6 +24,8 @@ Before annotation, freeze:
 - reference GFF3 for liftover when appropriate
 - decision logs for excluded contaminant, organelle, alternate, or haplotig sequences
 
+Use `docs/repeat_to_gene_annotation_handoff.md` before handing the masked genome into gene annotation.
+
 ## Liftoff
 
 ```bash

@@ -24,6 +24,8 @@ Prepare:
 - related cultivar/species GFF3 for liftover when appropriate
 - decision log for excluded contaminant, organellar, alternate, and haplotig sequences
 
+Use `docs/repeat_to_gene_annotation_handoff.md` before starting annotation so the repeat mask, repeat GFF, and final release sequence IDs stay synchronized.
+
 ## Liftoff Template
 
 ```bash

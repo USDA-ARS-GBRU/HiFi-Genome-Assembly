@@ -349,6 +349,8 @@ docs/qc_report_template.md
 docs/ragtag_workflow.md
 docs/repeat_annotation.md
 docs/repeat_library_decision_guide.md
+docs/repeat_landscape_interpretation.md
+docs/repeat_to_gene_annotation_handoff.md
 docs/release_checklist.md
 docs/rejected_corrections.md
 docs/review_standards.md
@@ -2208,7 +2210,8 @@ Goal: crop-appropriate repeat libraries and soft-masked genomes.
 - Maintain repeat annotation strategy guide.
 - Maintain repeat summary comparison helper.
 - Maintain repeat annotation decision audit helper and toy validation.
-- Add repeat-to-gene-annotation handoff checklist.
+- Maintain repeat landscape interpretation guidance.
+- Maintain repeat-to-gene-annotation handoff checklist.
 
 ### v0.8: Gene Annotation
 

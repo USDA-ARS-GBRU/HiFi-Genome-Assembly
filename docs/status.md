@@ -68,8 +68,8 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] EDTA and RepeatModeler2/RepeatMasker sbatch templates exist.
 - [x] Add repeat summary comparison helper.
 - [x] Add repeat annotation decision audit helper and toy validation.
-- [ ] Add repeat landscape interpretation guidance.
-- [ ] Add repeat-to-gene-annotation handoff checklist.
+- [x] Add repeat landscape interpretation guidance.
+- [x] Add repeat-to-gene-annotation handoff checklist.
 
 ## v1.0 Gates
 

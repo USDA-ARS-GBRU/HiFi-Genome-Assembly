@@ -52,6 +52,7 @@ Choose the repeat annotation that is:
 Prefer soft masking for gene prediction so evidence-supported genes can still be modeled through repeats when appropriate.
 
 For release-library decision logging, see `docs/repeat_library_decision_guide.md`.
+For interpreting repeat composition and handoff into annotation, see `docs/repeat_landscape_interpretation.md` and `docs/repeat_to_gene_annotation_handoff.md`.
 
 ## Deliverables
 
