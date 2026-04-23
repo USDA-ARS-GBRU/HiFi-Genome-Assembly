@@ -8,6 +8,7 @@ Primary pages:
 - [RagTag workflow](../ragtag_workflow.md)
 - [Hi-C contact map QC](../hic_contact_map_qc.md)
 - [Scaffolding candidate comparison](../scaffolding_candidate_comparison.md)
+- [AGP for scaffolded assemblies](agp.md)
 - [AGP summary workflow](../agp_summary_workflow.md)
 - [Gap filling workflow](../gap_filling_workflow.md)
 - [Telomere summary workflow](../telomere_summary_workflow.md)

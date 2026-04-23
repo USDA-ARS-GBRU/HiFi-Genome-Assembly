@@ -39,6 +39,12 @@ docs/
 
 The initial section landing pages now exist under `docs/`. They are intentionally light index pages until the README-to-docs migration begins.
 
+The first focused migration pages are:
+
+- `docs/assembly/hifiasm.md`
+- `docs/assembly/prepare_reads.md`
+- `docs/scaffolding/agp.md`
+
 ## Migration Rules
 
 - Keep the root README as the project overview, quickstart, and roadmap.

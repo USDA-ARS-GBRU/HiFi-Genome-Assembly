@@ -302,6 +302,8 @@ docs/assembly_decision_log_template.md
 docs/3d_dna_juicebox_workflow.md
 docs/agp_summary_workflow.md
 docs/agp_after_splitting.md
+docs/assembly/hifiasm.md
+docs/assembly/prepare_reads.md
 docs/annotation_validation_examples.md
 docs/common_false_positive_corrections.md
 docs/contamination_workflow.md
@@ -349,11 +351,13 @@ docs/assembly/index.md
 docs/qc/index.md
 docs/curation/index.md
 docs/scaffolding/index.md
+docs/scaffolding/agp.md
 docs/annotation/index.md
 docs/release/index.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
 examples/centromere_candidates.tsv
+examples/centromere_candidates_empty.tsv
 examples/correction_evidence_checklist.tsv
 examples/dotplot_decisions.tsv
 examples/gap_filling_decisions.tsv
@@ -523,6 +527,12 @@ Parameters worth understanding:
 - trio mode options: use when parental reads are available.
 
 ## Step 1: Prepare Reads
+
+Focused web-doc draft:
+
+```text
+docs/assembly/prepare_reads.md
+```
 
 ### Convert BAM to FASTQ
 
@@ -1650,6 +1660,12 @@ scripts/summarize_agp.py \
 ```
 
 See `docs/agp_summary_workflow.md` for a beginner-friendly explanation of the format and how to interpret component, gap, and linkage-evidence summaries.
+
+The future web-doc page for AGP is:
+
+```text
+docs/scaffolding/agp.md
+```
 
 Make sure:
 

@@ -18,6 +18,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added AGP definition, AGP summary workflow, and AGP summary helper.
 - Added first focused hifiasm docs page for the future web documentation.
 - Added T2T readiness report helper and centromere candidate example table.
+- Added web-doc AGP page under scaffolding.
+- Added focused read-preparation docs page with btrim/HiFiAdapterFilt decision logic.
+- Added empty centromere fixture to test unsupported T2T readiness cases.
 
 ## 0.4.0-dev
 
