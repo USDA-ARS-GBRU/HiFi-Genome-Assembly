@@ -43,6 +43,7 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.
 - Added public release metadata audit and citation/license review guide.
 - Added beginner usability review guide and tracking fixture for outside-reader testing.
+- Added v0.5 release-candidate notes and tagging dry-run checklist.
 
 ## 0.4.0-dev
 

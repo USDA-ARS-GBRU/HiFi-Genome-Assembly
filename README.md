@@ -380,6 +380,7 @@ docs/release/beginner_usability_review.md
 docs/release/citation_license_review.md
 docs/release/ncbi_submission.md
 docs/release/v0.5_review_checklist.md
+docs/release/v0.5_release_candidate_notes.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
 examples/centromere_candidates.tsv

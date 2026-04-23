@@ -44,6 +44,7 @@ The root `README.md` remains the canonical longform protocol while the focused d
 - [x] README-shortening order is defined for the docs-site migration.
 - [x] Public release metadata audit and citation/license review guide exist.
 - [x] Beginner usability review template exists.
+- [x] v0.5 release-candidate notes exist.
 
 Current v0.5 assessment: feature-complete for scaffolding and README-migration content review, but not stable-release taggable yet. See [v0.5 Review Checklist](release/v0.5_review_checklist.md).
 
