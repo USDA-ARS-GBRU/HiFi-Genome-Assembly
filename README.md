@@ -347,6 +347,8 @@ docs/minimum_evidence_checklist.md
 docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
 docs/annotation_submission_handoff.md
+docs/release_candidate_worked_case.md
+docs/release_bundle_worked_example.md
 docs/organelle_workflow.md
 docs/paf_dotplot_options.md
 docs/pacbio_watchlist.md
@@ -2267,6 +2269,8 @@ Goal: submission-ready assemblies and annotation packages.
 - Maintain release package decision audit helper and toy validation.
 - Maintain annotation submission handoff guide.
 - Maintain release methods and structured comments guide.
+- Maintain worked release candidate case.
+- Maintain release bundle worked example.
 
 ### v1.0: Stable Public Protocol
 

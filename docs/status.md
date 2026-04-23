@@ -90,6 +90,8 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Add release submission decision audit helper and toy validation.
 - [x] Add annotation submission handoff guide.
 - [x] Add methods text template for manuscripts and NCBI structured comments.
+- [x] Add worked release candidate case.
+- [x] Add release bundle worked example.
 
 ## v1.0 Gates
 
