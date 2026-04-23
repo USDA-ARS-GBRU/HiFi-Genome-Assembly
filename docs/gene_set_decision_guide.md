@@ -50,6 +50,23 @@ Prefer the candidate that is:
 - reproducible from archived commands and evidence inputs
 - acceptable under table2asn and downstream release review
 
+Compare annotation summaries before choosing the release gene set:
+
+```bash
+scripts/compare_annotation_summaries.py \
+  --candidate liftoff=examples/annotation_summary_liftoff.tsv \
+  --candidate hybrid=examples/annotation_summary_hybrid.tsv \
+  -o /tmp/annotation_summary_comparison.tsv
+```
+
+Audit the final gene-set decision log before release:
+
+```bash
+scripts/audit_gene_annotation_decisions.py \
+  examples/gene_annotation_decisions.tsv \
+  -o /tmp/gene_annotation_decision_audit.tsv
+```
+
 ## Common Decision Cases
 
 | Observation | Interpretation | Action |

@@ -55,6 +55,7 @@ Current development focus: v0.5 content review, v0.6 telomere/centromere/T2T ref
 - Added repeat landscape interpretation guide and repeat-to-gene-annotation handoff checklist.
 - Started v0.8 gene annotation drafting with kickoff guide, gene set decision guide, and example decision table.
 - Updated README and release docs to reflect v0.5 review plus v0.6-v0.8 drafting lanes.
+- Added annotation summary comparison and gene annotation decision audit helpers with positive and negative fixtures.
 
 ## 0.4.0-dev
 

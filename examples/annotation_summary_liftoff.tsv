@@ -1,0 +1,2 @@
+sample	protein_coding_genes	transcripts	busco_protein_complete	functional_annotation_percent	method	notes
+ToyCrop01	38210	40112	95.8	88.4	Liftoff	Transfer baseline with preserved close-cultivar models.

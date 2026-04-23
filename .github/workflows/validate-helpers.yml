@@ -98,6 +98,16 @@ jobs:
             echo "expected repeat annotation decision audit to fail contradictory release choices"
             exit 1
           fi
+      - name: Compare annotation summary candidates
+        run: python scripts/compare_annotation_summaries.py --candidate liftoff=examples/annotation_summary_liftoff.tsv --candidate hybrid=examples/annotation_summary_hybrid.tsv -o /tmp/annotation_summary_comparison.tsv
+      - name: Audit gene annotation decision table
+        run: python scripts/audit_gene_annotation_decisions.py examples/gene_annotation_decisions.tsv -o /tmp/gene_annotation_decision_audit.tsv
+      - name: Confirm gene annotation decision audit catches contradictions
+        run: |
+          if python scripts/audit_gene_annotation_decisions.py examples/gene_annotation_decisions_bad.tsv -o /tmp/gene_annotation_decision_bad_audit.tsv; then
+            echo "expected gene annotation decision audit to fail contradictory release choices"
+            exit 1
+          fi
       - name: Summarize toy organelle PAF
         run: |
           printf 'unplaced_000001\t47\t0\t42\t+\tchloroplast_ref\t150000\t10\t52\t42\t42\t60\n' > /tmp/toy_organelle.paf

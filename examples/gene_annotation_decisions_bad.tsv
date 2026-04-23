@@ -1,0 +1,3 @@
+decision_id	sample_id	assembly_version	candidate_method	candidate_outputs	gene_count	busco_protein_complete_percent	primary_strength	primary_concern	final_action	table2asn_ready	reviewer	notes
+gene_bad_0001	ToyCrop01	0.5.0-dev	Liftoff	14_genes/liftoff/ToyCrop01.liftoff.gff3;14_genes/liftoff/ToyCrop01.proteins.fa	38210	95.8	preserves close-cultivar gene structure	misses accession-specific models	use_for_release	yes	ReviewerName	First release candidate.
+gene_bad_0002	ToyCrop01	0.5.0-dev	BRAKER3	14_genes/braker3/ToyCrop01.gff3;14_genes/braker3/ToyCrop01.proteins.fa	40155	97.1	strong transcript and protein support	TE-derived review still pending	use_for_release	yes	ReviewerName	Second release candidate should fail audit.

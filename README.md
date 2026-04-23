@@ -158,10 +158,12 @@ scripts/check_markdown_links.py
 scripts/check_docs_coverage.py
 scripts/check_project_metadata.py
 scripts/check_public_release_metadata.py
+scripts/compare_annotation_summaries.py
 scripts/compare_repeat_summaries.py
 scripts/compare_scaffolding_candidates.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
+scripts/audit_gene_annotation_decisions.py
 scripts/audit_gff3_fasta_ids.py
 scripts/audit_release_manifest.py
 scripts/audit_repeat_annotation_decisions.py
@@ -399,6 +401,8 @@ docs/release/v0.5_review_checklist.md
 docs/release/v0.5_release_candidate_notes.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
+examples/annotation_summary_liftoff.tsv
+examples/annotation_summary_hybrid.tsv
 examples/centromere_candidates.tsv
 examples/centromere_candidates_empty.tsv
 examples/correction_evidence_checklist.tsv
@@ -415,6 +419,7 @@ examples/repeat_annotation_decisions_bad.tsv
 examples/repeat_summary_edta.tsv
 examples/repeat_summary_repeatmodeler.tsv
 examples/gene_annotation_decisions.tsv
+examples/gene_annotation_decisions_bad.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
 examples/btrim_patterns.example.txt
@@ -2231,8 +2236,8 @@ Goal: evidence-based gene models.
 - Maintain MAKER workflow for projects needing full evidence integration.
 - Maintain Liftoff, BRAKER3, and MAKER sbatch templates.
 - Maintain gene annotation strategy guide.
-- Add annotation summary comparison helper.
-- Add gene annotation decision audit helper and toy validation.
+- Maintain annotation summary comparison helper.
+- Maintain gene annotation decision audit helper and toy validation.
 - Add functional annotation examples.
 - Add annotation QC dashboard.
 

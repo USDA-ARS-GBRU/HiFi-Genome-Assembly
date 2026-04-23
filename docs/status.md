@@ -77,8 +77,8 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Gene set decision guide exists.
 - [x] Example gene annotation decision table exists.
 - [x] Liftoff, BRAKER3, and MAKER sbatch templates exist.
-- [ ] Add annotation summary comparison helper.
-- [ ] Add gene annotation decision audit helper and toy validation.
+- [x] Add annotation summary comparison helper.
+- [x] Add gene annotation decision audit helper and toy validation.
 - [ ] Add functional annotation guide.
 - [ ] Add annotation QC dashboard guide.
 
