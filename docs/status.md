@@ -40,10 +40,10 @@ The root `README.md` remains the canonical longform protocol while the focused d
 - [x] README workflow steps have focused docs coverage.
 - [x] Markdown links and docs coverage are checked in CI.
 - [x] Public metadata and contribution templates exist.
-- [ ] One worked scaffolding decision case is needed before calling v0.5 feature-complete.
-- [ ] README-shortening order should be chosen before the docs-site migration accelerates.
+- [x] One worked scaffolding decision case links candidate comparison to final decision text.
+- [x] README-shortening order is defined for the docs-site migration.
 
-Current v0.5 assessment: close to feature-complete, but not taggable yet. See [v0.5 Review Checklist](release/v0.5_review_checklist.md).
+Current v0.5 assessment: feature-complete for scaffolding and README-migration content review, but not stable-release taggable yet. See [v0.5 Review Checklist](release/v0.5_review_checklist.md).
 
 ## v1.0 Gates
 

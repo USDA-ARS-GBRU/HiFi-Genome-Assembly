@@ -18,6 +18,8 @@ scripts/compare_scaffolding_candidates.py \
 
 This helper reports sequence count, total length, N50/N90, gap count, gap bases, and maximum gap size for each candidate. It intentionally does not declare a winner.
 
+For a small worked example that moves from candidate metrics to a final decision, see `docs/scaffolding_worked_decision_case.md`.
+
 ## What to Compare
 
 | Evidence | Why it matters |

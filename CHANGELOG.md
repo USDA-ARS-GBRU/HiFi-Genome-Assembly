@@ -39,6 +39,8 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added GitHub issue and pull request templates.
 - Added v0.5 review checklist with remaining feature-complete work.
 - Updated README and docs status with current v0.5 assessment.
+- Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
+- Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.
 
 ## 0.4.0-dev
 

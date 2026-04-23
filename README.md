@@ -345,8 +345,10 @@ docs/repeat_annotation.md
 docs/release_checklist.md
 docs/rejected_corrections.md
 docs/review_standards.md
+docs/readme_to_docs_migration_plan.md
 docs/scaffolding_decision_log_template.md
 docs/scaffolding_candidate_comparison.md
+docs/scaffolding_worked_decision_case.md
 docs/telomere_summary_workflow.md
 docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
@@ -382,6 +384,7 @@ examples/centromere_candidates_empty.tsv
 examples/correction_evidence_checklist.tsv
 examples/dotplot_decisions.tsv
 examples/gap_filling_decisions.tsv
+examples/scaffolding_decision_case/
 examples/toy/toy_gapfilled.fa
 examples/release_manifest.tsv
 examples/release_bundle/
@@ -2119,6 +2122,7 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 - Maintain AGP summary helper.
 - Maintain Hi-C contact map QC checklist.
 - Maintain scaffolding decision log template.
+- Maintain worked scaffolding decision case.
 - Maintain conservative gap-filling workflow.
 - Maintain LR_Gapcloser, TGS-GapCloser2, and TRFill sbatch templates.
 - Maintain FASTA gap summarizer.
@@ -2126,6 +2130,7 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 - Maintain gap-filling decision log example.
 - Maintain scaffolding candidate comparison helper and guidance.
 - Maintain documentation-site skeleton as preparation for v1.0 migration.
+- Maintain README-to-docs migration order.
 - Maintain T2T readiness checklist as the bridge into v0.6.
 - Maintain T2T readiness report helper.
 - Maintain focused docs coverage for every README workflow step.
@@ -2134,9 +2139,8 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 
 Remaining before v0.5 feature-complete:
 
-- Add one worked scaffolding decision case from candidate comparison to final decision text.
-- Decide the first README sections to shorten after v0.5.
 - Review citation/license wording before stable release.
+- Do one outside-reader pass for beginner usability.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 

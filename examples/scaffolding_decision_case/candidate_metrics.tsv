@@ -1,0 +1,5 @@
+candidate	seq_count	total_bp	n50	n90	max_seq_bp	gap_count	gap_bp	max_gap_bp	note
+contig	188	1084200000	35400000	8200000	61200000	0	0	0	unscaffolded hifiasm primary contigs
+yahs	24	1084198600	74200000	22100000	104200000	14	1400	100	selected release-track candidate after evidence review
+3d_dna	21	1084198300	78100000	23800000	108700000	17	1700	100	rejected pending unresolved contact-map concerns
+ragtag	12	1084196100	91300000	68400000	121600000	36	3600	100	rejected as final assembly because several joins were reference-guided without Hi-C support

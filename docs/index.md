@@ -26,3 +26,5 @@ Status meanings:
 Content is being added as focused pages first. Before v1.0, the README will become a concise landing page and this documentation tree will carry the detailed protocol.
 
 See [Documentation Status and Roadmap](status.md) for version focus, page maturity, v0.5 exit goals, and v1.0 gates.
+
+For the planned conversion from longform README to focused GitHub documentation, see [README to Docs Migration Plan](readme_to_docs_migration_plan.md).
