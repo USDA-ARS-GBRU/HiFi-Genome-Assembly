@@ -36,6 +36,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added documentation status and roadmap page.
 - Added CONTRIBUTING, CITATION.cff, and MIT LICENSE files.
 - Added project metadata checker for CI.
+- Added GitHub issue and pull request templates.
+- Added v0.5 review checklist with remaining feature-complete work.
+- Updated README and docs status with current v0.5 assessment.
 
 ## 0.4.0-dev
 

@@ -33,12 +33,17 @@ The root `README.md` remains the canonical longform protocol while the focused d
 
 ## v0.5 Exit Goals
 
-- Hi-C scaffolding reader path is usable.
-- AGP is defined and validated in docs and helper scripts.
-- Gap filling is documented as conservative and evidence-based.
-- T2T readiness reports combine gap, telomere, and centromere evidence.
-- README workflow steps have focused docs coverage.
-- Markdown links and docs coverage are checked in CI.
+- [x] Hi-C scaffolding reader path is usable.
+- [x] AGP is defined and validated in docs and helper scripts.
+- [x] Gap filling is documented as conservative and evidence-based.
+- [x] T2T readiness reports combine gap, telomere, and centromere evidence.
+- [x] README workflow steps have focused docs coverage.
+- [x] Markdown links and docs coverage are checked in CI.
+- [x] Public metadata and contribution templates exist.
+- [ ] One worked scaffolding decision case is needed before calling v0.5 feature-complete.
+- [ ] README-shortening order should be chosen before the docs-site migration accelerates.
+
+Current v0.5 assessment: close to feature-complete, but not taggable yet. See [v0.5 Review Checklist](release/v0.5_review_checklist.md).
 
 ## v1.0 Gates
 

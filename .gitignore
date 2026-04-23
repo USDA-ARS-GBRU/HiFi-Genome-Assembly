@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 temp/
+bulk-notes/
 
 # Large local analysis products
 00_log/

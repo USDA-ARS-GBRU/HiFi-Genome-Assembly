@@ -374,6 +374,7 @@ docs/annotation/repeats.md
 docs/annotation/genes.md
 docs/release/index.md
 docs/release/ncbi_submission.md
+docs/release/v0.5_review_checklist.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
 examples/centromere_candidates.tsv
@@ -2127,6 +2128,15 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 - Maintain documentation-site skeleton as preparation for v1.0 migration.
 - Maintain T2T readiness checklist as the bridge into v0.6.
 - Maintain T2T readiness report helper.
+- Maintain focused docs coverage for every README workflow step.
+- Maintain public project metadata and contribution templates.
+- Maintain v0.5 review checklist.
+
+Remaining before v0.5 feature-complete:
+
+- Add one worked scaffolding decision case from candidate comparison to final decision text.
+- Decide the first README sections to shorten after v0.5.
+- Review citation/license wording before stable release.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 
