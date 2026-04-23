@@ -5,6 +5,13 @@
 
 This repository is a modular, beginner-friendly, peer-review-oriented protocol for assembling crop plant genomes from PacBio HiFi reads, evaluating assembly quality, preparing annotation tracks, and getting the final product ready for public release through NCBI/INSDC and related community databases.
 
+Project metadata:
+
+- Contribution guide: `CONTRIBUTING.md`
+- Citation metadata: `CITATION.cff`
+- License: `LICENSE`
+- Documentation status: `docs/status.md`
+
 The protocol is designed as a practical representation of contemporary crop plant genome assembly work. It emphasizes transparent decisions, independent quality evidence, reproducible HPC execution, and release products that can withstand manuscript review, database validation, and reuse by breeding and genomics communities.
 
 The protocol is intentionally written as a longform guide. A beginning bioinformatics graduate student should be able to follow the logic, not just copy commands.
@@ -146,6 +153,7 @@ scripts/collect_qc_dashboard.py
 scripts/check_repo_inventory.py
 scripts/check_markdown_links.py
 scripts/check_docs_coverage.py
+scripts/check_project_metadata.py
 scripts/compare_scaffolding_candidates.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
@@ -350,6 +358,7 @@ docs/v0.5_scaffolding_kickoff.md
 docs/yahs_hic_workflow.md
 docs/methods_text_template.md
 docs/index.md
+docs/status.md
 docs/setup/index.md
 docs/assembly/index.md
 docs/qc/index.md

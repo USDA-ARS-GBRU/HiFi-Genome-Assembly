@@ -18,6 +18,8 @@ jobs:
         run: bash -n 01_sbatch_templates/*.sbatch
       - name: Check README inventory
         run: python scripts/check_repo_inventory.py --readme README.md -o /tmp/repo_inventory.tsv
+      - name: Check project metadata
+        run: python scripts/check_project_metadata.py -o /tmp/project_metadata.tsv
       - name: Check local Markdown links
         run: python scripts/check_markdown_links.py README.md docs -o /tmp/markdown_links.tsv
       - name: Check README step docs coverage

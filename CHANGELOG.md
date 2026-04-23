@@ -33,6 +33,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added focused NCBI submission web-doc page.
 - Added focused repeat and gene annotation web-doc pages.
 - Added docs coverage checker mapping README workflow steps to focused docs.
+- Added documentation status and roadmap page.
+- Added CONTRIBUTING, CITATION.cff, and MIT LICENSE files.
+- Added project metadata checker for CI.
 
 ## 0.4.0-dev
 

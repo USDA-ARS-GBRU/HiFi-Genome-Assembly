@@ -24,3 +24,5 @@ Status meanings:
 ## Migration Status
 
 Content is being added as focused pages first. Before v1.0, the README will become a concise landing page and this documentation tree will carry the detailed protocol.
+
+See [Documentation Status and Roadmap](status.md) for version focus, page maturity, v0.5 exit goals, and v1.0 gates.
