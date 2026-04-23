@@ -20,6 +20,15 @@ jobs:
         run: python scripts/check_repo_inventory.py --readme README.md -o /tmp/repo_inventory.tsv
       - name: Check local Markdown links
         run: python scripts/check_markdown_links.py README.md docs -o /tmp/markdown_links.tsv
+      - name: Confirm Markdown link checker scanned links
+        run: test "$(tail -n +2 /tmp/markdown_links.tsv | wc -l)" -gt 0
+      - name: Confirm Markdown link checker fails broken links
+        run: |
+          printf '[broken](missing-page.md)\n' > /tmp/broken_link_fixture.md
+          if python scripts/check_markdown_links.py /tmp/broken_link_fixture.md -o /tmp/broken_markdown_links.tsv; then
+            echo "expected broken Markdown link check to fail"
+            exit 1
+          fi
       - name: Validate toy FASTA
         run: python scripts/validate_fasta.py examples/toy/toy_assembly.fa --min-length 1
       - name: Validate toy AGP

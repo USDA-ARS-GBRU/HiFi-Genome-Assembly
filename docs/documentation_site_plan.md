@@ -44,6 +44,8 @@ The first focused migration pages are:
 - `docs/assembly/hifiasm.md`
 - `docs/assembly/prepare_reads.md`
 - `docs/assembly/genome_profiling.md`
+- `docs/assembly/hifiasm_parameters.md`
+- `docs/qc/assembly_metrics.md`
 - `docs/qc/contamination.md`
 - `docs/scaffolding/agp.md`
 

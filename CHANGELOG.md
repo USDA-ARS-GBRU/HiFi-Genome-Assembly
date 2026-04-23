@@ -24,6 +24,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added focused genome-profiling docs page.
 - Added focused contamination-review docs page.
 - Added local Markdown link checker for documentation navigation.
+- Added focused hifiasm parameter/mode docs page.
+- Added focused assembly metrics interpretation docs page.
+- Added CI checks that Markdown link validation sees links and fails on a broken-link fixture.
 
 ## 0.4.0-dev
 

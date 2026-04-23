@@ -306,6 +306,7 @@ docs/agp_after_splitting.md
 docs/assembly/hifiasm.md
 docs/assembly/genome_profiling.md
 docs/assembly/prepare_reads.md
+docs/assembly/hifiasm_parameters.md
 docs/annotation_validation_examples.md
 docs/common_false_positive_corrections.md
 docs/contamination_workflow.md
@@ -352,6 +353,7 @@ docs/setup/index.md
 docs/assembly/index.md
 docs/qc/index.md
 docs/qc/contamination.md
+docs/qc/assembly_metrics.md
 docs/curation/index.md
 docs/scaffolding/index.md
 docs/scaffolding/agp.md
@@ -759,6 +761,13 @@ For highly inbred lines, a strong homozygous peak and weak/no heterozygous peak 
 
 ## Step 3: Assemble with hifiasm
 
+Focused web-doc drafts:
+
+```text
+docs/assembly/hifiasm.md
+docs/assembly/hifiasm_parameters.md
+```
+
 ### Basic HiFi-Only Assembly
 
 ```bash
@@ -849,6 +858,12 @@ Keep raw hifiasm outputs in `06_hifiasm/`. Keep renamed, analysis-ready FASTA fi
 ## Step 5: Assembly Statistics
 
 Run at least two stat tools because they report slightly different summaries.
+
+Focused web-doc draft:
+
+```text
+docs/qc/assembly_metrics.md
+```
 
 ### seqkit
 
