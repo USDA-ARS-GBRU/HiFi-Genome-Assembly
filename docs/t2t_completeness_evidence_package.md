@@ -76,6 +76,7 @@ Use this package together with:
 
 - `docs/telomere_summary_workflow.md`
 - `docs/t2t_readiness_checklist.md`
+- `docs/t2t_claim_language_guide.md`
 - `docs/hic_contact_map_qc.md`
 - `docs/scaffolding_worked_decision_case.md`
 - `docs/release_checklist.md`
@@ -95,6 +96,8 @@ scripts/audit_t2t_evidence_package.py \
 ```text
 Chromosome completeness was reviewed using a structured evidence table combining FASTA gap status, AGP gap records, terminal and internal telomeric repeat calls, centromere candidate evidence, Hi-C contact-map review, dotplot review, and difficult-repeat annotations. Chromosomes were classified conservatively as chromosome-scale, near-gapless, candidate T2T, or unresolved according to the weakest unresolved evidence category.
 ```
+
+For more claim-specific manuscript and reviewer-response text, see `docs/t2t_claim_language_guide.md`.
 
 ## Reviewer Response Language
 

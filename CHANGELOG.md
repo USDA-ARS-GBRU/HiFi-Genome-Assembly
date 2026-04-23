@@ -47,6 +47,7 @@ Current development focus: v0.5 content review plus v0.6 drafting for telomere, 
 - Started v0.6 drafting with kickoff guide, T2T completeness evidence package, and example evidence table.
 - Added tidk and quarTeT sbatch templates for v0.6 telomere/centromere review.
 - Added T2T completeness evidence audit helper with positive and overclaim fixtures.
+- Added manuscript and reviewer-response language guide for chromosome completeness claims.
 
 ## 0.4.0-dev
 

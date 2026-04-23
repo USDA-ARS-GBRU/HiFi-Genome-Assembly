@@ -357,6 +357,7 @@ docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
 docs/t2t_readiness_checklist.md
 docs/t2t_completeness_evidence_package.md
+docs/t2t_claim_language_guide.md
 docs/v0.4_curation_index.md
 docs/v0.4_release_candidate_checklist.md
 docs/v0.4_review_pass.md
@@ -2173,6 +2174,7 @@ Goal: track chromosome completeness without overclaiming.
 - Maintain tidk examples for known and de novo telomere motifs.
 - Maintain quarTeT telomere/centromere examples.
 - Maintain terminal telomere summary script.
+- Maintain manuscript and reviewer-response language for completeness claims.
 - Refine gap status summaries into T2T readiness reporting.
 - Refine T2T readiness checklist for projects with ultra-long ONT or optical maps.
 

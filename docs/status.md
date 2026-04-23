@@ -57,7 +57,7 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Add tidk sbatch examples for known and de novo telomere motifs.
 - [x] Add quarTeT telomere and centromere sbatch examples.
 - [x] Add completeness evidence audit helper and toy validation.
-- [ ] Refine manuscript language for chromosome-scale, near-gapless, candidate T2T, and unresolved claims.
+- [x] Refine manuscript language for chromosome-scale, near-gapless, candidate T2T, and unresolved claims.
 
 ## v1.0 Gates
 

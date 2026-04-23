@@ -17,6 +17,7 @@ Primary pages:
 - [T2T readiness checklist](../t2t_readiness_checklist.md)
 - [v0.6 T2T kickoff](../v0.6_t2t_kickoff.md)
 - [T2T completeness evidence package](../t2t_completeness_evidence_package.md)
+- [T2T claim language guide](../t2t_claim_language_guide.md)
 
 Planned pages:
 

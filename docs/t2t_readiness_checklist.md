@@ -80,3 +80,5 @@ Example:
 ```text
 The final assembly consisted of [N] chromosome-scale scaffolds and [N] unplaced scaffolds. Gap status was summarized directly from the final FASTA and AGP files. [N] chromosomes contained no runs of Ns, [N] retained documented scaffold gaps, and [N] had telomeric repeat signal at both terminal ends. We therefore describe the assembly as [chromosome-scale/near-gapless/candidate T2T] rather than fully complete.
 ```
+
+For claim-specific methods, results, and reviewer-response language, see `docs/t2t_claim_language_guide.md`.
