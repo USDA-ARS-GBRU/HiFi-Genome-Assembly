@@ -3,6 +3,8 @@
 Primary pages:
 
 - [Repeat annotation and masking](repeats.md)
+- [v0.7 repeat annotation kickoff](../v0.7_repeat_annotation_kickoff.md)
+- [Repeat library decision guide](../repeat_library_decision_guide.md)
 - [Gene annotation](genes.md)
 - [Repeat annotation](../repeat_annotation.md)
 - [Gene annotation](../gene_annotation.md)
@@ -10,7 +12,5 @@ Primary pages:
 
 Planned pages:
 
-- EDTA workflow details
-- RepeatModeler2/RepeatMasker workflow details
 - Liftoff, BRAKER3, and MAKER workflow details
 - functional annotation and annotation QC

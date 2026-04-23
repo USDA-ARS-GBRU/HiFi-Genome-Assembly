@@ -13,8 +13,8 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | v0.3 | maintained baseline | validation, contamination, release readiness |
 | v0.4 | maintained baseline | dotplot review and manual curation |
 | v0.5 | content review | scaffolding, gap filling, T2T readiness, docs-site migration |
-| v0.6 | active drafting | telomere, centromere, and T2T refinement |
-| v0.7 | planned | repeat annotation refinement |
+| v0.6 | active draft baseline | telomere, centromere, and T2T refinement |
+| v0.7 | active drafting | repeat annotation refinement |
 | v0.8 | planned | gene annotation refinement |
 | v0.9 | planned | NCBI release candidate polish |
 | v1.0 | planned | stable public protocol |
@@ -29,7 +29,7 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | Curation | maintained draft | v0.4 workflow is usable and linked |
 | Scaffolding | active draft | Hi-C, AGP, gap filling, and T2T paths are underway |
 | Telomere/T2T | active draft | v0.6 kickoff and completeness evidence package started |
-| Annotation | active draft | repeat and gene pages exist as first-pass web docs |
+| Annotation | active draft | repeat refinement lane started; gene pages exist as first-pass web docs |
 | Release | active draft | NCBI submission path exists; release examples will continue to grow |
 
 ## v0.5 Exit Goals
@@ -58,6 +58,18 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Add quarTeT telomere and centromere sbatch examples.
 - [x] Add completeness evidence audit helper and toy validation.
 - [x] Refine manuscript language for chromosome-scale, near-gapless, candidate T2T, and unresolved claims.
+- [x] Worked completeness claim case exists.
+
+## v0.7 Drafting Goals
+
+- [x] v0.7 repeat annotation kickoff guide exists.
+- [x] Repeat library decision guide exists.
+- [x] Example repeat annotation decision table exists.
+- [x] EDTA and RepeatModeler2/RepeatMasker sbatch templates exist.
+- [ ] Add repeat summary comparison helper.
+- [ ] Add repeat annotation decision audit helper and toy validation.
+- [ ] Add repeat landscape interpretation guidance.
+- [ ] Add repeat-to-gene-annotation handoff checklist.
 
 ## v1.0 Gates
 

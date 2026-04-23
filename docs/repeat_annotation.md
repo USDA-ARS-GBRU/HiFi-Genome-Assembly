@@ -55,6 +55,8 @@ Use the repeat annotation that is:
 
 Do not switch repeat libraries after gene annotation without rerunning or validating gene prediction.
 
+For a structured release-mask decision table and reviewer-response language, see `docs/repeat_library_decision_guide.md`.
+
 For annotation, prefer soft masking over hard masking so gene predictors can still use the underlying sequence when evidence supports a model. Hard-masked FASTA can be useful for some downstream searches, but it is usually not the best master genome sequence for a release package.
 
 ## Comparing Repeat Runs

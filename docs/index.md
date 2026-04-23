@@ -12,7 +12,7 @@ This directory is the future home of the web documentation for the crop plant Pa
 | Curation | maintained draft | [Curation](curation/index.md) |
 | Scaffolding and finishing | active draft | [Scaffolding and Finishing](scaffolding/index.md) |
 | Telomere, centromere, and T2T | active draft | [v0.6 T2T Kickoff](v0.6_t2t_kickoff.md), [T2T Claim Language](t2t_claim_language_guide.md) |
-| Annotation | early draft | [Annotation](annotation/index.md) |
+| Annotation | active draft | [Annotation](annotation/index.md), [v0.7 Repeat Kickoff](v0.7_repeat_annotation_kickoff.md) |
 | Release | early draft | [Release](release/index.md) |
 
 Status meanings:

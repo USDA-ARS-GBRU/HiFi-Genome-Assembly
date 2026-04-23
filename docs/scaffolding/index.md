@@ -18,6 +18,7 @@ Primary pages:
 - [v0.6 T2T kickoff](../v0.6_t2t_kickoff.md)
 - [T2T completeness evidence package](../t2t_completeness_evidence_package.md)
 - [T2T claim language guide](../t2t_claim_language_guide.md)
+- [Worked completeness claim case](../t2t_completeness_worked_case.md)
 
 Planned pages:
 

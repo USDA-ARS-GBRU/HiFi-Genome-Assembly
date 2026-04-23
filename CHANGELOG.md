@@ -2,7 +2,7 @@
 
 ## 0.5.0-dev
 
-Current development focus: v0.5 content review plus v0.6 drafting for telomere, centromere, and T2T refinement.
+Current development focus: v0.5 content review, v0.6 telomere/centromere/T2T refinement, and v0.7 repeat annotation drafting.
 
 - Promoted v0.5 to the active development version.
 - v0.4 is now maintained as the dotplot and misassembly curation baseline.
@@ -48,6 +48,9 @@ Current development focus: v0.5 content review plus v0.6 drafting for telomere, 
 - Added tidk and quarTeT sbatch templates for v0.6 telomere/centromere review.
 - Added T2T completeness evidence audit helper with positive and overclaim fixtures.
 - Added manuscript and reviewer-response language guide for chromosome completeness claims.
+- Added worked completeness claim case translating mixed evidence into manuscript and reviewer-response language.
+- Started v0.7 repeat annotation drafting with kickoff guide, repeat library decision guide, and example decision table.
+- Updated README release and roadmap sections to reflect v0.5 review, v0.6 draft baseline, and v0.7 active drafting.
 
 ## 0.4.0-dev
 

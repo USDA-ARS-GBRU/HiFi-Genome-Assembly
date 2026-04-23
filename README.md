@@ -59,7 +59,7 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, v0.5 is in content review for chromosome-scale scaffolding and release-readiness work, and v0.6 has started as an active drafting lane for telomere, centromere, and T2T-refinement guidance.
+Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, v0.5 is in content review for chromosome-scale scaffolding and release-readiness work, v0.6 has an active draft baseline for telomere/centromere/T2T-refinement guidance, and v0.7 has started as an active drafting lane for repeat annotation refinement.
 
 Completed baseline:
 
@@ -72,6 +72,7 @@ Current focus:
 
 - **v0.5 Scaffolding and Finishing**: chromosome-scale scaffolding with YaHS, 3D-DNA/Juicebox, RagTag comparison, conservative gap filling, and early T2T readiness checks.
 - **v0.6 Telomere, Centromere, and T2T Refinement**: conservative completeness evidence packages for telomeres, centromeres, gaps, contact maps, dotplots, and difficult repeats.
+- **v0.7 Repeat Annotation Refinement**: repeat-library selection, EDTA/RepeatModeler2 comparison, release-mask decisions, and gene-annotation handoff.
 
 ## Workflow Overview
 
@@ -345,6 +346,7 @@ docs/qc_figures.md
 docs/qc_report_template.md
 docs/ragtag_workflow.md
 docs/repeat_annotation.md
+docs/repeat_library_decision_guide.md
 docs/release_checklist.md
 docs/rejected_corrections.md
 docs/review_standards.md
@@ -358,11 +360,13 @@ docs/toy_manual_correction_case_study.md
 docs/t2t_readiness_checklist.md
 docs/t2t_completeness_evidence_package.md
 docs/t2t_claim_language_guide.md
+docs/t2t_completeness_worked_case.md
 docs/v0.4_curation_index.md
 docs/v0.4_release_candidate_checklist.md
 docs/v0.4_review_pass.md
 docs/v0.5_scaffolding_kickoff.md
 docs/v0.6_t2t_kickoff.md
+docs/v0.7_repeat_annotation_kickoff.md
 docs/yahs_hic_workflow.md
 docs/methods_text_template.md
 docs/index.md
@@ -399,6 +403,7 @@ examples/t2t_completeness_evidence_bad.tsv
 examples/toy/toy_gapfilled.fa
 examples/release_manifest.tsv
 examples/beginner_usability_review.tsv
+examples/repeat_annotation_decisions.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
 examples/btrim_patterns.example.txt
@@ -2156,14 +2161,15 @@ Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
 - Maintain public project metadata and contribution templates.
 - Maintain v0.5 review checklist.
 
-Remaining before v0.5 feature-complete:
+Remaining before a stable v0.5 tag:
 
 - Review citation/license wording before stable release.
 - Do one outside-reader pass for beginner usability.
+- Decide whether post-v0.5 drafting content is included in the tag or clearly marked as later development.
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 
-Status: **active drafting while v0.5 remains in human review**.
+Status: **active draft baseline while v0.5 remains in human review**.
 
 Goal: track chromosome completeness without overclaiming.
 
@@ -2175,22 +2181,29 @@ Goal: track chromosome completeness without overclaiming.
 - Maintain quarTeT telomere/centromere examples.
 - Maintain terminal telomere summary script.
 - Maintain manuscript and reviewer-response language for completeness claims.
+- Maintain worked completeness claim case.
 - Refine gap status summaries into T2T readiness reporting.
 - Refine T2T readiness checklist for projects with ultra-long ONT or optical maps.
 
 ### v0.7: Repeat Annotation
 
-Status: **started in v0.3, full refinement planned for v0.7**.
+Status: **active drafting while v0.5 remains in human review**.
 
 Goal: crop-appropriate repeat libraries and soft-masked genomes.
 
-- Add EDTA workflow.
-- Add RepeatModeler2 + RepeatMasker workflow.
+- Maintain v0.7 repeat annotation kickoff guide.
+- Maintain repeat library decision guide.
+- Maintain example repeat annotation decision table.
+- Maintain EDTA workflow.
+- Maintain RepeatModeler2 + RepeatMasker workflow.
 - Add repeat landscape summary.
 - Add softmasked FASTA output standard.
 - Add repeat GFF/BED track preparation.
 - Maintain EDTA and RepeatModeler2/RepeatMasker sbatch templates.
 - Maintain repeat annotation strategy guide.
+- Add repeat summary comparison helper.
+- Add repeat annotation decision audit helper and toy validation.
+- Add repeat-to-gene-annotation handoff checklist.
 
 ### v0.8: Gene Annotation
 

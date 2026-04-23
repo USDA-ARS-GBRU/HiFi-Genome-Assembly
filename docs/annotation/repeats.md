@@ -51,6 +51,8 @@ Choose the repeat annotation that is:
 
 Prefer soft masking for gene prediction so evidence-supported genes can still be modeled through repeats when appropriate.
 
+For release-library decision logging, see `docs/repeat_library_decision_guide.md`.
+
 ## Deliverables
 
 ```text

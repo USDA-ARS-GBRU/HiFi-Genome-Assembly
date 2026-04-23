@@ -144,6 +144,7 @@ Before using T2T or near-gapless language:
 
 - `docs/t2t_readiness_checklist.md`
 - `docs/t2t_completeness_evidence_package.md`
+- `docs/t2t_completeness_worked_case.md`
 - `docs/telomere_summary_workflow.md`
 - `examples/t2t_completeness_evidence.tsv`
 - `scripts/audit_t2t_evidence_package.py`
