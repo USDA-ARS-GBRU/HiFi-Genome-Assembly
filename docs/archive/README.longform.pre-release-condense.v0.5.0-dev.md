@@ -1215,24 +1215,138 @@ Before release:
 
 ## Step 15: NCBI and Community Database Release
 
-Public release is now documented in focused release pages rather than one long README block.
+Public release is part of the assembly workflow, not an afterthought.
 
-Start here:
+### NCBI Submission Objects
 
-- `docs/release/index.md`
-- `docs/release/ncbi_submission.md`
-- `docs/release_package_decision_guide.md`
-- `docs/release_bundle_worked_example.md`
-- `docs/table2asn_discrepancy_triage.md`
-- `docs/community_database_release_companion.md`
+You will usually need:
 
-Key logic:
+- BioProject
+- BioSample
+- SRA read submission
+- Genome assembly submission
+- Annotation submission if submitting annotated genome records
 
-- treat NCBI/INSDC release as a validation workflow, not just a file upload
-- freeze FASTA names, AGP, contamination decisions, and accession tracking before submission
-- choose the strongest coherent release package, not the most ambitious one
-- keep annotation submission separate when discrepancy cleanup is still in progress
-- maintain crosswalks between NCBI identifiers and community-database names
+NCBI accepts unannotated eukaryotic genome FASTA submissions. Annotation is optional, but if included it must follow NCBI feature table or GenBank-specific GFF requirements and pass validation.
+
+### Prepare FASTA
+
+NCBI requirements and practical rules:
+
+- FASTA format.
+- Stable sequence IDs.
+- Avoid spaces and special characters in sequence IDs.
+- Each sequence should be at least 200 bp.
+- Do not randomly concatenate sequences.
+- Include organelles with the genome submission only when they are part of the assembly submission plan; otherwise submit standalone organelles appropriately.
+- If using chromosome scaffolds built from contigs, prepare AGP.
+
+Example header style:
+
+```text
+>chr01 [organism=Glycine max] [cultivar=ExampleCultivar]
+```
+
+For WGS contigs/scaffolds, a simpler stable ID may be better:
+
+```text
+>SampleID_chr01
+>SampleID_unplaced_000001
+```
+
+### AGP
+
+AGP means **A Golden Path**. If scaffolds/chromosomes are built from contigs with gaps, provide AGP when required. The AGP describes the component sequence spans and gap spans that make up each larger assembly object.
+
+Validate AGP:
+
+```bash
+agp_validate sample.agp
+```
+
+Summarize AGP structure:
+
+```bash
+scripts/summarize_agp.py \
+  sample.agp \
+  -o sample.agp_summary.tsv
+```
+
+See `docs/agp_summary_workflow.md` for a beginner-friendly explanation of the format and how to interpret component, gap, and linkage-evidence summaries.
+
+The future web-doc page for AGP is:
+
+```text
+docs/scaffolding/agp.md
+```
+
+Make sure:
+
+- FASTA scaffold IDs match AGP object IDs.
+- Contig IDs match AGP component IDs.
+- Gap sizes and linkage evidence are valid.
+
+### NCBI FCS
+
+Run NCBI FCS before submission:
+
+- FCS-adaptor for vector/adaptor contamination.
+- FCS-GX for cross-species contamination.
+
+Follow the current NCBI FCS GitHub/wiki instructions because databases and wrapper commands change.
+
+### table2asn
+
+If submitting annotation:
+
+```bash
+table2asn \
+  -M n \
+  -J \
+  -c w \
+  -euk \
+  -t template.sbt \
+  -i genome.fsa \
+  -f genome.gff \
+  -V vb
+```
+
+Check:
+
+- `.val` validation report
+- discrepancy report
+- internal stop codons
+- missing locus tags
+- invalid products
+- genes crossing gaps
+- feature coordinates after scaffold renaming
+
+### Community Databases
+
+Crop genomes often also belong in community databases:
+
+- Phytozome/JGI when appropriate.
+- SoyBase, MaizeGDB, Gramene, Legume Information System, CottonGen, Sol Genomics Network, or crop-specific portals.
+- Figshare/Zenodo/USDA repositories for intermediate files and browser tracks.
+- NCBI Assembly and SRA as the archival source.
+
+Release package:
+
+```text
+15_release/sample.genome.fa.gz
+15_release/sample.genome.fa.gz.fai
+15_release/sample.agp
+15_release/sample.annotation.gff3.gz
+15_release/sample.proteins.fa.gz
+15_release/sample.transcripts.fa.gz
+15_release/sample.repeats.gff3.gz
+15_release/sample.repeat_library.fa.gz
+15_release/sample.busco_summary.txt
+15_release/sample.merqury_report/
+15_release/sample.contamination_reports/
+15_release/sample.assembly_methods.md
+15_release/sample.metadata.tsv
+```
 
 ## Example sbatch Scripts
 
