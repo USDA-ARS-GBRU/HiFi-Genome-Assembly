@@ -1,10 +1,16 @@
 # README to Docs Migration Plan
 
-The root `README.md` is currently the canonical longform protocol. That is useful during active development because it keeps the workflow visible in one place. Before v1.0, the README should become a concise landing page and the focused `docs/` tree should carry the detailed protocol.
+The root `README.md` is currently the canonical longform protocol. That is useful during active development because it keeps the workflow visible in one place. Before v1.0, the README should become a concise landing page and the focused `docs/` tree should carry the detailed protocol through MkDocs.
 
 ## Goal
 
 Keep the README useful for a first visitor while moving operational detail into focused pages that are easier to review, link, and maintain.
+
+The preserved pre-condensation source copy for this migration phase is:
+
+```text
+docs/archive/README.longform.v0.5.0-dev.md
+```
 
 ## Shortening Order
 

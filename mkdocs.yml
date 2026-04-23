@@ -1,0 +1,61 @@
+site_name: PacBio HiFi Genome Assembly for Crop Plants
+site_description: Peer-review-oriented PacBio HiFi crop plant genome assembly workflow documentation.
+repo_url: https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly
+docs_dir: docs
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Status and Roadmap: status.md
+  - Setup:
+      - Overview: setup/index.md
+      - Software Environments: setup/environment.md
+      - Tool Version Policy: tool_version_policy.md
+      - README Migration Plan: readme_to_docs_migration_plan.md
+      - Site Platform Decision: site_platform_decision.md
+  - Assembly:
+      - Overview: assembly/index.md
+      - Prepare Reads: assembly/prepare_reads.md
+      - Genome Profiling: assembly/genome_profiling.md
+      - hifiasm Workflow: assembly/hifiasm.md
+      - hifiasm Parameters: assembly/hifiasm_parameters.md
+  - QC:
+      - Overview: qc/index.md
+      - Assembly Metrics: qc/assembly_metrics.md
+      - Dotplots: qc/dotplots.md
+      - Contamination: qc/contamination.md
+      - QC Figures: qc_figures.md
+  - Curation:
+      - Overview: curation/index.md
+      - Dotplot Misassembly Curation: dotplot_misassembly_curation.md
+      - Manual Correction Workflow: manual_correction_workflow.md
+      - IGV Session Setup: igv_session_setup.md
+      - IGV Breakpoint Reporting: igv_breakpoint_reporting.md
+  - Scaffolding and Finishing:
+      - Overview: scaffolding/index.md
+      - Hi-C Scaffolding: scaffolding/hic_scaffolding.md
+      - AGP: scaffolding/agp.md
+      - Gap Filling: gap_filling_workflow.md
+      - RagTag: ragtag_workflow.md
+      - T2T Readiness: t2t_readiness_checklist.md
+  - Annotation:
+      - Overview: annotation/index.md
+      - Repeats: annotation/repeats.md
+      - Genes: annotation/genes.md
+      - Functional Annotation: functional_annotation_guide.md
+      - Annotation QC Dashboard: annotation_qc_dashboard_guide.md
+  - Release:
+      - Overview: release/index.md
+      - NCBI Submission: release/ncbi_submission.md
+      - Release Package Decisions: release_package_decision_guide.md
+      - table2asn Triage: table2asn_discrepancy_triage.md
+      - Reviewer Responses: table2asn_reviewer_response_examples.md
+      - Community Database Companion: community_database_release_companion.md
+  - Contributing and Release:
+      - Beginner Usability Review: release/beginner_usability_review.md
+      - Citation and License Review: release/citation_license_review.md
+      - v0.5 Review Checklist: release/v0.5_review_checklist.md
+      - v0.5 Release Candidate Notes: release/v0.5_release_candidate_notes.md
+markdown_extensions:
+  - admonition
+  - tables

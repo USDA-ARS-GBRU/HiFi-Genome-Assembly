@@ -11,8 +11,6 @@ Project metadata:
 - Citation metadata: `CITATION.cff`
 - License: `LICENSE`
 - Documentation status: `docs/status.md`
-- Preserved longform source: `docs/archive/README.longform.v0.5.0-dev.md`
-- MkDocs site scaffold: `mkdocs.yml`
 
 The protocol is designed as a practical representation of contemporary crop plant genome assembly work. It emphasizes transparent decisions, independent quality evidence, reproducible HPC execution, and release products that can withstand manuscript review, database validation, and reuse by breeding and genomics communities.
 
@@ -442,19 +440,104 @@ examples/btrim_patterns.example.txt
 
 ## Software Setup
 
-No single installation method works everywhere. The protocol supports four main styles: HPC modules, conda or mamba, pixi, and direct install or containers.
+No single installation method works everywhere. The protocol supports four styles: HPC modules, conda/mamba, pixi, and direct install or containers. See `docs/tool_version_policy.md` for the minimum version and command-capture expectations for review-quality releases.
 
-For the full environment setup discussion, example commands, and practical HPC recommendations, see:
+### Option A: HPC Modules
 
-- `docs/setup/environment.md`
-- `docs/tool_version_policy.md`
+Use modules when your cluster maintains current versions.
 
-Short recommendation:
+```bash
+module avail hifiasm
+module avail seqkit
+module avail mummer
+module avail busco
+module avail samtools
+module avail minimap2
+```
 
-- use modules when the cluster provides current versions
-- use mamba for flexible assembly and QC environments
-- keep a separate annotation environment for repeat and gene tools
-- use containers for fragile or cluster-specific software stacks
+Load the versions you used into every job log:
+
+```bash
+module load hifiasm/0.25.0
+module load seqkit/2.4.0
+module load mummer/4.0.0rc1
+module load gnuplot/5.4.8
+
+hifiasm --version
+seqkit version
+nucmer --version
+```
+
+### Option B: Conda or Mamba
+
+Use mamba when possible; it resolves complex bioinformatics environments much faster than conda.
+
+```bash
+mamba create -n hifi-assembly -c conda-forge -c bioconda \
+  hifiasm \
+  seqkit \
+  samtools \
+  minimap2 \
+  mummer4 \
+  gnuplot \
+  fastqc \
+  fastp \
+  filtlong \
+  jellyfish \
+  genomescope2 \
+  busco \
+  quast \
+  merqury \
+  purge_dups \
+  ragtag \
+  yahs \
+  bwa \
+  bedtools \
+  blast \
+  sourmash \
+  python=3.11
+```
+
+For plant annotation work, use a separate environment or container. Repeat and gene annotation tools can have difficult dependencies.
+
+```bash
+mamba create -n plant-annotation -c conda-forge -c bioconda \
+  edta \
+  repeatmodeler \
+  repeatmasker \
+  braker3 \
+  maker \
+  augustus \
+  genemark-et \
+  liftoff \
+  gffread \
+  agat \
+  busco \
+  miniprot \
+  diamond \
+  trnascan-se \
+  barrnap
+```
+
+### Option C: Pixi
+
+Pixi is useful when you want a project-local, lockable environment.
+
+```bash
+pixi init
+pixi add -c conda-forge -c bioconda hifiasm seqkit samtools minimap2 mummer4 gnuplot busco quast
+pixi run hifiasm --version
+```
+
+### Option D: Direct Install or Containers
+
+Some tools are easiest as binaries or containers:
+
+- hifiasm can be compiled directly from GitHub.
+- NCBI FCS commonly runs through Singularity/Apptainer or Docker.
+- EDTA, BRAKER3, and MAKER may be more stable in containers on some systems.
+
+Always record the exact command, version, and container digest if available.
 
 ## Input Data and Metadata
 

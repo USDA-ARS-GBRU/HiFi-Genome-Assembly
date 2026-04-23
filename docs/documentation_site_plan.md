@@ -1,6 +1,6 @@
 # Documentation Site Plan
 
-The README is the longform source narrative while the protocol is under active development. Before v1.0, split it into a tractable GitHub-compatible documentation site while preserving the README as the landing page.
+The README is the longform source narrative while the protocol is under active development. Before v1.0, split it into a tractable GitHub-compatible documentation site built with MkDocs while preserving the README as the landing page.
 
 ## Suggested Site Structure
 
@@ -8,8 +8,8 @@ The README is the longform source narrative while the protocol is under active d
 docs/
   index.md
   setup/
-    software.md
-    hpc_templates.md
+    environment.md
+    project_layout.md
   assembly/
     strategy.md
     hifiasm.md
@@ -37,7 +37,7 @@ docs/
     checklist.md
 ```
 
-The initial section landing pages now exist under `docs/`. They are intentionally light index pages until the README-to-docs migration begins.
+The initial section landing pages now exist under `docs/`. They are intentionally light index pages until the README-to-docs migration begins. A first MkDocs configuration is now maintained in `mkdocs.yml`.
 
 The first focused migration pages are:
 
@@ -60,7 +60,7 @@ The first focused migration pages are:
 - Move long procedural sections into focused `docs/` pages.
 - Keep commands copy-pasteable and HPC paths consistent across pages.
 - Keep every helper script documented in exactly one primary page and referenced from the README inventory.
-- Add GitHub Pages, MkDocs, or Quarto only after the protocol content stabilizes.
+- Use MkDocs as the primary documentation framework while the content is being split out of the README.
 - Preserve stable links where possible by using descriptive filenames rather than versioned filenames for durable topics.
 
 ## v1.0 Documentation Gate

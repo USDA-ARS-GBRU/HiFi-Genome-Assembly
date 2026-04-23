@@ -2,6 +2,8 @@
 
 This directory is the future home of the web documentation for the crop plant PacBio HiFi assembly protocol. During active development, the root `README.md` remains the canonical longform guide.
 
+The documentation site is being organized for MkDocs publication while the README is condensed into a landing page.
+
 ## Sections
 
 | Section | Status | Start here |
@@ -29,5 +31,7 @@ Content is being added as focused pages first. Before v1.0, the README will beco
 See [Documentation Status and Roadmap](status.md) for version focus, page maturity, v0.5 exit goals, and v1.0 gates.
 
 For the planned conversion from longform README to focused GitHub documentation, see [README to Docs Migration Plan](readme_to_docs_migration_plan.md).
+
+For the platform choice and migration rationale, see [Documentation Platform Decision](site_platform_decision.md).
 
 For public release metadata, see [Citation and License Review](release/citation_license_review.md).

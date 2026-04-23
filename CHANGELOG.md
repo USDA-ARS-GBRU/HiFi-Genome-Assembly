@@ -43,6 +43,7 @@ Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines
 - Added worked v0.9 release candidate and release bundle example pages.
 - Added table2asn/discrepancy triage, accession handoff, and community database release companion guides.
 - Added identifier crosswalk example and table2asn reviewer-response examples.
+- Preserved the longform README in `docs/archive/` and started MkDocs documentation-site scaffolding with the first README condensation pass for software setup.
 - Updated README and docs status with current v0.5 assessment.
 - Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.
