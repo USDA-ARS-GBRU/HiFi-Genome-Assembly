@@ -3,6 +3,7 @@
 Primary pages:
 
 - [v0.5 scaffolding kickoff](../v0.5_scaffolding_kickoff.md)
+- [Hi-C scaffolding reader path](hic_scaffolding.md)
 - [YaHS Hi-C workflow](../yahs_hic_workflow.md)
 - [3D-DNA/Juicebox workflow](../3d_dna_juicebox_workflow.md)
 - [RagTag workflow](../ragtag_workflow.md)

@@ -47,7 +47,9 @@ The first focused migration pages are:
 - `docs/assembly/hifiasm_parameters.md`
 - `docs/qc/assembly_metrics.md`
 - `docs/qc/contamination.md`
+- `docs/qc/dotplots.md`
 - `docs/scaffolding/agp.md`
+- `docs/scaffolding/hic_scaffolding.md`
 
 ## Migration Rules
 

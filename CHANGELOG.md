@@ -27,6 +27,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added focused hifiasm parameter/mode docs page.
 - Added focused assembly metrics interpretation docs page.
 - Added CI checks that Markdown link validation sees links and fails on a broken-link fixture.
+- Added focused dotplot review docs page.
+- Added focused Hi-C scaffolding reader path.
+- Added documentation index status table for stable/draft/planned navigation.
 
 ## 0.4.0-dev
 

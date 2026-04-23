@@ -354,9 +354,11 @@ docs/assembly/index.md
 docs/qc/index.md
 docs/qc/contamination.md
 docs/qc/assembly_metrics.md
+docs/qc/dotplots.md
 docs/curation/index.md
 docs/scaffolding/index.md
 docs/scaffolding/agp.md
+docs/scaffolding/hic_scaffolding.md
 docs/annotation/index.md
 docs/release/index.md
 examples/accession_tracking.tsv
@@ -907,6 +909,12 @@ Do not let reference-based QUAST scores override biological evidence. A crop acc
 
 Dotplots are one of the best ways to teach assembly judgment. They reveal collinearity, inversions, duplicated haplotigs, translocations, and potential misjoins.
 
+Focused web-doc draft:
+
+```text
+docs/qc/dotplots.md
+```
+
 ### MUMmer/nucmer Dotplot
 
 ```bash
@@ -1106,6 +1114,7 @@ Start with the v0.5 scaffolding guides:
 
 ```text
 docs/v0.5_scaffolding_kickoff.md
+docs/scaffolding/hic_scaffolding.md
 docs/yahs_hic_workflow.md
 docs/3d_dna_juicebox_workflow.md
 docs/ragtag_workflow.md
