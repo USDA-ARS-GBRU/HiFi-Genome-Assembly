@@ -1,0 +1,3 @@
+package_id	sample_id	assembly_version	assembly_level	submission_target	assembly_fasta	agp_included	annotation_package	bioproject_status	biosample_status	sra_status	release_action	primary_strength	primary_concern	reviewer	notes
+pkg001	maize_line_a	v1	chromosome	assembly_only	15_release/maize_line_a.v1.genome.fa.gz	yes	no	ready	ready	pending	use_for_submission	frozen chromosome-scale assembly	annotation package still under review	rc1	submit assembly first while annotation validation continues
+pkg002	maize_line_a	v1	chromosome	combined_release	15_release/maize_line_a.v1.genome.fa.gz	yes	planned	ready	ready	pending	comparison_only	annotation nearly complete	table2asn discrepancy review not finished	rc1	not chosen for first release

@@ -2,7 +2,7 @@
 
 ## 0.5.0-dev
 
-Current development focus: v0.5 content review, v0.6 telomere/centromere/T2T refinement, and v0.7 repeat annotation drafting.
+Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines, and v0.9 NCBI release candidate drafting.
 
 - Promoted v0.5 to the active development version.
 - v0.4 is now maintained as the dotplot and misassembly curation baseline.
@@ -38,6 +38,8 @@ Current development focus: v0.5 content review, v0.6 telomere/centromere/T2T ref
 - Added project metadata checker for CI.
 - Added GitHub issue and pull request templates.
 - Added v0.5 review checklist with remaining feature-complete work.
+- Added v0.9 NCBI release kickoff, release package decision guide, annotation submission handoff, and release decision audit helper.
+- Added release methods and structured comments guide with a Genome-Assembly-Data `.cmt` example.
 - Updated README and docs status with current v0.5 assessment.
 - Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.

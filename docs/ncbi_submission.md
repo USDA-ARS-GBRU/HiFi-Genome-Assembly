@@ -80,6 +80,11 @@ Prepare:
 - evidence data accessions or file provenance for RNA-seq/protein evidence
 - repeat masking method and library provenance if a soft-masked genome was used for annotation
 
+For package-selection logic and annotation freeze notes, also see:
+
+- `docs/release_package_decision_guide.md`
+- `docs/annotation_submission_handoff.md`
+
 ## Files to Archive Beside the Submission
 
 Keep these files even when they are not all uploaded to NCBI:

@@ -59,7 +59,7 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, v0.5 is in content review for chromosome-scale scaffolding and release-readiness work, v0.6 has an active draft baseline for telomere/centromere/T2T-refinement guidance, v0.7 has an active draft baseline for repeat annotation refinement, and v0.8 has started as an active drafting lane for gene annotation refinement.
+Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, v0.5 is in content review for chromosome-scale scaffolding and release-readiness work, v0.6 has an active draft baseline for telomere/centromere/T2T-refinement guidance, v0.7 has an active draft baseline for repeat annotation refinement, v0.8 has an active draft baseline for gene annotation refinement, and v0.9 has started as an active drafting lane for NCBI release-candidate polish.
 
 Completed baseline:
 
@@ -74,6 +74,7 @@ Current focus:
 - **v0.6 Telomere, Centromere, and T2T Refinement**: conservative completeness evidence packages for telomeres, centromeres, gaps, contact maps, dotplots, and difficult repeats.
 - **v0.7 Repeat Annotation Refinement**: repeat-library selection, EDTA/RepeatModeler2 comparison, release-mask decisions, and gene-annotation handoff.
 - **v0.8 Gene Annotation Refinement**: release-gene-set selection, evidence-aware annotation strategy, and annotation QC/release handoff.
+- **v0.9 NCBI Release Candidate Polish**: submission-package decisions, annotation handoff, accession readiness, and final release-bundle review.
 
 ## Workflow Overview
 
@@ -345,6 +346,7 @@ docs/manual_correction_workflow.md
 docs/minimum_evidence_checklist.md
 docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
+docs/annotation_submission_handoff.md
 docs/organelle_workflow.md
 docs/paf_dotplot_options.md
 docs/pacbio_watchlist.md
@@ -378,8 +380,11 @@ docs/v0.5_scaffolding_kickoff.md
 docs/v0.6_t2t_kickoff.md
 docs/v0.7_repeat_annotation_kickoff.md
 docs/v0.8_gene_annotation_kickoff.md
+docs/v0.9_ncbi_release_kickoff.md
 docs/yahs_hic_workflow.md
 docs/methods_text_template.md
+docs/release_methods_and_structured_comments.md
+docs/release_package_decision_guide.md
 docs/index.md
 docs/status.md
 docs/setup/index.md
@@ -2245,17 +2250,23 @@ Goal: evidence-based gene models.
 
 ### v0.9: NCBI Release Candidate
 
-Goal: submission-ready assemblies.
+Status: **active drafting while v0.5 remains in human review**.
 
-- Add FASTA header validation.
-- Add AGP validation.
+Goal: submission-ready assemblies and annotation packages.
+
+- Maintain FASTA header validation.
+- Maintain AGP validation.
 - Maintain release bundle checker.
 - Maintain manifest audit helper.
 - Maintain table2asn validation example.
 - Maintain NCBI submission and annotation validation guide.
-- Add BioProject/BioSample/SRA checklist.
-- Refine release manifest template.
-- Add methods text template for manuscripts and NCBI structured comments.
+- Maintain BioProject/BioSample/SRA checklist.
+- Maintain accession tracking example.
+- Maintain v0.9 NCBI release kickoff guide.
+- Maintain release package decision guide.
+- Maintain release package decision audit helper and toy validation.
+- Maintain annotation submission handoff guide.
+- Maintain release methods and structured comments guide.
 
 ### v1.0: Stable Public Protocol
 

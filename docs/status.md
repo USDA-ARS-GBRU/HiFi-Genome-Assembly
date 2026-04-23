@@ -15,8 +15,8 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | v0.5 | content review | scaffolding, gap filling, T2T readiness, docs-site migration |
 | v0.6 | active draft baseline | telomere, centromere, and T2T refinement |
 | v0.7 | active draft baseline | repeat annotation refinement |
-| v0.8 | active drafting | gene annotation refinement |
-| v0.9 | planned | NCBI release candidate polish |
+| v0.8 | active draft baseline | gene annotation refinement |
+| v0.9 | active drafting | NCBI release candidate polish |
 | v1.0 | planned | stable public protocol |
 
 ## Documentation Maturity
@@ -30,7 +30,7 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | Scaffolding | active draft | Hi-C, AGP, gap filling, and T2T paths are underway |
 | Telomere/T2T | active draft | v0.6 kickoff and completeness evidence package started |
 | Annotation | active draft | repeat and gene refinement lanes started; gene pages exist as first-pass web docs |
-| Release | active draft | NCBI submission path exists; release examples will continue to grow |
+| Release | active draft | NCBI submission path exists and v0.9 is expanding package-level release decisions |
 
 ## v0.5 Exit Goals
 
@@ -81,6 +81,15 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Add gene annotation decision audit helper and toy validation.
 - [x] Add functional annotation guide.
 - [x] Add annotation QC dashboard guide.
+
+## v0.9 Drafting Goals
+
+- [x] v0.9 NCBI release kickoff guide exists.
+- [x] Release package decision guide exists.
+- [x] Example release submission decision table exists.
+- [x] Add release submission decision audit helper and toy validation.
+- [x] Add annotation submission handoff guide.
+- [x] Add methods text template for manuscripts and NCBI structured comments.
 
 ## v1.0 Gates
 

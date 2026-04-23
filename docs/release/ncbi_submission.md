@@ -81,6 +81,11 @@ examples/accession_tracking.tsv
 
 Connect BioProject, BioSample, SRA, Assembly, and Annotation records so future users can trace the release.
 
+For package-selection logic and annotation freeze notes, also see:
+
+- `../release_package_decision_guide.md`
+- `../annotation_submission_handoff.md`
+
 ## Files to Archive
 
 ```text

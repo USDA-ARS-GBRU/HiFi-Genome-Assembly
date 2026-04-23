@@ -108,6 +108,14 @@ jobs:
             echo "expected gene annotation decision audit to fail contradictory release choices"
             exit 1
           fi
+      - name: Audit release submission decision table
+        run: python scripts/audit_release_submission_decisions.py examples/release_submission_decisions.tsv -o /tmp/release_submission_decision_audit.tsv
+      - name: Confirm release submission decision audit catches contradictions
+        run: |
+          if python scripts/audit_release_submission_decisions.py examples/release_submission_decisions_bad.tsv -o /tmp/release_submission_decision_bad_audit.tsv; then
+            echo "expected release submission decision audit to fail incomplete release package choices"
+            exit 1
+          fi
       - name: Summarize toy organelle PAF
         run: |
           printf 'unplaced_000001\t47\t0\t42\t+\tchloroplast_ref\t150000\t10\t52\t42\t42\t60\n' > /tmp/toy_organelle.paf

@@ -1,0 +1,6 @@
+StructuredCommentPrefix	Genome-Assembly-Data
+Assembly Method	hifiasm v. 0.25.0; YaHS v. 1.2a
+Genome Coverage	38x PacBio HiFi
+Sequencing Technology	PacBio Revio HiFi; Hi-C
+Assembly Name	maize_line_a_v1
+StructuredCommentSuffix	Genome-Assembly-Data
