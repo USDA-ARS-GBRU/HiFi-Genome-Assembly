@@ -336,6 +336,8 @@ docs/dotplot_figures.md
 docs/gap_filling_workflow.md
 docs/gene_annotation.md
 docs/gene_set_decision_guide.md
+docs/functional_annotation_guide.md
+docs/annotation_qc_dashboard_guide.md
 docs/hic_contact_map_qc.md
 docs/igv_breakpoint_reporting.md
 docs/igv_session_setup.md
@@ -2238,8 +2240,8 @@ Goal: evidence-based gene models.
 - Maintain gene annotation strategy guide.
 - Maintain annotation summary comparison helper.
 - Maintain gene annotation decision audit helper and toy validation.
-- Add functional annotation examples.
-- Add annotation QC dashboard.
+- Maintain functional annotation guide.
+- Maintain annotation QC dashboard guide.
 
 ### v0.9: NCBI Release Candidate
 

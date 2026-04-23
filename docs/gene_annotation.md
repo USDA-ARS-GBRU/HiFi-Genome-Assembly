@@ -26,6 +26,7 @@ Prepare:
 
 Use `docs/repeat_to_gene_annotation_handoff.md` before starting annotation so the repeat mask, repeat GFF, and final release sequence IDs stay synchronized.
 For release-gene-set comparison and selection, see `docs/gene_set_decision_guide.md`.
+For functional labels and compact release summaries, see `docs/functional_annotation_guide.md` and `docs/annotation_qc_dashboard_guide.md`.
 
 ## Liftoff Template
 

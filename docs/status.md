@@ -79,8 +79,8 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Liftoff, BRAKER3, and MAKER sbatch templates exist.
 - [x] Add annotation summary comparison helper.
 - [x] Add gene annotation decision audit helper and toy validation.
-- [ ] Add functional annotation guide.
-- [ ] Add annotation QC dashboard guide.
+- [x] Add functional annotation guide.
+- [x] Add annotation QC dashboard guide.
 
 ## v1.0 Gates
 

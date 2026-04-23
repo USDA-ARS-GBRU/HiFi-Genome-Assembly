@@ -10,6 +10,8 @@ Primary pages:
 - [v0.8 gene annotation kickoff](../v0.8_gene_annotation_kickoff.md)
 - [Gene set decision guide](../gene_set_decision_guide.md)
 - [Gene annotation](genes.md)
+- [Functional annotation guide](../functional_annotation_guide.md)
+- [Annotation QC dashboard guide](../annotation_qc_dashboard_guide.md)
 - [Repeat annotation](../repeat_annotation.md)
 - [Gene annotation](../gene_annotation.md)
 - [Annotation validation examples](../annotation_validation_examples.md)
@@ -17,4 +19,3 @@ Primary pages:
 Planned pages:
 
 - Liftoff, BRAKER3, and MAKER workflow details
-- functional annotation and annotation QC

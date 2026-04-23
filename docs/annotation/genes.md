@@ -26,6 +26,7 @@ Before annotation, freeze:
 
 Use `docs/repeat_to_gene_annotation_handoff.md` before handing the masked genome into gene annotation.
 For release-gene-set selection, see `docs/gene_set_decision_guide.md`.
+For downstream function labels and QC summaries, see `docs/functional_annotation_guide.md` and `docs/annotation_qc_dashboard_guide.md`.
 
 ## Liftoff
 
