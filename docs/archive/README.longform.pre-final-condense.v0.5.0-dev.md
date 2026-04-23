@@ -1236,44 +1236,531 @@ Key logic:
 
 ## Example sbatch Scripts
 
-Reusable templates live in `01_sbatch_templates/`. Copy them into a project-specific `01_sbatch/` directory and adapt partition, account, memory, walltime, module names, and environment activation for your cluster.
+Reusable versions of these scripts live in `01_sbatch_templates/`. Copy the templates into a project-specific `01_sbatch/` directory and edit partition, account, memory, walltime, and module names for your cluster.
 
-Start here:
+```bash
+mkdir -p 01_sbatch
+cp 01_sbatch_templates/*.sbatch 01_sbatch/
+```
 
-- `docs/sbatch_template_index.md`
-- `docs/setup/environment.md`
+### BAM to FASTQ
 
-Key logic:
+```bash
+#!/bin/bash
+#SBATCH -J bam2fastq
+#SBATCH -p batch
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --mem=8G
+#SBATCH -t 24:00:00
+#SBATCH -o 00_log/bam2fastq_%j.out
+#SBATCH -e 00_log/bam2fastq_%j.err
 
-- treat templates as reusable examples, not universal cluster scripts
-- keep the assembly, curation, annotation, and release templates in the same project-local `01_sbatch/` directory
-- document cluster-specific edits in the project decision log or methods notes
+set -euo pipefail
+cd "$SLURM_SUBMIT_DIR"
+
+module load bamtools/2.5.2
+
+echo "Input BAM: ${infile}"
+echo "Sample: ${sample}"
+echo "Output directory: ${oDir}"
+echo "Node: ${SLURMD_NODENAME}"
+
+mkdir -p "${oDir}"
+
+bamtools convert \
+  -format fastq \
+  -in "${infile}" \
+  -out "${oDir}/${sample}.fastq"
+
+echo "Job ID: ${SLURM_JOBID}"
+```
+
+Submit:
+
+```bash
+sbatch \
+  --export infile=raw/sample.bam,sample=sample,oDir=03_reads_raw \
+  01_sbatch/bam2fastq.sbatch
+```
+
+### hifiasm
+
+```bash
+#!/bin/bash
+#SBATCH -J hifiasm
+#SBATCH -p batch
+#SBATCH -N 1
+#SBATCH -n 32
+#SBATCH --mem=300G
+#SBATCH -t 48:00:00
+#SBATCH -o 00_log/hifiasm_%j.out
+#SBATCH -e 00_log/hifiasm_%j.err
+
+set -euo pipefail
+cd "$SLURM_SUBMIT_DIR"
+
+module load hifiasm/0.25.0
+
+echo "Reads: ${reads}"
+echo "Sample: ${sample}"
+echo "Output directory: ${oDir}"
+echo "Node: ${SLURMD_NODENAME}"
+hifiasm --version || true
+
+mkdir -p "${oDir}/${sample}" 07_assemblies
+
+hifiasm \
+  -t "${SLURM_NTASKS}" \
+  -o "${oDir}/${sample}/${sample}" \
+  ${reads}
+
+for gfa in "${oDir}/${sample}"/*.gfa; do
+  base=$(basename "$gfa" .gfa)
+  awk '/^S/{print ">"$2; print $3}' "$gfa" > "07_assemblies/${base}.fa"
+done
+
+echo "Job ID: ${SLURM_JOBID}"
+```
+
+Submit one file:
+
+```bash
+sbatch \
+  --export reads="03_reads_raw/sample.fastq.gz",sample=sample,oDir=06_hifiasm \
+  01_sbatch/hifiasm.sbatch
+```
+
+Submit two files for the same sample:
+
+```bash
+sbatch \
+  --export reads="03_reads_raw/sample_run1.fastq.gz 03_reads_raw/sample_run2.fastq.gz",sample=sample,oDir=06_hifiasm \
+  01_sbatch/hifiasm.sbatch
+```
+
+### Assembly Stats
+
+```bash
+#!/bin/bash
+#SBATCH -J asm_stats
+#SBATCH -p batch
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH --mem=8G
+#SBATCH -t 04:00:00
+#SBATCH -o 00_log/asm_stats_%j.out
+#SBATCH -e 00_log/asm_stats_%j.err
+
+set -euo pipefail
+cd "$SLURM_SUBMIT_DIR"
+
+module load seqkit
+module load bbtools
+
+mkdir -p 08_stats
+
+seqkit stats -a ${assemblies} > 08_stats/seqkit_assembly_stats.tsv
+
+for fa in ${assemblies}; do
+  name=$(basename "$fa" .fa)
+  stats.sh in="$fa" format=3 -Xmx4g > "08_stats/${name}.bbtools_stats.txt"
+done
+```
+
+### MUMmer Dotplot
+
+```bash
+#!/bin/bash
+#SBATCH -J mummer
+#SBATCH -p batch
+#SBATCH -N 1
+#SBATCH -n 16
+#SBATCH --mem=64G
+#SBATCH -t 24:00:00
+#SBATCH -o 00_log/mummer_%j.out
+#SBATCH -e 00_log/mummer_%j.err
+
+set -euo pipefail
+cd "$SLURM_SUBMIT_DIR"
+
+module load mummer/4.0.0rc1
+module load gnuplot/5.4.8
+
+mkdir -p "${oDir}"
+
+nucmer \
+  -t "${SLURM_NTASKS}" \
+  -c "${mincluster}" \
+  -p "${oDir}/${name}" \
+  "${ref}" \
+  "${query}"
+
+delta-filter \
+  -i "${identity}" \
+  -l "${minlen}" \
+  -1 \
+  "${oDir}/${name}.delta" \
+  > "${oDir}/${name}.filter"
+
+show-coords -r -c -l \
+  "${oDir}/${name}.filter" \
+  > "${oDir}/${name}.coords"
+
+show-tiling \
+  "${oDir}/${name}.filter" \
+  > "${oDir}/${name}.tiling"
+
+mummerplot \
+  -p "${oDir}/plot_${name}" \
+  -R "${ref}" \
+  --postscript \
+  --large \
+  --layout \
+  --fat \
+  "${oDir}/${name}.filter"
+```
+
+Submit:
+
+```bash
+sbatch \
+  --export oDir=09_dotplots,ref=references/ref.fa,query=07_assemblies/sample.primary.fa,name=ref_vs_sample,mincluster=100,identity=90,minlen=10000 \
+  01_sbatch/mummer_plot.sbatch
+```
+
+### BUSCO
+
+```bash
+#!/bin/bash
+#SBATCH -J busco
+#SBATCH -p batch
+#SBATCH -N 1
+#SBATCH -n 32
+#SBATCH --mem=128G
+#SBATCH -t 24:00:00
+#SBATCH -o 00_log/busco_%j.out
+#SBATCH -e 00_log/busco_%j.err
+
+set -euo pipefail
+cd "$SLURM_SUBMIT_DIR"
+
+module load busco/6.0.0
+
+mkdir -p 08_stats/busco
+
+busco \
+  -i "${assembly}" \
+  -m genome \
+  -l "${lineage}" \
+  -o "${sample}.busco" \
+  --out_path 08_stats/busco \
+  -c "${SLURM_NTASKS}"
+```
+
+Submit:
+
+```bash
+sbatch \
+  --export assembly=07_assemblies/sample.primary.fa,sample=sample,lineage=embryophyta_odb12 \
+  01_sbatch/busco.sbatch
+```
 
 ## Development Roadmap
 
-The detailed roadmap is now maintained in:
+### v0.1: Assembly Core
 
-- `docs/status.md`
-- `CHANGELOG.md`
+Status: **complete baseline**.
 
-High-level status:
+Goal: a usable protocol for HiFi-only primary assemblies.
 
-- `v0.1-v0.4`: maintained baselines for assembly core, QC, validation, and curation
-- `v0.5`: content review for scaffolding, gap filling, T2T readiness, and docs-site migration
-- `v0.6-v0.9`: active draft baselines for T2T, repeat annotation, gene annotation, and release polish
-- `v1.0`: stable public protocol target with a shortened README and a full documentation site
+- Establish a coherent, standalone README for crop plant PacBio HiFi assemblies.
+- Add reusable sbatch examples for BAM-to-FASTQ, hifiasm, stats, BUSCO, dotplots.
+- Add sample metadata templates.
+- Add a small helper script to parse hifiasm logs for k-mer peaks and collected bases.
+- Add a FASTA filtering/renaming helper.
+- Document raw-vs-trimmed comparison logic.
+- Document primary/hap1/hap2 output interpretation.
+
+### v0.2: QC Dashboard
+
+Status: **complete baseline, continuing refinement**.
+
+Goal: standardized assembly quality reports.
+
+- Maintain `scripts/collect_qc_dashboard.py` as the central metric aggregator for seqkit, BBTools, BUSCO, QUAST, Merqury, hifiasm logs, FCS, and project-specific telomere/repeat/annotation summaries.
+- Maintain `docs/qc_report_template.md` as the per-assembly peer-review report template.
+- Maintain `docs/release_checklist.md`, `docs/methods_text_template.md`, and `examples/release_manifest.tsv` for release preparation.
+- Add example plots for read length, assembly length, BUSCO, and Merqury QV.
+- Add guidance for interpreting problematic k-mer profiles.
+
+### v0.3: Validation, Contamination, and Organelle Handling
+
+Status: **maintained baseline**.
+
+Goal: prevent release problems and make validation reproducible.
+
+- Maintain FASTA validation helper.
+- Maintain AGP validation helper.
+- Maintain assembly decision log template.
+- Maintain tool-version policy.
+- Maintain StandardizedHeterozygosityEvaluation option for haplotype-level assemblies.
+- Maintain toy dataset and GitHub Actions helper validation.
+- Maintain FCS-adaptor and FCS-GX examples.
+- Maintain organelle detection/removal decision workflow.
+- Maintain assembly review standards.
+- Maintain BlobToolKit workflow.
+- Maintain sourmash read-screening template.
+- Maintain contamination decision TSV template.
+- Maintain organelle PAF hit summarizer.
+- Maintain decision tree for remove, mask, retain, split, or submit separately.
+- Maintain NCBI-oriented FASTA header, manifest, and release bundle helper scripts.
+- Maintain btrim, PacBio-watch, and QC-figure guidance.
+- Continue maintaining validation, annotation, contamination, and release-readiness helpers as v0.4 adds correction and curation workflows.
+
+### v0.4: Dotplot and Misassembly Curation
+
+Status: **maintained baseline**.
+
+Goal: make structural review teachable and reproducible.
+
+- Add MUMmer/minimap2 dotplot workflows.
+- Add example interpretations for clean, inverted, translocated, duplicated, and chimeric patterns.
+- Maintain dotplot and misassembly curation guide.
+- Maintain example dotplot decision cases.
+- Maintain manual-break helper script.
+- Maintain correction decision log template.
+- Maintain dotplot figure guide.
+- Maintain RagTag correct/scaffold comparison workflow.
+- Maintain manual reference-to-assembly IGV correction workflow.
+- Maintain minimap2 PAF dotplot options.
+- Maintain correction summary helper and AGP-after-splitting guidance.
+- Maintain minimum evidence checklist for retain, break, flip, remove, mask, and submit-separately decisions.
+- Maintain IGV breakpoint screenshot/reporting guide.
+- Maintain post-correction validation mini-workflow and sbatch template.
+- Maintain post-correction report template.
+- Maintain correction decision audit helper.
+- Maintain rejected-correction examples.
+- Maintain v0.4 curation workflow index.
+- Maintain toy manual correction case study.
+- Maintain correction report generator.
+- Maintain IGV session setup guide.
+- Maintain common false-positive correction guide.
+- Maintain v0.4 release-candidate checklist.
+- Maintain v0.4 review-pass document.
+- Maintain repo inventory checker.
+
+### v0.5: Scaffolding
+
+Status: **current development focus**.
+
+Goal: chromosome-scale assemblies, targeted gap filling, and clear evidence.
+
+- Maintain v0.5 scaffolding kickoff guide.
+- Maintain YaHS Hi-C scaffolding workflow.
+- Maintain 3D-DNA/Juicebox visual curation workflow and sbatch template.
+- Maintain RagTag reference-guided scaffold workflow with reference-bias warnings.
+- Maintain AGP generation and validation notes.
+- Maintain AGP definition and summary workflow.
+- Maintain AGP summary helper.
+- Maintain Hi-C contact map QC checklist.
+- Maintain scaffolding decision log template.
+- Maintain worked scaffolding decision case.
+- Maintain conservative gap-filling workflow.
+- Maintain LR_Gapcloser, TGS-GapCloser2, and TRFill sbatch templates.
+- Maintain FASTA gap summarizer.
+- Maintain gap-filling report helper.
+- Maintain gap-filling decision log example.
+- Maintain scaffolding candidate comparison helper and guidance.
+- Maintain documentation-site skeleton as preparation for v1.0 migration.
+- Maintain README-to-docs migration order.
+- Maintain T2T readiness checklist as the bridge into v0.6.
+- Maintain T2T readiness report helper.
+- Maintain focused docs coverage for every README workflow step.
+- Maintain public project metadata and contribution templates.
+- Maintain v0.5 review checklist.
+
+Remaining before a stable v0.5 tag:
+
+- Review citation/license wording before stable release.
+- Do one outside-reader pass for beginner usability.
+- Decide whether post-v0.5 drafting content is included in the tag or clearly marked as later development.
+
+### v0.6: Telomere, Centromere, and T2T Readiness
+
+Status: **active draft baseline while v0.5 remains in human review**.
+
+Goal: track chromosome completeness without overclaiming.
+
+- Maintain v0.6 kickoff guide.
+- Maintain T2T completeness evidence package.
+- Maintain example T2T completeness evidence table.
+- Maintain T2T completeness evidence audit helper and toy validation.
+- Maintain tidk examples for known and de novo telomere motifs.
+- Maintain quarTeT telomere/centromere examples.
+- Maintain terminal telomere summary script.
+- Maintain manuscript and reviewer-response language for completeness claims.
+- Maintain worked completeness claim case.
+- Refine gap status summaries into T2T readiness reporting.
+- Refine T2T readiness checklist for projects with ultra-long ONT or optical maps.
+
+### v0.7: Repeat Annotation
+
+Status: **active drafting while v0.5 remains in human review**.
+
+Goal: crop-appropriate repeat libraries and soft-masked genomes.
+
+- Maintain v0.7 repeat annotation kickoff guide.
+- Maintain repeat library decision guide.
+- Maintain example repeat annotation decision table.
+- Maintain EDTA workflow.
+- Maintain RepeatModeler2 + RepeatMasker workflow.
+- Add repeat landscape summary.
+- Add softmasked FASTA output standard.
+- Add repeat GFF/BED track preparation.
+- Maintain EDTA and RepeatModeler2/RepeatMasker sbatch templates.
+- Maintain repeat annotation strategy guide.
+- Maintain repeat summary comparison helper.
+- Maintain repeat annotation decision audit helper and toy validation.
+- Maintain repeat landscape interpretation guidance.
+- Maintain repeat-to-gene-annotation handoff checklist.
+
+### v0.8: Gene Annotation
+
+Status: **active drafting while v0.5 remains in human review**.
+
+Goal: evidence-based gene models.
+
+- Maintain v0.8 gene annotation kickoff guide.
+- Maintain gene set decision guide.
+- Maintain example gene annotation decision table.
+- Maintain Liftoff workflow for cultivar-to-cultivar transfer.
+- Maintain BRAKER3 workflow with RNA-seq/protein evidence.
+- Maintain MAKER workflow for projects needing full evidence integration.
+- Maintain Liftoff, BRAKER3, and MAKER sbatch templates.
+- Maintain gene annotation strategy guide.
+- Maintain annotation summary comparison helper.
+- Maintain gene annotation decision audit helper and toy validation.
+- Maintain functional annotation guide.
+- Maintain annotation QC dashboard guide.
+
+### v0.9: NCBI Release Candidate
+
+Status: **active drafting while v0.5 remains in human review**.
+
+Goal: submission-ready assemblies and annotation packages.
+
+- Maintain FASTA header validation.
+- Maintain AGP validation.
+- Maintain release bundle checker.
+- Maintain manifest audit helper.
+- Maintain table2asn validation example.
+- Maintain NCBI submission and annotation validation guide.
+- Maintain BioProject/BioSample/SRA checklist.
+- Maintain accession tracking example.
+- Maintain v0.9 NCBI release kickoff guide.
+- Maintain release package decision guide.
+- Maintain release package decision audit helper and toy validation.
+- Maintain annotation submission handoff guide.
+- Maintain table2asn and discrepancy triage guide.
+- Maintain identifier crosswalk example.
+- Maintain table2asn reviewer-response examples.
+- Maintain accession handoff worked example.
+- Maintain community database release companion guide.
+- Maintain release methods and structured comments guide.
+- Maintain worked release candidate case.
+- Maintain release bundle worked example.
+
+### v1.0: Stable Public Protocol
+
+Goal: polished GitHub release for USDA-ARS-GBRU crop genome assembly projects.
+
+- Complete end-to-end README.
+- Provide tested sbatch scripts in `01_sbatch_templates/`.
+- Provide helper scripts in `scripts/`.
+- Provide example metadata in `examples/`.
+- Provide a minimal test dataset or toy workflow where licensing permits.
+- Add GitHub Actions or local lint checks for scripts.
+- Add versioned release notes.
+- Add citation and contribution guidelines.
+- Split the longform README into a GitHub-compatible documentation site while preserving the README as the landing page.
 
 ## Key References and Tool Links
 
-The curated reference list now lives in focused documentation pages.
+Assembly:
 
-Start here:
+- hifiasm documentation: https://hifiasm.readthedocs.io/
+- hifiasm paper: https://www.nature.com/articles/s41592-020-01056-5
+- hifiasm GitHub: https://github.com/chhylp123/hifiasm
+- NCBI AGP Specification v2.1: https://www.ncbi.nlm.nih.gov/genbank/genome_agp_specification/
+- NCBI AGP validation: https://www.ncbi.nlm.nih.gov/assembly/agp/
+- PacBio GitHub organization: https://github.com/PacificBiosciences
+- PacBio pbtk: https://github.com/PacificBiosciences/pbtk
+- PacBio pbmm2: https://github.com/PacificBiosciences/pbmm2
+- PacBio HiFi human assembly WDL: https://github.com/PacificBiosciences/HiFi-human-assembly-WDL
 
-- `docs/key_references.md`
-- `docs/pacbio_watchlist.md`
+Genome profiling and quality:
 
-Key logic:
+- GenomeScope 2.0 and Smudgeplot: https://www.nature.com/articles/s41467-020-14998-3
+- USDA-ARS-GBRU StandardizedHeterozygosityEvaluation: https://github.com/USDA-ARS-GBRU/StandardizedHeterozygosityEvaluation
+- Merqury paper: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02134-9
+- BUSCO user guide: https://busco.ezlab.org/busco_userguide
+- Inspector paper: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02527-4
 
-- keep the README readable and move long tool/reference catalogs into docs pages
-- keep step-specific reasoning in the workflow docs and broader external links in shared reference pages
-- keep watching Pacific Biosciences and NCBI guidance as tool recommendations and submission expectations evolve
+Scaffolding and structural review:
+
+- YaHS paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC9848053/
+- 3D-DNA GitHub: https://github.com/aidenlab/3d-dna
+- Juicebox GitHub: https://github.com/aidenlab/Juicebox
+- Juicebox Assembly Tools documentation: https://github.com/aidenlab/Juicebox/wiki/Juicebox-Assembly-Tools
+- RagTag GitHub: https://github.com/malonge/RagTag
+- MUMmer4 GitHub: https://github.com/mummer4/mummer
+- minimap2: https://github.com/lh3/minimap2
+
+Gap filling:
+
+- Comprehensive evaluation of long-read gap-filling tools: https://pubmed.ncbi.nlm.nih.gov/38275608/
+- LR_Gapcloser paper: https://academic.oup.com/gigascience/article/8/1/giy157/5256637
+- LR_Gapcloser GitHub: https://github.com/CAFS-bioinformatics/LR_Gapcloser
+- TGS-GapCloser paper: https://academic.oup.com/gigascience/article/9/9/giaa094/5902284
+- TGS-GapCloser2 GitHub: https://github.com/BGI-Qingdao/TGS-GapCloser2
+- Gapless paper/tool: https://www.life-science-alliance.org/content/6/7/e202201471
+- Gapless GitHub: https://github.com/schmeing/gapless
+- TRFill paper: https://pubmed.ncbi.nlm.nih.gov/40721805/
+- TRFill GitHub: https://github.com/panlab-bioinfo/TRFill
+
+Telomere and centromere:
+
+- tidk paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC11814493/
+- tidk GitHub: https://github.com/tolkit/telomeric-identifier
+- quarTeT paper: https://pubmed.ncbi.nlm.nih.gov/37560017/
+- quarTeT GitHub: https://github.com/aaranyue/quarTeT
+
+Contamination:
+
+- NCBI FCS documentation: https://www.ncbi.nlm.nih.gov/datasets/docs/v2/data-processing/policies-annotation/quality/contamination/fcs-contamination/
+- NCBI FCS GitHub: https://github.com/ncbi/fcs
+- VecScreen/UniVec: https://www.ncbi.nlm.nih.gov/tools/vecscreen/
+- btrim paper: https://doi.org/10.1016/j.ygeno.2011.05.009
+- HiFiAdapterFilt paper: https://doi.org/10.1186/s12864-022-08375-1
+- BlobToolKit paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC7144090/
+
+Repeat annotation:
+
+- EDTA GitHub: https://github.com/oushujun/EDTA
+- RepeatModeler2 paper: https://pubmed.ncbi.nlm.nih.gov/32300014/
+- RepeatMasker: https://www.repeatmasker.org/
+
+Gene annotation:
+
+- BRAKER: https://github.com/Gaius-Augustus/BRAKER
+- MAKER paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC2134774/
+- MAKER2 paper: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-491
+- Liftoff: https://github.com/agshumate/Liftoff
+
+NCBI submission:
+
+- Genome submission portal: https://submit.ncbi.nlm.nih.gov/about/genome/
+- Eukaryotic genome submission guide: https://www.ncbi.nlm.nih.gov/genbank/eukaryotic_genome_submission/
+- Eukaryotic annotation guide: https://www.ncbi.nlm.nih.gov/genbank/eukaryotic_genome_submission_annotation/
+- Submitting eukaryotic genome data: https://www.ncbi.nlm.nih.gov/genbank/eukaryotic_submission/

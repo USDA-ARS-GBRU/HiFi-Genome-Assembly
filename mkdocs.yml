@@ -11,6 +11,9 @@ nav:
   - Setup:
       - Overview: setup/index.md
       - Software Environments: setup/environment.md
+      - sbatch Template Index: sbatch_template_index.md
+      - Key References: key_references.md
+      - PacBio Watchlist: pacbio_watchlist.md
       - Tool Version Policy: tool_version_policy.md
       - README Migration Plan: readme_to_docs_migration_plan.md
       - Site Platform Decision: site_platform_decision.md

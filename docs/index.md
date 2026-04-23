@@ -9,6 +9,7 @@ The documentation site is being organized for MkDocs publication while the READM
 | Section | Status | Start here |
 | --- | --- | --- |
 | Setup | draft | [Setup](setup/index.md) |
+| Shared references and templates | active draft | [sbatch Template Index](sbatch_template_index.md), [Key References](key_references.md), [PacBio Watchlist](pacbio_watchlist.md) |
 | Assembly | active draft | [Assembly](assembly/index.md) |
 | QC | active draft | [QC](qc/index.md) |
 | Curation | maintained draft | [Curation](curation/index.md) |
