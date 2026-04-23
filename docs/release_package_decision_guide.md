@@ -121,7 +121,7 @@ Reviewer response:
 
 - `docs/v0.9_ncbi_release_kickoff.md`
 - `docs/annotation_submission_handoff.md`
-- `docs/ncbi_submission.md`
+- `docs/release/ncbi_submission.md`
 - `docs/release/ncbi_submission.md`
 - `docs/ncbi_metadata_templates.md`
 - `examples/accession_tracking.tsv`

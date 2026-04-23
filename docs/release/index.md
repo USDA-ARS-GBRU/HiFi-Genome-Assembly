@@ -17,7 +17,7 @@ Primary pages:
 - [v0.5 review checklist](v0.5_review_checklist.md)
 - [v0.5 release candidate notes](v0.5_release_candidate_notes.md)
 - [Release checklist](../release_checklist.md)
-- [NCBI submission](../ncbi_submission.md)
+- [NCBI submission](ncbi_submission.md)
 - [NCBI metadata templates](../ncbi_metadata_templates.md)
 - [Methods text template](../methods_text_template.md)
 

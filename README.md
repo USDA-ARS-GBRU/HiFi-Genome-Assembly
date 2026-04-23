@@ -14,7 +14,7 @@ The full protocol now lives in the documentation site:
 - Status and roadmap: [docs/status.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/status.md)
 - Publishing guide: [docs/mkdocs_publishing.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/mkdocs_publishing.md)
 
-Preserved longform snapshots are archived in [docs/archive](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/archive).
+Preserved longform snapshots are archived in [archive/README.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/archive/README.md).
 
 ## Scope
 

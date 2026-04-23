@@ -40,7 +40,7 @@ Compared with Docsify, MkDocs should make it easier to:
 The full pre-condensation README snapshot for this migration phase is archived at:
 
 ```text
-docs/archive/README.longform.v0.5.0-dev.md
+archive/readme/README.longform.v0.5.0-dev.md
 ```
 
 ## Immediate Next Steps

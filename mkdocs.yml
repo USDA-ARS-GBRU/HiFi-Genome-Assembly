@@ -16,6 +16,7 @@ nav:
       - PacBio Watchlist: pacbio_watchlist.md
       - Tool Version Policy: tool_version_policy.md
       - README Migration Plan: readme_to_docs_migration_plan.md
+      - Documentation Site Plan: documentation_site_plan.md
       - Site Platform Decision: site_platform_decision.md
       - Publishing to GitHub Pages: mkdocs_publishing.md
   - Assembly:
@@ -29,6 +30,7 @@ nav:
       - Assembly Metrics: qc/assembly_metrics.md
       - Dotplots: qc/dotplots.md
       - Contamination: qc/contamination.md
+      - Contamination Decision Workflow: contamination_workflow.md
       - QC Figures: qc_figures.md
   - Curation:
       - Overview: curation/index.md
@@ -37,12 +39,15 @@ nav:
       - Dotplot Figures: dotplot_figures.md
       - Manual Correction Workflow: manual_correction_workflow.md
       - v0.4 Workflow Index: v0.4_curation_index.md
+      - Review Standards: review_standards.md
       - IGV Session Setup: igv_session_setup.md
       - IGV Breakpoint Reporting: igv_breakpoint_reporting.md
       - Minimum Evidence Checklist: minimum_evidence_checklist.md
+      - Common False Positives: common_false_positive_corrections.md
       - Post-correction Validation: post_correction_validation.md
       - Post-correction Report Template: post_correction_report_template.md
       - Correction Report Examples: correction_report_examples.md
+      - Rejected Corrections: rejected_corrections.md
       - Toy Manual Correction Case: toy_manual_correction_case_study.md
   - Scaffolding and Finishing:
       - Overview: scaffolding/index.md
@@ -52,6 +57,7 @@ nav:
       - 3D-DNA and Juicebox: 3d_dna_juicebox_workflow.md
       - AGP: scaffolding/agp.md
       - AGP Summary Workflow: agp_summary_workflow.md
+      - AGP After Splitting: agp_after_splitting.md
       - Scaffolding Candidate Comparison: scaffolding_candidate_comparison.md
       - Scaffolding Worked Case: scaffolding_worked_decision_case.md
       - Gap Filling: gap_filling_workflow.md
@@ -66,11 +72,13 @@ nav:
   - Annotation:
       - Overview: annotation/index.md
       - v0.7 Repeat Kickoff: v0.7_repeat_annotation_kickoff.md
+      - Repeat Annotation Strategy: repeat_annotation.md
       - Repeats: annotation/repeats.md
       - Repeat Library Decisions: repeat_library_decision_guide.md
       - Repeat Landscape Interpretation: repeat_landscape_interpretation.md
       - Repeat to Gene Handoff: repeat_to_gene_annotation_handoff.md
       - v0.8 Gene Kickoff: v0.8_gene_annotation_kickoff.md
+      - Gene Annotation Strategy: gene_annotation.md
       - Genes: annotation/genes.md
       - Gene Set Decisions: gene_set_decision_guide.md
       - Functional Annotation: functional_annotation_guide.md
@@ -78,8 +86,10 @@ nav:
       - Annotation Validation Examples: annotation_validation_examples.md
   - Release:
       - Overview: release/index.md
+      - v0.9 Release Kickoff: v0.9_ncbi_release_kickoff.md
       - NCBI Submission: release/ncbi_submission.md
       - Release Package Decisions: release_package_decision_guide.md
+      - Organelle Workflow: organelle_workflow.md
       - Annotation Submission Handoff: annotation_submission_handoff.md
       - table2asn Triage: table2asn_discrepancy_triage.md
       - Reviewer Responses: table2asn_reviewer_response_examples.md
@@ -89,9 +99,19 @@ nav:
       - Release Candidate Worked Case: release_candidate_worked_case.md
       - Release Bundle Worked Example: release_bundle_worked_example.md
       - NCBI Metadata Templates: ncbi_metadata_templates.md
+  - Templates and Checklists:
+      - Overview: workflow_templates/index.md
+      - Assembly Decision Log: assembly_decision_log_template.md
+      - Correction Decision Log: correction_decision_log_template.md
+      - Scaffolding Decision Log: scaffolding_decision_log_template.md
+      - QC Report Template: qc_report_template.md
+      - Methods Text Template: methods_text_template.md
+      - Release Checklist: release_checklist.md
   - Contributing and Release:
       - Beginner Usability Review: release/beginner_usability_review.md
       - Citation and License Review: release/citation_license_review.md
+      - v0.4 Release Candidate Checklist: v0.4_release_candidate_checklist.md
+      - v0.4 Review Pass: v0.4_review_pass.md
       - v0.5 Review Checklist: release/v0.5_review_checklist.md
       - v0.5 Release Candidate Notes: release/v0.5_release_candidate_notes.md
 markdown_extensions:

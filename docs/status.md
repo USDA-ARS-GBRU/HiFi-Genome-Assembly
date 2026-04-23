@@ -2,7 +2,7 @@
 
 Current version: `0.5.0-dev`
 
-The root `README.md` remains the canonical longform protocol while the focused documentation tree is built. The goal before v1.0 is to keep the README as a concise landing page and move detailed procedures into `docs/`.
+The root `README.md` now serves as a concise landing page while the focused documentation tree carries the detailed protocol. The goal before v1.0 is to keep the repo front page short and keep detailed procedures in `docs/`.
 
 ## Current Phase
 
@@ -31,7 +31,7 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | Telomere/T2T | active draft | v0.6 kickoff and completeness evidence package started |
 | Annotation | active draft | repeat and gene refinement lanes started; gene pages exist as first-pass web docs |
 | Release | active draft | NCBI submission path exists and v0.9 is expanding package-level release decisions |
-| Docs site | active draft | MkDocs scaffold exists, local builds work, Pages workflow exists, and GitHub Pages is blocked until repo visibility or plan changes |
+| Docs site | active draft | MkDocs site is live, local strict builds work, and navigation cleanup is in progress |
 
 ## v0.5 Exit Goals
 

@@ -24,22 +24,20 @@ In the repository settings:
 
 After that, pushes to `main` should build and publish the MkDocs site.
 
-## Current Repository Constraint
+## Current State
 
-As of this migration pass, the repository is private and GitHub returned:
+The repository is now public, GitHub Pages is enabled, and the site is live at:
 
-> Your current plan does not support GitHub Pages for this repository.
-
-That means the publishing workflow is ready, and local MkDocs builds work, but the public Pages site will not go live until one of these changes happens:
-
-1. the repository is made public, or
-2. the organization/account plan supports GitHub Pages for private repositories
+```text
+https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/
+```
 
 ## Current Publishing Strategy
 
 - keep the root `README.md` as the GitHub landing page
 - publish the focused docs tree to GitHub Pages
 - link the public docs site from the README
+- keep archived README snapshots outside `docs/` so MkDocs does not treat them as undocumented site pages
 
 This gives first-time visitors a short repo overview while keeping the detailed protocol in a real docs site.
 
@@ -50,5 +48,7 @@ Do not wait for the documentation site to be perfect before publishing it. It is
 ## Related Files
 
 - `mkdocs.yml`
+- `.github/workflows/deploy-docs.yml`
 - `docs/site_platform_decision.md`
 - `docs/readme_to_docs_migration_plan.md`
+- `archive/README.md`

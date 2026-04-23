@@ -1,15 +1,27 @@
 # HiFi Genome Assembly Documentation
 
-This directory is the future home of the web documentation for the crop plant PacBio HiFi assembly protocol. During active development, the root `README.md` remains the canonical longform guide.
+Welcome to the documentation site for the crop plant PacBio HiFi genome assembly workflow.
 
-The documentation site is being organized for MkDocs publication while the README is condensed into a landing page.
+This project is written to help a beginning bioinformatics graduate student move from raw HiFi reads to a defensible crop genome assembly, structured review, annotation handoff, and public release package. The emphasis is not only on commands, but on why one decision is stronger than another.
 
-## Sections
+## Start Paths
+
+Choose the path that matches where you are today:
+
+- New to the project: [Setup](setup/index.md)
+- Ready to assemble: [Assembly](assembly/index.md)
+- Checking whether an assembly is trustworthy: [QC](qc/index.md)
+- Reviewing structural problems by hand: [Curation](curation/index.md)
+- Moving to chromosome scale: [Scaffolding and Finishing](scaffolding/index.md)
+- Preparing repeats or genes: [Annotation](annotation/index.md)
+- Packaging for NCBI and community databases: [Release](release/index.md)
+
+## What This Site Covers
 
 | Section | Status | Start here |
 | --- | --- | --- |
 | Setup | draft | [Setup](setup/index.md) |
-| Shared references and templates | active draft | [sbatch Template Index](sbatch_template_index.md), [Key References](key_references.md), [PacBio Watchlist](pacbio_watchlist.md) |
+| Shared references | active draft | [sbatch Template Index](sbatch_template_index.md), [Key References](key_references.md), [PacBio Watchlist](pacbio_watchlist.md) |
 | Assembly | active draft | [Assembly](assembly/index.md) |
 | QC | active draft | [QC](qc/index.md) |
 | Curation | maintained draft | [Curation](curation/index.md) |
@@ -17,6 +29,7 @@ The documentation site is being organized for MkDocs publication while the READM
 | Telomere, centromere, and T2T | active draft | [v0.6 T2T Kickoff](v0.6_t2t_kickoff.md), [T2T Claim Language](t2t_claim_language_guide.md) |
 | Annotation | active draft | [Annotation](annotation/index.md), [v0.7 Repeat Kickoff](v0.7_repeat_annotation_kickoff.md), [v0.8 Gene Kickoff](v0.8_gene_annotation_kickoff.md) |
 | Release | active draft | [Release](release/index.md) |
+| Templates and checklists | active draft | [Templates and Checklists](workflow_templates/index.md) |
 
 Status meanings:
 
@@ -25,16 +38,28 @@ Status meanings:
 - `early draft`: skeleton or partial content exists.
 - `planned`: not yet written.
 
-## Migration Status
+## Recommended Reading Order
 
-Content is being added as focused pages first. Before v1.0, the README will become a concise landing page and this documentation tree will carry the detailed protocol.
+For most projects, the cleanest reading order is:
 
-See [Documentation Status and Roadmap](status.md) for version focus, page maturity, v0.5 exit goals, and v1.0 gates.
+1. [Software Environments](setup/environment.md)
+2. [Genome Profiling](assembly/genome_profiling.md)
+3. [hifiasm Workflow](assembly/hifiasm.md)
+4. [Assembly Metrics](qc/assembly_metrics.md)
+5. [Dotplot Misassembly Curation](dotplot_misassembly_curation.md)
+6. [Hi-C Scaffolding](scaffolding/hic_scaffolding.md) or [RagTag](ragtag_workflow.md) when appropriate
+7. [Repeat Library Decisions](repeat_library_decision_guide.md)
+8. [Gene Set Decisions](gene_set_decision_guide.md)
+9. [Release Package Decisions](release_package_decision_guide.md)
 
-For the planned conversion from longform README to focused GitHub documentation, see [README to Docs Migration Plan](readme_to_docs_migration_plan.md).
+## Project Status
 
-For the platform choice and migration rationale, see [Documentation Platform Decision](site_platform_decision.md).
+The public repo landing page now serves as a short front door. The detailed protocol lives here in the docs site.
 
-For MkDocs publishing and GitHub Pages deployment, see [MkDocs and GitHub Pages Publishing](mkdocs_publishing.md).
+Use these pages to track where the project is headed:
 
-For public release metadata, see [Citation and License Review](release/citation_license_review.md).
+- [Documentation Status and Roadmap](status.md)
+- [README to Docs Migration Plan](readme_to_docs_migration_plan.md)
+- [Documentation Platform Decision](site_platform_decision.md)
+- [MkDocs and GitHub Pages Publishing](mkdocs_publishing.md)
+- [Citation and License Review](release/citation_license_review.md)

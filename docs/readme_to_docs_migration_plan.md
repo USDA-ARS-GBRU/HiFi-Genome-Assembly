@@ -9,19 +9,19 @@ Keep the README useful for a first visitor while moving operational detail into 
 The preserved pre-condensation source copy for this migration phase is:
 
 ```text
-docs/archive/README.longform.v0.5.0-dev.md
+archive/readme/README.longform.v0.5.0-dev.md
 ```
 
 An additional pre-assembly-condensation snapshot is preserved at:
 
 ```text
-docs/archive/README.longform.pre-assembly-condense.v0.5.0-dev.md
+archive/readme/README.longform.pre-assembly-condense.v0.5.0-dev.md
 ```
 
 An additional pre-QC/curation-condensation snapshot is preserved at:
 
 ```text
-docs/archive/README.longform.pre-qc-curation-condense.v0.5.0-dev.md
+archive/readme/README.longform.pre-qc-curation-condense.v0.5.0-dev.md
 ```
 
 ## Shortening Order
