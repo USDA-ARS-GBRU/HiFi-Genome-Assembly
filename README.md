@@ -376,6 +376,7 @@ docs/annotation/index.md
 docs/annotation/repeats.md
 docs/annotation/genes.md
 docs/release/index.md
+docs/release/beginner_usability_review.md
 docs/release/citation_license_review.md
 docs/release/ncbi_submission.md
 docs/release/v0.5_review_checklist.md
@@ -389,6 +390,7 @@ examples/gap_filling_decisions.tsv
 examples/scaffolding_decision_case/
 examples/toy/toy_gapfilled.fa
 examples/release_manifest.tsv
+examples/beginner_usability_review.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
 examples/btrim_patterns.example.txt

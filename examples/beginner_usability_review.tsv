@@ -1,0 +1,8 @@
+review_id	reviewer_role	review_date	task	score	finding	response	owner	status
+review_001	beginning bioinformatics graduate student	YYYY-MM-DD	find current version and status				TBD	not_started
+review_001	beginning bioinformatics graduate student	YYYY-MM-DD	find read preparation and adapter screening options				TBD	not_started
+review_001	beginning bioinformatics graduate student	YYYY-MM-DD	choose hifiasm mode for heterozygous crop				TBD	not_started
+review_001	beginning bioinformatics graduate student	YYYY-MM-DD	identify core manuscript QC figures				TBD	not_started
+review_001	beginning bioinformatics graduate student	YYYY-MM-DD	decide whether to break questionable contig				TBD	not_started
+review_001	beginning bioinformatics graduate student	YYYY-MM-DD	compare scaffolding candidates				TBD	not_started
+review_001	beginning bioinformatics graduate student	YYYY-MM-DD	find NCBI submission checks				TBD	not_started
