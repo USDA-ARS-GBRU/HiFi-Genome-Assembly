@@ -145,6 +145,7 @@ Starter helper scripts are available in:
 scripts/collect_qc_dashboard.py
 scripts/check_repo_inventory.py
 scripts/check_markdown_links.py
+scripts/check_docs_coverage.py
 scripts/compare_scaffolding_candidates.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
@@ -360,7 +361,10 @@ docs/scaffolding/index.md
 docs/scaffolding/agp.md
 docs/scaffolding/hic_scaffolding.md
 docs/annotation/index.md
+docs/annotation/repeats.md
+docs/annotation/genes.md
 docs/release/index.md
+docs/release/ncbi_submission.md
 examples/accession_tracking.tsv
 examples/annotation_validation/
 examples/centromere_candidates.tsv

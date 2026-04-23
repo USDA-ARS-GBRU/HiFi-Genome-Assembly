@@ -2,6 +2,8 @@
 
 Primary pages:
 
+- [Repeat annotation and masking](repeats.md)
+- [Gene annotation](genes.md)
 - [Repeat annotation](../repeat_annotation.md)
 - [Gene annotation](../gene_annotation.md)
 - [Annotation validation examples](../annotation_validation_examples.md)

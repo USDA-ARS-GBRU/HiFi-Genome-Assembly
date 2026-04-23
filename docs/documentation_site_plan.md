@@ -50,6 +50,9 @@ The first focused migration pages are:
 - `docs/qc/dotplots.md`
 - `docs/scaffolding/agp.md`
 - `docs/scaffolding/hic_scaffolding.md`
+- `docs/annotation/repeats.md`
+- `docs/annotation/genes.md`
+- `docs/release/ncbi_submission.md`
 
 ## Migration Rules
 

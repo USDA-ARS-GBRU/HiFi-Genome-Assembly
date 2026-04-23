@@ -2,6 +2,7 @@
 
 Primary pages:
 
+- [NCBI submission path](ncbi_submission.md)
 - [Release checklist](../release_checklist.md)
 - [NCBI submission](../ncbi_submission.md)
 - [NCBI metadata templates](../ncbi_metadata_templates.md)

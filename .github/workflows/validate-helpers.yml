@@ -20,6 +20,8 @@ jobs:
         run: python scripts/check_repo_inventory.py --readme README.md -o /tmp/repo_inventory.tsv
       - name: Check local Markdown links
         run: python scripts/check_markdown_links.py README.md docs -o /tmp/markdown_links.tsv
+      - name: Check README step docs coverage
+        run: python scripts/check_docs_coverage.py -o /tmp/docs_coverage.tsv
       - name: Confirm Markdown link checker scanned links
         run: test "$(tail -n +2 /tmp/markdown_links.tsv | wc -l)" -gt 0
       - name: Confirm Markdown link checker fails broken links

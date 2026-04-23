@@ -30,6 +30,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added focused dotplot review docs page.
 - Added focused Hi-C scaffolding reader path.
 - Added documentation index status table for stable/draft/planned navigation.
+- Added focused NCBI submission web-doc page.
+- Added focused repeat and gene annotation web-doc pages.
+- Added docs coverage checker mapping README workflow steps to focused docs.
 
 ## 0.4.0-dev
 
