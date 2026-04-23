@@ -347,6 +347,9 @@ docs/minimum_evidence_checklist.md
 docs/ncbi_metadata_templates.md
 docs/ncbi_submission.md
 docs/annotation_submission_handoff.md
+docs/table2asn_discrepancy_triage.md
+docs/accession_handoff_worked_example.md
+docs/community_database_release_companion.md
 docs/release_candidate_worked_case.md
 docs/release_bundle_worked_example.md
 docs/organelle_workflow.md
@@ -2268,6 +2271,9 @@ Goal: submission-ready assemblies and annotation packages.
 - Maintain release package decision guide.
 - Maintain release package decision audit helper and toy validation.
 - Maintain annotation submission handoff guide.
+- Maintain table2asn and discrepancy triage guide.
+- Maintain accession handoff worked example.
+- Maintain community database release companion guide.
 - Maintain release methods and structured comments guide.
 - Maintain worked release candidate case.
 - Maintain release bundle worked example.

@@ -41,6 +41,7 @@ Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines
 - Added v0.9 NCBI release kickoff, release package decision guide, annotation submission handoff, and release decision audit helper.
 - Added release methods and structured comments guide with a Genome-Assembly-Data `.cmt` example.
 - Added worked v0.9 release candidate and release bundle example pages.
+- Added table2asn/discrepancy triage, accession handoff, and community database release companion guides.
 - Updated README and docs status with current v0.5 assessment.
 - Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.
