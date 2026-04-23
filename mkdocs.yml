@@ -1,6 +1,7 @@
 site_name: PacBio HiFi Genome Assembly for Crop Plants
 site_description: Peer-review-oriented PacBio HiFi crop plant genome assembly workflow documentation.
 repo_url: https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly
+site_url: https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/
 docs_dir: docs
 theme:
   name: material
@@ -13,6 +14,7 @@ nav:
       - Tool Version Policy: tool_version_policy.md
       - README Migration Plan: readme_to_docs_migration_plan.md
       - Site Platform Decision: site_platform_decision.md
+      - Publishing to GitHub Pages: mkdocs_publishing.md
   - Assembly:
       - Overview: assembly/index.md
       - Prepare Reads: assembly/prepare_reads.md

@@ -49,3 +49,5 @@ docs/archive/README.longform.v0.5.0-dev.md
 2. Build a first-pass site navigation around the existing section index pages.
 3. Move setup/environment detail out of the README.
 4. Continue shortening the README in small reversible passes.
+
+GitHub Pages publishing is part of this plan so the focused docs can become the public documentation destination while the README remains the repository landing page.

@@ -13,8 +13,6 @@ Project metadata:
 - Documentation status: `docs/status.md`
 - Preserved longform source: `docs/archive/README.longform.v0.5.0-dev.md`
 - MkDocs site scaffold: `mkdocs.yml`
-- Docs publishing guide: `docs/mkdocs_publishing.md`
-- GitHub Pages docs URL: `https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/`
 
 The protocol is designed as a practical representation of contemporary crop plant genome assembly work. It emphasizes transparent decisions, independent quality evidence, reproducible HPC execution, and release products that can withstand manuscript review, database validation, and reuse by breeding and genomics communities.
 
@@ -515,64 +513,307 @@ Parameters worth understanding:
 - `--h1/--h2`: paired-end Hi-C reads for integrated phasing.
 - trio mode options: use when parental reads are available.
 
-## Assembly Docs
-
-The detailed assembly-stage documentation is now being moved out of the README and into focused pages.
-
-Start here:
-
-- `docs/assembly/index.md`
-- `docs/assembly/prepare_reads.md`
-- `docs/assembly/genome_profiling.md`
-- `docs/assembly/hifiasm.md`
-- `docs/assembly/hifiasm_parameters.md`
-
 ## Step 1: Prepare Reads
 
-Read preparation should stay conservative. For PacBio HiFi data, the default is usually to inspect and document reads first, then trim only when adapter or artifact evidence shows that trimming improves the assembly.
+Focused web-doc draft:
 
-Detailed guidance now lives in:
+```text
+docs/assembly/prepare_reads.md
+```
 
-- `docs/assembly/prepare_reads.md`
+### Convert BAM to FASTQ
 
-Key logic:
+If reads arrive as BAM:
 
-- capture basic read statistics and expected coverage
-- avoid aggressive trimming by default
-- compare raw and filtered assemblies before changing the production workflow
-- treat `btrim` as an optional evidence-based adapter-screening path, not an automatic preprocessing step
+```bash
+module load bamtools/2.5.2
+
+bamtools convert \
+  -format fastq \
+  -in raw/sample.subreads_or_hifi.bam \
+  -out 03_reads_raw/sample.fastq
+```
+
+For many files, use a sample sheet rather than hand-written loops once this repo matures. For now, a simple loop is acceptable:
+
+```bash
+for bam in ../RawData/*/*.bam; do
+  sample=$(basename "$(dirname "$bam")")
+  file=$(basename "$bam" .bam)
+  sbatch \
+    -o 00_log/bam2fastq_${sample}_${file}.out \
+    -e 00_log/bam2fastq_${sample}_${file}.err \
+    --export infile="$bam",sample="$file",oDir="03_reads_raw/$sample" \
+    01_sbatch/bam2fastq.sbatch
+done
+```
+
+### Read QC
+
+Run basic stats first:
+
+```bash
+seqkit stats -a 03_reads_raw/*.fastq.gz > 04_reads_qc/seqkit_raw_stats.tsv
+```
+
+FastQC can be useful, but remember that it was designed around short-read assumptions. Warnings are not automatically failures for HiFi reads.
+
+```bash
+fastqc -t 8 -o 04_reads_qc/fastqc_raw 03_reads_raw/*.fastq.gz
+```
+
+Useful QC outputs:
+
+- total bases per sample
+- read count
+- read N50
+- mean/median read length
+- longest read
+- estimated coverage
+- read length histogram
+- adapter/vector hits
+- contamination sketch results
+
+### Adapter Trimming
+
+PacBio HiFi reads should already be high quality. Avoid aggressive trimming unless you have evidence of adapters or bad run-specific artifacts.
+
+Possible tools:
+
+- `fastplong` for long-read adapter/quality cleanup.
+- `btrim` for explicit adapter-pattern screening/removal when a validated long-read-capable build and adapter pattern file are available.
+- `HiFiAdapterFilt` for PacBio HiFi adapter contamination.
+- `cutadapt` for known adapter sequences.
+- NCBI FCS-adaptor on the assembly before submission.
+
+Empirically test trimming before applying it project-wide. In many HiFi plant projects, raw HiFi reads already assemble well; unnecessary trimming can reduce total read length, remove informative terminal sequence, and occasionally reduce contiguity. A defensible approach is to compare raw and trimmed assemblies for one representative sample, then choose the strategy supported by assembly size, contiguity, BUSCO, Merqury, and dotplot evidence.
+
+Example:
+
+```bash
+fastplong \
+  -i 03_reads_raw/sample.fastq.gz \
+  -o 04_reads_qc/sample.fastplong.fastq.gz \
+  -h 04_reads_qc/sample.fastplong.html \
+  -j 04_reads_qc/sample.fastplong.json \
+  -5 -3
+```
+
+### btrim Option for HiFi Adapter Screening
+
+`btrim` is a fast adapter and quality trimming program originally described by Kong (2011). It can be used as an optional HiFi read sanitation step when you have a build that supports the read lengths in your data and a validated PacBio adapter pattern file. In this workflow, the most conservative btrim use is to separate reads with detected adapter sequence from reads with no detected adapter sequence, then assemble the adapter-free reads and compare against the raw-read assembly.
+
+Important btrim logic:
+
+- `-p patterns.txt`: adapter pattern pairs.
+- `-t reads.fastq.gz`: query reads.
+- `-o reads_adapter_detected.fastq`: reads where adapter sequence was detected and trimmed.
+- `-K reads_adapter_free.fastq`: reads with no detected adapter; these are the conservative passing reads for assembly.
+- `-3`: search/trim the 3-prime end.
+- `-e 0`: trim to the first base after detection.
+- `-v 3`: allow a small edit distance to the adapter pattern; tune only with evidence.
+- `-s summary.txt`: write summary counts.
+
+Example:
+
+```bash
+sbatch \
+  --export iFiles="03_reads_raw/*.fastq.gz",oDir=04_reads_qc/btrim,btrim_bin=/path/to/btrim,patterns=examples/btrim_patterns.example.txt,edit_distance=3 \
+  01_sbatch/btrim_hifi_adapters.sbatch
+```
+
+Interpretation:
+
+- If very few reads are flagged, compare raw and adapter-free assemblies before changing the production workflow.
+- If many reads are flagged, inspect the btrim summary, BLAST/locate adapter motifs, and run FCS-adaptor on the downstream assembly.
+- Do not assume btrim replaces FCS-adaptor; NCBI screening still matters for release.
+- Record the btrim binary/source, compile settings, pattern file, and command in `00_metadata/tool_versions.tsv` and the assembly decision log.
+
+### Coverage Calculation
+
+Coverage is:
+
+```text
+coverage = total HiFi bases / expected haploid genome size
+```
+
+For example:
+
+```text
+30 Gb HiFi reads / 1.0 Gb genome = 30x
+```
+
+Target coverage depends on genome size, heterozygosity, and budget, but 25-40x HiFi is often a practical minimum for many diploid plant assemblies, while 40-80x is common for robust crop projects. Very high coverage can help, but can also increase compute cost and make heterozygosity/polyploid signals more complex.
 
 ## Step 2: Estimate Genome Properties
 
-Estimate genome size, heterozygosity, repeat content, and ploidy signal before assembly. This is where we decide whether the sample behaves like an inbred diploid, a heterozygous diploid, or something more polyploid or homeologous.
+Before assembly, estimate genome size, heterozygosity, repeats, and ploidy signal from k-mers.
 
-Detailed guidance now lives in:
+Focused web-doc draft:
 
-- `docs/assembly/genome_profiling.md`
+```text
+docs/assembly/genome_profiling.md
+```
 
-Key logic:
+### meryl + GenomeScope
 
-- use `meryl` or `jellyfish` plus GenomeScope
-- use Smudgeplot when ploidy or dosage is unclear
-- optionally use USDA-ARS-GBRU `StandardizedHeterozygosityEvaluation` when reliable haplotype assemblies exist
-- compare profiling expectations against later hifiasm logs, BUSCO, Merqury, and final assembly size
+Merqury uses `meryl`, so using meryl early makes sense.
+
+```bash
+meryl k=21 count output 05_kmers/sample.k21.meryl 03_reads_raw/sample.fastq.gz
+meryl histogram 05_kmers/sample.k21.meryl > 05_kmers/sample.k21.hist
+```
+
+Upload the histogram to GenomeScope 2.0 or run a local GenomeScope installation.
+
+Record:
+
+- estimated genome size
+- heterozygosity
+- repeat content
+- main k-mer peak
+- whether the model fit looks believable
+
+For polyploid crops, also use Smudgeplot when ploidy or subgenome structure is uncertain.
+
+### Standardized Heterozygosity from Haplotype Assemblies
+
+When high-quality haplotype-level assemblies are available for the same individual, use the USDA-ARS-GBRU [StandardizedHeterozygosityEvaluation](https://github.com/USDA-ARS-GBRU/StandardizedHeterozygosityEvaluation) approach as an optional standardized estimate of percent heterozygosity.
+
+Conceptual workflow:
+
+1. Align haplotype assembly 1 and haplotype assembly 2 with MUMmer `nucmer`.
+2. Extract non-repetitive SNPs with `show-snps -Clr`.
+3. Count SNP records, excluding the `show-snps` header lines.
+4. Divide the SNP count by organism genome size.
+5. Multiply by 100 to report percent heterozygosity.
+
+Example:
+
+```bash
+module load mummer
+
+ref=07_assemblies/sample.hap1.fa
+query=07_assemblies/sample.hap2.fa
+out=05_kmers/sample.hap1_vs_hap2
+genome_size=1000000000
+
+nucmer --prefix="${out}" "${ref}" "${query}"
+show-snps -Clr "${out}.delta" > "${out}.nonrepeat.snps"
+
+total_lines=$(wc -l < "${out}.nonrepeat.snps")
+snp_count=$((total_lines - 5))
+awk -v snps="${snp_count}" -v genome="${genome_size}" \
+  'BEGIN { printf "percent_heterozygosity\t%.6f\n", (snps / genome) * 100 }'
+```
+
+Use this estimate with care:
+
+- It requires reliable haplotype assemblies from the same individual.
+- It measures SNP differences captured between assembled haplotypes, not all possible heterozygous variation.
+- It is most comparable across projects when the same alignment, SNP extraction, repeat handling, and genome-size assumptions are used.
+- It complements k-mer approaches such as GenomeScope/Smudgeplot, which estimate heterozygosity directly from reads before assembly.
+
+### Jellyfish Alternative
+
+```bash
+jellyfish count -C -m 21 -s 10G -t 32 \
+  -o 05_kmers/sample.jf \
+  <(zcat 03_reads_raw/sample.fastq.gz)
+
+jellyfish histo -t 32 05_kmers/sample.jf > 05_kmers/sample.jf.hist
+```
+
+### Interpreting hifiasm Coverage Peaks
+
+hifiasm logs do not usually print a friendly "coverage = X" line. Instead, inspect:
+
+```bash
+grep -E "collected|genome size|peak_hom|peak_het|peak" 00_log/hifiasm_sample.err
+```
+
+Useful values:
+
+- total collected bases
+- estimated genome size
+- `peak_hom`
+- `peak_het`
+
+For highly inbred lines, a strong homozygous peak and weak/no heterozygous peak is expected. For heterozygous diploids, a heterozygous peak near half the homozygous peak can be normal. For polyploids, multiple peaks may represent allele dosage and homeologous structure.
 
 ## Step 3: Assemble with hifiasm
 
-`hifiasm` remains the default assembler in this protocol, but the important decision is not just how to run it. It is how to choose among default primary assembly, Hi-C integrated runs, trio-aware runs, and diagnostic parameter tests without overfitting the assembly to one metric.
+Focused web-doc drafts:
 
-Detailed guidance now lives in:
+```text
+docs/assembly/hifiasm.md
+docs/assembly/hifiasm_parameters.md
+```
 
-- `docs/assembly/hifiasm.md`
-- `docs/assembly/hifiasm_parameters.md`
+### Basic HiFi-Only Assembly
 
-Key logic:
+```bash
+hifiasm \
+  -t 32 \
+  -o 06_hifiasm/sample/sample \
+  03_reads_raw/sample.fastq.gz \
+  2> 00_log/hifiasm_sample.err
+```
 
-- start with a default HiFi-only assembly for many crop projects
-- use Hi-C integrated mode when phased outputs are biologically valuable
-- treat `-l0` and other non-default parameters as diagnostics unless evidence supports them
-- compare assemblies using contiguity, BUSCO, Merqury, dotplots, contamination review, and biological plausibility rather than N50 alone
-- record every non-default choice in the assembly decision log
+If a sample has multiple FASTQ files:
+
+```bash
+hifiasm \
+  -t 32 \
+  -o 06_hifiasm/sample/sample \
+  03_reads_raw/sample_run1.fastq.gz \
+  03_reads_raw/sample_run2.fastq.gz \
+  2> 00_log/hifiasm_sample.err
+```
+
+### Hi-C Integrated hifiasm Assembly
+
+Use this when Hi-C reads are from the same individual/genotype and you want phased assemblies.
+
+```bash
+hifiasm \
+  -t 48 \
+  -o 06_hifiasm/sample_hic/sample_hic \
+  --h1 hic_R1.fastq.gz \
+  --h2 hic_R2.fastq.gz \
+  03_reads_raw/sample.fastq.gz \
+  2> 00_log/hifiasm_sample_hic.err
+```
+
+hifiasm does not perform final chromosome scaffolding. After Hi-C integrated phasing, use a scaffolder such as YaHS, SALSA2, or 3D-DNA/Juicer on the haplotype contigs.
+
+### Inbred or Odd Samples: Test `-l0`
+
+For inbred/homozygous genomes, hifiasm documentation notes that `-l0` disables purging. This can be useful as a diagnostic, not necessarily as the final assembly.
+
+```bash
+hifiasm \
+  -t 32 \
+  -l0 \
+  -o 06_hifiasm/sample_l0/sample_l0 \
+  03_reads_raw/sample.fastq.gz \
+  2> 00_log/hifiasm_sample_l0.err
+```
+
+Compare default and `-l0` assemblies using assembly size, contig count, BUSCO duplication, Merqury spectra, and dotplots.
+
+### Memory and Runtime
+
+For crop plants, start conservatively:
+
+| Genome size | Initial hifiasm request |
+| --- | --- |
+| < 500 Mb | 16-32 CPUs, 64-128G |
+| 500 Mb - 1.5 Gb | 32 CPUs, 128-300G |
+| 1.5 - 5 Gb | 32-64 CPUs, 300-750G |
+| > 5 Gb or polyploid | 64+ CPUs, highmem node, test subset first |
+
+These are starting points, not guarantees. Always inspect `seff`, `sacct`, or your cluster's accounting tools after jobs finish.
 
 ## Step 4: Convert and Organize hifiasm Outputs
 

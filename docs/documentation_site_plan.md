@@ -39,6 +39,12 @@ docs/
 
 The initial section landing pages now exist under `docs/`. They are intentionally light index pages until the README-to-docs migration begins. A first MkDocs configuration is now maintained in `mkdocs.yml`.
 
+The planned publication target is GitHub Pages at:
+
+```text
+https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/
+```
+
 The first focused migration pages are:
 
 - `docs/assembly/hifiasm.md`

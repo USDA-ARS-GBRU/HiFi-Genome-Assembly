@@ -12,6 +12,12 @@ The preserved pre-condensation source copy for this migration phase is:
 docs/archive/README.longform.v0.5.0-dev.md
 ```
 
+An additional pre-assembly-condensation snapshot is preserved at:
+
+```text
+docs/archive/README.longform.pre-assembly-condense.v0.5.0-dev.md
+```
+
 ## Shortening Order
 
 Shorten sections in this order after v0.5 content review:

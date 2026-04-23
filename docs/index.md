@@ -34,4 +34,6 @@ For the planned conversion from longform README to focused GitHub documentation,
 
 For the platform choice and migration rationale, see [Documentation Platform Decision](site_platform_decision.md).
 
+For MkDocs publishing and GitHub Pages deployment, see [MkDocs and GitHub Pages Publishing](mkdocs_publishing.md).
+
 For public release metadata, see [Citation and License Review](release/citation_license_review.md).
