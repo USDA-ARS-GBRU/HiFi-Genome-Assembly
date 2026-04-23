@@ -18,6 +18,8 @@ jobs:
         run: bash -n 01_sbatch_templates/*.sbatch
       - name: Check README inventory
         run: python scripts/check_repo_inventory.py --readme README.md -o /tmp/repo_inventory.tsv
+      - name: Check local Markdown links
+        run: python scripts/check_markdown_links.py README.md docs -o /tmp/markdown_links.tsv
       - name: Validate toy FASTA
         run: python scripts/validate_fasta.py examples/toy/toy_assembly.fa --min-length 1
       - name: Validate toy AGP

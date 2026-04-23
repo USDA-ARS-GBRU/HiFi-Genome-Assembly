@@ -21,6 +21,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added web-doc AGP page under scaffolding.
 - Added focused read-preparation docs page with btrim/HiFiAdapterFilt decision logic.
 - Added empty centromere fixture to test unsupported T2T readiness cases.
+- Added focused genome-profiling docs page.
+- Added focused contamination-review docs page.
+- Added local Markdown link checker for documentation navigation.
 
 ## 0.4.0-dev
 

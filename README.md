@@ -144,6 +144,7 @@ Starter helper scripts are available in:
 ```text
 scripts/collect_qc_dashboard.py
 scripts/check_repo_inventory.py
+scripts/check_markdown_links.py
 scripts/compare_scaffolding_candidates.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
@@ -303,6 +304,7 @@ docs/3d_dna_juicebox_workflow.md
 docs/agp_summary_workflow.md
 docs/agp_after_splitting.md
 docs/assembly/hifiasm.md
+docs/assembly/genome_profiling.md
 docs/assembly/prepare_reads.md
 docs/annotation_validation_examples.md
 docs/common_false_positive_corrections.md
@@ -349,6 +351,7 @@ docs/index.md
 docs/setup/index.md
 docs/assembly/index.md
 docs/qc/index.md
+docs/qc/contamination.md
 docs/curation/index.md
 docs/scaffolding/index.md
 docs/scaffolding/agp.md
@@ -661,6 +664,12 @@ Target coverage depends on genome size, heterozygosity, and budget, but 25-40x H
 ## Step 2: Estimate Genome Properties
 
 Before assembly, estimate genome size, heterozygosity, repeats, and ploidy signal from k-mers.
+
+Focused web-doc draft:
+
+```text
+docs/assembly/genome_profiling.md
+```
 
 ### meryl + GenomeScope
 
@@ -1299,6 +1308,12 @@ scripts/make_t2t_readiness_report.py \
 ## Step 11: Contamination Screening
 
 Contamination checks should happen before and after assembly.
+
+Focused web-doc draft:
+
+```text
+docs/qc/contamination.md
+```
 
 ### Read-Level Screening
 
