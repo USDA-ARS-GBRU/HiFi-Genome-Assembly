@@ -59,7 +59,7 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, and v0.5 is the active development focus for chromosome-scale scaffolding, contact-map review, conservative gap filling, and T2T-readiness triage.
+Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, v0.5 is in content review for chromosome-scale scaffolding and release-readiness work, and v0.6 has started as an active drafting lane for telomere, centromere, and T2T-refinement guidance.
 
 Completed baseline:
 
@@ -71,6 +71,7 @@ Completed baseline:
 Current focus:
 
 - **v0.5 Scaffolding and Finishing**: chromosome-scale scaffolding with YaHS, 3D-DNA/Juicebox, RagTag comparison, conservative gap filling, and early T2T readiness checks.
+- **v0.6 Telomere, Centromere, and T2T Refinement**: conservative completeness evidence packages for telomeres, centromeres, gaps, contact maps, dotplots, and difficult repeats.
 
 ## Workflow Overview
 
@@ -160,6 +161,7 @@ scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
 scripts/audit_gff3_fasta_ids.py
 scripts/audit_release_manifest.py
+scripts/audit_t2t_evidence_package.py
 scripts/check_release_bundle.py
 scripts/compare_fasta_stats.py
 scripts/extract_hifiasm_log_metrics.py
@@ -354,10 +356,12 @@ docs/telomere_summary_workflow.md
 docs/tool_version_policy.md
 docs/toy_manual_correction_case_study.md
 docs/t2t_readiness_checklist.md
+docs/t2t_completeness_evidence_package.md
 docs/v0.4_curation_index.md
 docs/v0.4_release_candidate_checklist.md
 docs/v0.4_review_pass.md
 docs/v0.5_scaffolding_kickoff.md
+docs/v0.6_t2t_kickoff.md
 docs/yahs_hic_workflow.md
 docs/methods_text_template.md
 docs/index.md
@@ -389,6 +393,8 @@ examples/correction_evidence_checklist.tsv
 examples/dotplot_decisions.tsv
 examples/gap_filling_decisions.tsv
 examples/scaffolding_decision_case/
+examples/t2t_completeness_evidence.tsv
+examples/t2t_completeness_evidence_bad.tsv
 examples/toy/toy_gapfilled.fa
 examples/release_manifest.tsv
 examples/beginner_usability_review.tsv
@@ -1301,6 +1307,13 @@ scripts/summarize_telomeres.py \
 
 See `docs/telomere_summary_workflow.md` for interpretation and stronger `tidk`/`quarTeT` options.
 
+Reusable HPC templates:
+
+```text
+01_sbatch_templates/tidk_telomere.sbatch
+01_sbatch_templates/quartet_telomere_centromere.sbatch
+```
+
 Interpretation:
 
 - Telomere signal at both ends of a chromosome-scale scaffold supports completeness.
@@ -2149,10 +2162,16 @@ Remaining before v0.5 feature-complete:
 
 ### v0.6: Telomere, Centromere, and T2T Readiness
 
-Goal: track chromosome completeness.
+Status: **active drafting while v0.5 remains in human review**.
 
-- Add tidk examples for known and de novo telomere motifs.
-- Add quarTeT telomere/centromere examples.
+Goal: track chromosome completeness without overclaiming.
+
+- Maintain v0.6 kickoff guide.
+- Maintain T2T completeness evidence package.
+- Maintain example T2T completeness evidence table.
+- Maintain T2T completeness evidence audit helper and toy validation.
+- Maintain tidk examples for known and de novo telomere motifs.
+- Maintain quarTeT telomere/centromere examples.
 - Maintain terminal telomere summary script.
 - Refine gap status summaries into T2T readiness reporting.
 - Refine T2T readiness checklist for projects with ultra-long ONT or optical maps.

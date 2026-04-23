@@ -69,6 +69,14 @@ jobs:
         run: python scripts/make_t2t_readiness_report.py --fasta examples/toy/toy_assembly.fa --telomere-summary /tmp/toy_telomere_summary.tsv --centromere-table examples/centromere_candidates.tsv --sample toy --version 0.5.0-dev -o /tmp/toy_t2t_readiness.tsv --markdown /tmp/toy_t2t_readiness.md
       - name: Build toy T2T readiness report without centromere support
         run: python scripts/make_t2t_readiness_report.py --fasta examples/toy/toy_gapfilled.fa --telomere-summary /tmp/toy_telomere_summary.tsv --centromere-table examples/centromere_candidates_empty.tsv --sample toy_no_centromere --version 0.5.0-dev -o /tmp/toy_t2t_readiness_no_centromere.tsv
+      - name: Audit T2T completeness evidence table
+        run: python scripts/audit_t2t_evidence_package.py examples/t2t_completeness_evidence.tsv -o /tmp/t2t_evidence_audit.tsv
+      - name: Confirm T2T completeness audit catches overclaims
+        run: |
+          if python scripts/audit_t2t_evidence_package.py examples/t2t_completeness_evidence_bad.tsv -o /tmp/t2t_bad_evidence_audit.tsv; then
+            echo "expected T2T evidence audit to fail overclaimed candidate T2T row"
+            exit 1
+          fi
       - name: Build toy correction report
         run: python scripts/make_correction_report.py --sample toy --version 0.5.0-dev --decision-log examples/toy/toy_correction_decisions.tsv --decision-audit /tmp/toy_correction_decision_audit.tsv --correction-summary /tmp/toy_correction_summary.tsv --split-map /tmp/toy_split.map.tsv --fasta-comparison /tmp/toy_fasta_comparison.tsv --break-validation /tmp/toy_breaks_validation.tsv --fasta-validation /tmp/toy_split_validation.tsv -o /tmp/toy_post_correction_report.md
       - name: Audit example release manifest

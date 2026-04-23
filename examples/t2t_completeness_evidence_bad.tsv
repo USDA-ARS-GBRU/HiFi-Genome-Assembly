@@ -1,0 +1,2 @@
+sample_id	assembly_version	sequence_id	length_bp	gap_count	agp_gap_count	left_telomere_status	right_telomere_status	internal_telomere_status	centromere_status	centromere_evidence	hic_status	dotplot_status	difficult_repeat_status	claim_class	review_notes
+ToyCropBad	0.5.0-dev	chr_bad	90000000	2	2	terminal_supported	terminal_missing	possible_misjoin	low_confidence	repeat enrichment only	needs_contact_map_review	breakpoint_needs_review	unresolved_gap	candidate_t2t_chromosome	This row should fail because it overclaims T2T status.

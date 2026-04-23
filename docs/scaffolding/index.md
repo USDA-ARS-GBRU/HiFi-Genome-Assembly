@@ -15,9 +15,10 @@ Primary pages:
 - [Gap filling workflow](../gap_filling_workflow.md)
 - [Telomere summary workflow](../telomere_summary_workflow.md)
 - [T2T readiness checklist](../t2t_readiness_checklist.md)
+- [v0.6 T2T kickoff](../v0.6_t2t_kickoff.md)
+- [T2T completeness evidence package](../t2t_completeness_evidence_package.md)
 
 Planned pages:
 
 - AGP after scaffolding
 - Juicebox/JBAT screenshot guidance
-- near-gapless release evidence package

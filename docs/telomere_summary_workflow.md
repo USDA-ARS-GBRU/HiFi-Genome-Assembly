@@ -49,6 +49,13 @@ quartet.py TeloExplorer \
   -o 12_telomere_centromere/quartet_telomere
 ```
 
+HPC templates are available in:
+
+```text
+01_sbatch_templates/tidk_telomere.sbatch
+01_sbatch_templates/quartet_telomere_centromere.sbatch
+```
+
 ## Release Rule
 
 Do not claim telomere-to-telomere chromosomes from motif counts alone. Combine terminal telomere evidence with gap status, centromere candidates, Hi-C contact maps, dotplots, and unresolved repeat review.

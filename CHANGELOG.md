@@ -2,7 +2,7 @@
 
 ## 0.5.0-dev
 
-Current development focus: chromosome-scale scaffolding, contact-map review, conservative gap filling, and T2T-readiness triage.
+Current development focus: v0.5 content review plus v0.6 drafting for telomere, centromere, and T2T refinement.
 
 - Promoted v0.5 to the active development version.
 - v0.4 is now maintained as the dotplot and misassembly curation baseline.
@@ -44,6 +44,9 @@ Current development focus: chromosome-scale scaffolding, contact-map review, con
 - Added public release metadata audit and citation/license review guide.
 - Added beginner usability review guide and tracking fixture for outside-reader testing.
 - Added v0.5 release-candidate notes and tagging dry-run checklist.
+- Started v0.6 drafting with kickoff guide, T2T completeness evidence package, and example evidence table.
+- Added tidk and quarTeT sbatch templates for v0.6 telomere/centromere review.
+- Added T2T completeness evidence audit helper with positive and overclaim fixtures.
 
 ## 0.4.0-dev
 

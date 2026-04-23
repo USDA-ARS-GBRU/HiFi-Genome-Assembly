@@ -11,6 +11,7 @@ This directory is the future home of the web documentation for the crop plant Pa
 | QC | active draft | [QC](qc/index.md) |
 | Curation | maintained draft | [Curation](curation/index.md) |
 | Scaffolding and finishing | active draft | [Scaffolding and Finishing](scaffolding/index.md) |
+| Telomere, centromere, and T2T | active draft | [v0.6 T2T Kickoff](v0.6_t2t_kickoff.md) |
 | Annotation | early draft | [Annotation](annotation/index.md) |
 | Release | early draft | [Release](release/index.md) |
 

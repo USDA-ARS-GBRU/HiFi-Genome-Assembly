@@ -12,8 +12,8 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | v0.2 | complete baseline | QC dashboard and reports |
 | v0.3 | maintained baseline | validation, contamination, release readiness |
 | v0.4 | maintained baseline | dotplot review and manual curation |
-| v0.5 | active development | scaffolding, gap filling, T2T readiness, docs-site migration |
-| v0.6 | planned | telomere, centromere, and T2T refinement |
+| v0.5 | content review | scaffolding, gap filling, T2T readiness, docs-site migration |
+| v0.6 | active drafting | telomere, centromere, and T2T refinement |
 | v0.7 | planned | repeat annotation refinement |
 | v0.8 | planned | gene annotation refinement |
 | v0.9 | planned | NCBI release candidate polish |
@@ -28,6 +28,7 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | QC | active draft | metrics, contamination, and dotplots are split out |
 | Curation | maintained draft | v0.4 workflow is usable and linked |
 | Scaffolding | active draft | Hi-C, AGP, gap filling, and T2T paths are underway |
+| Telomere/T2T | active draft | v0.6 kickoff and completeness evidence package started |
 | Annotation | active draft | repeat and gene pages exist as first-pass web docs |
 | Release | active draft | NCBI submission path exists; release examples will continue to grow |
 
@@ -47,6 +48,16 @@ The root `README.md` remains the canonical longform protocol while the focused d
 - [x] v0.5 release-candidate notes exist.
 
 Current v0.5 assessment: feature-complete for scaffolding and README-migration content review, but not stable-release taggable yet. See [v0.5 Review Checklist](release/v0.5_review_checklist.md).
+
+## v0.6 Drafting Goals
+
+- [x] v0.6 kickoff guide exists.
+- [x] T2T completeness evidence package exists.
+- [x] Example completeness evidence table exists.
+- [x] Add tidk sbatch examples for known and de novo telomere motifs.
+- [x] Add quarTeT telomere and centromere sbatch examples.
+- [x] Add completeness evidence audit helper and toy validation.
+- [ ] Refine manuscript language for chromosome-scale, near-gapless, candidate T2T, and unresolved claims.
 
 ## v1.0 Gates
 
