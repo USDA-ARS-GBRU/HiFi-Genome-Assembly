@@ -24,6 +24,17 @@ In the repository settings:
 
 After that, pushes to `main` should build and publish the MkDocs site.
 
+## Current Repository Constraint
+
+As of this migration pass, the repository is private and GitHub returned:
+
+> Your current plan does not support GitHub Pages for this repository.
+
+That means the publishing workflow is ready, and local MkDocs builds work, but the public Pages site will not go live until one of these changes happens:
+
+1. the repository is made public, or
+2. the organization/account plan supports GitHub Pages for private repositories
+
 ## Current Publishing Strategy
 
 - keep the root `README.md` as the GitHub landing page

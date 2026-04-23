@@ -45,6 +45,7 @@ Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines
 - Added identifier crosswalk example and table2asn reviewer-response examples.
 - Preserved the longform README in `docs/archive/` and started MkDocs documentation-site scaffolding with the first README condensation pass for software setup.
 - Added GitHub Pages MkDocs deployment workflow, publishing guide, a second archived README snapshot, and the first assembly-focused README condensation pass.
+- Added a third archived README snapshot, documented the current private-repo Pages blocker, ignored local MkDocs build artifacts, and condensed the README QC and curation sections.
 - Updated README and docs status with current v0.5 assessment.
 - Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.

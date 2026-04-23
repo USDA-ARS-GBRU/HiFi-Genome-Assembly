@@ -31,7 +31,7 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | Telomere/T2T | active draft | v0.6 kickoff and completeness evidence package started |
 | Annotation | active draft | repeat and gene refinement lanes started; gene pages exist as first-pass web docs |
 | Release | active draft | NCBI submission path exists and v0.9 is expanding package-level release decisions |
-| Docs site | active draft | MkDocs scaffold exists, GitHub Pages deployment is being added, and README condensation has started |
+| Docs site | active draft | MkDocs scaffold exists, local builds work, Pages workflow exists, and GitHub Pages is blocked until repo visibility or plan changes |
 
 ## v0.5 Exit Goals
 

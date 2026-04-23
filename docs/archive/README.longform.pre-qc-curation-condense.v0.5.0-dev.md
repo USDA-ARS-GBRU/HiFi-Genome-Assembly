@@ -598,71 +598,243 @@ Keep raw hifiasm outputs in `06_hifiasm/`. Keep renamed, analysis-ready FASTA fi
 
 ## Step 5: Assembly Statistics
 
-Assembly statistics are evidence, not verdicts. For crop genomes, the core question is whether contiguity, completeness, duplication, and base accuracy all tell a coherent story.
+Run at least two stat tools because they report slightly different summaries.
 
-Detailed guidance now lives in:
+Focused web-doc draft:
 
-- `docs/qc/index.md`
-- `docs/qc/assembly_metrics.md`
+```text
+docs/qc/assembly_metrics.md
+```
 
-Key logic:
+### seqkit
 
-- use `seqkit`, BBTools, QUAST, BUSCO, and Merqury as complementary metrics
-- do not treat N50 as a quality claim by itself
-- interpret reference-based QUAST cautiously when cultivar-specific structure is expected
+```bash
+seqkit stats -a 07_assemblies/*.fa > 08_stats/seqkit_assembly_stats.tsv
+```
+
+### BBTools stats.sh
+
+```bash
+stats.sh in=07_assemblies/sample.primary.fa format=3 -Xmx4g > 08_stats/sample.primary.bbtools_stats.txt
+```
+
+### QUAST
+
+QUAST is useful for N50, NG50 if genome size is known, misassembly signals against a reference, and general reporting.
+
+```bash
+quast.py \
+  -t 16 \
+  -o 08_stats/quast_sample \
+  --large \
+  --est-ref-size 1000000000 \
+  07_assemblies/sample.primary.fa
+```
+
+If a close reference exists:
+
+```bash
+quast.py \
+  -t 16 \
+  -o 08_stats/quast_sample_ref \
+  -r references/close_reference.fa \
+  --large \
+  07_assemblies/sample.primary.fa
+```
+
+Do not let reference-based QUAST scores override biological evidence. A crop accession may contain real inversions, introgressions, or presence/absence variation.
 
 ## Step 6: Reference and Self Alignment Dotplots
 
-Dotplots are one of the best ways to teach assembly judgment. They reveal collinearity, inversions, duplicated haplotigs, translocations, and possible misjoins, but they are not proof by themselves.
+Dotplots are one of the best ways to teach assembly judgment. They reveal collinearity, inversions, duplicated haplotigs, translocations, and potential misjoins.
 
-Detailed guidance now lives in:
+Focused web-doc draft:
 
-- `docs/qc/dotplots.md`
-- `docs/paf_dotplot_options.md`
-- `docs/dotplot_figures.md`
+```text
+docs/qc/dotplots.md
+```
 
-Key logic:
+### MUMmer/nucmer Dotplot
 
-- generate dotplots early, before destructive correction
-- use both MUMmer and PAF-based workflows when useful
-- treat reference disagreement as a signal to investigate, not an automatic reason to break sequence
-- require independent support before changing assembly structure
+```bash
+nucmer \
+  -t 16 \
+  -c 100 \
+  -p 09_dotplots/ref_vs_sample \
+  references/close_reference.fa \
+  07_assemblies/sample.primary.fa
+
+delta-filter \
+  -i 90 \
+  -l 10000 \
+  -1 \
+  09_dotplots/ref_vs_sample.delta \
+  > 09_dotplots/ref_vs_sample.filter
+
+show-coords -r -c -l \
+  09_dotplots/ref_vs_sample.filter \
+  > 09_dotplots/ref_vs_sample.coords
+
+mummerplot \
+  -p 09_dotplots/ref_vs_sample.plot \
+  -R references/close_reference.fa \
+  --postscript \
+  --large \
+  --layout \
+  --fat \
+  09_dotplots/ref_vs_sample.filter
+```
+
+Parameter logic:
+
+- `-c 100`: minimum cluster length. Good first pass for whole-genome alignments.
+- `-i 90`: keep alignments >= 90% identity. Use higher for very close cultivars.
+- `-l 10000`: ignore tiny alignments; helps reduce repeat noise in plant genomes.
+- `-1`: keep a best one-to-one alignment chain; cleaner for visual inspection.
+
+For divergent species, reduce identity or use minimap2 `-x asm10`/`asm20` and dotplot with `pafr`, `plotsr`, or custom scripts.
+
+### How to Read MUMmer Plots
+
+In common MUMmer plot coloring:
+
+- Forward/same-orientation alignments form positive-slope diagonals.
+- Reverse-orientation alignments form negative-slope diagonals and may indicate inversions.
+- Long clean diagonals indicate collinearity.
+- Broken diagonals can indicate contig breaks, real structural variation, or misassembly.
+- Dense clusters often represent repeats, centromeres, segmental duplications, or over-alignment.
+
+Do not automatically "fix" every difference from the reference. Aggressive reference-guided correction can make dotplots look cleaner while introducing excessive breaks or erasing real cultivar-specific structural variation. Treat a cleaner reference-alignment plot as one line of evidence, not as proof that the assembly is more biologically accurate.
 
 ## Step 7: Haplotigs, Duplications, and Ploidy
 
-Haplotig duplication and ploidy interpretation sit between assembly statistics and curation. Large assembly size, high duplicated BUSCO, Merqury spectra-cn patterns, and parallel dotplot blocks can all reflect redundancy, real duplication, or polyploid biology.
+Signs of haplotig duplication:
 
-Use the QC and assembly pages together:
+- assembly size much larger than expected
+- BUSCO duplicated score high
+- primary assembly contains many short alternate-like contigs
+- k-mer spectra show assembly-only duplications
+- dotplot shows parallel duplicate alignments
 
-- `docs/qc/assembly_metrics.md`
-- `docs/assembly/genome_profiling.md`
-- `docs/assembly/hifiasm_parameters.md`
+Tools:
 
-Key logic:
+- hifiasm built-in purging/default behavior
+- purge_dups
+- purge_haplotigs
+- Merqury spectra-cn plots
+- BUSCO duplication
+- coverage mapping of HiFi reads back to assembly
 
-- compare assembly size to profiling expectations
-- inspect BUSCO duplication and Merqury spectra-cn
-- map HiFi reads back when depth interpretation matters
-- do not treat all duplication as error in polyploid or recently duplicated crop genomes
+### Map HiFi Reads Back
+
+```bash
+minimap2 -ax map-hifi -t 32 \
+  07_assemblies/sample.primary.fa \
+  03_reads_raw/sample.fastq.gz \
+  | samtools sort -@ 8 -o 08_stats/sample.hifi_to_assembly.bam
+
+samtools index 08_stats/sample.hifi_to_assembly.bam
+samtools coverage 08_stats/sample.hifi_to_assembly.bam > 08_stats/sample.hifi_coverage.tsv
+```
+
+Coverage interpretation:
+
+- Contigs at half expected coverage may be haplotigs in a primary assembly.
+- Contigs at very high coverage may be collapsed repeats or organellar sequence.
+- Contigs with very low coverage may be contamination, assembly artifacts, or rare organellar fragments.
+
+### Purge Duplicates Carefully
+
+If purging is needed:
+
+```bash
+minimap2 -x map-hifi -t 32 sample.fa reads.fastq.gz | gzip -c > sample.paf.gz
+pbcstat sample.paf.gz
+calcuts PB.stat > cutoffs 2> calcuts.log
+split_fa sample.fa > sample.split
+minimap2 -xasm5 -DP -t 32 sample.split sample.split | gzip -c > sample.split.self.paf.gz
+purge_dups -2 -T cutoffs -c PB.base.cov sample.split.self.paf.gz > dups.bed
+get_seqs -e dups.bed sample.fa
+```
+
+Treat purged outputs as candidates. Re-run BUSCO, Merqury, and dotplots before accepting.
 
 ## Step 8: Misassembly Review and Correction
 
-Dotplots identify candidates, not verdicts. High-quality PacBio HiFi contigs usually should not require many manual breaks, so the correction workflow should stay evidence-first and conservative.
+Misassembly correction should be conservative and evidence-based.
 
-Detailed guidance now lives in:
+Start with the v0.4 curation index:
 
-- `docs/curation/index.md`
-- `docs/v0.4_curation_index.md`
+```text
+docs/v0.4_curation_index.md
+```
+
+The recommended workflow is:
+
+1. Generate whole-genome and focused dotplots.
+2. Use minimap2 PAF, MUMmer, or both to identify questionable contigs.
+3. Map the reference genome to the HiFi assembly and inspect only candidate regions in IGV.
+4. Record accepted and rejected candidate edits in a correction decision log.
+5. Validate breakpoints before editing FASTA.
+6. Split only at defensible coordinates.
+7. Regenerate FASTA stats, AGP, dotplots, annotation inputs, and release validation outputs.
+8. Generate a post-correction report.
+
+Core v0.4 documents:
+
+- `docs/dotplot_misassembly_curation.md`
 - `docs/manual_correction_workflow.md`
-- `docs/toy_manual_correction_case_study.md`
+- `docs/paf_dotplot_options.md`
+- `docs/igv_breakpoint_reporting.md`
+- `docs/minimum_evidence_checklist.md`
+- `docs/rejected_corrections.md`
+- `docs/post_correction_validation.md`
+- `docs/post_correction_report_template.md`
 
-Key logic:
+Core helper scripts:
 
-- use dotplots to nominate suspicious regions
-- inspect only those regions with independent evidence such as read mapping, Hi-C, contamination, or organelle context
-- validate breakpoint coordinates before editing FASTA
-- keep accepted and rejected corrections documented
-- prefer retaining a slightly suspicious but supported contig over fragmenting the assembly without clear evidence
+- `scripts/validate_breaks.py`
+- `scripts/split_fasta_at_breaks.py`
+- `scripts/summarize_corrections.py`
+- `scripts/audit_correction_decisions.py`
+- `scripts/compare_fasta_stats.py`
+- `scripts/make_correction_report.py`
+
+Useful evidence types:
+
+- MUMmer/minimap whole-genome alignments
+- PAF-based dotplots
+- reference-to-assembly IGV inspection
+- HiFi read mapping across suspected breakpoints
+- Hi-C contact map
+- optical map or Bionano map
+- genetic map
+- agreement across related assemblies
+- telomere/centromere orientation
+- coverage changes
+
+### Automated Correction Tools
+
+Automated or semi-automated tools can nominate candidate corrections, but high-quality HiFi crop assemblies should not be broken aggressively. Treat RagTag `correct`, Breakwright-style methods, Pteranodon auto mode, and structural-difference summaries as candidate generators.
+
+RagTag correction/scaffolding examples are in:
+
+```text
+docs/ragtag_workflow.md
+01_sbatch_templates/ragtag_correct_scaffold.sbatch
+```
+
+### Manual Breaks
+
+If a contig must be manually split:
+
+1. Define the breakpoint with coordinates and evidence.
+2. Save the original contig ID and coordinates.
+3. Split with a scripted, reproducible command.
+4. Add an entry to `00_metadata/assembly_decisions.md`.
+5. Re-run stats, BUSCO, Merqury, dotplots, and contamination checks.
+
+Never edit FASTA manually in a text editor for a release assembly.
 
 ## Step 9: Chromosome-Scale Scaffolding
 
