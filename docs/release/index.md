@@ -6,6 +6,7 @@ Primary pages:
 - [Release package decision guide](../release_package_decision_guide.md)
 - [Annotation submission handoff](../annotation_submission_handoff.md)
 - [table2asn and discrepancy triage](../table2asn_discrepancy_triage.md)
+- [table2asn reviewer-response examples](../table2asn_reviewer_response_examples.md)
 - [Accession handoff worked example](../accession_handoff_worked_example.md)
 - [Community database release companion](../community_database_release_companion.md)
 - [Release methods and structured comments](../release_methods_and_structured_comments.md)

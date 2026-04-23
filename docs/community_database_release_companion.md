@@ -53,6 +53,12 @@ Instead, ship a crosswalk table that connects:
 
 This is especially important when the community database has its own nomenclature conventions, as seen in MaizeGDB and SoyBase.
 
+Toy example:
+
+```text
+examples/identifier_crosswalk.tsv
+```
+
 ## Synchronization Checklist
 
 - [ ] Assembly version matches the public submission object
@@ -108,3 +114,4 @@ Reviewer response:
 - `docs/accession_handoff_worked_example.md`
 - `docs/release_package_decision_guide.md`
 - `examples/accession_tracking.tsv`
+- `examples/identifier_crosswalk.tsv`

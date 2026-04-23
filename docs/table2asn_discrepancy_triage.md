@@ -191,5 +191,6 @@ Reviewer response:
 
 - `docs/annotation_validation_examples.md`
 - `docs/annotation_submission_handoff.md`
+- `docs/table2asn_reviewer_response_examples.md`
 - `docs/release_candidate_worked_case.md`
 - `examples/annotation_validation/expected_table2asn_review.md`

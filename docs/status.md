@@ -93,6 +93,8 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Add worked release candidate case.
 - [x] Add release bundle worked example.
 - [x] Add table2asn and discrepancy triage guide.
+- [x] Add identifier crosswalk example.
+- [x] Add table2asn reviewer-response examples.
 - [x] Add accession handoff worked example.
 - [x] Add community database release companion guide.
 
