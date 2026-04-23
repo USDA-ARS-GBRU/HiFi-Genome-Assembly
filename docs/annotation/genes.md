@@ -25,6 +25,7 @@ Before annotation, freeze:
 - decision logs for excluded contaminant, organelle, alternate, or haplotig sequences
 
 Use `docs/repeat_to_gene_annotation_handoff.md` before handing the masked genome into gene annotation.
+For release-gene-set selection, see `docs/gene_set_decision_guide.md`.
 
 ## Liftoff
 

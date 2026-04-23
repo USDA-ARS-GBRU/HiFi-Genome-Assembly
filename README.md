@@ -59,7 +59,7 @@ This workflow favors:
 
 ## Current Version
 
-Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, v0.5 is in content review for chromosome-scale scaffolding and release-readiness work, v0.6 has an active draft baseline for telomere/centromere/T2T-refinement guidance, and v0.7 has started as an active drafting lane for repeat annotation refinement.
+Current roadmap version: **v0.5.0-dev**. See `VERSION` and `CHANGELOG.md`. v0.4 is now a maintained curation baseline, v0.5 is in content review for chromosome-scale scaffolding and release-readiness work, v0.6 has an active draft baseline for telomere/centromere/T2T-refinement guidance, v0.7 has an active draft baseline for repeat annotation refinement, and v0.8 has started as an active drafting lane for gene annotation refinement.
 
 Completed baseline:
 
@@ -73,6 +73,7 @@ Current focus:
 - **v0.5 Scaffolding and Finishing**: chromosome-scale scaffolding with YaHS, 3D-DNA/Juicebox, RagTag comparison, conservative gap filling, and early T2T readiness checks.
 - **v0.6 Telomere, Centromere, and T2T Refinement**: conservative completeness evidence packages for telomeres, centromeres, gaps, contact maps, dotplots, and difficult repeats.
 - **v0.7 Repeat Annotation Refinement**: repeat-library selection, EDTA/RepeatModeler2 comparison, release-mask decisions, and gene-annotation handoff.
+- **v0.8 Gene Annotation Refinement**: release-gene-set selection, evidence-aware annotation strategy, and annotation QC/release handoff.
 
 ## Workflow Overview
 
@@ -332,6 +333,7 @@ docs/dotplot_misassembly_curation.md
 docs/dotplot_figures.md
 docs/gap_filling_workflow.md
 docs/gene_annotation.md
+docs/gene_set_decision_guide.md
 docs/hic_contact_map_qc.md
 docs/igv_breakpoint_reporting.md
 docs/igv_session_setup.md
@@ -371,6 +373,7 @@ docs/v0.4_review_pass.md
 docs/v0.5_scaffolding_kickoff.md
 docs/v0.6_t2t_kickoff.md
 docs/v0.7_repeat_annotation_kickoff.md
+docs/v0.8_gene_annotation_kickoff.md
 docs/yahs_hic_workflow.md
 docs/methods_text_template.md
 docs/index.md
@@ -411,6 +414,7 @@ examples/repeat_annotation_decisions.tsv
 examples/repeat_annotation_decisions_bad.tsv
 examples/repeat_summary_edta.tsv
 examples/repeat_summary_repeatmodeler.tsv
+examples/gene_annotation_decisions.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
 examples/btrim_patterns.example.txt
@@ -2215,15 +2219,20 @@ Goal: crop-appropriate repeat libraries and soft-masked genomes.
 
 ### v0.8: Gene Annotation
 
-Status: **started in v0.3, full refinement planned for v0.8**.
+Status: **active drafting while v0.5 remains in human review**.
 
 Goal: evidence-based gene models.
 
-- Add Liftoff workflow for cultivar-to-cultivar transfer.
-- Add BRAKER3 workflow with RNA-seq/protein evidence.
-- Add MAKER workflow for projects needing full evidence integration.
+- Maintain v0.8 gene annotation kickoff guide.
+- Maintain gene set decision guide.
+- Maintain example gene annotation decision table.
+- Maintain Liftoff workflow for cultivar-to-cultivar transfer.
+- Maintain BRAKER3 workflow with RNA-seq/protein evidence.
+- Maintain MAKER workflow for projects needing full evidence integration.
 - Maintain Liftoff, BRAKER3, and MAKER sbatch templates.
 - Maintain gene annotation strategy guide.
+- Add annotation summary comparison helper.
+- Add gene annotation decision audit helper and toy validation.
 - Add functional annotation examples.
 - Add annotation QC dashboard.
 

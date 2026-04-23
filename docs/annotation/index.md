@@ -7,6 +7,8 @@ Primary pages:
 - [Repeat library decision guide](../repeat_library_decision_guide.md)
 - [Repeat landscape interpretation](../repeat_landscape_interpretation.md)
 - [Repeat-to-gene-annotation handoff](../repeat_to_gene_annotation_handoff.md)
+- [v0.8 gene annotation kickoff](../v0.8_gene_annotation_kickoff.md)
+- [Gene set decision guide](../gene_set_decision_guide.md)
 - [Gene annotation](genes.md)
 - [Repeat annotation](../repeat_annotation.md)
 - [Gene annotation](../gene_annotation.md)

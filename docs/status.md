@@ -14,8 +14,8 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | v0.4 | maintained baseline | dotplot review and manual curation |
 | v0.5 | content review | scaffolding, gap filling, T2T readiness, docs-site migration |
 | v0.6 | active draft baseline | telomere, centromere, and T2T refinement |
-| v0.7 | active drafting | repeat annotation refinement |
-| v0.8 | planned | gene annotation refinement |
+| v0.7 | active draft baseline | repeat annotation refinement |
+| v0.8 | active drafting | gene annotation refinement |
 | v0.9 | planned | NCBI release candidate polish |
 | v1.0 | planned | stable public protocol |
 
@@ -29,7 +29,7 @@ The root `README.md` remains the canonical longform protocol while the focused d
 | Curation | maintained draft | v0.4 workflow is usable and linked |
 | Scaffolding | active draft | Hi-C, AGP, gap filling, and T2T paths are underway |
 | Telomere/T2T | active draft | v0.6 kickoff and completeness evidence package started |
-| Annotation | active draft | repeat refinement lane started; gene pages exist as first-pass web docs |
+| Annotation | active draft | repeat and gene refinement lanes started; gene pages exist as first-pass web docs |
 | Release | active draft | NCBI submission path exists; release examples will continue to grow |
 
 ## v0.5 Exit Goals
@@ -70,6 +70,17 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Add repeat annotation decision audit helper and toy validation.
 - [x] Add repeat landscape interpretation guidance.
 - [x] Add repeat-to-gene-annotation handoff checklist.
+
+## v0.8 Drafting Goals
+
+- [x] v0.8 gene annotation kickoff guide exists.
+- [x] Gene set decision guide exists.
+- [x] Example gene annotation decision table exists.
+- [x] Liftoff, BRAKER3, and MAKER sbatch templates exist.
+- [ ] Add annotation summary comparison helper.
+- [ ] Add gene annotation decision audit helper and toy validation.
+- [ ] Add functional annotation guide.
+- [ ] Add annotation QC dashboard guide.
 
 ## v1.0 Gates
 

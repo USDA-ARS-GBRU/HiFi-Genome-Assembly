@@ -25,6 +25,7 @@ Prepare:
 - decision log for excluded contaminant, organellar, alternate, and haplotig sequences
 
 Use `docs/repeat_to_gene_annotation_handoff.md` before starting annotation so the repeat mask, repeat GFF, and final release sequence IDs stay synchronized.
+For release-gene-set comparison and selection, see `docs/gene_set_decision_guide.md`.
 
 ## Liftoff Template
 
