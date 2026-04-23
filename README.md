@@ -154,6 +154,7 @@ scripts/check_repo_inventory.py
 scripts/check_markdown_links.py
 scripts/check_docs_coverage.py
 scripts/check_project_metadata.py
+scripts/check_public_release_metadata.py
 scripts/compare_scaffolding_candidates.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
@@ -375,6 +376,7 @@ docs/annotation/index.md
 docs/annotation/repeats.md
 docs/annotation/genes.md
 docs/release/index.md
+docs/release/citation_license_review.md
 docs/release/ncbi_submission.md
 docs/release/v0.5_review_checklist.md
 examples/accession_tracking.tsv

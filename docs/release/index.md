@@ -3,6 +3,7 @@
 Primary pages:
 
 - [NCBI submission path](ncbi_submission.md)
+- [Citation and license review](citation_license_review.md)
 - [v0.5 review checklist](v0.5_review_checklist.md)
 - [Release checklist](../release_checklist.md)
 - [NCBI submission](../ncbi_submission.md)
