@@ -51,6 +51,7 @@ Current development focus: v0.5 content review, v0.6 telomere/centromere/T2T ref
 - Added worked completeness claim case translating mixed evidence into manuscript and reviewer-response language.
 - Started v0.7 repeat annotation drafting with kickoff guide, repeat library decision guide, and example decision table.
 - Updated README release and roadmap sections to reflect v0.5 review, v0.6 draft baseline, and v0.7 active drafting.
+- Added repeat summary comparison and repeat annotation decision audit helpers with positive and negative fixtures.
 
 ## 0.4.0-dev
 

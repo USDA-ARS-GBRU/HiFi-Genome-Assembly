@@ -157,11 +157,13 @@ scripts/check_markdown_links.py
 scripts/check_docs_coverage.py
 scripts/check_project_metadata.py
 scripts/check_public_release_metadata.py
+scripts/compare_repeat_summaries.py
 scripts/compare_scaffolding_candidates.py
 scripts/audit_fasta_headers.py
 scripts/audit_correction_decisions.py
 scripts/audit_gff3_fasta_ids.py
 scripts/audit_release_manifest.py
+scripts/audit_repeat_annotation_decisions.py
 scripts/audit_t2t_evidence_package.py
 scripts/check_release_bundle.py
 scripts/compare_fasta_stats.py
@@ -404,6 +406,9 @@ examples/toy/toy_gapfilled.fa
 examples/release_manifest.tsv
 examples/beginner_usability_review.tsv
 examples/repeat_annotation_decisions.tsv
+examples/repeat_annotation_decisions_bad.tsv
+examples/repeat_summary_edta.tsv
+examples/repeat_summary_repeatmodeler.tsv
 examples/release_bundle/
 examples/contamination_decisions.tsv
 examples/btrim_patterns.example.txt
@@ -2201,8 +2206,8 @@ Goal: crop-appropriate repeat libraries and soft-masked genomes.
 - Add repeat GFF/BED track preparation.
 - Maintain EDTA and RepeatModeler2/RepeatMasker sbatch templates.
 - Maintain repeat annotation strategy guide.
-- Add repeat summary comparison helper.
-- Add repeat annotation decision audit helper and toy validation.
+- Maintain repeat summary comparison helper.
+- Maintain repeat annotation decision audit helper and toy validation.
 - Add repeat-to-gene-annotation handoff checklist.
 
 ### v0.8: Gene Annotation

@@ -1,0 +1,2 @@
+sample	total_masked_percent	ltr_percent	dna_transposon_percent	unclassified_percent	method	notes
+ToyCrop01	69.8	41.2	9.1	18.7	RepeatModeler2_RepeatMasker	Independent comparison candidate with higher unclassified burden.

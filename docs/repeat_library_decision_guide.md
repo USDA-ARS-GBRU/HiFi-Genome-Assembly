@@ -51,6 +51,23 @@ Prefer the candidate that is:
 - not inflated by contamination, organelles, haplotig duplication, or unreviewed alternate haplotypes
 - clear about unclassified repeat burden
 
+Compare repeat summaries before choosing the release mask:
+
+```bash
+scripts/compare_repeat_summaries.py \
+  --candidate edta=examples/repeat_summary_edta.tsv \
+  --candidate repeatmodeler=examples/repeat_summary_repeatmodeler.tsv \
+  -o /tmp/repeat_summary_comparison.tsv
+```
+
+Audit the final decision log before release:
+
+```bash
+scripts/audit_repeat_annotation_decisions.py \
+  examples/repeat_annotation_decisions.tsv \
+  -o /tmp/repeat_annotation_decision_audit.tsv
+```
+
 ## Common Decision Cases
 
 | Observation | Interpretation | Action |

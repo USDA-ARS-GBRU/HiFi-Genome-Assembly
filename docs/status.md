@@ -66,8 +66,8 @@ Current v0.5 assessment: feature-complete for scaffolding and README-migration c
 - [x] Repeat library decision guide exists.
 - [x] Example repeat annotation decision table exists.
 - [x] EDTA and RepeatModeler2/RepeatMasker sbatch templates exist.
-- [ ] Add repeat summary comparison helper.
-- [ ] Add repeat annotation decision audit helper and toy validation.
+- [x] Add repeat summary comparison helper.
+- [x] Add repeat annotation decision audit helper and toy validation.
 - [ ] Add repeat landscape interpretation guidance.
 - [ ] Add repeat-to-gene-annotation handoff checklist.
 

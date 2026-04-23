@@ -88,6 +88,16 @@ jobs:
             --repeat-summary examples/repeat_summary.tsv \
             --annotation-summary examples/annotation_summary.tsv \
             -o /tmp/assembly_qc_dashboard.tsv
+      - name: Compare repeat summary candidates
+        run: python scripts/compare_repeat_summaries.py --candidate edta=examples/repeat_summary_edta.tsv --candidate repeatmodeler=examples/repeat_summary_repeatmodeler.tsv -o /tmp/repeat_summary_comparison.tsv
+      - name: Audit repeat annotation decision table
+        run: python scripts/audit_repeat_annotation_decisions.py examples/repeat_annotation_decisions.tsv -o /tmp/repeat_annotation_decision_audit.tsv
+      - name: Confirm repeat annotation decision audit catches contradictions
+        run: |
+          if python scripts/audit_repeat_annotation_decisions.py examples/repeat_annotation_decisions_bad.tsv -o /tmp/repeat_annotation_decision_bad_audit.tsv; then
+            echo "expected repeat annotation decision audit to fail contradictory release choices"
+            exit 1
+          fi
       - name: Summarize toy organelle PAF
         run: |
           printf 'unplaced_000001\t47\t0\t42\t+\tchloroplast_ref\t150000\t10\t52\t42\t42\t60\n' > /tmp/toy_organelle.paf
