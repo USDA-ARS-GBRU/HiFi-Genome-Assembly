@@ -1,6 +1,6 @@
 # Documentation Status and Roadmap
 
-Current version: `0.7.0-dev`
+Current version: `0.8.0-dev`
 
 The root `README.md` now serves as a concise landing page while the focused documentation tree carries the detailed protocol. The goal before v1.0 is to keep the repo front page short and keep detailed procedures in `docs/`.
 
@@ -14,8 +14,8 @@ The root `README.md` now serves as a concise landing page while the focused docu
 | v0.4 | maintained baseline | dotplot review and manual curation |
 | v0.5 | signed off | stable baseline for scaffolding, gap filling, T2T readiness, docs-site migration |
 | v0.6 | completed first draft | telomere, centromere, and T2T refinement |
-| v0.7 | active development | repeat annotation refinement |
-| v0.8 | active draft baseline | gene annotation refinement |
+| v0.7 | completed first draft | repeat annotation refinement |
+| v0.8 | active development | gene annotation refinement |
 | v0.9 | active drafting | NCBI release candidate polish |
 | v1.0 | planned | stable public protocol |
 
@@ -51,7 +51,7 @@ The root `README.md` now serves as a concise landing page while the focused docu
 - [x] v0.5 human-review runbook exists.
 - [x] v0.5 maintainer precheck exists.
 
-Current v0.5 assessment: signed off as the stable `v0.5.0` baseline. Current development focus has moved to `v0.7.0-dev`, while future human validation before `v1.0` should focus on the broader full-protocol experience, active-draft lanes, and contributor feedback rather than reopening the v0.5 release decision itself.
+Current v0.5 assessment: signed off as the stable `v0.5.0` baseline. Current development focus has moved to `v0.8.0-dev`, while future human validation before `v1.0` should focus on the broader full-protocol experience, active-draft lanes, and contributor feedback rather than reopening the v0.5 release decision itself.
 
 ## v0.6 Drafting Goals
 
@@ -78,6 +78,9 @@ Current v0.6 assessment: coherent first-draft packet complete.
 - [x] Add repeat landscape interpretation guidance.
 - [x] Add repeat-to-gene-annotation handoff checklist.
 - [x] Add hard-case repeat interpretation examples.
+- [x] Add repeat release-mask decision case or packet-closing summary.
+
+Current v0.7 assessment: coherent first-draft packet complete.
 
 ## v0.8 Drafting Goals
 
@@ -89,6 +92,7 @@ Current v0.6 assessment: coherent first-draft packet complete.
 - [x] Add gene annotation decision audit helper and toy validation.
 - [x] Add functional annotation guide.
 - [x] Add annotation QC dashboard guide.
+- [x] Add worked gene-set disagreement case.
 
 ## v0.9 Drafting Goals
 

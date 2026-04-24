@@ -9,6 +9,7 @@ This packet is the shortest ordered route through the v0.8 gene-annotation mater
 3. [Gene set decision guide](gene_set_decision_guide.md)
 4. [Functional annotation guide](functional_annotation_guide.md)
 5. [Annotation QC dashboard guide](annotation_qc_dashboard_guide.md)
+6. [Gene-set disagreement case](gene_set_disagreement_case.md)
 
 ## What This Packet Should Produce
 
@@ -17,6 +18,7 @@ By the end of this sequence, you should have:
 - a release-gene-set decision
 - a clear evidence path for functional annotation
 - an annotation QC summary that is ready for internal review or release planning
+- a worked example showing how to resolve disagreement between competing gene-set candidates
 
 ## When To Use This Page
 

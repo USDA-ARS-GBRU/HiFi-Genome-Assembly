@@ -11,6 +11,7 @@ This packet is the shortest ordered route through the v0.7 repeat-annotation mat
 5. [Repeat-to-gene-annotation handoff](repeat_to_gene_annotation_handoff.md)
 6. [Repeat unclassified burden case](repeat_unclassified_burden_case.md)
 7. [Repeat-rich unplaced contigs case](repeat_unplaced_contigs_case.md)
+8. [Repeat release-mask decision case](repeat_release_mask_decision_case.md)
 
 ## What This Packet Should Produce
 
@@ -20,6 +21,7 @@ By the end of this sequence, you should have:
 - a release-mask rationale
 - a repeat summary that is ready to hand off into annotation
 - examples of two common hard repeat-decision cases that often cause overinterpretation
+- a conservative release-mask decision you can defend in annotation and release review
 
 ## When To Use This Page
 

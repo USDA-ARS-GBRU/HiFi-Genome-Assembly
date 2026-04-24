@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.0-dev
+
+Current development focus: v0.8 active development, with v0.7 preserved as a completed first-draft repeat packet and v0.9 queued for tighter release handoff polish.
+
+- Promoted the repository development version to `0.8.0-dev`.
+- Marked v0.7 as a coherent first-draft packet and shifted the active lane to v0.8 gene annotation refinement.
+- Added a repeat release-mask decision case to close the v0.7 packet more cleanly.
+- Added a worked gene-set disagreement case and linked it into the v0.8 packet and roadmap.
+- Tightened the v0.9 release submission packet into a clearer internal handoff flow for lab use.
+
 ## 0.7.0-dev
 
 Current development focus: v0.7 active development, with v0.8-v0.9 maintained as active draft lanes under the signed-off v0.5 baseline and the completed first-draft v0.6 packet.

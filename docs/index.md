@@ -64,6 +64,8 @@ If you want a more concrete path instead of a section-by-section tour, start her
 - [Worked project paths](worked_project_paths.md)
 - [Diploid inbred HiFi-only path](case_paths/diploid_inbred_hifi_only.md)
 - [Heterozygous HiFi plus Hi-C path](case_paths/heterozygous_hifi_hic.md)
+- [Reference-guided crop path](case_paths/reference_guided_crop.md)
+- [Polyploid crop path](case_paths/polyploid_crop.md)
 
 ## Project Status
 

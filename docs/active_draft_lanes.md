@@ -2,7 +2,7 @@
 
 This page separates the signed-off `v0.5.0` baseline from the active-draft lanes that are still being expanded before a broader `v1.0` validation cycle.
 
-Current active development version: `v0.7.0-dev`
+Current active development version: `v0.8.0-dev`
 
 ## Stable Baseline
 
@@ -46,7 +46,7 @@ Best starting pages:
 
 Status:
 
-- current active development lane
+- completed first-draft packet
 
 Focus:
 
@@ -62,8 +62,13 @@ Best starting pages:
 - [repeat-to-gene handoff](repeat_to_gene_annotation_handoff.md)
 - [repeat unclassified burden case](repeat_unclassified_burden_case.md)
 - [repeat-rich unplaced contigs case](repeat_unplaced_contigs_case.md)
+- [repeat release-mask decision case](repeat_release_mask_decision_case.md)
 
 ### v0.8 Gene Annotation Refinement
+
+Status:
+
+- current active development lane
 
 Focus:
 
@@ -77,6 +82,7 @@ Best starting pages:
 - [gene annotation packet](gene_annotation_packet.md)
 - [gene set decision guide](gene_set_decision_guide.md)
 - [annotation QC dashboard guide](annotation_qc_dashboard_guide.md)
+- [gene-set disagreement case](gene_set_disagreement_case.md)
 
 ### v0.9 NCBI Release Candidate Polish
 

@@ -15,6 +15,7 @@ This section covers the path from a frozen assembly and annotation set to a cohe
 - [NCBI submission path](ncbi_submission.md)
 - [Release package decision guide](../release_package_decision_guide.md)
 - [Annotation submission handoff](../annotation_submission_handoff.md)
+- [Accession handoff worked example](../accession_handoff_worked_example.md)
 - [table2asn and discrepancy triage](../table2asn_discrepancy_triage.md)
 - [Release bundle worked example](../release_bundle_worked_example.md)
 - [Community database release companion](../community_database_release_companion.md)
@@ -29,6 +30,7 @@ After this section, you should have:
 - reviewer-ready language for release methods and discrepancy cleanup
 
 If you want the shortest ordered route through release readiness, start with [Release submission packet](../release_submission_packet.md).
+If you want the most operational version of that path for an internal lab handoff, use the handoff-flow sections on that page as your checklist.
 
 ## Read Next
 
