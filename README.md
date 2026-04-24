@@ -120,7 +120,7 @@ Helpful indexes:
 
 ## Version and Roadmap
 
-Current project version: **v0.8.0-dev**
+Current project version: **v0.9.0-dev**
 
 Current roadmap state:
 
@@ -128,8 +128,8 @@ Current roadmap state:
 - `v0.5`: signed-off stable baseline for scaffolding, gap filling, T2T readiness, and docs migration
 - `v0.6`: completed first-draft packet for telomere, centromere, and completeness claims
 - `v0.7`: completed first-draft packet for repeat annotation refinement
-- `v0.8`: current active development lane for gene annotation refinement
-- `v0.9`: active draft baseline for NCBI release-candidate polish
+- `v0.8`: completed first-draft packet for gene annotation refinement
+- `v0.9`: current active development lane for NCBI release-candidate polish
 - `v1.0`: stable public protocol target
 
 See:

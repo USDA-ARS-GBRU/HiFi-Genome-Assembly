@@ -20,6 +20,7 @@ nav:
   - Repeat Release-Mask Decision Case: repeat_release_mask_decision_case.md
   - Gene Annotation Packet: gene_annotation_packet.md
   - Gene-Set Disagreement Case: gene_set_disagreement_case.md
+  - Gene ID Preservation vs Novel-Locus Recovery Case: gene_id_preservation_vs_novel_loci_case.md
   - sbatch Templates: sbatch/index.md
   - Scripts: scripts/index.md
   - Worked Project Paths:
@@ -104,6 +105,7 @@ nav:
       - Genes: annotation/genes.md
       - Gene Set Decisions: gene_set_decision_guide.md
       - Gene-Set Disagreement Case: gene_set_disagreement_case.md
+      - Gene ID Preservation vs Novel-Locus Recovery Case: gene_id_preservation_vs_novel_loci_case.md
       - Functional Annotation: functional_annotation_guide.md
       - Annotation QC Dashboard: annotation_qc_dashboard_guide.md
       - Annotation Validation Examples: annotation_validation_examples.md
@@ -123,6 +125,7 @@ nav:
       - Release Candidate Worked Case: release_candidate_worked_case.md
       - Release Bundle Worked Example: release_bundle_worked_example.md
       - Release Internal Handoff Flow: release_submission_packet.md
+      - Release Internal Handoff Example: release_internal_handoff_example.md
       - NCBI Metadata Templates: ncbi_metadata_templates.md
   - Templates and Checklists:
       - Overview: workflow_templates/index.md

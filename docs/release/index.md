@@ -18,6 +18,7 @@ This section covers the path from a frozen assembly and annotation set to a cohe
 - [Accession handoff worked example](../accession_handoff_worked_example.md)
 - [table2asn and discrepancy triage](../table2asn_discrepancy_triage.md)
 - [Release bundle worked example](../release_bundle_worked_example.md)
+- [Release internal handoff example](../release_internal_handoff_example.md)
 - [Community database release companion](../community_database_release_companion.md)
 
 ## Practical Outcome

@@ -20,6 +20,7 @@ This section covers repeat annotation, masking strategy, gene annotation, and th
 - [Gene annotation](genes.md)
 - [Gene set decision guide](../gene_set_decision_guide.md)
 - [Gene-set disagreement case](../gene_set_disagreement_case.md)
+- [Gene ID preservation vs novel-locus recovery case](../gene_id_preservation_vs_novel_loci_case.md)
 - [Functional annotation guide](../functional_annotation_guide.md)
 
 ## Practical Outcome

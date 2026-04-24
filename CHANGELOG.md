@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0-dev
+
+Current development focus: v0.9 active development, with v0.8 preserved as a completed first-draft gene-annotation packet and release readiness now receiving the same packet-tightening treatment as earlier lanes.
+
+- Promoted the repository development version to `0.9.0-dev`.
+- Marked v0.8 as a coherent first-draft packet and shifted the active lane to v0.9 release-candidate polish.
+- Added a hard gene-annotation case for balancing inherited ID continuity against supported novel-locus recovery.
+- Added a worked internal release handoff example so the release packet reads more like an executable lab handoff.
+
 ## 0.8.0-dev
 
 Current development focus: v0.8 active development, with v0.7 preserved as a completed first-draft repeat packet and v0.9 queued for tighter release handoff polish.

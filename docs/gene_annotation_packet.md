@@ -10,6 +10,7 @@ This packet is the shortest ordered route through the v0.8 gene-annotation mater
 4. [Functional annotation guide](functional_annotation_guide.md)
 5. [Annotation QC dashboard guide](annotation_qc_dashboard_guide.md)
 6. [Gene-set disagreement case](gene_set_disagreement_case.md)
+7. [Gene ID preservation vs novel-locus recovery case](gene_id_preservation_vs_novel_loci_case.md)
 
 ## What This Packet Should Produce
 
@@ -19,6 +20,7 @@ By the end of this sequence, you should have:
 - a clear evidence path for functional annotation
 - an annotation QC summary that is ready for internal review or release planning
 - a worked example showing how to resolve disagreement between competing gene-set candidates
+- a worked example for balancing familiar inherited IDs against supported novel biology
 
 ## When To Use This Page
 

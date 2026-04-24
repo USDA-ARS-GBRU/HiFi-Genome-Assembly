@@ -59,12 +59,14 @@ Read:
 
 1. [Release candidate worked case](release_candidate_worked_case.md)
 2. [table2asn reviewer-response examples](table2asn_reviewer_response_examples.md)
+3. [Release internal handoff example](release_internal_handoff_example.md)
 
 Output:
 
 - a final handoff folder
 - short methods text
 - short reviewer-response language for common release questions
+- one concrete example of how to package the handoff for another lab member
 
 ## Recommended Packet Order
 
@@ -76,7 +78,8 @@ Output:
 6. [Release methods and structured comments](release_methods_and_structured_comments.md)
 7. [table2asn and discrepancy triage](table2asn_discrepancy_triage.md)
 8. [Release candidate worked case](release_candidate_worked_case.md)
-9. [Community database release companion](community_database_release_companion.md)
+9. [Release internal handoff example](release_internal_handoff_example.md)
+10. [Community database release companion](community_database_release_companion.md)
 
 ## What This Packet Should Produce
 

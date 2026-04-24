@@ -2,7 +2,7 @@
 
 This page separates the signed-off `v0.5.0` baseline from the active-draft lanes that are still being expanded before a broader `v1.0` validation cycle.
 
-Current active development version: `v0.8.0-dev`
+Current active development version: `v0.9.0-dev`
 
 ## Stable Baseline
 
@@ -68,7 +68,7 @@ Best starting pages:
 
 Status:
 
-- current active development lane
+- completed first-draft packet
 
 Focus:
 
@@ -83,8 +83,13 @@ Best starting pages:
 - [gene set decision guide](gene_set_decision_guide.md)
 - [annotation QC dashboard guide](annotation_qc_dashboard_guide.md)
 - [gene-set disagreement case](gene_set_disagreement_case.md)
+- [gene ID preservation vs novel-locus recovery case](gene_id_preservation_vs_novel_loci_case.md)
 
 ### v0.9 NCBI Release Candidate Polish
+
+Status:
+
+- current active development lane
 
 Focus:
 
@@ -97,14 +102,13 @@ Best starting pages:
 - [v0.9 release kickoff](v0.9_ncbi_release_kickoff.md)
 - [release submission packet](release_submission_packet.md)
 - [release package decision guide](release_package_decision_guide.md)
+- [release internal handoff example](release_internal_handoff_example.md)
 
 ## Sequential Goal
 
 The current goal is to finish the first tightened draft of each remaining lane in order:
 
-1. `v0.7`
-2. `v0.8`
-3. `v0.9`
+1. `v0.9`
 
 After each lane feels coherent as a packet, the repository version can move forward to the next active development lane while keeping earlier lanes available as stable or near-stable references.
 
