@@ -11,6 +11,7 @@ This section covers the path from a frozen assembly and annotation set to a cohe
 
 ## Best Starting Pages
 
+- [Release submission packet](../release_submission_packet.md)
 - [NCBI submission path](ncbi_submission.md)
 - [Release package decision guide](../release_package_decision_guide.md)
 - [Annotation submission handoff](../annotation_submission_handoff.md)
@@ -26,6 +27,8 @@ After this section, you should have:
 - accession and identifier tracking that remains consistent
 - a validated FASTA, AGP, annotation, and manifest bundle
 - reviewer-ready language for release methods and discrepancy cleanup
+
+If you want the shortest ordered route through release readiness, start with [Release submission packet](../release_submission_packet.md).
 
 ## Read Next
 

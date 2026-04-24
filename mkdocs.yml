@@ -13,6 +13,7 @@ nav:
       - Overview: worked_project_paths.md
       - Diploid Inbred HiFi-Only: case_paths/diploid_inbred_hifi_only.md
       - Heterozygous HiFi Plus Hi-C: case_paths/heterozygous_hifi_hic.md
+      - Reference-Guided Crop: case_paths/reference_guided_crop.md
   - Status and Roadmap: status.md
   - Setup:
       - Overview: setup/index.md
@@ -92,6 +93,7 @@ nav:
       - Annotation Validation Examples: annotation_validation_examples.md
   - Release:
       - Overview: release/index.md
+      - Release Submission Packet: release_submission_packet.md
       - v0.9 Release Kickoff: v0.9_ncbi_release_kickoff.md
       - NCBI Submission: release/ncbi_submission.md
       - Release Package Decisions: release_package_decision_guide.md

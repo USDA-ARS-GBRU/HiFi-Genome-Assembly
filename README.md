@@ -57,6 +57,21 @@ Use it when you are:
 - deciding which metadata files to create before large jobs start
 - onboarding a new lab member into the workflow
 
+## Worked Project Paths
+
+The worked project paths are opinionated beginner routes through the protocol for common crop assembly situations.
+
+- [Worked Project Paths](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/worked_project_paths/)
+- [Diploid Inbred HiFi-Only](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/diploid_inbred_hifi_only/)
+- [Heterozygous HiFi Plus Hi-C](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/heterozygous_hifi_hic/)
+
+Use them when you want:
+
+- a realistic first-pass reading order
+- clearer guidance on what to postpone
+- a better sense of which outputs to keep and which cautions matter most
+- a path that feels closer to an actual crop project than a generic tool index
+
 ## Start Here
 
 For most users, the best entry points are:
