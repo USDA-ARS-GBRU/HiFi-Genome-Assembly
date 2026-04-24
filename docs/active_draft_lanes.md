@@ -104,11 +104,16 @@ Best starting pages:
 - [release package decision guide](release_package_decision_guide.md)
 - [release internal handoff example](release_internal_handoff_example.md)
 
+Current assessment:
+
+- nearly complete first-draft packet; ready for a human validation pass on the full release path
+
 ## Sequential Goal
 
 The current goal is to finish the first tightened draft of each remaining lane in order:
 
 1. `v0.9`
+2. broader human validation toward `v1.0`
 
 After each lane feels coherent as a packet, the repository version can move forward to the next active development lane while keeping earlier lanes available as stable or near-stable references.
 

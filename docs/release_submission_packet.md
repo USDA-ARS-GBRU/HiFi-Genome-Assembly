@@ -2,6 +2,10 @@
 
 This page is the simplest ordered path through the release docs for someone who needs to assemble a coherent submission packet without guessing which page comes next. It is written as an internal handoff flow, so a lab member can see what should be frozen, reviewed, exported, and checked before submission.
 
+## Packet Goal
+
+Use this packet to move from a frozen assembly and annotation package to a submitter-ready handoff with aligned files, clear provenance, and no ambiguity about what should be uploaded.
+
 ## Internal Handoff Flow
 
 ### 1. Freeze the release object
@@ -18,6 +22,7 @@ Output:
 - one declared release package type
 - one frozen assembly version
 - one declared annotation status: assembly-only, pending, or combined release
+- one short release-scope note that says what is in and what is out
 
 ### 2. Align identifiers and handoff files
 
@@ -34,6 +39,7 @@ Output:
 - a stable identifier crosswalk
 - annotation files that match final FASTA sequence IDs
 - accession notes that can be handed to collaborators without translation
+- a clear split between final release objects and comparison-only context
 
 ### 3. Build and audit the submission bundle
 
@@ -50,6 +56,7 @@ Output:
 - FASTA, AGP, GFF3, manifest, and `.cmt` files that agree
 - a discrepancy triage note or clean validation report
 - a release bundle that passes internal helper checks
+- one audit record showing when the final bundle was checked
 
 ### 4. Prepare the submitter handoff
 
@@ -67,6 +74,18 @@ Output:
 - short methods text
 - short reviewer-response language for common release questions
 - one concrete example of how to package the handoff for another lab member
+
+## Packet Checklist
+
+Use this as the shortest go/no-go list for internal release handoff:
+
+- release scope is frozen
+- final assembly and annotation versions are named explicitly
+- final FASTA, AGP, GFF3, manifest, and `.cmt` files agree
+- accession and identifier tracking tables are current
+- comparison-only files are separated from final upload files
+- discrepancy notes are either clean or explained
+- submitter notes say exactly what should be uploaded
 
 ## Recommended Packet Order
 
@@ -91,6 +110,14 @@ By the end of this sequence, you should have:
 - structured comments and methods text that match the actual release objects
 - a release bundle that can be audited before submission
 - an internal handoff path that another lab member can execute without reverse-engineering your intent
+
+## Before You Move On
+
+Before leaving this packet, you should be able to answer:
+
+- What exact object is being submitted?
+- Which files are final and which are comparison-only?
+- Can another lab member submit this package without needing verbal clarification?
 
 ## When To Use This Page
 

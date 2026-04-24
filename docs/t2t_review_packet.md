@@ -2,6 +2,10 @@
 
 This packet is the shortest ordered route through the v0.6 telomere, centromere, and completeness-claim material.
 
+## Packet Goal
+
+Use this packet to decide what completeness claim is justified and what wording should be avoided.
+
 ## Recommended Packet Order
 
 1. [v0.6 T2T kickoff](v0.6_t2t_kickoff.md)
@@ -20,6 +24,14 @@ By the end of this sequence, you should have:
 - a clear distinction between chromosome-scale, near-gapless, and candidate T2T language
 - a worked example for translating mixed evidence into manuscript wording
 - examples of two common hard cases that often trigger overclaiming
+
+## Before You Move On
+
+Before leaving this packet, you should be able to answer:
+
+- What is the strongest supported completeness claim for this assembly?
+- Which chromosomes still have unresolved telomere, centromere, or gap evidence?
+- What wording would be too strong for the evidence currently in hand?
 
 ## When To Use This Page
 

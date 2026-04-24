@@ -2,6 +2,10 @@
 
 This packet is the shortest ordered route through the v0.7 repeat-annotation material.
 
+## Packet Goal
+
+Use this packet to choose a release repeat library and mask that are biologically plausible, annotation-aware, and easy to defend.
+
 ## Recommended Packet Order
 
 1. [v0.7 repeat kickoff](v0.7_repeat_annotation_kickoff.md)
@@ -22,6 +26,14 @@ By the end of this sequence, you should have:
 - a repeat summary that is ready to hand off into annotation
 - examples of two common hard repeat-decision cases that often cause overinterpretation
 - a conservative release-mask decision you can defend in annotation and release review
+
+## Before You Move On
+
+Before leaving this packet, you should be able to answer:
+
+- Why was the release repeat library chosen over the comparison candidates?
+- What parts of the assembly remain hard to classify confidently?
+- Is the selected mask appropriate for downstream gene annotation and release review?
 
 ## When To Use This Page
 

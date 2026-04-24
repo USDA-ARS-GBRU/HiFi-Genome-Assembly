@@ -16,7 +16,7 @@ The root `README.md` now serves as a concise landing page while the focused docu
 | v0.6 | completed first draft | telomere, centromere, and T2T refinement |
 | v0.7 | completed first draft | repeat annotation refinement |
 | v0.8 | completed first draft | gene annotation refinement |
-| v0.9 | active development | NCBI release candidate polish |
+| v0.9 | active development | NCBI release candidate polish and submitter handoff |
 | v1.0 | planned | stable public protocol |
 
 ## Documentation Maturity
@@ -115,6 +115,8 @@ Current v0.8 assessment: coherent first-draft packet complete.
 - [x] Tighten the release packet into an internal handoff flow.
 - [x] Add worked internal release handoff example.
 
+Current v0.9 assessment: coherent first-draft packet with submitter handoff flow complete. Next priority is broader human validation across the full packet series.
+
 ## v1.0 Gates
 
 - README is shortened into a landing page.
@@ -127,3 +129,4 @@ Current v0.8 assessment: coherent first-draft packet complete.
 - Changelog and version are current.
 - At least one broader human validation pass is completed across the full docs site, not only the v0.5 stable baseline.
 - A concrete human validation plan exists before broader v1.0 review begins.
+- A human validation runbook and session-tracking template exist for packet-based review.

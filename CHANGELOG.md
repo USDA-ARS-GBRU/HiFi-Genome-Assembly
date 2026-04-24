@@ -8,6 +8,8 @@ Current development focus: v0.9 active development, with v0.8 preserved as a com
 - Marked v0.8 as a coherent first-draft packet and shifted the active lane to v0.9 release-candidate polish.
 - Added a hard gene-annotation case for balancing inherited ID continuity against supported novel-locus recovery.
 - Added a worked internal release handoff example so the release packet reads more like an executable lab handoff.
+- Tightened the v0.6-v0.9 packet pages into a more consistent series with shared goals and exit questions.
+- Added a human validation runbook and session-tracking example for the path to `v1.0`.
 
 ## 0.8.0-dev
 

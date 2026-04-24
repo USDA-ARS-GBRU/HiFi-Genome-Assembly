@@ -77,6 +77,7 @@ Use these pages to track where the project is headed:
 - [Active Draft Lanes](active_draft_lanes.md)
 - [How to use this protocol in a real project](how_to_use_this_protocol.md)
 - [Project starter kit](project_starter_kit.md)
+- [Human validation runbook](human_validation_runbook.md)
 - [README to Docs Migration Plan](readme_to_docs_migration_plan.md)
 - [Documentation Platform Decision](site_platform_decision.md)
 - [MkDocs and GitHub Pages Publishing](mkdocs_publishing.md)

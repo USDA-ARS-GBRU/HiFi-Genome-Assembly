@@ -129,7 +129,7 @@ Current roadmap state:
 - `v0.6`: completed first-draft packet for telomere, centromere, and completeness claims
 - `v0.7`: completed first-draft packet for repeat annotation refinement
 - `v0.8`: completed first-draft packet for gene annotation refinement
-- `v0.9`: current active development lane for NCBI release-candidate polish
+- `v0.9`: current active development lane for release-packet tightening and submitter handoff polish
 - `v1.0`: stable public protocol target
 
 See:

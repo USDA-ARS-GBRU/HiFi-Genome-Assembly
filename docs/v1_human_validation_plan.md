@@ -6,6 +6,8 @@ This page outlines the broader human validation layer planned before a `v1.0` re
 
 The goal is not only to prove that the docs are internally consistent. The goal is to learn whether real users can move through the protocol with the right level of confidence and restraint.
 
+For the operational version of this plan, use the [human validation runbook](human_validation_runbook.md).
+
 ## Validation Groups
 
 Plan to gather feedback from at least three perspectives:
@@ -49,6 +51,7 @@ The protocol is closer to `v1.0` when:
 Use or extend:
 
 - `examples/beginner_usability_review.tsv`
+- `examples/human_validation_sessions.tsv`
 - issue templates in `.github/ISSUE_TEMPLATE/`
 - section-specific docs updates in the relevant lane
 
@@ -57,3 +60,4 @@ Use or extend:
 - [How to use this protocol in a real project](how_to_use_this_protocol.md)
 - [Project starter kit](project_starter_kit.md)
 - [Active draft lanes](active_draft_lanes.md)
+- [Human validation runbook](human_validation_runbook.md)

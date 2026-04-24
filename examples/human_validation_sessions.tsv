@@ -1,0 +1,4 @@
+session_id	reviewer_type	scenario	starting_page	path_followed	success_level	confusion_point	main_feedback	overclaim_risk	recommended_fix
+HV001	student	diploid_hifi_only	README.md	project_starter_kit -> worked_project_paths -> diploid_inbred_hifi_only	partial	choosing between QC and curation pages	Needs a clearer note about when to stop after initial assembly review	no	Add a sentence in the worked path about when to postpone curation
+HV002	practitioner	t2t_claim_review	docs/index.md	t2t_review_packet	completed	none	Packet feels conservative and technically coherent	no	None
+HV003	release_submitter	combined_release_handoff	docs/index.md	release_submission_packet -> release_internal_handoff_example	partial	unclear which files are comparison-only	Wants a clearer handoff checklist near the top of the release packet	no	Move comparison-only guidance into the checklist
