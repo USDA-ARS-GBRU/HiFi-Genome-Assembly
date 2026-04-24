@@ -51,6 +51,7 @@ Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines
 - Refined the docs home page into a clearer newcomer entry point, added a templates/checklists section, moved preserved README snapshots into `archive/readme/`, archived the legacy top-level NCBI submission page, and updated the GitHub Pages workflow to current documented action versions.
 - Updated README doc links to use public docs-site URLs, rewrote section index pages for clearer onboarding, added a real-project onboarding guide, and added a v0.5 tagging-readiness page.
 - Finished the remaining README link cleanup, added a project starter kit, polished several high-traffic workflow pages, and added a v0.5 human-review runbook.
+- Elevated the project starter kit in the README, added worked beginner case paths, and added a maintainer precheck for the v0.5 human review gate.
 - Updated README and docs status with current v0.5 assessment.
 - Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.

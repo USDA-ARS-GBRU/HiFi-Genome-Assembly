@@ -44,6 +44,19 @@ metadata and sample definition
   -> release bundle preparation for NCBI/INSDC and community databases
 ```
 
+## Project Starter Kit
+
+The project starter kit is the quickest way to turn this protocol into a real working directory with the right first files, folders, and decision logs.
+
+- [Project Starter Kit](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/project_starter_kit/)
+
+Use it when you are:
+
+- starting a new species or cultivar project
+- setting up the first directory structure on HPC
+- deciding which metadata files to create before large jobs start
+- onboarding a new lab member into the workflow
+
 ## Start Here
 
 For most users, the best entry points are:

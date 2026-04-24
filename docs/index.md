@@ -10,6 +10,7 @@ Choose the path that matches where you are today:
 
 - New lab member or first real project: [How to use this protocol in a real project](how_to_use_this_protocol.md)
 - Starting a brand-new assembly workspace: [Project starter kit](project_starter_kit.md)
+- Want a concrete beginner example path: [Worked project paths](worked_project_paths.md)
 - New to the project: [Setup](setup/index.md)
 - Ready to assemble: [Assembly](assembly/index.md)
 - Checking whether an assembly is trustworthy: [QC](qc/index.md)
@@ -53,6 +54,14 @@ For most projects, the cleanest reading order is:
 7. [Repeat Library Decisions](repeat_library_decision_guide.md)
 8. [Gene Set Decisions](gene_set_decision_guide.md)
 9. [Release Package Decisions](release_package_decision_guide.md)
+
+## Worked Project Paths
+
+If you want a more concrete path instead of a section-by-section tour, start here:
+
+- [Worked project paths](worked_project_paths.md)
+- [Diploid inbred HiFi-only path](case_paths/diploid_inbred_hifi_only.md)
+- [Heterozygous HiFi plus Hi-C path](case_paths/heterozygous_hifi_hic.md)
 
 ## Project Status
 

@@ -9,6 +9,10 @@ nav:
   - Home: index.md
   - Using This Protocol: how_to_use_this_protocol.md
   - Project Starter Kit: project_starter_kit.md
+  - Worked Project Paths:
+      - Overview: worked_project_paths.md
+      - Diploid Inbred HiFi-Only: case_paths/diploid_inbred_hifi_only.md
+      - Heterozygous HiFi Plus Hi-C: case_paths/heterozygous_hifi_hic.md
   - Status and Roadmap: status.md
   - Setup:
       - Overview: setup/index.md
@@ -114,6 +118,7 @@ nav:
       - Citation and License Review: release/citation_license_review.md
       - v0.4 Release Candidate Checklist: v0.4_release_candidate_checklist.md
       - v0.4 Review Pass: v0.4_review_pass.md
+      - v0.5 Maintainer Precheck: release/v0.5_maintainer_precheck.md
       - v0.5 Human Review Runbook: release/v0.5_human_review_runbook.md
       - v0.5 Review Checklist: release/v0.5_review_checklist.md
       - v0.5 Tagging Readiness: release/v0.5_tagging_readiness.md
