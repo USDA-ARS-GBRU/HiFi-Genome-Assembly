@@ -9,6 +9,8 @@ No single installation method works everywhere. This protocol supports four comm
 
 See `docs/tool_version_policy.md` for minimum version and command-capture expectations for review-quality releases.
 
+The point of this page is not to declare a single correct environment strategy for every cluster. The point is to choose the simplest option that your lab can reproduce a few months later without guesswork.
+
 ## Pick The Simplest Reproducible Option
 
 Recommended decision logic:
@@ -19,6 +21,8 @@ Recommended decision logic:
 - use **containers** when tool dependencies are difficult or cluster-specific
 
 For annotation work, a separate environment is often the best choice because repeat and gene annotation tools can be dependency-heavy and conflict with assembly tooling.
+
+If you are just starting a project, pair this page with `docs/project_starter_kit.md` so the environment decision and project layout get written down together.
 
 ## Option A: HPC Modules
 
@@ -135,9 +139,19 @@ For many crop genome projects on HPC:
 
 That split usually reduces dependency conflicts and makes reruns less painful.
 
+## Before You Move On
+
+Before leaving setup, make sure you can point to:
+
+- the exact environment method you chose
+- the place where version output will be captured
+- the project-local `01_sbatch/` directory you will actually edit
+- the decision log where cluster-specific deviations will be recorded
+
 ## Related Files
 
 - `docs/setup/index.md`
+- `docs/project_starter_kit.md`
 - `docs/tool_version_policy.md`
 - `docs/assembly/index.md`
 - `01_sbatch_templates/`

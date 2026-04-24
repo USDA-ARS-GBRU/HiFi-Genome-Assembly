@@ -2,6 +2,8 @@
 
 NCBI submission is a validation workflow, not just a file upload. Freeze the assembly, validate the release files, prepare accessions, and submit annotation only after the assembly sequence names are stable.
 
+For new users, the biggest conceptual shift is this: do not wait until the end to think about submission. Good release packages are usually the result of decisions that were made consistently during QC, curation, naming, and annotation.
+
 ## Assembly Submission Inputs
 
 Prepare:
@@ -27,6 +29,8 @@ Prepare:
 5. Prepare BioProject, BioSample, and SRA records.
 6. Submit the assembly package.
 7. Submit annotation only after the assembly accession and sequence names are stable.
+
+If the annotation still has active discrepancy cleanup, it is often better to release the assembly first and hold annotation for a second pass than to force a combined release that is not yet coherent.
 
 ## Local Checks
 
@@ -71,6 +75,8 @@ Common issues:
 - internal stop codons
 - repeat-derived gene models that need filtering or naming review
 
+Treat these reports as a triage queue, not as a moral judgment on the annotation. Fix coordinate and ID mismatches first, then feature-logic problems, then naming and product cleanup.
+
 ## Accession Tracking
 
 Track accessions in a single table:
@@ -102,3 +108,11 @@ For package-selection logic and annotation freeze notes, also see:
 ## Release Rule
 
 Do not submit until sequence names, FASTA content, AGP, contamination decisions, annotation coordinates, and metadata all describe the same frozen assembly version.
+
+## Read Next
+
+After this page, continue with:
+
+- `../release_package_decision_guide.md`
+- `../release_bundle_worked_example.md`
+- `../table2asn_discrepancy_triage.md`

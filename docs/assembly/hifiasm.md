@@ -1,6 +1,8 @@
 # hifiasm Assembly Workflow
 
-This page is the first focused extraction from the longform README into the future web documentation structure. The README remains the canonical guide during development.
+Use this page when you are ready to turn PacBio HiFi reads into a first assembly that can survive downstream QC and review.
+
+For most crop projects, hifiasm is the default starting point because it gives a strong first-pass assembly without forcing early complexity. The hard part is not only running the assembler. The hard part is choosing which outputs to carry forward and documenting why.
 
 ## Goal
 
@@ -40,6 +42,8 @@ sample.hifiasm.err
 
 Convert selected GFA outputs to FASTA, capture tool versions, and keep the original GFA files.
 
+Do not throw away alternate or haplotype-resolved outputs immediately. Even if the primary assembly becomes the release candidate, the other outputs can explain why BUSCO duplication, k-mer behavior, or structural differences look the way they do.
+
 ## Parameter Logic
 
 | Choice | Starting point | Reasoning |
@@ -62,9 +66,19 @@ Before scaffolding or release:
 - generate dotplots for structural review
 - record the assembly choice in the decision log
 
+## Before You Move On
+
+Before leaving the assembly stage, make sure you can answer:
+
+- why this output is the preferred assembly candidate
+- whether haplotype-resolved outputs are being kept, excluded, or submitted separately
+- whether the assembly size matches the genome-profiling expectations closely enough to trust the next stage
+- whether obvious contamination or organellar carryover is already visible
+
 ## Related Pages
 
 - `docs/assembly_decision_log_template.md`
+- `docs/assembly/genome_profiling.md`
 - `docs/v0.4_curation_index.md`
 - `docs/yahs_hic_workflow.md`
 - `docs/scaffolding/index.md`

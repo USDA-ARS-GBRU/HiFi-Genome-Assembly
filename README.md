@@ -10,11 +10,11 @@ This repository is a modular, beginner-friendly, peer-review-oriented workflow f
 The full protocol now lives in the documentation site:
 
 - Docs site: [https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/)
-- Docs home: [docs/index.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/index.md)
-- Status and roadmap: [docs/status.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/status.md)
-- Publishing guide: [docs/mkdocs_publishing.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/mkdocs_publishing.md)
+- [Docs Home](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/)
+- [Status and Roadmap](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/status/)
+- [Publishing Guide](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/mkdocs_publishing/)
 
-Preserved longform snapshots are archived in [archive/README.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/archive/README.md).
+Preserved longform snapshots are archived in [Archive Overview](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/archive/README.md).
 
 ## Scope
 
@@ -78,9 +78,10 @@ Top-level resources include:
 
 Helpful indexes:
 
-- sbatch templates: [docs/sbatch_template_index.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/sbatch_template_index.md)
-- shared references: [docs/key_references.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/key_references.md)
-- PacBio watchlist: [docs/pacbio_watchlist.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/pacbio_watchlist.md)
+- [sbatch Template Index](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/sbatch_template_index/)
+- [Key References](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/key_references/)
+- [PacBio Watchlist](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/pacbio_watchlist/)
+- [Project Starter Kit](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/project_starter_kit/)
 
 ## Version and Roadmap
 
@@ -97,14 +98,14 @@ Current roadmap state:
 
 See:
 
-- [VERSION](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/VERSION)
-- [CHANGELOG.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/CHANGELOG.md)
-- [docs/status.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/status.md)
+- [Version Status](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/status/)
+- [Changelog](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/CHANGELOG.md)
+- [Documentation Roadmap](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/status/)
 
 ## Contributing and Reuse
 
-- Contributing: [CONTRIBUTING.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/CONTRIBUTING.md)
-- Citation metadata: [CITATION.cff](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/CITATION.cff)
-- License: [LICENSE](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/LICENSE)
+- [Contributing Guide](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/CONTRIBUTING.md)
+- [Citation Metadata](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/CITATION.cff)
+- [License](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/LICENSE)
 
 This project is being written so a beginning bioinformatics graduate student can follow the logic, not just copy commands. Contributions that improve clarity, evidence standards, examples, or release readiness are especially valuable.

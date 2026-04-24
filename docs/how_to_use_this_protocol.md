@@ -13,6 +13,15 @@ Treat this repository as:
 
 Do not treat it as a single copy-paste command stream.
 
+## Best Companion Pages
+
+Keep these open while you work:
+
+- [Project starter kit](project_starter_kit.md)
+- [sbatch template index](sbatch_template_index.md)
+- [workflow templates and checklists](workflow_templates/index.md)
+- [Status and roadmap](status.md)
+
 ## First Day Checklist
 
 Before running large jobs, make sure you can answer:
@@ -67,6 +76,7 @@ Pause and review more carefully when:
 
 - [sbatch template index](sbatch_template_index.md)
 - [workflow templates and checklists](workflow_templates/index.md)
+- [project starter kit](project_starter_kit.md)
 - `scripts/` helper programs
 - `examples/` toy validation fixtures
 

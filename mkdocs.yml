@@ -8,6 +8,7 @@ theme:
 nav:
   - Home: index.md
   - Using This Protocol: how_to_use_this_protocol.md
+  - Project Starter Kit: project_starter_kit.md
   - Status and Roadmap: status.md
   - Setup:
       - Overview: setup/index.md
@@ -113,6 +114,7 @@ nav:
       - Citation and License Review: release/citation_license_review.md
       - v0.4 Release Candidate Checklist: v0.4_release_candidate_checklist.md
       - v0.4 Review Pass: v0.4_review_pass.md
+      - v0.5 Human Review Runbook: release/v0.5_human_review_runbook.md
       - v0.5 Review Checklist: release/v0.5_review_checklist.md
       - v0.5 Tagging Readiness: release/v0.5_tagging_readiness.md
       - v0.5 Release Candidate Notes: release/v0.5_release_candidate_notes.md

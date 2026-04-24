@@ -9,6 +9,7 @@ This project is written to help a beginning bioinformatics graduate student move
 Choose the path that matches where you are today:
 
 - New lab member or first real project: [How to use this protocol in a real project](how_to_use_this_protocol.md)
+- Starting a brand-new assembly workspace: [Project starter kit](project_starter_kit.md)
 - New to the project: [Setup](setup/index.md)
 - Ready to assemble: [Assembly](assembly/index.md)
 - Checking whether an assembly is trustworthy: [QC](qc/index.md)
@@ -61,6 +62,7 @@ Use these pages to track where the project is headed:
 
 - [Documentation Status and Roadmap](status.md)
 - [How to use this protocol in a real project](how_to_use_this_protocol.md)
+- [Project starter kit](project_starter_kit.md)
 - [README to Docs Migration Plan](readme_to_docs_migration_plan.md)
 - [Documentation Platform Decision](site_platform_decision.md)
 - [MkDocs and GitHub Pages Publishing](mkdocs_publishing.md)
