@@ -10,6 +10,9 @@ nav:
   - Using This Protocol: how_to_use_this_protocol.md
   - Project Starter Kit: project_starter_kit.md
   - Active Draft Lanes: active_draft_lanes.md
+  - T2T Review Packet: t2t_review_packet.md
+  - Repeat Annotation Packet: repeat_annotation_packet.md
+  - Gene Annotation Packet: gene_annotation_packet.md
   - sbatch Templates: sbatch/index.md
   - Scripts: scripts/index.md
   - Worked Project Paths:

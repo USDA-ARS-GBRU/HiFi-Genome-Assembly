@@ -11,9 +11,11 @@ This section covers repeat annotation, masking strategy, gene annotation, and th
 
 ## Best Starting Pages
 
+- [Repeat annotation packet](../repeat_annotation_packet.md)
 - [Repeat annotation and masking](repeats.md)
 - [Repeat library decision guide](../repeat_library_decision_guide.md)
 - [Repeat-to-gene-annotation handoff](../repeat_to_gene_annotation_handoff.md)
+- [Gene annotation packet](../gene_annotation_packet.md)
 - [Gene annotation](genes.md)
 - [Gene set decision guide](../gene_set_decision_guide.md)
 - [Functional annotation guide](../functional_annotation_guide.md)

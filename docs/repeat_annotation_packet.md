@@ -1,0 +1,32 @@
+# Repeat Annotation Packet
+
+This packet is the shortest ordered route through the v0.7 repeat-annotation material.
+
+## Recommended Packet Order
+
+1. [v0.7 repeat kickoff](v0.7_repeat_annotation_kickoff.md)
+2. [Repeat annotation strategy](repeat_annotation.md)
+3. [Repeat library decision guide](repeat_library_decision_guide.md)
+4. [Repeat landscape interpretation](repeat_landscape_interpretation.md)
+5. [Repeat-to-gene-annotation handoff](repeat_to_gene_annotation_handoff.md)
+
+## What This Packet Should Produce
+
+By the end of this sequence, you should have:
+
+- a repeat-library choice you can defend
+- a release-mask rationale
+- a repeat summary that is ready to hand off into annotation
+
+## When To Use This Page
+
+Use this packet when:
+
+- v0.7 is the current working lane
+- you want a compact internal review path for repeat decisions
+- a contributor needs the smallest useful route through the repeat docs
+
+## Related Pages
+
+- [Annotation](annotation/index.md)
+- [Active draft lanes](active_draft_lanes.md)

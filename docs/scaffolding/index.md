@@ -12,6 +12,7 @@ This section covers the move from contigs to chromosome-scale assemblies, while 
 ## Best Starting Pages
 
 - [v0.5 scaffolding kickoff](../v0.5_scaffolding_kickoff.md)
+- [T2T review packet](../t2t_review_packet.md)
 - [Hi-C scaffolding reader path](hic_scaffolding.md)
 - [Scaffolding candidate comparison](../scaffolding_candidate_comparison.md)
 - [Worked scaffolding decision case](../scaffolding_worked_decision_case.md)

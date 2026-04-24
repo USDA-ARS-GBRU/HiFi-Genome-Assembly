@@ -1,0 +1,32 @@
+# T2T Review Packet
+
+This packet is the shortest ordered route through the v0.6 telomere, centromere, and completeness-claim material.
+
+## Recommended Packet Order
+
+1. [v0.6 T2T kickoff](v0.6_t2t_kickoff.md)
+2. [T2T readiness checklist](t2t_readiness_checklist.md)
+3. [T2T completeness evidence package](t2t_completeness_evidence_package.md)
+4. [T2T claim language guide](t2t_claim_language_guide.md)
+5. [T2T completeness worked case](t2t_completeness_worked_case.md)
+
+## What This Packet Should Produce
+
+By the end of this sequence, you should have:
+
+- a conservative completeness evidence table
+- a clear distinction between chromosome-scale, near-gapless, and candidate T2T language
+- a worked example for translating mixed evidence into manuscript wording
+
+## When To Use This Page
+
+Use this packet when:
+
+- v0.6 is the current active lane
+- someone needs the shortest route to the T2T-readiness material
+- you want an internal review order for completeness claims
+
+## Related Pages
+
+- [Scaffolding and finishing](scaffolding/index.md)
+- [Active draft lanes](active_draft_lanes.md)

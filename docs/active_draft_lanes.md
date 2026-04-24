@@ -2,6 +2,8 @@
 
 This page separates the signed-off `v0.5.0` baseline from the active-draft lanes that are still being expanded before a broader `v1.0` validation cycle.
 
+Current active development version: `v0.6.0-dev`
+
 ## Stable Baseline
 
 `v0.5.0` is now the signed-off stable baseline for:
@@ -30,6 +32,7 @@ Focus:
 Best starting pages:
 
 - [v0.6 T2T kickoff](v0.6_t2t_kickoff.md)
+- [T2T review packet](t2t_review_packet.md)
 - [T2T readiness checklist](t2t_readiness_checklist.md)
 - [T2T claim language guide](t2t_claim_language_guide.md)
 
@@ -44,6 +47,7 @@ Focus:
 Best starting pages:
 
 - [v0.7 repeat kickoff](v0.7_repeat_annotation_kickoff.md)
+- [repeat annotation packet](repeat_annotation_packet.md)
 - [repeat library decision guide](repeat_library_decision_guide.md)
 - [repeat-to-gene handoff](repeat_to_gene_annotation_handoff.md)
 
@@ -58,6 +62,7 @@ Focus:
 Best starting pages:
 
 - [v0.8 gene kickoff](v0.8_gene_annotation_kickoff.md)
+- [gene annotation packet](gene_annotation_packet.md)
 - [gene set decision guide](gene_set_decision_guide.md)
 - [annotation QC dashboard guide](annotation_qc_dashboard_guide.md)
 
@@ -74,6 +79,17 @@ Best starting pages:
 - [v0.9 release kickoff](v0.9_ncbi_release_kickoff.md)
 - [release submission packet](release_submission_packet.md)
 - [release package decision guide](release_package_decision_guide.md)
+
+## Sequential Goal
+
+The current goal is to finish the first tightened draft of each lane in order:
+
+1. `v0.6`
+2. `v0.7`
+3. `v0.8`
+4. `v0.9`
+
+After each lane feels coherent as a packet, the repository version can move forward to the next active development lane while keeping earlier lanes available as stable or near-stable references.
 
 ## How To Contribute Safely
 
