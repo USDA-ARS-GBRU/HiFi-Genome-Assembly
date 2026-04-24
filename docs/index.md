@@ -24,6 +24,8 @@ Choose the path that matches where you are today:
 | Section | Status | Start here |
 | --- | --- | --- |
 | Setup | draft | [Setup](setup/index.md) |
+| sbatch templates | active draft | [sbatch templates](sbatch/index.md) |
+| helper scripts | active draft | [scripts](scripts/index.md) |
 | Shared references | active draft | [sbatch Template Index](sbatch_template_index.md), [Key References](key_references.md), [PacBio Watchlist](pacbio_watchlist.md) |
 | Assembly | active draft | [Assembly](assembly/index.md) |
 | QC | active draft | [QC](qc/index.md) |

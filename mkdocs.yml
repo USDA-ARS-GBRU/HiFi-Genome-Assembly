@@ -9,11 +9,14 @@ nav:
   - Home: index.md
   - Using This Protocol: how_to_use_this_protocol.md
   - Project Starter Kit: project_starter_kit.md
+  - sbatch Templates: sbatch/index.md
+  - Scripts: scripts/index.md
   - Worked Project Paths:
       - Overview: worked_project_paths.md
       - Diploid Inbred HiFi-Only: case_paths/diploid_inbred_hifi_only.md
       - Heterozygous HiFi Plus Hi-C: case_paths/heterozygous_hifi_hic.md
       - Reference-Guided Crop: case_paths/reference_guided_crop.md
+      - Polyploid Crop: case_paths/polyploid_crop.md
   - Status and Roadmap: status.md
   - Setup:
       - Overview: setup/index.md

@@ -64,6 +64,8 @@ The worked project paths are opinionated beginner routes through the protocol fo
 - [Worked Project Paths](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/worked_project_paths/)
 - [Diploid Inbred HiFi-Only](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/diploid_inbred_hifi_only/)
 - [Heterozygous HiFi Plus Hi-C](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/heterozygous_hifi_hic/)
+- [Reference-Guided Crop](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/reference_guided_crop/)
+- [Polyploid Crop](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/polyploid_crop/)
 
 Use them when you want:
 
@@ -107,6 +109,8 @@ Top-level resources include:
 Helpful indexes:
 
 - [sbatch Template Index](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/sbatch_template_index/)
+- [sbatch Templates Section](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/sbatch/)
+- [Scripts Section](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/scripts/)
 - [Key References](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/key_references/)
 - [PacBio Watchlist](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/pacbio_watchlist/)
 - [Project Starter Kit](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/project_starter_kit/)
