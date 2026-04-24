@@ -49,6 +49,7 @@ Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines
 - Added a fourth archived README snapshot, moved the remaining sbatch/reference/roadmap tail out of the root README, and exposed shared template/reference pages in MkDocs navigation.
 - Added a fifth archived README snapshot and converted the root README into a short landing page that points readers to the live documentation site.
 - Refined the docs home page into a clearer newcomer entry point, added a templates/checklists section, moved preserved README snapshots into `archive/readme/`, archived the legacy top-level NCBI submission page, and updated the GitHub Pages workflow to current documented action versions.
+- Updated README doc links to use public docs-site URLs, rewrote section index pages for clearer onboarding, added a real-project onboarding guide, and added a v0.5 tagging-readiness page.
 - Updated README and docs status with current v0.5 assessment.
 - Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.

@@ -1,21 +1,32 @@
 # Annotation
 
-Primary pages:
+This section covers repeat annotation, masking strategy, gene annotation, and the handoff from evidence collection to a release-ready gene set.
+
+## Read This Section First If
+
+- the assembly is stable enough to freeze sequence IDs and masking strategy
+- you need to choose between EDTA, RepeatModeler2, or a curated repeat library
+- you are comparing Liftoff, BRAKER3, MAKER, or hybrid gene-set strategies
+- you want annotation QC that will survive NCBI validation and manuscript review
+
+## Best Starting Pages
 
 - [Repeat annotation and masking](repeats.md)
-- [v0.7 repeat annotation kickoff](../v0.7_repeat_annotation_kickoff.md)
 - [Repeat library decision guide](../repeat_library_decision_guide.md)
-- [Repeat landscape interpretation](../repeat_landscape_interpretation.md)
 - [Repeat-to-gene-annotation handoff](../repeat_to_gene_annotation_handoff.md)
-- [v0.8 gene annotation kickoff](../v0.8_gene_annotation_kickoff.md)
-- [Gene set decision guide](../gene_set_decision_guide.md)
 - [Gene annotation](genes.md)
+- [Gene set decision guide](../gene_set_decision_guide.md)
 - [Functional annotation guide](../functional_annotation_guide.md)
-- [Annotation QC dashboard guide](../annotation_qc_dashboard_guide.md)
-- [Repeat annotation](../repeat_annotation.md)
-- [Gene annotation](../gene_annotation.md)
-- [Annotation validation examples](../annotation_validation_examples.md)
 
-Planned pages:
+## Practical Outcome
 
-- Liftoff, BRAKER3, and MAKER workflow details
+After this section, you should have:
+
+- a repeat mask and library you are willing to release
+- a gene-set decision backed by evidence rather than habit
+- annotation QC tables for internal review and public submission
+- a cleaner handoff into the NCBI release path
+
+## Read Next
+
+Move to [Release](../release/index.md) when sequence names, annotation files, and package decisions are stable enough to prepare submission bundles.

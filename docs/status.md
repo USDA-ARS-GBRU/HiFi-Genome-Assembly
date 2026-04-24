@@ -47,6 +47,7 @@ The root `README.md` now serves as a concise landing page while the focused docu
 - [x] Public release metadata audit and citation/license review guide exist.
 - [x] Beginner usability review template exists.
 - [x] v0.5 release-candidate notes exist.
+- [x] v0.5 tagging-readiness summary exists.
 
 Current v0.5 assessment: feature-complete for scaffolding and README-migration content review, but not stable-release taggable yet. See [v0.5 Review Checklist](release/v0.5_review_checklist.md).
 

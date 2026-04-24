@@ -1,26 +1,32 @@
 # Scaffolding and Finishing
 
-Primary pages:
+This section covers the move from contigs to chromosome-scale assemblies, while staying conservative about joins, breaks, and gap claims.
+
+## Read This Section First If
+
+- you are choosing between Hi-C, RagTag, or other scaffolding paths
+- you need to compare scaffold candidates instead of chasing N50 alone
+- you are deciding whether gap filling improved the assembly or just changed it
+- you want to make careful claims about near-gapless or candidate T2T chromosomes
+
+## Best Starting Pages
 
 - [v0.5 scaffolding kickoff](../v0.5_scaffolding_kickoff.md)
 - [Hi-C scaffolding reader path](hic_scaffolding.md)
-- [YaHS Hi-C workflow](../yahs_hic_workflow.md)
-- [3D-DNA/Juicebox workflow](../3d_dna_juicebox_workflow.md)
-- [RagTag workflow](../ragtag_workflow.md)
-- [Hi-C contact map QC](../hic_contact_map_qc.md)
 - [Scaffolding candidate comparison](../scaffolding_candidate_comparison.md)
 - [Worked scaffolding decision case](../scaffolding_worked_decision_case.md)
-- [AGP for scaffolded assemblies](agp.md)
-- [AGP summary workflow](../agp_summary_workflow.md)
 - [Gap filling workflow](../gap_filling_workflow.md)
-- [Telomere summary workflow](../telomere_summary_workflow.md)
 - [T2T readiness checklist](../t2t_readiness_checklist.md)
-- [v0.6 T2T kickoff](../v0.6_t2t_kickoff.md)
-- [T2T completeness evidence package](../t2t_completeness_evidence_package.md)
-- [T2T claim language guide](../t2t_claim_language_guide.md)
-- [Worked completeness claim case](../t2t_completeness_worked_case.md)
 
-Planned pages:
+## Practical Outcome
 
-- AGP after scaffolding
-- Juicebox/JBAT screenshot guidance
+After this section, you should have:
+
+- a preferred scaffold set backed by independent evidence
+- an AGP-aware scaffold representation
+- documented gap filling decisions
+- conservative language for chromosome-scale and completeness claims
+
+## Read Next
+
+Continue to [Annotation](../annotation/index.md) once the assembly structure is stable enough to support repeat and gene tracks. If you are preparing release claims immediately, also review [Release](../release/index.md).

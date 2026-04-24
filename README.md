@@ -58,13 +58,13 @@ For most users, the best entry points are:
 
 Useful focused pages:
 
-- Environment setup: [docs/setup/environment.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/setup/environment.md)
-- hifiasm workflow: [docs/assembly/hifiasm.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/assembly/hifiasm.md)
-- Dotplot curation: [docs/dotplot_misassembly_curation.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/dotplot_misassembly_curation.md)
-- Gap filling: [docs/gap_filling_workflow.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/gap_filling_workflow.md)
-- Repeat annotation: [docs/repeat_library_decision_guide.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/repeat_library_decision_guide.md)
-- Gene annotation: [docs/gene_set_decision_guide.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/gene_set_decision_guide.md)
-- NCBI release: [docs/release/index.md](/Users/rothconrad/Library/CloudStorage/OneDrive-UniversityofGeorgia/Binf-protocols/HiFi-Genome-Assembly/docs/release/index.md)
+- [Environment Setup](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/setup/environment/)
+- [hifiasm Workflow](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/assembly/hifiasm/)
+- [Dotplot Curation](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/dotplot_misassembly_curation/)
+- [Gap Filling](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/gap_filling_workflow/)
+- [Repeat Annotation](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/repeat_library_decision_guide/)
+- [Gene Annotation](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/gene_set_decision_guide/)
+- [NCBI Release](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/release/)
 
 ## Repository Contents
 
