@@ -8,6 +8,7 @@ Current development focus: v0.6 active development, with v0.7-v0.9 maintained as
 - Added an active-draft-lanes page to separate the stable `v0.5.0` baseline from v0.6-v0.9 expansion work.
 - Added packet-style entry pages for v0.6 T2T review, v0.7 repeat annotation, and v0.8 gene annotation.
 - Updated roadmap and status language so v0.1-v0.4 remain visible as historical baselines and v0.6 is clearly the current development lane.
+- Added two harder v0.6 completeness-review cases and a first v1.0 human validation plan page.
 
 ## 0.5.0
 

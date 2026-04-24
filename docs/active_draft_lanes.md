@@ -35,6 +35,8 @@ Best starting pages:
 - [T2T review packet](t2t_review_packet.md)
 - [T2T readiness checklist](t2t_readiness_checklist.md)
 - [T2T claim language guide](t2t_claim_language_guide.md)
+- [T2T internal telomere review case](t2t_internal_telomere_case.md)
+- [T2T repeat-rich centromere case](t2t_repeat_rich_centromere_case.md)
 
 ### v0.7 Repeat Annotation Refinement
 
@@ -105,3 +107,4 @@ When editing active-draft lanes:
 - [Documentation status and roadmap](status.md)
 - [How to use this protocol in a real project](how_to_use_this_protocol.md)
 - [Project starter kit](project_starter_kit.md)
+- [v1.0 human validation plan](v1_human_validation_plan.md)

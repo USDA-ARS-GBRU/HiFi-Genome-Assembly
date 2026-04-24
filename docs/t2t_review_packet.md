@@ -9,6 +9,8 @@ This packet is the shortest ordered route through the v0.6 telomere, centromere,
 3. [T2T completeness evidence package](t2t_completeness_evidence_package.md)
 4. [T2T claim language guide](t2t_claim_language_guide.md)
 5. [T2T completeness worked case](t2t_completeness_worked_case.md)
+6. [T2T internal telomere review case](t2t_internal_telomere_case.md)
+7. [T2T repeat-rich centromere case](t2t_repeat_rich_centromere_case.md)
 
 ## What This Packet Should Produce
 
@@ -17,6 +19,7 @@ By the end of this sequence, you should have:
 - a conservative completeness evidence table
 - a clear distinction between chromosome-scale, near-gapless, and candidate T2T language
 - a worked example for translating mixed evidence into manuscript wording
+- examples of two common hard cases that often trigger overclaiming
 
 ## When To Use This Page
 

@@ -63,6 +63,7 @@ Current v0.5 assessment: signed off as the stable `v0.5.0` baseline. Current dev
 - [x] Add completeness evidence audit helper and toy validation.
 - [x] Refine manuscript language for chromosome-scale, near-gapless, candidate T2T, and unresolved claims.
 - [x] Worked completeness claim case exists.
+- [x] Additional hard-case completeness examples exist.
 
 ## v0.7 Drafting Goals
 
@@ -113,3 +114,4 @@ Current v0.5 assessment: signed off as the stable `v0.5.0` baseline. Current dev
 - `LICENSE`, `CITATION.cff`, and `CONTRIBUTING.md` are present.
 - Changelog and version are current.
 - At least one broader human validation pass is completed across the full docs site, not only the v0.5 stable baseline.
+- A concrete human validation plan exists before broader v1.0 review begins.
