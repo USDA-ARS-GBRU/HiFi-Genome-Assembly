@@ -19,6 +19,17 @@ Choose the path that matches where you are today:
 - Preparing repeats or genes: [Annotation](annotation/index.md)
 - Packaging for NCBI and community databases: [Release](release/index.md)
 
+## Sidebar Organization
+
+The sidebar is organized into four practical buckets:
+
+- `Walkthroughs`: onboarding pages, worked project paths, review packets, and hard cases
+- `Support Files`: sbatch templates, scripts, checklists, and shared references
+- `Workflow Steps`: the end-to-end protocol from setup through release
+- `Development Project`: roadmap, validation planning, docs-site work, and internal release history
+
+If you are new here, start with `Walkthroughs` or `Workflow Steps`. If you are implementing or adapting the workflow, `Support Files` is usually the fastest route. If you are helping maintain the project itself, use `Development Project`.
+
 ## What This Site Covers
 
 | Section | Status | Start here |
