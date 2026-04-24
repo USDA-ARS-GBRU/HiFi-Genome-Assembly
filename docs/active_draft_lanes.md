@@ -2,7 +2,7 @@
 
 This page separates the signed-off `v0.5.0` baseline from the active-draft lanes that are still being expanded before a broader `v1.0` validation cycle.
 
-Current active development version: `v0.6.0-dev`
+Current active development version: `v0.7.0-dev`
 
 ## Stable Baseline
 
@@ -22,6 +22,10 @@ The following lanes are still under active expansion:
 
 ### v0.6 Telomere, Centromere, and T2T Refinement
 
+Status:
+
+- completed first-draft packet
+
 Focus:
 
 - completeness evidence packaging
@@ -40,6 +44,10 @@ Best starting pages:
 
 ### v0.7 Repeat Annotation Refinement
 
+Status:
+
+- current active development lane
+
 Focus:
 
 - repeat library choices
@@ -52,6 +60,8 @@ Best starting pages:
 - [repeat annotation packet](repeat_annotation_packet.md)
 - [repeat library decision guide](repeat_library_decision_guide.md)
 - [repeat-to-gene handoff](repeat_to_gene_annotation_handoff.md)
+- [repeat unclassified burden case](repeat_unclassified_burden_case.md)
+- [repeat-rich unplaced contigs case](repeat_unplaced_contigs_case.md)
 
 ### v0.8 Gene Annotation Refinement
 
@@ -84,12 +94,11 @@ Best starting pages:
 
 ## Sequential Goal
 
-The current goal is to finish the first tightened draft of each lane in order:
+The current goal is to finish the first tightened draft of each remaining lane in order:
 
-1. `v0.6`
-2. `v0.7`
-3. `v0.8`
-4. `v0.9`
+1. `v0.7`
+2. `v0.8`
+3. `v0.9`
 
 After each lane feels coherent as a packet, the repository version can move forward to the next active development lane while keeping earlier lanes available as stable or near-stable references.
 

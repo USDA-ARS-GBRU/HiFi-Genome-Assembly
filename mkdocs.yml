@@ -15,6 +15,8 @@ nav:
   - T2T Internal Telomere Case: t2t_internal_telomere_case.md
   - T2T Repeat-Rich Centromere Case: t2t_repeat_rich_centromere_case.md
   - Repeat Annotation Packet: repeat_annotation_packet.md
+  - Repeat Unclassified Burden Case: repeat_unclassified_burden_case.md
+  - Repeat-Rich Unplaced Contigs Case: repeat_unplaced_contigs_case.md
   - Gene Annotation Packet: gene_annotation_packet.md
   - sbatch Templates: sbatch/index.md
   - Scripts: scripts/index.md

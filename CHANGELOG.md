@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0-dev
+
+Current development focus: v0.7 active development, with v0.8-v0.9 maintained as active draft lanes under the signed-off v0.5 baseline and the completed first-draft v0.6 packet.
+
+- Promoted the repository development version to `0.7.0-dev`.
+- Marked v0.6 as a coherent first-draft packet and shifted the active lane to v0.7 repeat annotation refinement.
+- Added harder repeat-annotation interpretation cases and updated the repeat packet accordingly.
+
 ## 0.6.0-dev
 
 Current development focus: v0.6 active development, with v0.7-v0.9 maintained as active draft lanes under the signed-off v0.5 baseline.
