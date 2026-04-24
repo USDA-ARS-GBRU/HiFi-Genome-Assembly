@@ -32,6 +32,40 @@ The sidebar is organized into four practical buckets:
 
 If you are new here, start with `Walkthroughs` or `Workflow Steps`. If you are implementing or adapting the workflow, `Support Files` is usually the fastest route. If you are helping maintain the project itself, use `Development Project`.
 
+## Four Ways To Navigate
+
+### Walkthroughs
+
+Start here when you want guidance, examples, and packet-style reading paths.
+
+- [Walkthroughs overview](walkthroughs.md)
+- [How to use this protocol](how_to_use_this_protocol.md)
+- [Worked project paths](worked_project_paths.md)
+
+### Support Files
+
+Start here when you need reusable files, templates, scripts, or reference material.
+
+- [Support files overview](support_files.md)
+- [sbatch templates](sbatch/index.md)
+- [scripts](scripts/index.md)
+
+### Workflow Steps
+
+Start here when you want the protocol in biological and operational order.
+
+- [Workflow steps overview](workflow_steps.md)
+- [Setup](setup/index.md)
+- [Release](release/index.md)
+
+### Development Project
+
+Start here when you are maintaining the docs project itself.
+
+- [Development project overview](development_project.md)
+- [Status and roadmap](status.md)
+- [Human validation runbook](human_validation_runbook.md)
+
 ## What This Site Covers
 
 | Section | Status | Start here |
@@ -95,3 +129,4 @@ Use these pages to track where the project is headed:
 - [Documentation Platform Decision](site_platform_decision.md)
 - [MkDocs and GitHub Pages Publishing](mkdocs_publishing.md)
 - [Citation and License Review](release/citation_license_review.md)
+- [GitHub repository](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly)

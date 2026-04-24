@@ -49,6 +49,7 @@ nav:
           - PacBio Watchlist: pacbio_watchlist.md
           - Tool Version Policy: tool_version_policy.md
   - Workflow Steps:
+      - Overview: workflow_steps.md
       - Setup:
           - Overview: setup/index.md
           - Environments: setup/environment.md
@@ -160,6 +161,7 @@ nav:
           - v0.5 Review Checklist: release/v0.5_review_checklist.md
           - v0.5 Tagging Readiness: release/v0.5_tagging_readiness.md
           - v0.5 Release Candidate Notes: release/v0.5_release_candidate_notes.md
+  - GitHub Repository: https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly
 markdown_extensions:
   - admonition
   - tables
