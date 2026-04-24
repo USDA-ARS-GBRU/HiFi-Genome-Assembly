@@ -146,3 +146,22 @@ See:
 - [License](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/LICENSE)
 
 This project is being written so a beginning bioinformatics graduate student can follow the logic, not just copy commands. Contributions that improve clarity, evidence standards, examples, or release readiness are especially valuable.
+
+### Corresponding Contact
+
+Contact info for current maintaining author
+
+Roth Conrad: roth.conrad@uga.edu
+
+## License
+
+This software is a work of the United States Department of Agriculture, Agricultural Research Service and is released under a Creative Commons CC0 public domain attribution - see the LICENSE.txt file for details
+
+## Acknowledgments
+
+Inspiration, code snippets, etc.
+* [readme_template](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
+
+### Funding Support
+This is a project supported by the U.S. Department of Agriculture - Agricultural Research Service (USDA-ARS) - Genomics and Bioinformatics Research Unit (GBRU) through CRIS Project No. 6066-21310-006-000-D.
+Additional project support was through <and any additional agreements or grants>.
