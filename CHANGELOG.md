@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.5.0-dev
+## 0.5.0
 
-Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines, and v0.9 NCBI release candidate drafting.
+Current development focus: signed-off v0.5 stable baseline, plus v0.6-v0.9 active draft baselines.
 
 - Promoted v0.5 to the active development version.
 - v0.4 is now maintained as the dotplot and misassembly curation baseline.
@@ -54,6 +54,8 @@ Current development focus: v0.5 content review, v0.6-v0.8 active draft baselines
 - Elevated the project starter kit in the README, added worked beginner case paths, and added a maintainer precheck for the v0.5 human review gate.
 - Highlighted worked project paths in the README, added a reference-guided crop path, and added a release submission packet page to make release docs easier to walk in order.
 - Added a polyploid worked path, promoted all worked paths in the README, and added dedicated sbatch and scripts documentation sections with descriptions and usage examples.
+- Marked v0.5 as signed off, updated version/status language to `0.5.0`, and added an active-draft-lanes page for v0.6-v0.9.
+- Updated citation and roadmap metadata to match the signed-off `0.5.0` baseline and cleaned several lingering `0.5.0-dev` references in active-draft docs.
 - Updated README and docs status with current v0.5 assessment.
 - Added worked scaffolding decision case with candidate metrics, decision-log rows, methods text, and reviewer response language.
 - Added README-to-docs migration plan with the section-shortening order for the future GitHub documentation split.

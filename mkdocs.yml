@@ -9,6 +9,7 @@ nav:
   - Home: index.md
   - Using This Protocol: how_to_use_this_protocol.md
   - Project Starter Kit: project_starter_kit.md
+  - Active Draft Lanes: active_draft_lanes.md
   - sbatch Templates: sbatch/index.md
   - Scripts: scripts/index.md
   - Worked Project Paths:

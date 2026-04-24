@@ -72,6 +72,7 @@ The public repo landing page now serves as a short front door. The detailed prot
 Use these pages to track where the project is headed:
 
 - [Documentation Status and Roadmap](status.md)
+- [Active Draft Lanes](active_draft_lanes.md)
 - [How to use this protocol in a real project](how_to_use_this_protocol.md)
 - [Project starter kit](project_starter_kit.md)
 - [README to Docs Migration Plan](readme_to_docs_migration_plan.md)

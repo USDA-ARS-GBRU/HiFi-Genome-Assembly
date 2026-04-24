@@ -14,6 +14,8 @@ The full protocol now lives in the documentation site:
 - [Status and Roadmap](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/status/)
 - [Publishing Guide](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/mkdocs_publishing/)
 
+The repo-tracked source for documentation status remains `docs/status.md`.
+
 Preserved longform snapshots are archived in [Archive Overview](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/archive/README.md).
 
 ## Scope
@@ -117,11 +119,11 @@ Helpful indexes:
 
 ## Version and Roadmap
 
-Current project version: **v0.5.0-dev**
+Current project version: **v0.5.0**
 
 Current roadmap state:
 
-- `v0.5`: content review for scaffolding, gap filling, T2T readiness, and docs migration
+- `v0.5`: signed-off stable baseline for scaffolding, gap filling, T2T readiness, and docs migration
 - `v0.6`: active draft baseline for telomere, centromere, and completeness claims
 - `v0.7`: active draft baseline for repeat annotation refinement
 - `v0.8`: active draft baseline for gene annotation refinement
@@ -131,6 +133,7 @@ Current roadmap state:
 See:
 
 - [Version Status](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/status/)
+- [Active Draft Lanes](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/active_draft_lanes/)
 - [Changelog](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly/blob/main/CHANGELOG.md)
 - [Documentation Roadmap](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/status/)
 
