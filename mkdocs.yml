@@ -8,6 +8,7 @@ theme:
 nav:
   - Home: index.md
   - Walkthroughs:
+      - Overview: walkthroughs.md
       - Using This Protocol: how_to_use_this_protocol.md
       - Project Starter Kit: project_starter_kit.md
       - Worked Project Paths:
@@ -31,6 +32,7 @@ nav:
           - Gene ID Preservation vs Novel-Locus Recovery Case: gene_id_preservation_vs_novel_loci_case.md
           - Release Internal Handoff Example: release_internal_handoff_example.md
   - Support Files:
+      - Overview: support_files.md
       - sbatch Templates: sbatch/index.md
       - Scripts: scripts/index.md
       - Templates and Checklists:
@@ -49,52 +51,52 @@ nav:
   - Workflow Steps:
       - Setup:
           - Overview: setup/index.md
-          - Software Environments: setup/environment.md
+          - Environments: setup/environment.md
       - Assembly:
           - Overview: assembly/index.md
-          - Prepare Reads: assembly/prepare_reads.md
-          - Genome Profiling: assembly/genome_profiling.md
-          - hifiasm Workflow: assembly/hifiasm.md
+          - Reads: assembly/prepare_reads.md
+          - Profiling: assembly/genome_profiling.md
+          - hifiasm: assembly/hifiasm.md
           - hifiasm Parameters: assembly/hifiasm_parameters.md
       - QC:
           - Overview: qc/index.md
-          - Assembly Metrics: qc/assembly_metrics.md
+          - Metrics: qc/assembly_metrics.md
           - Dotplots: qc/dotplots.md
           - Contamination: qc/contamination.md
-          - Contamination Decision Workflow: contamination_workflow.md
-          - QC Figures: qc_figures.md
+          - Contamination Decisions: contamination_workflow.md
+          - Figures: qc_figures.md
       - Curation:
           - Overview: curation/index.md
-          - Dotplot Misassembly Curation: dotplot_misassembly_curation.md
-          - PAF Dotplot Options: paf_dotplot_options.md
+          - Dotplot Curation: dotplot_misassembly_curation.md
+          - PAF Dotplots: paf_dotplot_options.md
           - Dotplot Figures: dotplot_figures.md
-          - Manual Correction Workflow: manual_correction_workflow.md
-          - v0.4 Workflow Index: v0.4_curation_index.md
-          - Review Standards: review_standards.md
-          - IGV Session Setup: igv_session_setup.md
-          - IGV Breakpoint Reporting: igv_breakpoint_reporting.md
-          - Minimum Evidence Checklist: minimum_evidence_checklist.md
-          - Common False Positives: common_false_positive_corrections.md
-          - Post-correction Validation: post_correction_validation.md
-          - Post-correction Report Template: post_correction_report_template.md
-          - Correction Report Examples: correction_report_examples.md
+          - Manual Correction: manual_correction_workflow.md
+          - v0.4 Index: v0.4_curation_index.md
+          - Standards: review_standards.md
+          - IGV Setup: igv_session_setup.md
+          - IGV Breakpoint Reports: igv_breakpoint_reporting.md
+          - Evidence Checklist: minimum_evidence_checklist.md
+          - False Positives: common_false_positive_corrections.md
+          - Validation: post_correction_validation.md
+          - Report Template: post_correction_report_template.md
+          - Report Examples: correction_report_examples.md
           - Rejected Corrections: rejected_corrections.md
-          - Toy Manual Correction Case: toy_manual_correction_case_study.md
+          - Toy Case: toy_manual_correction_case_study.md
       - Scaffolding and Finishing:
           - Overview: scaffolding/index.md
-          - v0.5 Scaffolding Kickoff: v0.5_scaffolding_kickoff.md
+          - v0.5 Kickoff: v0.5_scaffolding_kickoff.md
           - Hi-C Scaffolding: scaffolding/hic_scaffolding.md
           - YaHS Workflow: yahs_hic_workflow.md
           - 3D-DNA and Juicebox: 3d_dna_juicebox_workflow.md
           - AGP: scaffolding/agp.md
-          - AGP Summary Workflow: agp_summary_workflow.md
+          - AGP Summary: agp_summary_workflow.md
           - AGP After Splitting: agp_after_splitting.md
-          - Scaffolding Candidate Comparison: scaffolding_candidate_comparison.md
-          - Scaffolding Worked Case: scaffolding_worked_decision_case.md
+          - Candidate Comparison: scaffolding_candidate_comparison.md
+          - Worked Case: scaffolding_worked_decision_case.md
           - Gap Filling: gap_filling_workflow.md
           - RagTag: ragtag_workflow.md
-          - Hi-C Contact Map QC: hic_contact_map_qc.md
-          - Telomere Summary Workflow: telomere_summary_workflow.md
+          - Hi-C Contact QC: hic_contact_map_qc.md
+          - Telomere Summary: telomere_summary_workflow.md
           - v0.6 T2T Kickoff: v0.6_t2t_kickoff.md
           - T2T Readiness: t2t_readiness_checklist.md
           - T2T Evidence Package: t2t_completeness_evidence_package.md
@@ -103,39 +105,40 @@ nav:
       - Annotation:
           - Overview: annotation/index.md
           - v0.7 Repeat Kickoff: v0.7_repeat_annotation_kickoff.md
-          - Repeat Annotation Strategy: repeat_annotation.md
+          - Repeat Strategy: repeat_annotation.md
           - Repeats: annotation/repeats.md
           - Repeat Library Decisions: repeat_library_decision_guide.md
-          - Repeat Landscape Interpretation: repeat_landscape_interpretation.md
+          - Repeat Landscape: repeat_landscape_interpretation.md
           - Repeat to Gene Handoff: repeat_to_gene_annotation_handoff.md
-          - Repeat Release-Mask Decision Case: repeat_release_mask_decision_case.md
+          - Repeat Release-Mask Case: repeat_release_mask_decision_case.md
           - v0.8 Gene Kickoff: v0.8_gene_annotation_kickoff.md
-          - Gene Annotation Strategy: gene_annotation.md
+          - Gene Strategy: gene_annotation.md
           - Genes: annotation/genes.md
           - Gene Set Decisions: gene_set_decision_guide.md
           - Gene-Set Disagreement Case: gene_set_disagreement_case.md
-          - Gene ID Preservation vs Novel-Locus Recovery Case: gene_id_preservation_vs_novel_loci_case.md
+          - Gene ID vs Novel Loci Case: gene_id_preservation_vs_novel_loci_case.md
           - Functional Annotation: functional_annotation_guide.md
           - Annotation QC Dashboard: annotation_qc_dashboard_guide.md
-          - Annotation Validation Examples: annotation_validation_examples.md
+          - Validation Examples: annotation_validation_examples.md
       - Release:
           - Overview: release/index.md
           - v0.9 Release Kickoff: v0.9_ncbi_release_kickoff.md
-          - Release Submission Packet: release_submission_packet.md
+          - Submission Packet: release_submission_packet.md
           - NCBI Submission: release/ncbi_submission.md
-          - Release Package Decisions: release_package_decision_guide.md
+          - Package Decisions: release_package_decision_guide.md
           - Organelle Workflow: organelle_workflow.md
-          - Annotation Submission Handoff: annotation_submission_handoff.md
+          - Annotation Handoff: annotation_submission_handoff.md
           - table2asn Triage: table2asn_discrepancy_triage.md
           - Reviewer Responses: table2asn_reviewer_response_examples.md
-          - Accession Handoff Worked Example: accession_handoff_worked_example.md
+          - Accession Handoff Example: accession_handoff_worked_example.md
           - Community Database Companion: community_database_release_companion.md
-          - Release Methods and Structured Comments: release_methods_and_structured_comments.md
-          - Release Candidate Worked Case: release_candidate_worked_case.md
-          - Release Bundle Worked Example: release_bundle_worked_example.md
-          - Release Internal Handoff Example: release_internal_handoff_example.md
+          - Methods and Structured Comments: release_methods_and_structured_comments.md
+          - Release Candidate Case: release_candidate_worked_case.md
+          - Release Bundle Example: release_bundle_worked_example.md
+          - Internal Handoff Example: release_internal_handoff_example.md
           - NCBI Metadata Templates: ncbi_metadata_templates.md
   - Development Project:
+      - Overview: development_project.md
       - Current Status:
           - Status and Roadmap: status.md
           - Active Draft Lanes: active_draft_lanes.md

@@ -2,6 +2,8 @@
 
 Welcome to the documentation site for the crop plant PacBio HiFi genome assembly workflow.
 
+Repo: [USDA-ARS-GBRU/HiFi-Genome-Assembly](https://github.com/USDA-ARS-GBRU/HiFi-Genome-Assembly)
+
 This project is written to help a beginning bioinformatics graduate student move from raw HiFi reads to a defensible crop genome assembly, structured review, annotation handoff, and public release package. The emphasis is not only on commands, but on why one decision is stronger than another.
 
 ## Start Paths
