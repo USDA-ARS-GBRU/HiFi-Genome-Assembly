@@ -63,7 +63,8 @@ Use it when you are:
 
 The worked project paths are opinionated beginner routes through the protocol for common crop assembly situations.
 
-- [Worked Project Paths](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/worked_project_paths/)
+[Worked Project Paths](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/worked_project_paths/)
+
 - [Diploid Inbred HiFi-Only](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/diploid_inbred_hifi_only/)
 - [Heterozygous HiFi Plus Hi-C](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/heterozygous_hifi_hic/)
 - [Reference-Guided Crop](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/case_paths/reference_guided_crop/)
