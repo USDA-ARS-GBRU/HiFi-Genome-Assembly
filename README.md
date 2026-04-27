@@ -35,12 +35,12 @@ This project is designed for crop plant genome assembly work that needs to hold 
 
 ## Published-Method Defaults
 
-Recent high-profile crop genome and pangenome papers support two practical lanes for this protocol:
+[Recent high-profile crop genome and pangenome papers](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/research_notes/2026-04-27_recent_crop_publication_methods_pass/) support two practical lanes for this protocol:
 
 - **Chromosome-scale pangenome/reference lane:** PacBio HiFi plus `hifiasm` for contigs, Hi-C/Omni-C or carefully documented reference/map evidence for ordering, BUSCO plus Merqury and plant repeat-space metrics such as LAI, EDTA/RepeatMasker repeat annotation, and evidence-integrated gene annotation.
 - **Near-T2T/T2T escalation lane:** standard HiFi assemblies are usually not enough for the hardest centromeric, rDNA, satellite, and telomeric repeats. Projects making T2T-style claims should plan for additional evidence such as ultra-long ONT, Hi-C, optical maps, cytogenetic evidence, targeted gap filling, and explicit repeat-region validation.
 
-The default workflow therefore starts with a conservative hifiasm assembly, then escalates only when the biology, QC results, and project goal justify extra methods.
+The default workflow therefore starts with a conservative hifiasm assembly, then escalates only when the biology, QC results, and project goal justify extra methods. The broader resource audit behind the method update is published in the [HiFi methods deep research pass](https://usda-ars-gbru.github.io/HiFi-Genome-Assembly/research_notes/2026-04-27_hifi_methods_deep_research/).
 
 ## Recommended Workflow
 

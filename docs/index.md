@@ -8,7 +8,7 @@ This project is written to help a beginning bioinformatics graduate student move
 
 ## Current Method Stance
 
-Recent crop genome publications support a clear default path:
+[Recent crop genome publications](research_notes/2026-04-27_recent_crop_publication_methods_pass.md) support a clear default path:
 
 - start PacBio HiFi crop assemblies with `hifiasm`
 - use alternate assemblers as diagnostic comparisons, not random replacements
@@ -16,7 +16,7 @@ Recent crop genome publications support a clear default path:
 - reserve near-T2T or T2T language for projects with extra evidence for centromeres, telomeres, rDNA, satellites, and gap closure
 - evaluate plant genomes with multiple evidence layers: BUSCO, Merqury, LAI or other repeat-space checks, dotplots/contact maps, read mapping, contamination review, and release validation
 
-This site is organized around that default, then gives escalation paths when the data or publication goal requires more.
+This site is organized around that default, then gives escalation paths when the data or publication goal requires more. The full dated research notes are published under [Research Notes](research_notes/index.md).
 
 ## Start Paths
 
@@ -86,6 +86,7 @@ Start here when you are maintaining the docs project itself.
 | sbatch templates | active draft | [sbatch templates](sbatch/index.md) |
 | helper scripts | active draft | [scripts](scripts/index.md) |
 | Shared references | active draft | [sbatch Template Index](sbatch_template_index.md), [Key References](key_references.md), [PacBio Watchlist](pacbio_watchlist.md) |
+| Research notes | active draft | [Research Notes](research_notes/index.md) |
 | Assembly | active draft | [Assembly](assembly/index.md) |
 | QC | active draft | [QC](qc/index.md) |
 | Curation | maintained draft | [Curation](curation/index.md) |

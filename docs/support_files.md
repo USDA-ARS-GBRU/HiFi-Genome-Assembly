@@ -10,6 +10,7 @@ Use these pages when you are actively implementing the protocol on HPC or adapti
 - helper scripts
 - decision logs and checklists
 - shared references and tool-policy pages
+- dated research notes behind published-method defaults
 - method comparison pages for alternate assemblers, scaffolding candidates, T2T evidence, repeat libraries, and gene sets
 
 ## Best Uses
@@ -18,6 +19,7 @@ Use these pages when you are actively implementing the protocol on HPC or adapti
 - looking up a helper script and usage example
 - pulling a checklist into a real project folder
 - checking project-wide references and tooling notes
+- reviewing the source notes behind current method defaults
 
 ## Start Here
 
@@ -26,3 +28,4 @@ Use these pages when you are actively implementing the protocol on HPC or adapti
 - [workflow templates and checklists](workflow_templates/index.md)
 - [sbatch template index](sbatch_template_index.md)
 - [key references](key_references.md)
+- [research notes](research_notes/index.md)

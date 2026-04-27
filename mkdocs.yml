@@ -48,6 +48,10 @@ nav:
           - Key References: key_references.md
           - PacBio Watchlist: pacbio_watchlist.md
           - Tool Version Policy: tool_version_policy.md
+      - Research Notes:
+          - Overview: research_notes/index.md
+          - HiFi Methods Deep Research: research_notes/2026-04-27_hifi_methods_deep_research.md
+          - Recent Crop Publication Methods: research_notes/2026-04-27_recent_crop_publication_methods_pass.md
   - Workflow Steps:
       - Overview: workflow_steps.md
       - Setup:
