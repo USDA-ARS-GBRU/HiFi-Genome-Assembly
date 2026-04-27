@@ -2,6 +2,8 @@
 
 This section covers the path from a frozen assembly and annotation set to a coherent NCBI/INSDC submission package and synchronized community-database release.
 
+Use the same method stance in release text that was used during analysis. If the project used hifiasm contigs, Hi-C scaffolding, LAI/Merqury/BUSCO QC, EDTA/RepeatMasker repeats, or evidence-integrated gene annotation, those choices should be visible in the methods, manifest, structured comments, and reviewer-ready summaries.
+
 ## Read This Section First If
 
 - you are deciding whether to submit assembly only or assembly plus annotation

@@ -6,6 +6,18 @@ Repo: [USDA-ARS-GBRU/HiFi-Genome-Assembly](https://github.com/USDA-ARS-GBRU/HiFi
 
 This project is written to help a beginning bioinformatics graduate student move from raw HiFi reads to a defensible crop genome assembly, structured review, annotation handoff, and public release package. The emphasis is not only on commands, but on why one decision is stronger than another.
 
+## Current Method Stance
+
+Recent crop genome publications support a clear default path:
+
+- start PacBio HiFi crop assemblies with `hifiasm`
+- use alternate assemblers as diagnostic comparisons, not random replacements
+- use Hi-C or similarly strong long-range evidence for chromosome-scale scaffolding
+- reserve near-T2T or T2T language for projects with extra evidence for centromeres, telomeres, rDNA, satellites, and gap closure
+- evaluate plant genomes with multiple evidence layers: BUSCO, Merqury, LAI or other repeat-space checks, dotplots/contact maps, read mapping, contamination review, and release validation
+
+This site is organized around that default, then gives escalation paths when the data or publication goal requires more.
+
 ## Start Paths
 
 Choose the path that matches where you are today:
@@ -97,12 +109,14 @@ For most projects, the cleanest reading order is:
 1. [Software Environments](setup/environment.md)
 2. [Genome Profiling](assembly/genome_profiling.md)
 3. [hifiasm Workflow](assembly/hifiasm.md)
-4. [Assembly Metrics](qc/assembly_metrics.md)
-5. [Dotplot Misassembly Curation](dotplot_misassembly_curation.md)
-6. [Hi-C Scaffolding](scaffolding/hic_scaffolding.md) or [RagTag](ragtag_workflow.md) when appropriate
-7. [Repeat Library Decisions](repeat_library_decision_guide.md)
-8. [Gene Set Decisions](gene_set_decision_guide.md)
-9. [Release Package Decisions](release_package_decision_guide.md)
+4. [Alternate Assembler Comparison](assembly/alternate_assemblers.md), only if the default assembly needs a diagnostic comparison
+5. [Assembly Metrics](qc/assembly_metrics.md)
+6. [Dotplot Misassembly Curation](dotplot_misassembly_curation.md)
+7. [Hi-C Scaffolding](scaffolding/hic_scaffolding.md) or [RagTag](ragtag_workflow.md) when appropriate
+8. [Advanced T2T Methods](t2t_advanced_methods.md), only when the project is aiming beyond ordinary chromosome scale
+9. [Repeat Library Decisions](repeat_library_decision_guide.md)
+10. [Gene Set Decisions](gene_set_decision_guide.md)
+11. [Release Package Decisions](release_package_decision_guide.md)
 
 ## Worked Project Paths
 

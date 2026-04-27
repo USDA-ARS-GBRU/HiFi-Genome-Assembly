@@ -59,6 +59,7 @@ nav:
           - Profiling: assembly/genome_profiling.md
           - hifiasm: assembly/hifiasm.md
           - hifiasm Parameters: assembly/hifiasm_parameters.md
+          - Alternate Assemblers: assembly/alternate_assemblers.md
       - QC:
           - Overview: qc/index.md
           - Metrics: qc/assembly_metrics.md
@@ -99,6 +100,7 @@ nav:
           - Hi-C Contact QC: hic_contact_map_qc.md
           - Telomere Summary: telomere_summary_workflow.md
           - v0.6 T2T Kickoff: v0.6_t2t_kickoff.md
+          - Advanced T2T Methods: t2t_advanced_methods.md
           - T2T Readiness: t2t_readiness_checklist.md
           - T2T Evidence Package: t2t_completeness_evidence_package.md
           - T2T Claim Language: t2t_claim_language_guide.md

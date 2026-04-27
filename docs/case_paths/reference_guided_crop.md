@@ -21,8 +21,10 @@ Use the reference to organize the assembly cautiously without letting reference 
 Be conservative:
 
 - use the reference as an organizing hypothesis, not as proof
+- distinguish pangenome comparability from de novo truth; some published pangenome projects use reference or map ordering for consistency, but that choice must be explicit
 - prefer unplaced or unscaffolded sequence over a confident-looking but weakly supported placement
 - do not “correct” real structural differences just to match the reference
+- preserve evidence for PAVs, inversions, introgressions, and accession-specific structure
 
 ## What To Watch Closely
 
@@ -30,6 +32,7 @@ Be conservative:
 - inversions or translocations that may be real biology
 - over-fragmentation from aggressive correction before scaffolding
 - chromosome names that imply confidence beyond the evidence
+- downstream SV analyses that depend on whether reference-guided order altered interpretation
 
 ## Likely Deliverable
 

@@ -122,12 +122,15 @@ Some tools are often easiest as binaries or containers:
 - `hifiasm` can be compiled directly from GitHub
 - NCBI FCS often runs best through Singularity/Apptainer or Docker
 - `EDTA`, `BRAKER3`, and `MAKER` may be more stable in containers on some systems
+- `Verkko`, ONT-heavy assemblers, and T2T-oriented tools may need separate environments from the default HiFi workflow
 
 Always record:
 
 - the exact command used
 - the tool version
 - the container tag or digest, if available
+
+For publication-grade methods, also record database or model versions for BUSCO, FCS, RepeatMasker libraries, EDTA curated libraries, sourmash sketches, and any protein/RNA evidence sets used for annotation.
 
 ## Practical Recommendation
 

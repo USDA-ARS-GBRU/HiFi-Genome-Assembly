@@ -12,6 +12,8 @@ Gene annotation should be evidence-driven. For crop plants, the best strategy de
 
 Many crop projects benefit from a hybrid strategy: Liftoff to preserve known models, BRAKER3 to add evidence-supported predictions, and MAKER or custom curation to integrate evidence into a final gene set.
 
+High-profile crop genome papers increasingly treat gene annotation as evidence integration: RNA-seq, Iso-Seq when available, protein homology, ab initio predictors, repeat filtering, and final QC. Liftoff is valuable for close-reference transfer, but it should not be the only discovery method when novel loci or structural variation matter.
+
 ## Inputs to Freeze
 
 Before annotation, freeze:
@@ -38,6 +40,8 @@ sbatch \
 
 Use Liftoff when the reference annotation is close enough that most gene structures should be conserved.
 
+Use Liftoff as comparison-only when divergence, PAVs, introgressions, or pangenome novelty are central to the project.
+
 ## BRAKER3
 
 ```bash
@@ -47,6 +51,8 @@ sbatch \
 ```
 
 Use BRAKER3 when RNA-seq and/or protein evidence are available and a full de novo annotation is needed.
+
+Record the evidence set carefully: tissues, developmental stages, RNA-seq aligner, Iso-Seq source, protein database, and repeat-mask version all affect the final gene set.
 
 ## MAKER
 

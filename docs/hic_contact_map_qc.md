@@ -2,6 +2,8 @@
 
 Hi-C contact maps are the main evidence for chromosome-scale scaffolding. Review them before accepting scaffolds, and archive representative screenshots for the release report.
 
+Recent crop pangenome workflows use contact maps as curation evidence, not as decoration. A scaffold candidate is not release-ready until the contact map has been reviewed against AGP, dotplot, contamination, and expected chromosome biology.
+
 ## Whole-Genome Review
 
 Look for:
@@ -33,6 +35,8 @@ For each chromosome-scale scaffold:
 | checkerboard pattern | orientation/order problem | review in Juicebox/JBAT |
 | many tiny placed contigs | over-scaffolding of repeats or low-confidence contigs | consider leaving contigs unplaced |
 | weak whole-map signal | poor Hi-C library or mapping issue | review read pairing, duplicates, mapping rate |
+| strong signal involving organelle or contaminant contigs | non-nuclear sequence in scaffold input | remove or classify before accepting scaffold |
+| apparent improvement after aggressive joining | N50-driven over-scaffolding | compare with candidate metrics and local evidence |
 
 ## Minimum Evidence to Accept Scaffolds
 

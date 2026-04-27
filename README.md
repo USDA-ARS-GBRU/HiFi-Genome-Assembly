@@ -22,12 +22,25 @@ Preserved longform snapshots are archived in [Archive Overview](https://github.c
 
 This project is designed for crop plant genome assembly work that needs to hold up in manuscript review, internal lab handoff, and public database release. The workflow emphasizes:
 
-- PacBio HiFi-first assembly
+- PacBio HiFi-first assembly with hifiasm as the default published-method starting point
+- systematic alternate-assembler comparison when the default assembly is suspicious
+- Hi-C/contact-map-supported scaffolding when chromosome-scale structure is a project goal
+- explicit escalation criteria for near-T2T or T2T claims
+- plant-specific QC beyond N50, including k-mer validation, gene-space checks, repeat-space checks, structural review, and contamination screening
 - transparent evidence-based decisions
 - conservative structural correction
 - repeat and gene annotation handoff
 - NCBI/community-database release readiness
 - HPC-friendly execution with reusable sbatch templates and helper scripts
+
+## Published-Method Defaults
+
+Recent high-profile crop genome and pangenome papers support two practical lanes for this protocol:
+
+- **Chromosome-scale pangenome/reference lane:** PacBio HiFi plus `hifiasm` for contigs, Hi-C/Omni-C or carefully documented reference/map evidence for ordering, BUSCO plus Merqury and plant repeat-space metrics such as LAI, EDTA/RepeatMasker repeat annotation, and evidence-integrated gene annotation.
+- **Near-T2T/T2T escalation lane:** standard HiFi assemblies are usually not enough for the hardest centromeric, rDNA, satellite, and telomeric repeats. Projects making T2T-style claims should plan for additional evidence such as ultra-long ONT, Hi-C, optical maps, cytogenetic evidence, targeted gap filling, and explicit repeat-region validation.
+
+The default workflow therefore starts with a conservative hifiasm assembly, then escalates only when the biology, QC results, and project goal justify extra methods.
 
 ## Recommended Workflow
 
@@ -35,14 +48,15 @@ This project is designed for crop plant genome assembly work that needs to hold 
 metadata and sample definition
   -> read QC and preprocessing
   -> genome profiling and heterozygosity review
-  -> hifiasm assembly
-  -> assembly metrics and k-mer validation
+  -> hifiasm primary assembly
+  -> optional alternate-assembler diagnostic comparison
+  -> assembly metrics, k-mer validation, and plant repeat-space QC
   -> dotplots and structural review
   -> contamination and organelle review
   -> optional correction, scaffolding, and gap filling
-  -> telomere/centromere/T2T evidence review
-  -> repeat annotation and masking
-  -> gene annotation and QC
+  -> telomere/centromere/T2T evidence review when claims require it
+  -> repeat annotation, masking, and library decision
+  -> evidence-integrated gene annotation and QC
   -> release bundle preparation for NCBI/INSDC and community databases
 ```
 

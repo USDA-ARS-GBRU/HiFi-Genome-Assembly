@@ -4,6 +4,16 @@ This page separates the signed-off `v0.5.0` baseline from the active-draft lanes
 
 Current active development version: `v0.9.0-dev`
 
+## Current Method Refresh
+
+The 2026-04-27 methods review added a cross-lane refresh grounded in recent crop genome publications. The main effects are:
+
+- hifiasm is the default published-method HiFi contig assembly lane.
+- alternate assemblers are framed as diagnostic comparisons.
+- YaHS/Juicebox and contact-map review are first-class Hi-C scaffolding paths.
+- T2T is a separate escalation lane requiring additional long-range and repeat-region evidence.
+- LAI/repeat-space QC, EDTA/RepeatMasker, pangenome repeat libraries, and evidence-integrated gene annotation are now emphasized across relevant pages.
+
 ## Stable Baseline
 
 `v0.5.0` is now the signed-off stable baseline for:

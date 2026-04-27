@@ -45,6 +45,8 @@ Record:
 - k-mer size
 - read set used
 
+Also record whether the same read set and k-mer database will be reused for Merqury. Reusing the database is efficient and helps keep early profiling and later assembly QV/completeness interpretation consistent.
+
 ## Smudgeplot
 
 Use Smudgeplot when ploidy, subgenome structure, or heterozygous dosage is uncertain. This is especially useful for polyploid crops, wild relatives, and heterozygous clonally propagated material.
@@ -97,3 +99,4 @@ For inbred lines, a strong homozygous peak and weak heterozygous peak can be nor
 - Treat k-mer estimates from contaminated read sets as suspect.
 - Use genome profiling to choose between primary, haplotype-resolved, trio, or Hi-C integrated assembly strategies.
 - Revisit profiling if assembly size, BUSCO duplication, Merqury spectra, and dotplots disagree.
+- For polyploids and highly heterozygous crops, interpret k-mer peaks as dosage and representation evidence, not as a simple diploid pass/fail result.

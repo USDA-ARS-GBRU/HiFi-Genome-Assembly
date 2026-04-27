@@ -14,6 +14,8 @@ Common candidates include:
 
 Run candidates against the same final FASTA whenever possible.
 
+Recent crop pangenome papers make the case for explicit repeat-library provenance. A project-wide library can improve consistency across accessions, but it can also mask accession-specific novelty if it is applied without review.
+
 ## Decision Table
 
 Record decisions in:
@@ -78,6 +80,7 @@ scripts/audit_repeat_annotation_decisions.py \
 | masked percent is much higher than related cultivars | may be biology, haplotigs, contamination, or repeats in unplaced contigs | review before release |
 | soft-masked FASTA differs from gene annotation input | provenance problem | rerun gene annotation or regenerate handoff files |
 | repeat tracks use old sequence names | release mismatch | remap or rerun repeat annotation |
+| pangenome project uses per-accession libraries only | annotation differences may reflect library differences | consider shared curated or panEDTA-style library comparison |
 
 ## Handoff to Gene Annotation
 

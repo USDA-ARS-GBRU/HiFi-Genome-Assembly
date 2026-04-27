@@ -2,6 +2,8 @@
 
 This section covers the move from contigs to chromosome-scale assemblies, while staying conservative about joins, breaks, and gap claims.
 
+Recent crop pangenome papers commonly use Hi-C/Omni-C, reference or map evidence, and manual contact-map review to move from hifiasm contigs to chromosome-scale assemblies. Treat scaffolding as an evidence integration step, not as a way to make a weak contig assembly look finished.
+
 ## Read This Section First If
 
 - you are choosing between Hi-C, RagTag, or other scaffolding paths
@@ -17,6 +19,7 @@ This section covers the move from contigs to chromosome-scale assemblies, while 
 - [Scaffolding candidate comparison](../scaffolding_candidate_comparison.md)
 - [Worked scaffolding decision case](../scaffolding_worked_decision_case.md)
 - [Gap filling workflow](../gap_filling_workflow.md)
+- [Advanced T2T methods](../t2t_advanced_methods.md)
 - [T2T readiness checklist](../t2t_readiness_checklist.md)
 
 ## Practical Outcome
@@ -26,6 +29,7 @@ After this section, you should have:
 - a preferred scaffold set backed by independent evidence
 - an AGP-aware scaffold representation
 - documented gap filling decisions
+- a decision about whether ordinary chromosome-scale language is sufficient or a T2T escalation lane is justified
 - conservative language for chromosome-scale and completeness claims
 
 ## Read Next

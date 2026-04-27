@@ -26,6 +26,22 @@ Use short, factual wording:
 High-molecular-weight DNA was extracted from young leaf tissue of <cultivar/accession>. PacBio HiFi reads were generated on the <instrument> platform to approximately <coverage>x genome coverage. A de novo assembly was generated with hifiasm v. <version>. Optional scaffolding used <tool and version>. Contamination screening included <tools>. Assembly quality was assessed with <metrics>. Repeat masking used <tool>. Gene annotation used <tool(s)> with <evidence>. The final release object was submitted as <assembly-only or annotated genome>.
 ```
 
+## Published-Method Crop Template
+
+Use this when the project follows the current recommended crop lane:
+
+```text
+PacBio HiFi reads were assembled de novo with hifiasm v. <version>. Assembly candidates were evaluated using contiguity statistics, BUSCO <lineage/version>, Merqury k-mer QV/completeness, <LAI/LTR_retriever if used>, read-mapping or Inspector evidence where applicable, whole-genome dotplots, and contamination/organelle screening with <tools>. Chromosome-scale scaffolding was performed with <YaHS/3D-DNA/RagTag/other> v. <version> using <Hi-C/Omni-C/reference/map evidence>, followed by contact-map and AGP review. Repeats were annotated with <EDTA/RepeatModeler2/RepeatMasker/curated library>, and gene annotation used <Liftoff/BRAKER3/MAKER/hybrid> with <RNA-seq/Iso-Seq/protein/reference> evidence.
+```
+
+## T2T Escalation Template
+
+Use this only when the project actually included the extra evidence:
+
+```text
+Candidate T2T regions were evaluated separately from ordinary chromosome-scale scaffolding. Evidence included <PacBio HiFi>, <ultra-long ONT>, <Hi-C/Omni-C>, <optical map/FISH/genetic map if used>, terminal telomere motif searches, centromere candidate annotation, difficult-repeat review, gap-status summaries, and spanning-read validation. We use <chromosome-scale/near-gapless/candidate T2T/T2T-quality> language according to the per-chromosome evidence table.
+```
+
 ## Minimal Reviewer-Response Template
 
 ```text
@@ -58,6 +74,8 @@ Record these values in one place before submission:
 - scaffolding method and version/date
 - estimated genome coverage
 - sequencing technologies used
+- alternate assembly candidates compared, if any
+- QC metrics and database versions, including BUSCO lineage, Merqury k-mer size, LAI method, and contamination databases
 - contamination-screening summary
 - repeat-masking method
 - annotation method and evidence

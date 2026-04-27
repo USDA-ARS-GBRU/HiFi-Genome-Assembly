@@ -2,6 +2,8 @@
 
 Gap filling is the process of replacing `N` runs in scaffolded assemblies with sequence. It is not the same as general polishing, and it should not be run automatically on every crop assembly.
 
+In recent T2T crop papers, gap closure is treated as targeted evidence work around difficult repeats, not a cosmetic final step. Keep unsupported gaps when the evidence is weak.
+
 ## When to Consider Gap Filling
 
 Consider gap filling when:
@@ -38,6 +40,8 @@ Use the gap table to prioritize gaps by length, chromosome, evidence, and biolog
 | TGS-GapCloser2 | Long-read gap closure for large genomes | scaffold FASTA plus TGS read FASTA | FASTA read input expected; validate filled sequence and details |
 | Gapless | Combined scaffolding, gap filling, and assembly correction | long reads plus draft assembly | Treat correction behavior conservatively |
 | TRFill | Complex repeat-region gap filling, including T2T-style gaps | homologous reference, assembly, HiFi/ONT, optional Hi-C | Best for targeted complex gaps; requires careful config |
+
+For near-T2T or T2T projects, also review [advanced T2T methods](t2t_advanced_methods.md) before accepting any fill in rDNA, centromeric, telomeric, satellite, or knob-repeat regions.
 
 ## Template Jobs
 
@@ -77,6 +81,7 @@ After any fill:
 6. Validate AGP and FASTA headers.
 7. Re-run BUSCO/Merqury where appropriate.
 8. Document accepted and rejected fills in a gap-filling decision log.
+9. For repeat-rich fills, validate copy number, depth, and spanning-read support.
 
 ## Decision Log
 

@@ -23,8 +23,11 @@ Produce a strong primary contig assembly first, then decide whether later refere
 Be conservative:
 
 - favor the primary assembly as the first release candidate
+- treat hifiasm as the default published-method starting point
+- use alternate assemblers only as diagnostics if QC disagrees with profiling or biology
 - do not force chromosome-scale scaffolding just because a related reference exists
 - do not over-purge duplicated sequence without strong evidence that it is assembly redundancy
+- do not describe the assembly as T2T without telomere, centromere, gap, and difficult-repeat evidence
 
 ## What To Watch Closely
 
@@ -32,6 +35,7 @@ Be conservative:
 - BUSCO duplication that is too high for the biology
 - organelle carryover
 - false confidence from good contig N50 without structural review
+- missing repeat-space QC when the crop is repeat-rich
 
 ## Likely Deliverable
 
@@ -45,5 +49,6 @@ For many such projects, the first defensible deliverable is:
 ## Read Next
 
 - [hifiasm workflow](../assembly/hifiasm.md)
+- [alternate assembler comparison](../assembly/alternate_assemblers.md)
 - [assembly metrics](../qc/assembly_metrics.md)
 - [release package decisions](../release_package_decision_guide.md)

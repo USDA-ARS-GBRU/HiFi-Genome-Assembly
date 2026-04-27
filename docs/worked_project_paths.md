@@ -23,6 +23,8 @@ Each worked path is meant to answer:
 
 They do not replace the rest of the protocol. They help you enter it with a realistic first-pass strategy.
 
+All paths share the same current method stance: start with hifiasm for PacBio HiFi contigs, compare alternate assemblers only when evidence demands it, use Hi-C or carefully justified reference/map evidence for chromosome-scale scaffolding, and reserve T2T claims for projects with additional long-range and repeat-resolution evidence.
+
 ## Related Pages
 
 - [How to use this protocol in a real project](how_to_use_this_protocol.md)

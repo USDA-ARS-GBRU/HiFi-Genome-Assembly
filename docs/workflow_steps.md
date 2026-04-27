@@ -4,6 +4,17 @@ This section is the end-to-end protocol path.
 
 Use these pages when you want to move through the actual assembly workflow from project setup to release packaging.
 
+## Published-Method Plan
+
+The workflow now follows a staged plan grounded in recent crop genome publications:
+
+1. Build a defensible HiFi contig assembly with `hifiasm`.
+2. Compare alternate assemblers only when QC or biology gives a reason.
+3. Use BUSCO, Merqury, repeat-space metrics such as LAI, read mapping, contamination review, and structural plots as a combined evidence set.
+4. Scaffold with Hi-C/Omni-C, reference/map evidence, or RagTag only when the project goal and evidence justify chromosome-scale organization.
+5. Treat T2T as a separate escalation lane requiring additional evidence for long repeats, centromeres, telomeres, rDNA arrays, and gap closure.
+6. Freeze sequence IDs before repeat annotation, gene annotation, and release packaging.
+
 ## Step Order
 
 The main workflow moves in this order:

@@ -22,9 +22,12 @@ Produce a chromosome-scale assembly without confusing true heterozygosity for as
 
 Be extra cautious:
 
+- use hifiasm as the first contig assembly, then compare primary, alternate, and phased outputs
+- use YaHS/3D-DNA/JBAT or another Hi-C scaffolder as a candidate-generation step, not a final verdict
 - do not collapse true haplotypic divergence into a cleaner-looking but less faithful assembly
 - do not trust Hi-C joins just because the contact map looks mostly tidy
 - do not force reference-like structure when independent evidence disagrees
+- use T2T language only when extra repeat-resolution evidence supports it
 
 ## What To Watch Closely
 
@@ -47,3 +50,4 @@ For many such projects, the strongest first release is:
 - [genome profiling](../assembly/genome_profiling.md)
 - [Hi-C scaffolding reader path](../scaffolding/hic_scaffolding.md)
 - [scaffolding worked decision case](../scaffolding_worked_decision_case.md)
+- [T2T readiness checklist](../t2t_readiness_checklist.md)

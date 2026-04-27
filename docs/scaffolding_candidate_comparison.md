@@ -2,6 +2,8 @@
 
 Run scaffolding candidates side by side when multiple tools are plausible. For example, a project may compare YaHS, 3D-DNA/JBAT, RagTag, and a gap-filled candidate. The goal is not to pick the assembly with the largest N50. The goal is to pick the structure with the strongest independent evidence.
 
+This comparison step is especially important for crop pangenomes, where different groups may choose Hi-C scaffolding, reference/map-based ordering, or Triticeae-specific workflows depending on the species and project goal.
+
 ## Candidate Table
 
 Create a FASTA-level comparison:
@@ -29,6 +31,7 @@ For a small worked example that moves from candidate metrics to a final decision
 | Hi-C contact map | primary evidence for order, orientation, and joins |
 | Dotplot | reveals inversions, translocations, duplications, and reference disagreements |
 | HiFi read mapping | checks local continuity around suspicious joins |
+| Merqury sanity check | confirms sequence content did not unexpectedly change during scaffolding |
 | Telomere/centromere status | supports chromosome completeness and orientation |
 | Contamination review | prevents contaminant or organellar sequence from being scaffolded |
 

@@ -2,6 +2,8 @@
 
 This section focuses on evidence-first structural review and conservative manual correction.
 
+Recent crop pangenome papers show why this matters: reference differences, haplotype structure, introgressions, and true structural variation are part of crop biology. Do not convert every dotplot disagreement into a correction.
+
 ## Read This Section First If
 
 - a dotplot suggests a chimeric contig or scaffold
@@ -25,6 +27,7 @@ After this section, you should have:
 - a corrected FASTA only where evidence is strong
 - post-correction validation tables and report text
 - a cleaner assembly for scaffolding or release
+- a record of structural differences that were retained because they may be real biology
 
 ## Read Next
 

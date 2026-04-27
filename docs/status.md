@@ -4,6 +4,8 @@ Current version: `0.9.0-dev`
 
 The root `README.md` now serves as a concise landing page while the focused documentation tree carries the detailed protocol. The goal before v1.0 is to keep the repo front page short and keep detailed procedures in `docs/`.
 
+The 2026-04-27 method refresh grounded the active docs in recent crop genome publications: hifiasm as the default HiFi assembler, alternate assemblers as diagnostic comparisons, Hi-C/contact-map scaffolding as the chromosome-scale path, advanced T2T methods as a separate escalation lane, and stronger plant-specific QC/annotation evidence.
+
 ## Current Phase
 
 | Version | Status | Focus |
@@ -24,13 +26,13 @@ The root `README.md` now serves as a concise landing page while the focused docu
 | Area | Status | Notes |
 | --- | --- | --- |
 | Setup | draft | tool policy exists; environment pages need expansion |
-| Assembly | active draft | read prep, genome profiling, hifiasm, and parameters are split out |
-| QC | active draft | metrics, contamination, and dotplots are split out |
-| Curation | maintained draft | v0.4 workflow is usable and linked |
-| Scaffolding | active draft | Hi-C, AGP, gap filling, and T2T paths are underway |
-| Telomere/T2T | active draft | v0.6 kickoff and completeness evidence package started |
-| Annotation | active draft | repeat and gene refinement lanes started; gene pages exist as first-pass web docs |
-| Release | active draft | NCBI submission path exists and v0.9 is expanding package-level release decisions |
+| Assembly | active draft | read prep, genome profiling, hifiasm, parameters, and alternate-assembler comparison are split out |
+| QC | active draft | metrics, contamination, dotplots, Merqury/BUSCO interpretation, and plant repeat-space checks are split out |
+| Curation | maintained draft | v0.4 workflow is usable and linked; current wording emphasizes retained biological SVs |
+| Scaffolding | active draft | Hi-C, YaHS/Juicebox, AGP, gap filling, and T2T paths are underway |
+| Telomere/T2T | active draft | v0.6 packet exists; advanced T2T escalation lane added |
+| Annotation | active draft | repeat and gene refinement lanes emphasize EDTA/RepeatMasker, pangenome libraries, and evidence-integrated gene sets |
+| Release | active draft | NCBI submission path exists and methods text now reflects the published-method defaults |
 | Docs site | active draft | MkDocs site is live, local strict builds work, and navigation cleanup is in progress |
 
 ## v0.5 Exit Goals

@@ -11,6 +11,8 @@ Repeat annotation is central to crop plant genome work. It affects gene predicti
 | Curated library plus RepeatMasker | Consistent across related assemblies | Can miss novel repeats | Pan-genome projects with a validated species library |
 | Combined EDTA + curated filtering | Best long-term library quality | Requires curation and clear provenance | Reference-grade community release |
 
+Recent crop pangenome publications frequently use EDTA with RepeatMasker and, for population-scale projects, combined or pan-genome TE libraries. Treat EDTA as the primary plant-focused starting point, then use RepeatModeler2 or curated libraries as comparison and refinement paths.
+
 ## Recommended First Pass
 
 For a new crop genome:
@@ -20,6 +22,7 @@ For a new crop genome:
 3. Compare total masked fraction and major repeat classes.
 4. Use a soft-masked genome for gene annotation.
 5. Save the repeat library, repeat GFF, summary tables, and software versions.
+6. For pangenome projects, decide whether a shared species/pangenome repeat library is needed for consistent annotation across accessions.
 
 Run repeat annotation after the assembly sequence set is mostly stable. If you remove contaminant contigs, split scaffolds, rename chromosomes, or change the primary/haplotype representation, rerun or remap repeat annotation before releasing tracks.
 
@@ -32,6 +35,8 @@ sbatch \
 ```
 
 Use `species=others` unless the crop has a specific EDTA mode that is appropriate. `sensitive=1` is slower but useful for repeat-rich plant genomes.
+
+Before running EDTA, make sure sequence names are simple and stable. EDTA and downstream RepeatMasker/GFF workflows are easier to audit when FASTA IDs already match the planned release IDs.
 
 ## RepeatModeler2 + RepeatMasker
 
@@ -88,3 +93,4 @@ Compare against related cultivars and species when available. A large change in 
 - Did repeat masking suppress real gene models?
 - Are repeat-derived gene predictions being filtered or annotated correctly?
 - Are repeat tracks based on the exact FASTA sequence names used for release?
+- Is the repeat library intended for one assembly only, or for consistent annotation across a pangenome?

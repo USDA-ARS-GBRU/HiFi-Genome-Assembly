@@ -24,6 +24,10 @@ hifiasm [parameters] -o [prefix] [reads]
 
 For Hi-C integrated phasing, Hi-C read pairs were provided using `--h1` and `--h2`. hifiasm GFA outputs were converted to FASTA from segment records. The [primary/haplotype/scaffolded] assembly was selected for downstream analysis based on contiguity, completeness, base accuracy, duplication, and structural review.
 
+If alternate assemblers were compared:
+
+Additional assembly candidates were generated with [HiCanu/Flye/IPA/Verkko/other version] as diagnostic comparisons. Candidates were evaluated with the same QC package and were not merged unless a targeted correction had independent read and structural support.
+
 ## Scaffolding and Structural Curation
 
 If Hi-C scaffolding was used:
@@ -36,7 +40,7 @@ Reference-guided scaffolding was performed with [RagTag version] using [referenc
 
 ## Assembly Quality Assessment
 
-Assembly contiguity was summarized with [seqkit/BBTools/QUAST versions]. Gene-space completeness was evaluated with BUSCO [version] using [lineage dataset]. Base-level quality and k-mer completeness were estimated with Merqury [version] using read k-mers. Whole-genome collinearity was inspected using [MUMmer/minimap2/plotsr versions]. HiFi reads were mapped back to the assembly with minimap2 [version] to evaluate coverage and breakpoint support.
+Assembly contiguity was summarized with [seqkit/BBTools/QUAST versions]. Gene-space completeness was evaluated with BUSCO [version] using [lineage dataset]. Base-level quality and k-mer completeness were estimated with Merqury [version] using read k-mers. Plant repeat-space quality was evaluated with [LAI/LTR_retriever/other, if used]. Whole-genome collinearity was inspected using [MUMmer/minimap2/plotsr versions]. HiFi reads were mapped back to the assembly with minimap2 [version] to evaluate coverage and breakpoint support.
 
 ## Contamination Screening
 
@@ -46,9 +50,13 @@ Assembly contamination was evaluated with NCBI FCS-adaptor and FCS-GX [versions/
 
 Telomeric repeats were identified using [tidk/quarTeT/seqkit] with motif [motif or de novo result]. Putative centromeric regions were annotated using [quarTeT/Tandem Repeat Finder/repeat enrichment/Hi-C/CENH3 ChIP-seq]. Gap counts and gap lengths were summarized from the final FASTA/AGP files.
 
+If near-T2T or T2T claims were made:
+
+Candidate T2T chromosomes were classified using a per-chromosome evidence table including FASTA gap status, terminal and internal telomere signals, centromere candidates, difficult-repeat review, read-spanning evidence, Hi-C/contact-map support, and contamination review. The assembly was described as [chromosome-scale/near-gapless/candidate T2T/T2T-quality] according to the weakest unresolved evidence category.
+
 ## Repeat Annotation
 
-Repeats were annotated using [EDTA/RepeatModeler2/RepeatMasker versions]. A de novo repeat library was generated from the final assembly, classified, and used to soft-mask the genome for gene annotation. Repeat summaries were reported as the percentage of assembly sequence assigned to major repeat classes.
+Repeats were annotated using [EDTA/RepeatModeler2/RepeatMasker versions]. A de novo or curated repeat library was generated from the final assembly or project-wide pangenome set, classified, and used to soft-mask the genome for gene annotation. Repeat summaries were reported as the percentage of assembly sequence assigned to major repeat classes.
 
 ## Gene Annotation
 
@@ -57,4 +65,3 @@ Gene annotation was performed using [BRAKER3/MAKER/Liftoff/Helixer/other] with e
 ## Data Availability
 
 Raw sequencing reads were deposited in the NCBI SRA under [accession]. The genome assembly was deposited in GenBank under [accession] and associated with BioProject [accession] and BioSample [accession]. Annotation files, repeat libraries, quality reports, and auxiliary tracks are available at [repository/DOI/community database].
-

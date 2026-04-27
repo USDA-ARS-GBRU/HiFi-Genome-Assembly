@@ -2,7 +2,9 @@
 
 Use this page when you are ready to turn PacBio HiFi reads into a first assembly that can survive downstream QC and review.
 
-For most crop projects, hifiasm is the default starting point because it gives a strong first-pass assembly without forcing early complexity. The hard part is not only running the assembler. The hard part is choosing which outputs to carry forward and documenting why.
+For most crop projects, hifiasm is the default starting point because it gives a strong first-pass assembly without forcing early complexity. Recent high-profile rice, barley, wheat, and maize pangenome/reference papers repeatedly use PacBio HiFi plus hifiasm for contig assembly, then add scaffolding, QC, and annotation evidence as separate steps.
+
+The hard part is not only running the assembler. The hard part is choosing which outputs to carry forward and documenting why.
 
 ## Goal
 
@@ -44,6 +46,22 @@ Convert selected GFA outputs to FASTA, capture tool versions, and keep the origi
 
 Do not throw away alternate or haplotype-resolved outputs immediately. Even if the primary assembly becomes the release candidate, the other outputs can explain why BUSCO duplication, k-mer behavior, or structural differences look the way they do.
 
+## GFA to FASTA Quick Recipe
+
+hifiasm writes GFA graph files. Convert the selected segment records to FASTA before running ordinary assembly statistics:
+
+```bash
+awk '/^S/{print ">"$2"\n"$3}' \
+  07_assemblies/sample.asm.bp.p_ctg.gfa \
+  > 07_assemblies/sample.primary.fa
+
+seqkit stats -a \
+  07_assemblies/sample.primary.fa \
+  > 08_stats/sample.primary.seqkit.tsv
+```
+
+Keep the original GFA, converted FASTA, hifiasm log, conversion command, and tool versions together. If a later scaffold or release FASTA differs from this primary FASTA, record the reason.
+
 ## Parameter Logic
 
 | Choice | Starting point | Reasoning |
@@ -54,12 +72,24 @@ Do not throw away alternate or haplotype-resolved outputs immediately. Even if t
 | Hi-C mode | project-specific | can improve phasing but does not replace post-assembly review |
 | purging | conservative | over-purging can remove real haplotypes, paralogs, or introgressions |
 
+## Polishing Policy
+
+Do not automatically polish PacBio HiFi assemblies with Illumina reads. HiFi assemblies often already have high base accuracy, and unnecessary polishing can introduce reference/read-set bias or damage haplotype-specific sequence.
+
+Use polishing only when there is a documented problem and a before/after validation plan. For example, ONT-heavy T2T workflows may polish ONT assemblies with HiFi or Illumina evidence, but that is a different project lane from the default HiFi-first hifiasm workflow.
+
+## When hifiasm Is Not Enough
+
+Use [alternate assembler comparison](alternate_assemblers.md) when the hifiasm assembly conflicts with genome profiling, Merqury, BUSCO, read depth, dotplots, or known biology. Use [advanced T2T methods](../t2t_advanced_methods.md) when the project is explicitly trying to resolve long repeats, centromeres, telomeres, or rDNA arrays with additional data such as ultra-long ONT.
+
+
 ## Review After Assembly
 
 Before scaffolding or release:
 
 - summarize FASTA statistics
 - run BUSCO and Merqury
+- add LAI/LTR-based repeat-space evaluation when repeat-rich plant assembly quality is central
 - inspect hifiasm log peaks
 - compare primary/haplotype outputs
 - screen contamination and organelles

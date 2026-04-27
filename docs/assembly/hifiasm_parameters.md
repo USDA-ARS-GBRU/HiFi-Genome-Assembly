@@ -2,6 +2,8 @@
 
 hifiasm defaults are strong for PacBio HiFi reads. For crop plant genomes, start with defaults unless biology, k-mer profiles, or diagnostic assemblies provide a clear reason to change parameters.
 
+Recent crop pangenome papers support this conservative default: use hifiasm as the primary HiFi contig assembler, then use scaffolding, QC, and annotation evidence to decide whether the output is suitable for release.
+
 ## Default HiFi-Only Primary Assembly
 
 Use this for many inbred or moderately heterozygous diploid crop samples:
@@ -22,6 +24,20 @@ Expected review outputs:
 
 The primary contig assembly is often the practical release candidate for inbred crops, but it still needs BUSCO, Merqury, contamination review, and dotplots.
 
+## Preserve Run Context
+
+Record these details for every hifiasm run:
+
+- hifiasm version and command line
+- input read files and read-filtering decisions
+- thread count, memory request, and cluster job ID
+- GFA outputs retained
+- FASTA conversion command
+- hifiasm log and extracted coverage/genome-size peaks
+- whether overlap/cache/bin files were reused or regenerated
+
+If you rerun hifiasm with new parameters or a different read set, keep it as a separate candidate rather than overwriting the earlier run.
+
 ## Hi-C Integrated Mode
 
 Use when Hi-C reads are from the same genotype and the goal includes haplotype phasing:
@@ -37,6 +53,8 @@ hifiasm \
 ```
 
 Hi-C integrated hifiasm output is not the final chromosome-scale scaffold. Use YaHS, 3D-DNA/JBAT, or another scaffolding workflow after reviewing the contigs.
+
+Treat hifiasm Hi-C mode as phasing support, not as a substitute for scaffolding contact-map review.
 
 ## Trio Mode
 
@@ -92,6 +110,18 @@ Poor evidence:
 - forcing the assembly to match a reference genome size
 - trying to hide heterozygosity or polyploid structure
 
+## Other Parameter Audits
+
+These parameters are sometimes useful, but they should be deliberate:
+
+| Parameter or behavior | Use | Caution |
+| --- | --- | --- |
+| `--primary` | force primary-only output behavior in some workflows | can hide useful alternate sequence review context |
+| `-s` | tune graph cleaning/stringency | compare with default before trusting improvements |
+| `-z` | adjust overlap length filtering for short reads or unusual datasets | changes graph behavior; document why |
+| `--write-paf` / `--write-ec` | preserve diagnostic overlaps or corrected reads when supported by the installed version | large files; plan storage |
+| cached overlaps/bin files | speed reruns with the same inputs | do not reuse after changing read sets or incompatible parameters |
+
 ## Polyploid Cautions
 
 Polyploid crops can have homeologous sequence, recent duplications, and allele dosage patterns that look confusing under diploid assumptions.
@@ -103,6 +133,8 @@ For polyploids:
 - compare homeolog-specific structure when references are available
 - be cautious with purging and reference-guided correction
 - document whether the release represents a haploid-like reference, primary assembly, or haplotype/subgenome-aware product
+
+For large polyploid crops, recent wheat work still supports hifiasm as a viable contig assembler, but the review burden shifts toward representation, subgenome/homeolog interpretation, contact-map review, and repeat-aware QC.
 
 ## Output Selection
 

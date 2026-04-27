@@ -2,6 +2,8 @@
 
 This section covers repeat annotation, masking strategy, gene annotation, and the handoff from evidence collection to a release-ready gene set.
 
+Recent high-profile crop genome papers generally pair EDTA/RepeatMasker-style repeat annotation with evidence-integrated gene annotation from RNA-seq, Iso-Seq, protein homology, and ab initio prediction. Use this section to make those choices reproducible rather than treating annotation as a single command after assembly.
+
 ## Read This Section First If
 
 - the assembly is stable enough to freeze sequence IDs and masking strategy
@@ -28,6 +30,7 @@ This section covers repeat annotation, masking strategy, gene annotation, and th
 After this section, you should have:
 
 - a repeat mask and library you are willing to release
+- repeat annotation provenance suitable for pangenome or community reuse
 - a gene-set decision backed by evidence rather than habit
 - annotation QC tables for internal review and public submission
 - a cleaner handoff into the NCBI release path

@@ -67,13 +67,15 @@ PacBio HiFi reads are normally high quality. Aggressive trimming can remove usef
 
 Options:
 
-| Tool | Use | Caution |
+| Tool | Use | Caution | Decision point |
 | --- | --- | --- |
-| fastplong | long-read adapter/quality cleanup | validate that assembly metrics improve |
-| btrim | explicit adapter-pattern screening/removal | use validated pattern files and long-read-capable build |
-| HiFiAdapterFilt | PacBio HiFi adapter contamination | useful when adapter contamination is suspected |
-| cutadapt | known adapter sequences | avoid broad trimming without evidence |
-| NCBI FCS-adaptor | release candidate assembly screening | does not replace read-level review |
+| fastplong | long-read adapter/quality cleanup | validate that assembly metrics improve | comparison-only unless it fixes a documented issue |
+| btrim | explicit adapter-pattern screening/removal | use validated pattern files and long-read-capable build | useful for conservative adapter-free vs raw comparison |
+| HiFiAdapterFilt | PacBio HiFi adapter contamination | designed for HiFi adapter artifacts; still inspect outputs | good choice when adapter contamination is suspected in reads |
+| cutadapt | known adapter sequences | avoid broad trimming without evidence | only for known motifs with clear rationale |
+| NCBI FCS-adaptor | adapter/vector screening for release candidates | assembly-level release screen; does not replace read-level review | required-style release evidence, not a read-prep shortcut |
+
+HiFiAdapterFilt is especially relevant because published evaluations found adapter sequence in many public CCS datasets and showed downstream assembly artifacts. Use it as a targeted sanitation tool, then compare the filtered assembly against the raw-read assembly.
 
 ## btrim Conservative Mode
 
@@ -106,6 +108,22 @@ Interpretation:
 - If many reads are flagged, inspect the btrim summary and independently verify adapter motifs.
 - Do not assume btrim replaces FCS-adaptor for release screening.
 - Record the btrim binary/source, pattern file, edit distance, and command in the decision log.
+
+## Read-Filtering Evidence Package
+
+If any reads are removed or trimmed, keep:
+
+- raw read statistics
+- filtered read statistics
+- number and percentage of reads affected
+- adapter/vector motif source
+- tool version and database or pattern file
+- raw-read hifiasm assembly metrics
+- filtered-read hifiasm assembly metrics
+- BUSCO/Merqury comparison
+- contamination/adaptor screening comparison
+
+Filtering should make the assembly more defensible, not merely smaller or cleaner-looking.
 
 ## Decision Rule
 

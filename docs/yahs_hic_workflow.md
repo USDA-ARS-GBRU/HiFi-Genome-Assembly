@@ -2,6 +2,8 @@
 
 YaHS is a fast Hi-C scaffolding tool that takes an assembly FASTA and a Hi-C alignment file, then proposes chromosome-scale scaffolds. For crop genomes, use YaHS as a strong scaffolding engine, but still review the contact map and evidence before release.
 
+YaHS plus Juicebox-style review is now a strong first-class path for crop pangenome work, including recent rice pangenome methods. Its output is still a candidate scaffold set until contact-map, AGP, dotplot, and contamination evidence agree.
+
 ## When to Use YaHS
 
 Use YaHS when:
@@ -92,10 +94,18 @@ For JBAT/manual curation mode, use the YaHS `juicer pre -a` pathway and archive 
 - Are small contigs being over-placed into repeat-rich regions?
 - Do telomere/centromere expectations agree with scaffold orientation?
 - Does the AGP match the scaffold FASTA?
+- Do Merqury and FASTA summaries show the expected same sequence content before and after scaffolding, aside from intended gaps/joins?
 
 ## Release Rule
 
 Do not release a YaHS scaffold FASTA until the contact map, AGP, dotplot, contamination decisions, and assembly decision logs agree.
+
+## Known Cautions
+
+- Hi-C scaffolding improves order and orientation; it does not improve base accuracy by itself.
+- A cleaner contact map is not proof that every small placed contig belongs there.
+- T2T or near-gapless claims require separate telomere, centromere, gap, and difficult-repeat evidence.
+- Archive YaHS/Juicebox inputs and outputs so manual review can be reproduced.
 
 ## References
 

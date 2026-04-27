@@ -11,6 +11,8 @@ Repeat annotation is central to crop plant genome work. Transposable elements ca
 | curated library + RepeatMasker | consistent pangenome or breeding-project annotation | may miss novel repeats |
 | combined EDTA + curated filtering | reference-grade species library | requires careful provenance and curation |
 
+For crop pangenomes, a shared curated or pan-genome repeat library can be more important than maximizing one accession's masked fraction. Record whether the library is assembly-specific, species-level, genus-level, or project-wide.
+
 ## Recommended First Pass
 
 1. Run EDTA on the final or near-final assembly.
@@ -18,6 +20,7 @@ Repeat annotation is central to crop plant genome work. Transposable elements ca
 3. Compare total masked fraction and major repeat classes.
 4. Use a soft-masked genome for gene annotation.
 5. Archive the repeat library, repeat GFF, summary tables, and versions.
+6. Keep enough provenance to recreate the mask after sequence renaming or release filtering.
 
 ## EDTA
 
@@ -28,6 +31,8 @@ sbatch \
 ```
 
 Use `species=others` unless a crop-specific mode is appropriate. `sensitive=1` is slower but useful for repeat-rich plant genomes.
+
+Use simple, release-safe FASTA IDs before EDTA when possible. Changing sequence IDs after repeat annotation creates avoidable GFF and release-package mismatches.
 
 ## RepeatModeler2 + RepeatMasker
 
@@ -71,6 +76,7 @@ For interpreting repeat composition and handoff into annotation, see `docs/repea
 - Are LTR retrotransposons represented as expected?
 - Did sequence filtering or haplotig duplication inflate repeat content?
 - Are repeat tracks based on the exact FASTA names used for release?
+- Could a panEDTA-style or curated project library improve consistency across related assemblies?
 
 ## Release Rule
 

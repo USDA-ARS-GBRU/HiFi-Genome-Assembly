@@ -21,9 +21,11 @@ Produce the most defensible assembly representation for the project stage withou
 
 Be conservative:
 
+- hifiasm is still a reasonable first assembler for many polyploid crop projects, but representation decisions are harder than the command line
 - prefer an honest intermediate assembly over a cleaner-looking but biologically misleading one
 - do not assume BUSCO duplication automatically means failure
 - do not collapse or purge duplicated sequence just because the assembly looks too large
+- use Hi-C/contact maps, subgenome-aware references, and repeat-space QC to interpret structure before release claims
 
 ## What To Watch Closely
 
@@ -32,6 +34,7 @@ Be conservative:
 - homeologous alignments that resemble assembly redundancy
 - reference-guided placements that oversimplify subgenome structure
 - annotation inflation caused by unresolved duplicated sequence
+- chromosome-scale claims that hide unresolved homeolog or haplotype representation
 
 ## Likely Deliverable
 
@@ -46,4 +49,5 @@ For many polyploid projects, the best early deliverable is:
 
 - [genome profiling before assembly](../assembly/genome_profiling.md)
 - [assembly metrics and interpretation](../qc/assembly_metrics.md)
+- [alternate assembler comparison](../assembly/alternate_assemblers.md)
 - [repeat annotation and masking](../annotation/repeats.md)

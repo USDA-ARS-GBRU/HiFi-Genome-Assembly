@@ -2,6 +2,8 @@
 
 Use this checklist when a project wants to claim chromosome completeness, near-gapless status, or telomere-to-telomere quality. Most crop HiFi projects will not be true T2T from HiFi alone. The goal is to describe the evidence honestly and identify what remains unresolved.
 
+Recent maize and cotton T2T crop papers used multi-technology evidence, including ultra-long ONT and targeted repeat validation, to resolve the hardest regions. Use [advanced T2T methods](t2t_advanced_methods.md) when a project is planning that escalation.
+
 ## Minimum Inputs
 
 | Evidence | Strong support | Caution |
@@ -47,6 +49,8 @@ Prepare these tables for every chromosome-scale assembly:
 | near-gapless | very few documented gaps, gap-filling decisions reviewed, no unsupported fills |
 | candidate T2T chromosome | no Ns, telomere signal at both ends, centromere candidate documented, Hi-C support, no unresolved contamination |
 | T2T-quality assembly | all chromosomes meet candidate T2T criteria and difficult repeats have spanning evidence, ideally with ultra-long ONT or optical-map support |
+
+If the assembly was generated only from ordinary HiFi plus Hi-C, default to chromosome-scale or near-gapless language unless the per-chromosome evidence package shows that the difficult repeats are truly resolved.
 
 ## Review Questions
 

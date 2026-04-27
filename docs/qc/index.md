@@ -2,6 +2,8 @@
 
 This section is for deciding whether the assembly is merely finished or actually believable.
 
+Recent crop genome papers do not rely on one score. They combine contiguity, BUSCO, k-mer QV/completeness, repeat-space quality, read support, structural plots, contact maps, and contamination review. Use this section to build that combined evidence package.
+
 ## Read This Section First If
 
 - you need to interpret contiguity, completeness, and k-mer evidence together
@@ -22,6 +24,7 @@ This section is for deciding whether the assembly is merely finished or actually
 After this section, you should know:
 
 - whether the assembly is structurally plausible
+- whether contiguity, BUSCO, Merqury, and repeat-space evidence tell the same story
 - whether contamination or organellar sequence needs action
 - which contigs or scaffolds deserve manual curation
 - which plots and tables should follow the project into review and release

@@ -11,9 +11,12 @@ Assembly metrics are evidence, not verdicts. A peer-review-quality crop genome s
 | Completeness | BUSCO genome score with lineage and version |
 | Base accuracy | Merqury QV and k-mer completeness |
 | Duplication | BUSCO duplicated, Merqury spectra-cn, purge/duplication reports |
+| Repeat-space quality | LAI/LTR_retriever where appropriate for plant repeat-rich assemblies |
 | Structural quality | dotplots, Hi-C map, read mapping, Inspector if used |
 | Contamination | FCS-adaptor, FCS-GX, BlobToolKit, sourmash, organelle review |
 | Release readiness | FASTA validation, AGP validation, manifest audit |
+
+Recent high-profile crop genome papers commonly report BUSCO together with k-mer QV/completeness and plant repeat-space measures such as LAI. Treat this table as a minimum evidence set, not a menu where one strong metric cancels the others.
 
 ## Contiguity
 
@@ -74,6 +77,28 @@ Record:
 
 Merqury spectra-cn plots are especially useful for distinguishing collapsed repeats, duplicated haplotigs, and missing sequence.
 
+Common troubleshooting:
+
+| Pattern | Possible cause | Review action |
+| --- | --- | --- |
+| high QV but suspicious dotplot | base accuracy is good but structure may be wrong | inspect dotplots, Hi-C, and read mapping |
+| lower QV after scaffolding | N handling, file mismatch, wrong read DB, or introduced sequence changes | rerun with the same meryl DB and confirm file identity |
+| strong duplicated spectra | haplotigs, homeologs, collapsed/expanded repeats, or real duplication | compare BUSCO duplication, depth, and biology |
+| low completeness with good BUSCO | missing non-gene sequence, wrong read set, or repeat collapse | inspect spectra-cn and assembly size |
+
+## LAI and Plant Repeat-Space Quality
+
+The LTR Assembly Index (LAI), usually derived with LTR_retriever-style workflows, is useful for plant genomes because repeat-rich regions can dominate crop assembly quality while BUSCO only measures conserved gene space.
+
+Use LAI when:
+
+- the crop genome is repeat-rich
+- a manuscript will claim reference-grade or pangenome-quality assembly
+- alternate assemblies have similar BUSCO and Merqury scores but differ in repeat representation
+- TEs, centromeres, or structural variation are major biological targets
+
+Record the LAI tool/version, input FASTA, intact LTR discovery method, and any masked/repeat library inputs used.
+
 ## QUAST With a Reference
 
 QUAST can report reference-based signals when a close reference is available:
@@ -98,6 +123,16 @@ Inspector and read-to-assembly mapping can localize likely base or structural er
 - dotplot or Hi-C signals suggest possible misassembly
 
 Read mapping is a support layer; it does not replace whole-genome structural review.
+
+## Quick FAQ
+
+| Question | Short answer |
+| --- | --- |
+| Is high N50 enough? | No. A misjoin can improve N50. |
+| Are duplicated BUSCOs always bad? | No. They can be haplotigs, homeologs, real gene duplication, whole-genome duplication, or contamination. |
+| Should I polish a HiFi assembly by default? | No. Polish only for a documented problem and validate before and after. |
+| Can BUSCO pass while repeats are poor? | Yes. Add Merqury, LAI, dotplots, and read support. |
+| Can Merqury and Inspector disagree? | Yes. They measure different error signals; use them as complementary evidence. |
 
 ## Dashboard
 

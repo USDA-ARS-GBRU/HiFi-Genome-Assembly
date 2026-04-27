@@ -17,11 +17,14 @@ Do not scaffold until:
 
 | Tool | Best use | Caution |
 | --- | --- | --- |
-| YaHS | fast Hi-C scaffolding and common current default | still requires contact-map review |
+| YaHS | fast Hi-C scaffolding and common current default in recent crop workflows | still requires contact-map review |
 | 3D-DNA/JBAT | interactive manual contact-map curation | manual dragging is not evidence by itself |
 | SALSA2 | older Hi-C scaffolding workflows | compare against newer tools when possible |
 | ALLHiC | some polyploid and allele-aware contexts | requires careful biological setup |
+| TRITEX | Triticeae/cereal chromosome-scale workflows | pipeline-level choice; still inspect contact maps |
 | RagTag | reference-guided scaffolding when Hi-C is absent or as comparison | reference bias can hide true variation |
+
+The 2025 rice pangenome used YaHS/Juicebox-style Hi-C validation/scaffolding, while the 2024 barley pangenome used a Triticeae-oriented Hi-C/TRITEX path with manual contact-map inspection. The common lesson is not one universal scaffolder; it is contact-map-backed structure plus documented curation.
 
 ## YaHS Path
 
@@ -75,6 +78,8 @@ scripts/compare_scaffolding_candidates.py \
 ```
 
 Do not choose solely by N50. Prefer the candidate with the strongest contact-map support, AGP validity, dotplot consistency, contamination review, and documented decisions.
+
+Post-scaffolding sanity checks should include the same read/k-mer database used before scaffolding where possible. If Merqury QV or completeness changes unexpectedly after scaffolding, first check file identity, N handling, sequence loss, and whether the same meryl database was reused.
 
 ## Required Release Artifacts
 

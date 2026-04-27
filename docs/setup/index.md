@@ -2,6 +2,8 @@
 
 Use this section when you are preparing a new project workspace, choosing how software will be installed on HPC, or trying to make sure another lab member can reproduce your environment later.
 
+Recent crop genome workflows combine tools with very different dependency profiles: hifiasm, Merqury, YaHS/Juicebox, FCS, EDTA, BRAKER, MAKER, and sometimes Verkko or ONT-heavy assemblers. Plan environments as part of the method, not as an afterthought.
+
 ## Read This Section First If
 
 - you are starting a new species or cultivar project

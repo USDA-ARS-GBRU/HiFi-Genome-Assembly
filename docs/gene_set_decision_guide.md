@@ -13,6 +13,8 @@ Common candidates include:
 
 Run candidates against the same final soft-masked FASTA whenever possible.
 
+Recent crop pangenome and reference papers favor evidence-integrated gene sets. Use Liftoff to preserve known models when the reference is close, but prefer BRAKER/MAKER/PASA/EVM/Mikado-style evidence integration when publication claims depend on novel genes, PAVs, resistance-gene diversity, or structural variation.
+
 ## Decision Table
 
 Record decisions in:
@@ -74,6 +76,7 @@ scripts/audit_gene_annotation_decisions.py \
 | Liftoff preserves known models cleanly | useful for close cultivar transfer | strong release candidate if divergence is limited |
 | BRAKER3 adds plausible novel models | useful de novo support | compare against transfer and TE-derived overprediction |
 | MAKER integrates multiple evidence types well | useful for release-grade curation | use if configuration and provenance are well documented |
+| Iso-Seq or multi-tissue RNA-seq supports missing/novel models | stronger publication support | prioritize evidence-supported additions over raw model count |
 | candidate has best BUSCO but many short or TE-like models | possible overprediction | review before release |
 | candidate gene set uses stale sequence IDs | release mismatch | regenerate on final FASTA |
 | table2asn reports major structural problems | submission blocker | fix or reject candidate |

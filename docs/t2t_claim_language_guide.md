@@ -4,6 +4,8 @@ Use this guide when writing manuscripts, genome announcements, NCBI descriptions
 
 Most crop assemblies made from PacBio HiFi plus Hi-C are excellent chromosome-scale assemblies, but not automatically T2T. Long satellites, centromeres, rDNA arrays, knobs, introgressions, B chromosomes, organellar insertions, and collapsed repeats may remain unresolved even when contig and scaffold metrics look strong.
 
+Recent crop T2T papers in maize and cotton support this caution: they used ultra-long ONT, HiFi, Hi-C or other long-range evidence, targeted gap/repeat closure, and independent validation before making T2T-style claims. See [advanced T2T methods](t2t_advanced_methods.md) for the escalation lane.
+
 ## Core Principle
 
 State the strongest claim supported by the weakest unresolved evidence category.
